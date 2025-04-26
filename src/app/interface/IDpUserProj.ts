@@ -1,4 +1,4 @@
-import { IAchievement } from "./iachievement";
+import { IAchievement } from "./IAchievement";
 
 export interface IDpUserProj {
     dpUserProjId: number;
