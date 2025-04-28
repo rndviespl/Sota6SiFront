@@ -1,0 +1,8 @@
+<div class="header">
+  <div>
+    <ng-container *ngIf="buttonText !== ''">
+      <a (click)="Click()">{{ buttonText }}</a>
+    </ng-container>
+    <app-back-button></app-back-button>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.card-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 16px;
+    padding: 16px;
+    background-color: #fff;
+    width: 300px; /* Уменьшенная ширина карточки */
+  }
+  
+  .card-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px; /* Уменьшенная высота для картинки */
+    width: 100%; /* Ширина контейнера для изображения */
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  
+  .card-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Сохраняет пропорции изображения */
+  }
+  
+  .card-title {
+    font-size: 1.2rem; /* Уменьшенный размер шрифта заголовка */
+    margin-bottom: 8px;
+  }
+  
+  .card-price {
+    font-size: 1rem; /* Уменьшенный размер шрифта цены */
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  button.tuiButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px; /* Уменьшенные отступы кнопки */
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button.tuiButton:hover {
+    background-color: #0056b3;
+  }
+  

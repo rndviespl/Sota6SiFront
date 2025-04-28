@@ -1,8 +1,8 @@
-<div>
-    <div>
-        {{productInfo.dpImages}}
+<div class="card-item">
+    <div class="card-image">
+        <img *ngFor="let image of productInfo.dpImages" [src]="imageUrls[image.dpImagesId]" alt="Product Image">
     </div>
-    <h3>{{productInfo.dpTitle}}</h3>
-    <p>{{productInfo.dpPrice}}</p>
-    <button tuiButton></button>
+    <h3 class="card-title">{{ productInfo.dpTitle }}</h3>
+    <p class="card-price">{{ productInfo.dpPrice | currency }}</p>
+    <button tuiButton (click)="addToCart(productInfo)">Добавить в корзину</button>
 </div>
