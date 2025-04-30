@@ -1,42 +1,31 @@
-import { Component, Input } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { IDpProduct } from '../../../interface/IDpProduct';
 import { CommonModule } from '@angular/common';
 import { TuiAppearance, TuiButton } from '@taiga-ui/core';
 import { IAddToCartRequest } from '../../../interface/IAddToCartRequest';
 import { ProductsRepositoryService } from '../../../repositories/products-repository.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ImagesRepositoryService } from '../../../repositories/images-repository.service';
+import { CarouselImgComponent } from '../carousel-img/carousel-img.component';
+import { IDpImage } from '../../../interface/IDpImage';
 
 @Component({
   selector: 'app-card-item',
-  imports: [CommonModule, TuiAppearance, TuiButton],
+  imports: [
+    CommonModule,
+    TuiAppearance,
+    TuiButton,
+    CarouselImgComponent
+  ],
   templateUrl: './card-item.component.html',
-  styleUrls: ['./card-item.component.css']
+  styleUrls: ['./card-item.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-
 export class CardItemComponent {
   @Input() productInfo!: IDpProduct;
-  imageUrls: { [key: number]: SafeUrl } = {};
 
-  constructor(
-    private productsRepository: ProductsRepositoryService,
-    private imagesRepository: ImagesRepositoryService,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor(private productsRepository: ProductsRepositoryService) {}
 
-  ngOnInit(): void {
-    this.loadImageUrls();
-  }
-
-  private loadImageUrls(): void {
-    if (this.productInfo.dpImages) {
-      this.productInfo.dpImages.forEach(image => {
-        this.imagesRepository.getDpImageData(image.dpImagesId).subscribe(blob => {
-          const url = URL.createObjectURL(blob);
-          this.imageUrls[image.dpImagesId] = this.sanitizer.bypassSecurityTrustUrl(url);
-        });
-      });
-    }
+  get images(): IDpImage[] {
+    return this.productInfo.dpImages || [];
   }
 
   addToCart(product: IDpProduct): void {

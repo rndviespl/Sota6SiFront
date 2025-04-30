@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <tui-carousel #carousel class="carousel" [duration]="4000" [(index)]="index">
+        <ng-container *ngFor="let image of images">
+            <div *tuiItem class="item">
+                <img [src]="imageUrls[image.dpImagesId]" alt="Product Image" *ngIf="imageUrls[image.dpImagesId]">
+            </div>
+        </ng-container>
+    </tui-carousel>
+    <tui-pagination
+        size="s"
+        class="pagination"
+        [length]="images.length"
+        [(index)]="index"
+    />
+</div>
