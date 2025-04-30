@@ -2,5 +2,8 @@
     <app-carousel-img [images]="images"></app-carousel-img>
     <h3 class="card-title">{{ productInfo.dpTitle }}</h3>
     <p class="card-price">{{ productInfo.dpPrice | currency }}</p>
-    <button tuiButton (click)="addToCart(productInfo)">Добавить в корзину</button>
+    <button tuiButton type="button" (click)="navigateToProduct(productInfo)">
+        <tui-icon name="tuiIconChevronRightLarge"></tui-icon>
+        Перейти к товару
+    </button>
 </div>

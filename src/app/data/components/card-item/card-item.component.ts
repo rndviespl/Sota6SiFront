@@ -6,6 +6,7 @@ import { IAddToCartRequest } from '../../../interface/IAddToCartRequest';
 import { ProductsRepositoryService } from '../../../repositories/products-repository.service';
 import { CarouselImgComponent } from '../carousel-img/carousel-img.component';
 import { IDpImage } from '../../../interface/IDpImage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-item',
@@ -22,36 +23,13 @@ import { IDpImage } from '../../../interface/IDpImage';
 export class CardItemComponent {
   @Input() productInfo!: IDpProduct;
 
-  constructor(private productsRepository: ProductsRepositoryService) {}
+  constructor(private router: Router) {}
 
   get images(): IDpImage[] {
     return this.productInfo.dpImages || [];
   }
 
-  addToCart(product: IDpProduct): void {
-    const sizeId = product.dpProductAttributes?.[0]?.dpSize;
-    if (sizeId === undefined) {
-      console.error('Размер товара не определен.');
-      return;
-    }
-
-    const request: IAddToCartRequest = {
-      productId: product.dpProductId,
-      quantity: 1,
-      sizeId: sizeId
-    };
-
-    this.productsRepository.addToCart(request).subscribe({
-      next: (response) => {
-        if (response.success) {
-          console.log('Товар добавлен в корзину:', response.message);
-        } else {
-          console.error('Ошибка при добавлении в корзину:', response.message);
-        }
-      },
-      error: (error) => {
-        console.error('Ошибка при добавлении в корзину:', error);
-      }
-    });
+  navigateToProduct(product: IDpProduct): void {
+    this.router.navigate(['/product', product.dpProductId]);
   }
 }

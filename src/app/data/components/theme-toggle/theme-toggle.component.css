@@ -1,0 +1,23 @@
+button {
+    background-color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    margin: 0.625rem 0.5rem;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+  }
+
+  button:hover {
+    background-color: #e6e6e6;
+  }
+  p {
+    display: flex;
+    gap: 1rem;
+}
+
+code {
+    white-space: nowrap !important;
+}
