@@ -1,0 +1,39 @@
+@import 'variables.css';
+
+/* Общие стили для кнопок */
+button, .btn {
+    background-color: var(--button-background-color);
+    border: none;
+    padding: var(--button-padding);
+    margin: var(--button-margin);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    font-weight: var(--button-font-weight);
+    transition: var(--button-transition);
+    font-size: var(--button-font-size);
+    color: var(--text-color);
+}
+
+button:hover, .btn:hover {
+    background-color: var(--button-background-color-hover);
+}
+
+/* Основная кнопка */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--background-color);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+}
+
+/* Кнопка удаления */
+.btn-danger {
+    background: linear-gradient(135deg, var(--quaternary-color), var(--tertiary-color));
+    color: var(--background-color);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, var(--tertiary-color), var(--quaternary-color));
+}

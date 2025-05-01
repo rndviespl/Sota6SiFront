@@ -1,0 +1,14 @@
+@import 'variables.css';
+
+/* Стили для иконок */
+i {
+    margin-right: 0.9375rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color 0.3s;
+    font-size: 1.25rem;
+}
+
+i:hover {
+    color: var(--primary-color);
+}

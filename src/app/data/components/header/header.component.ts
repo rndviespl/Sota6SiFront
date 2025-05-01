@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   imports: [BackButtonComponent, CommonModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.css',
+    '../../../styles/root.css',],
 })
 export class HeaderComponent implements OnInit {
   @Input() logoUrl: string = 'public/logo__ru.jpg';

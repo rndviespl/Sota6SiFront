@@ -1,0 +1,21 @@
+@import 'variables.css';
+
+.separator-section {
+    margin: 1.25rem 0;
+    text-align: center;
+}
+
+.separator-section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.625rem;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0 auto;
+    width: 50%;
+}

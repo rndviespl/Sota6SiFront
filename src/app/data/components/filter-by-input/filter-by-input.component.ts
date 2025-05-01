@@ -12,7 +12,8 @@ import {TuiInputModule} from '@taiga-ui/legacy';
     TuiInputModule
   ],
   templateUrl: './filter-by-input.component.html',
-  styleUrls: ['./filter-by-input.component.css'],
+  styleUrls: ['./filter-by-input.component.css',
+    '../../../styles/root.css',],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {

@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
   selector: 'app-back-button',
   imports: [],
   templateUrl: './back-button.component.html',
-  styleUrl: './back-button.component.css'
+  styleUrls: ['./back-button.component.css',
+    '../../../styles/root.css',],
 })
 export class BackButtonComponent {
   constructor(private location: Location, private router: Router) {}

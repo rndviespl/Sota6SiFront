@@ -1,0 +1,45 @@
+@import 'variables.css';
+
+/* Стили для заголовков */
+h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    width: 65%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 2rem;
+}
+
+/* Стили для текста */
+p {
+    margin: 0.625rem 0;
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+    height: calc(1.5em * 2);
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+p::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+p::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 0.625rem;
+}
+
+p::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 0.625rem;
+}
+
+p::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

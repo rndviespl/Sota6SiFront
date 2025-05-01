@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-page-cart-item',
   imports: [CardItemComponent,CommonModule],
   templateUrl: './page-cart-item.component.html',
-  styleUrl: './page-cart-item.component.css'
+  styleUrls: ['./page-cart-item.component.css',
+     '../../../styles/root.css',]
 })
 export class PageCartItemComponent implements OnInit {
   products: IDpProduct[] = [];

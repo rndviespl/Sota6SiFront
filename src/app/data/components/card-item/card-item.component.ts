@@ -17,7 +17,8 @@ import { Router } from '@angular/router';
     CarouselImgComponent
   ],
   templateUrl: './card-item.component.html',
-  styleUrls: ['./card-item.component.css'],
+  styleUrls: ['./card-item.component.css',
+    '../../../styles/root.css',],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CardItemComponent {

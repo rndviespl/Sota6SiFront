@@ -11,7 +11,8 @@ TuiSwitch,
 FormsModule
   ],
   templateUrl: './theme-toggle.component.html',
-  styleUrl: './theme-toggle.component.css',
+  styleUrls: ['./theme-toggle.component.css',
+    '../../../styles/root.css',],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ThemeToggleComponent {

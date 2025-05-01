@@ -13,8 +13,7 @@ import { ICartItem } from '../../../interface/ICartItem';
     TuiIcon, TuiIconPipe,],
   templateUrl: './icon-trash.component.html',
   styleUrls: ['./icon-trash.component.css', 
-     '../../../styles/icon.css'
-  ]
+    '../../../styles/root.css',],
 })
 export class IconTrashComponent {
   @Input() item!: ICartItem;

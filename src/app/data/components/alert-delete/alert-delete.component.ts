@@ -10,7 +10,8 @@ import { switchMap, takeUntil } from 'rxjs';
   selector: 'app-alert-on-delete',
   imports: [CommonModule],
   templateUrl: './alert-delete.component.html',
-  styleUrl: './alert-delete.component.css'
+  styleUrls:[ './alert-delete.component.css',
+    '../../../styles/root.css',],
 })
 export class AlertDeleteComponent {
   protected readonly context =

@@ -1,0 +1,63 @@
+@import 'variables.css';
+
+/* Стили для контейнера */
+.container {
+    padding: 1.25rem;
+    position: relative;
+}
+
+.mb-40 {
+    margin-bottom: 2.5rem;
+}
+
+.header-section {
+    position: relative;
+    margin-bottom: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+/* Стили для сетки */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Стили для разделителя */
+.separator-section {
+    margin: 1.25rem 0;
+    text-align: center;
+}
+
+.separator-section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.625rem;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0 auto;
+    width: 50%;
+}

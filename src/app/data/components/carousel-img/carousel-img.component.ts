@@ -20,7 +20,8 @@ import { TuiAmountPipe } from '@taiga-ui/addon-commerce';
     TuiLoader
   ],
   templateUrl: './carousel-img.component.html',
-  styleUrls: ['./carousel-img.component.css']
+  styleUrls: ['./carousel-img.component.css',
+    '../../../styles/root.css',],
 })
 export class CarouselImgComponent implements OnInit {
   @Input() images: IDpImage[] = [];

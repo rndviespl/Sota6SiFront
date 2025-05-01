@@ -13,7 +13,8 @@ import { TuiLink } from '@taiga-ui/core';
     BackButtonComponent
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrls: ['./navbar.component.css',
+    '../../../styles/root.css',],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NavbarComponent {
