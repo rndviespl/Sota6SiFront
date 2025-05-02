@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { IDpImage } from '../../../interface/IDpImage';
 import { ImagesRepositoryService } from '../../../repositories/images-repository.service';
@@ -25,8 +25,9 @@ import { TuiAmountPipe } from '@taiga-ui/addon-commerce';
 })
 export class CarouselImgComponent implements OnInit {
   @Input() images: IDpImage[] = [];
+  @Output() imageClick = new EventEmitter<SafeUrl>();
   imageUrls: { [key: number]: SafeUrl } = {};
-  index = 0; // Добавлено свойство для отслеживания текущего индекса
+  index = 0;
 
   constructor(
     private imagesRepository: ImagesRepositoryService,
@@ -42,10 +43,14 @@ export class CarouselImgComponent implements OnInit {
     this.images.forEach(image => {
       this.imagesRepository.getDpImageData(image.dpImagesId).subscribe(blob => {
         const url = URL.createObjectURL(blob);
-        console.log('Image URL:', url); // Вывод URL в консоль
+        console.log('Image URL:', url);
         this.imageUrls[image.dpImagesId] = this.sanitizer.bypassSecurityTrustUrl(url);
-        this.cd.detectChanges(); // Ручной запуск change detection
+        this.cd.detectChanges();
       });
     });
+  }
+
+  onImageClick(imageUrl: SafeUrl): void {
+    this.imageClick.emit(imageUrl);
   }
 }

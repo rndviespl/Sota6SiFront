@@ -7,11 +7,11 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-page-cart-item',
   imports: [CardItemComponent,CommonModule],
-  templateUrl: './page-cart-item.component.html',
-  styleUrls: ['./page-cart-item.component.css',
+  templateUrl: './page-catalog-item.component.html',
+  styleUrls: ['./page-catalog-item.component.css',
      '../../../styles/root.css',]
 })
-export class PageCartItemComponent implements OnInit {
+export class PageCatalogItemComponent implements OnInit {
   products: IDpProduct[] = [];
 
   constructor(private productsRepository: ProductsRepositoryService) {}

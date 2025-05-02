@@ -28,8 +28,18 @@ export class ProductsRepositoryService {
       })
     );
   }
+  
   getProductById(id: number): Observable<IDpProduct> {
-    return this.productsService.getProductById(id);
+    return this.productsService.getProductById(id).pipe(
+      switchMap((product: IDpProduct) =>
+        this.imagesRepository.getAllDpImages().pipe(
+          map(images => {
+            product.dpImages = images.filter(image => image.dpProductId === product.dpProductId);
+            return product;
+          })
+        )
+      )
+    );
   }
 
   createProduct(product: IDpProduct): Observable<IDpProduct> {

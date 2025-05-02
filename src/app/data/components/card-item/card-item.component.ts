@@ -31,6 +31,6 @@ export class CardItemComponent {
   }
 
   navigateToProduct(product: IDpProduct): void {
-    this.router.navigate(['/product', product.dpProductId]);
+    this.router.navigate(['/ItemFromCatalog', product.dpProductId]);
   }
 }

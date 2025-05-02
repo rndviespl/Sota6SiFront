@@ -1,7 +1,7 @@
 <div class="wrapper">
     <tui-carousel #carousel class="carousel" [duration]="4000" [(index)]="index">
         <ng-container *ngFor="let image of images">
-            <div *tuiItem class="item">
+            <div *tuiItem class="item" (click)="onImageClick(imageUrls[image.dpImagesId])">
                 <img [src]="imageUrls[image.dpImagesId]" alt="Product Image" *ngIf="imageUrls[image.dpImagesId]">
             </div>
         </ng-container>
