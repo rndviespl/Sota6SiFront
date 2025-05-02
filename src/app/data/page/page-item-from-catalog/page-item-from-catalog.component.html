@@ -2,6 +2,6 @@
     <app-carousel-img [images]="images"></app-carousel-img>
     <h3 class="card-title">{{ productInfo?.dpTitle }}</h3>
     <p class="card-price">{{ productInfo?.dpPrice | currency }}</p>
-    <p>{{ productInfo?.dpDescription }}</p>
-    <p>{{ productInfo?.dpCategory?.dpCategoryTitle }}</p>
+    <p class="card-description">{{ productInfo?.dpDescription }}</p>
+    <p class="card-category">{{ productInfo?.dpCategory?.dpCategoryTitle }}</p>
 </div>

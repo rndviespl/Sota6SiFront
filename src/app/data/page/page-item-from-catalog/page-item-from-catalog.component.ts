@@ -13,8 +13,9 @@ import { IDpImage } from '../../../interface/IDpImage';
   selector: 'app-page-item-from-catalog',
   imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton],
   templateUrl: './page-item-from-catalog.component.html',
-  styleUrls: ['./page-item-from-catalog.component.css', 
-    '../../../styles/root.css'],
+  styleUrls: ['../../../styles/root.css', './page-item-from-catalog.component.css', 
+    
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageItemFromCatalogComponent implements OnInit {
@@ -31,10 +32,19 @@ export class PageItemFromCatalogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadProductInfo();
+  }
+
+  private loadProductInfo(): void {
     const dpProductId = this.route.snapshot.paramMap.get('dpProductId');
     if (dpProductId) {
-      this.productsRepositoryService.getProductById(+dpProductId).subscribe(product => {
-        this.productInfo = product;
+      this.productsRepositoryService.getProductById(+dpProductId).subscribe({
+        next: (product: IDpProduct) => {
+          this.productInfo = product;
+        },
+        error: (error) => {
+          console.error('Ошибка при загрузке информации о продукте:', error);
+        }
       });
     }
   }
