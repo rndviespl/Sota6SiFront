@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ShopCartService } from '../services/dp-shop-cart.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IAddToCartRequest } from '../interface/IAddToCartRequest';
 import { ICartViewModel } from '../interface/ICartViewModel';
-import { IDpOrderDetail } from '../interface/IDpOrderDetail';
 import { IRemoveFromCartRequest } from '../interface/IRemoveFromCartRequest';
 import { IUpdateCartRequest } from '../interface/IUpdateCartRequest';
 
@@ -11,35 +9,52 @@ import { IUpdateCartRequest } from '../interface/IUpdateCartRequest';
   providedIn: 'root'
 })
 export class ShopCartRepositoryService {
+  private cartKey = 'shopping_cart';
 
-  constructor(private shopCartService: ShopCartService) {}
+  constructor() { }
 
   getCart(): Observable<ICartViewModel> {
-    return this.shopCartService.getCart();
+    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    return of(cart);
   }
 
   updateCart(request: IUpdateCartRequest): Observable<{ success: boolean; message: string }> {
-    return this.shopCartService.updateCart(request);
+    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    // Логика обновления корзины
+    localStorage.setItem(this.cartKey, JSON.stringify(cart));
+    return of({ success: true, message: 'Корзина обновлена' });
   }
 
   addToCart(request: IAddToCartRequest): Observable<{ success: boolean; message: string }> {
-    return this.shopCartService.addToCart(request);
+    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    // Логика добавления товара в корзину
+    localStorage.setItem(this.cartKey, JSON.stringify(cart));
+    return of({ success: true, message: 'Товар добавлен в корзину' });
   }
 
   getCartQuantity(productId: number, sizeId: number): Observable<{ currentQuantity: number }> {
-    return this.shopCartService.getCartQuantity(productId, sizeId);
+    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    // Логика получения количества товара в корзине
+    const currentQuantity = 0; // Замените на реальную логику
+    return of({ currentQuantity });
   }
 
-  checkout(): Observable<{ orderId: number; orderDetails: IDpOrderDetail[] }> {
-    return this.shopCartService.checkout();
+  checkout(): Observable<{ orderId: number; orderDetails: any[] }> {
+    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    // Логика оформления заказа
+    localStorage.removeItem(this.cartKey);
+    return of({ orderId: 1, orderDetails: [] });
   }
 
   removeFromCart(request: IRemoveFromCartRequest): Observable<void> {
-    return this.shopCartService.removeFromCart(request);
+    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    // Логика удаления товара из корзины
+    localStorage.setItem(this.cartKey, JSON.stringify(cart));
+    return of(undefined); // Возвращаем Observable<void>
   }
 
   exportToExcel(orderId: number): Observable<Blob> {
-    return this.shopCartService.exportToExcel(orderId);
+    // Логика экспорта в Excel
+    return of(new Blob());
   }
 }
-

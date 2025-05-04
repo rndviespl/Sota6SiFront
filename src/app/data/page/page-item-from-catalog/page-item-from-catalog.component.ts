@@ -13,9 +13,7 @@ import { IDpImage } from '../../../interface/IDpImage';
   selector: 'app-page-item-from-catalog',
   imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton],
   templateUrl: './page-item-from-catalog.component.html',
-  styleUrls: ['../../../styles/root.css', './page-item-from-catalog.component.css', 
-    
-  ],
+  styleUrls: ['../../../styles/root.css', './page-item-from-catalog.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageItemFromCatalogComponent implements OnInit {
@@ -76,5 +74,9 @@ export class PageItemFromCatalogComponent implements OnInit {
 
       document.body.appendChild(fullscreenDiv);
     }
+  }
+
+  onImageClick(imageUrl: SafeUrl): void {
+    this.openImageInFullscreen(imageUrl);
   }
 }

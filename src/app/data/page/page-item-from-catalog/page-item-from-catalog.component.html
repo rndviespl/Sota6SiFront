@@ -1,7 +1,17 @@
-<div class="card-item">
-    <app-carousel-img [images]="images"></app-carousel-img>
-    <h3 class="card-title">{{ productInfo?.dpTitle }}</h3>
-    <p class="card-price">{{ productInfo?.dpPrice | currency }}</p>
-    <p class="card-description">{{ productInfo?.dpDescription }}</p>
-    <p class="card-category">{{ productInfo?.dpCategory?.dpCategoryTitle }}</p>
+<div class="product-card">
+    <div class="product-row">
+        <div class="product-image-container">
+            <app-carousel-img [images]="images" class="product-image" (imageClick)="onImageClick($event)"></app-carousel-img>
+        </div>
+        <div class="product-details-container">
+            <h3 class="product-title">{{ productInfo?.dpTitle }}</h3>
+            <p class="product-price">{{ productInfo?.dpPrice | currency }}</p>
+            <p class="product-description">{{ productInfo?.dpDescription }}</p>
+            <p class="product-category">{{ productInfo?.dpCategory?.dpCategoryTitle }}</p>
+            <div class="product-actions">
+                <button type="button" class="btn-add-to-cart">Добавить в корзину</button>
+                
+            </div>
+        </div>
+    </div>
 </div>
