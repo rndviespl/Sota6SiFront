@@ -11,50 +11,75 @@ import { IUpdateCartRequest } from '../interface/IUpdateCartRequest';
 export class ShopCartRepositoryService {
   private cartKey = 'shopping_cart';
 
-  constructor() { }
+  constructor() {}
 
   getCart(): Observable<ICartViewModel> {
-    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
     return of(cart);
   }
 
   updateCart(request: IUpdateCartRequest): Observable<{ success: boolean; message: string }> {
-    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
-    // Логика обновления корзины
-    localStorage.setItem(this.cartKey, JSON.stringify(cart));
-    return of({ success: true, message: 'Корзина обновлена' });
+    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
+    const itemIndex = cart.findIndex((item: IAddToCartRequest) =>
+      item.productId === request.productId && item.sizeId === request.sizeId
+    );
+
+    if (itemIndex !== -1) {
+      cart[itemIndex].quantity = request.quantity;
+      localStorage.setItem(this.cartKey, JSON.stringify(cart));
+      return of({ success: true, message: 'Корзина обновлена' });
+    } else {
+      return of({ success: false, message: 'Товар не найден в корзине' });
+    }
   }
 
   addToCart(request: IAddToCartRequest): Observable<{ success: boolean; message: string }> {
-    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
-    // Логика добавления товара в корзину
+    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
+    const existingItem = cart.find((item: IAddToCartRequest) =>
+      item.productId === request.productId && item.sizeId === request.sizeId
+    );
+
+    if (existingItem) {
+      existingItem.quantity += request.quantity;
+    } else {
+      cart.push(request);
+    }
+
     localStorage.setItem(this.cartKey, JSON.stringify(cart));
     return of({ success: true, message: 'Товар добавлен в корзину' });
   }
 
-  getCartQuantity(productId: number, sizeId: number): Observable<{ currentQuantity: number }> {
-    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
-    // Логика получения количества товара в корзине
-    const currentQuantity = 0; // Замените на реальную логику
+  getCartQuantity(productId: number, sizeId?: number): Observable<{ currentQuantity: number }> {
+    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
+    const item = cart.find((item: IAddToCartRequest) =>
+      item.productId === productId && item.sizeId === sizeId
+    );
+
+    const currentQuantity = item ? item.quantity : 0;
     return of({ currentQuantity });
   }
 
   checkout(): Observable<{ orderId: number; orderDetails: any[] }> {
-    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
+    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
     // Логика оформления заказа
     localStorage.removeItem(this.cartKey);
-    return of({ orderId: 1, orderDetails: [] });
+    return of({ orderId: 1, orderDetails: cart });
   }
 
   removeFromCart(request: IRemoveFromCartRequest): Observable<void> {
-    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '{}');
-    // Логика удаления товара из корзины
+    let cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
+    cart = cart.filter((item: IAddToCartRequest) =>
+      !(item.productId === request.productId && item.sizeId === request.sizeId)
+    );
+
     localStorage.setItem(this.cartKey, JSON.stringify(cart));
     return of(undefined); // Возвращаем Observable<void>
   }
 
   exportToExcel(orderId: number): Observable<Blob> {
     // Логика экспорта в Excel
-    return of(new Blob());
+    // Здесь можно использовать библиотеку для создания Excel-файлов, например, xlsx
+    const dummyData = new Blob(); // Замените на реальные данные
+    return of(dummyData);
   }
 }

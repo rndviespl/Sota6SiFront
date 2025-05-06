@@ -8,20 +8,25 @@ import { TuiAppearance, TuiButton } from '@taiga-ui/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { SecurityContext } from '@angular/core';
 import { IDpImage } from '../../../interface/IDpImage';
+import { FormsModule } from '@angular/forms';
+import { ShopCartRepositoryService } from '../../../repositories/shop-cart-repository.service';
 
 @Component({
   selector: 'app-page-item-from-catalog',
-  imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton],
+  imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton, FormsModule],
   templateUrl: './page-item-from-catalog.component.html',
   styleUrls: ['../../../styles/root.css', './page-item-from-catalog.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PageItemFromCatalogComponent implements OnInit {
-  productInfo: IDpProduct = {} as IDpProduct; // Initialize with a default value
+  productInfo: IDpProduct = {} as IDpProduct;
+  quantity: number = 1;
+  selectedSizeId: number | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private productsRepositoryService: ProductsRepositoryService,
+    private cartService: ShopCartRepositoryService,
     private sanitizer: DomSanitizer
   ) {}
 
@@ -44,6 +49,21 @@ export class PageItemFromCatalogComponent implements OnInit {
           console.error('Ошибка при загрузке информации о продукте:', error);
         }
       });
+    }
+  }
+
+  addToCart(): void {
+    if (this.productInfo) {
+      const request = {
+        productId: this.productInfo.dpProductId,
+        quantity: this.quantity,
+        sizeId: this.selectedSizeId // This can be undefined
+      };
+      this.cartService.addToCart(request).subscribe(response => {
+        alert(response.message);
+      });
+    } else {
+      alert('Произошла ошибка при добавлении товара в корзину');
     }
   }
 
