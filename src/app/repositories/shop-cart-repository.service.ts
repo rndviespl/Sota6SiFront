@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { forkJoin, map, Observable, of } from 'rxjs';
 import { IAddToCartRequest } from '../interface/IAddToCartRequest';
 import { ICartViewModel } from '../interface/ICartViewModel';
 import { IRemoveFromCartRequest } from '../interface/IRemoveFromCartRequest';
 import { IUpdateCartRequest } from '../interface/IUpdateCartRequest';
+import { IDpProduct } from '../interface/IDpProduct';
+import { ProductsRepositoryService } from './products-repository.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +13,36 @@ import { IUpdateCartRequest } from '../interface/IUpdateCartRequest';
 export class ShopCartRepositoryService {
   private cartKey = 'shopping_cart';
 
-  constructor() {}
+  constructor(private productsRepositoryService: ProductsRepositoryService) {}
 
   getCart(): Observable<ICartViewModel> {
-    const cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
-    return of(cart);
-  }
+    const cartItems = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
 
+    if (cartItems.length === 0) {
+      return of({ cartItems: [], products: [] });
+    }
+
+    const productObservables = cartItems.map((item: IAddToCartRequest) =>
+      this.productsRepositoryService.getProductById(item.productId)
+    );
+
+    return forkJoin(productObservables as Observable<IDpProduct>[]).pipe(
+      map((products: IDpProduct[]) => {
+        const cartItemsWithDetails = cartItems.map((item: IAddToCartRequest, index: number) => ({
+          productId: item.productId,
+          productTitle: products[index].dpTitle,
+          price: products[index].dpPrice,
+          quantity: item.quantity,
+        }));
+
+        return {
+          cartItems: cartItemsWithDetails,
+          products: products,
+        };
+      })
+    );
+  }
+  
   updateCart(request: IUpdateCartRequest): Observable<{ success: boolean; message: string }> {
     let cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
     const itemIndex = cart.findIndex((item: IAddToCartRequest) =>
