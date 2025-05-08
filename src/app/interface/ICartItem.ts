@@ -5,4 +5,5 @@ export interface ICartItem {
     productTitle: string;
     price: number;
     quantity: number;
+    sizeId?: number; // Add sizeId property
 }

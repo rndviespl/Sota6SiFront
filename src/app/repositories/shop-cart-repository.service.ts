@@ -16,39 +16,46 @@ export class ShopCartRepositoryService {
   constructor(private productsRepositoryService: ProductsRepositoryService) {}
 
   getCart(): Observable<ICartViewModel> {
-    const cartItems = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
-
-    if (cartItems.length === 0) {
+    try {
+      const cartItems = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
+  
+      if (cartItems.length === 0) {
+        return of({ cartItems: [], products: [] });
+      }
+  
+      const productObservables = cartItems.map((item: IAddToCartRequest) =>
+        this.productsRepositoryService.getProductById(item.productId)
+      );
+  
+      return forkJoin(productObservables as Observable<IDpProduct>[]).pipe(
+        map((products: IDpProduct[]) => {
+          const cartItemsWithDetails = cartItems.map((item: IAddToCartRequest, index: number) => ({
+            productId: item.productId,
+            productTitle: products[index].dpTitle,
+            price: products[index].dpPrice,
+            quantity: item.quantity,
+          }));
+  
+          return {
+            cartItems: cartItemsWithDetails,
+            products: products,
+          };
+        })
+      );
+    } catch (error) {
+      console.error('Error retrieving cart items:', error);
       return of({ cartItems: [], products: [] });
     }
-
-    const productObservables = cartItems.map((item: IAddToCartRequest) =>
-      this.productsRepositoryService.getProductById(item.productId)
-    );
-
-    return forkJoin(productObservables as Observable<IDpProduct>[]).pipe(
-      map((products: IDpProduct[]) => {
-        const cartItemsWithDetails = cartItems.map((item: IAddToCartRequest, index: number) => ({
-          productId: item.productId,
-          productTitle: products[index].dpTitle,
-          price: products[index].dpPrice,
-          quantity: item.quantity,
-        }));
-
-        return {
-          cartItems: cartItemsWithDetails,
-          products: products,
-        };
-      })
-    );
   }
   
+  
+
   updateCart(request: IUpdateCartRequest): Observable<{ success: boolean; message: string }> {
     let cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
     const itemIndex = cart.findIndex((item: IAddToCartRequest) =>
       item.productId === request.productId && item.sizeId === request.sizeId
     );
-
+  
     if (itemIndex !== -1) {
       cart[itemIndex].quantity = request.quantity;
       localStorage.setItem(this.cartKey, JSON.stringify(cart));
@@ -56,23 +63,24 @@ export class ShopCartRepositoryService {
     } else {
       return of({ success: false, message: 'Товар не найден в корзине' });
     }
-  }
-
+  }  
+  
   addToCart(request: IAddToCartRequest): Observable<{ success: boolean; message: string }> {
     let cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
     const existingItem = cart.find((item: IAddToCartRequest) =>
       item.productId === request.productId && item.sizeId === request.sizeId
     );
-
+  
     if (existingItem) {
       existingItem.quantity += request.quantity;
     } else {
       cart.push(request);
     }
-
+  
     localStorage.setItem(this.cartKey, JSON.stringify(cart));
     return of({ success: true, message: 'Товар добавлен в корзину' });
   }
+  
 
   getCartQuantity(productId: number, sizeId?: number): Observable<{ currentQuantity: number }> {
     const cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
@@ -96,15 +104,13 @@ export class ShopCartRepositoryService {
     cart = cart.filter((item: IAddToCartRequest) =>
       !(item.productId === request.productId && item.sizeId === request.sizeId)
     );
-
+  
     localStorage.setItem(this.cartKey, JSON.stringify(cart));
-    return of(undefined); // Возвращаем Observable<void>
+    return of(undefined); // Return an Observable<void>
   }
 
   exportToExcel(orderId: number): Observable<Blob> {
-    // Логика экспорта в Excel
-    // Здесь можно использовать библиотеку для создания Excel-файлов, например, xlsx
-    const dummyData = new Blob(); // Замените на реальные данные
+    const dummyData = new Blob();
     return of(dummyData);
   }
 }

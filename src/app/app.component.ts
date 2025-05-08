@@ -1,4 +1,4 @@
-import { TUI_DARK_MODE, TuiRoot } from "@taiga-ui/core";
+import { TUI_DARK_MODE, TuiLink, TuiRoot } from "@taiga-ui/core";
 import { Component, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./data/components/navbar/navbar.component";
@@ -9,6 +9,7 @@ import { NavbarComponent } from "./data/components/navbar/navbar.component";
     RouterOutlet, 
     TuiRoot, 
     RouterModule,
+    TuiLink,
     NavbarComponent
     ],
   templateUrl: './app.component.html',

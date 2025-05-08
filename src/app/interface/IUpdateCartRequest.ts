@@ -3,5 +3,5 @@
 export interface IUpdateCartRequest {
     productId: number;
     quantity: number;
-    sizeId: number;
+    sizeId?: number;
 }

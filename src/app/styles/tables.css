@@ -1,0 +1,159 @@
+/* Основные стили для таблицы */
+.taiga-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    color: #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Стили для заголовков таблицы */
+.taiga-table thead {
+    background-color: #4a6baf;
+    color: #fff;
+}
+
+.taiga-table th {
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #3a5a9a;
+    position: sticky;
+    top: 0;
+}
+
+/* Стили для строк таблицы */
+.taiga-table tbody tr {
+    border-bottom: 1px solid #eaeaea;
+    transition: background-color 0.2s ease;
+}
+
+.taiga-table tbody tr:last-of-type {
+    border-bottom: none;
+}
+
+.taiga-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.taiga-table td {
+    padding: 1.2rem 1.5rem;
+    vertical-align: middle;
+}
+
+/* Эффект наведения для строк таблицы */
+.taiga-table tbody tr:hover {
+    background-color: #e9f0ff;
+}
+
+/* Специфические стили для числовых ячеек */
+.taiga-table .number {
+    text-align: right;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Стили для контейнера с прокруткой */
+.taiga-scrollbar {
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+.taiga-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.taiga-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.taiga-scrollbar::-webkit-scrollbar-thumb {
+    background: #4a6baf;
+    border-radius: 10px;
+}
+
+.taiga-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3a5a9a;
+}
+
+/* Стили для кнопок внутри таблицы */
+.taiga-table button {
+    background-color: #4a6baf;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.taiga-table button:hover {
+    background-color: #3a5a9a;
+    transform: translateY(-1px);
+}
+
+.taiga-table button:active {
+    transform: translateY(0);
+}
+
+/* Стили для иконок в кнопках */
+.taiga-table button i {
+    margin-right: 0.5rem;
+}
+
+/* Стили для чекбоксов */
+.taiga-table input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Стили для статусов */
+.taiga-table .status {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.taiga-table .status-new {
+    background-color: #e0f7fa;
+    color: #26c6da;
+}
+
+.taiga-table .status-in-progress {
+    background-color: #fff3e0;
+    color: #ffa000;
+}
+
+.taiga-table .status-completed {
+    background-color: #e8f5e9;
+    color: #66bb6a;
+}
+
+/* Анимация для появления строк */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.taiga-table tbody tr {
+    animation: fadeIn 0.3s ease-out;
+}

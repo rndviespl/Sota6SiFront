@@ -2,5 +2,5 @@
 
 export interface IRemoveFromCartRequest {
     productId: number;
-    sizeId: number;
+    sizeId?: number;
 }

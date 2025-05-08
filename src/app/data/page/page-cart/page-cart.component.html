@@ -1,20 +1,56 @@
-
-
-<table *ngIf="cartItems.length > 0">
-  <thead>
-    <tr>
-      <th>Product Title</th>
-      <th>Price</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of cartItems">
-      <td>{{ item.productTitle }}</td>
-      <td>{{ item.price | currency }}</td>
-      <td>{{ item.quantity }}</td>
-    </tr>
-  </tbody>
-</table>
+<ng-container *ngIf="cartItems.length > 0">
+  <tui-scrollbar class="taiga-scrollbar">
+    <table
+        size="l"
+        tuiTable
+        class="taiga-table"
+        [columns]="columns"
+        [direction]="-1"
+        [sorter]="totalSorter"
+    >
+      <thead tuiThead>
+        <tr tuiThGroup>
+          <th *tuiHead="'productTitle'" tuiTh>
+            Product Title
+          </th>
+          <th *tuiHead="'price'" tuiTh class="number">
+            Price
+          </th>
+          <th *tuiHead="'quantity'" tuiTh>
+            Quantity
+          </th>
+          <th *tuiHead="'totalPrice'" tuiTh class="number">
+            Total Price
+          </th>
+          <th *tuiHead="'actions'" tuiTh>
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody tuiTbody [data]="cartItems">
+        <tr *ngFor="let item of cartItems; trackBy: trackByIndex" tuiTr>
+          <td *tuiCell="'productTitle'" tuiTd>
+            {{ item.productTitle }}
+          </td>
+          <td *tuiCell="'price'" tuiTd class="number">
+            {{ item.price | currency:'RUB' }}
+          </td>
+          <td *tuiCell="'quantity'" tuiTd>
+            <button (click)="decreaseQuantity(item)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increaseQuantity(item)">+</button>
+          </td>
+          <td *tuiCell="'totalPrice'" tuiTd class="number">
+            {{ getTotal(item) | currency:'RUB' }}
+          </td>
+          <td *tuiCell="'actions'" tuiTd>
+            <button (click)="removeFromCart(item)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </tui-scrollbar>
+  <h4>Total Amount: {{ getTotalAmount() | currency:'RUB' }}</h4>
+</ng-container>
 
 <p *ngIf="cartItems.length === 0">Your cart is empty.</p>
