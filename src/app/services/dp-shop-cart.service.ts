@@ -31,8 +31,8 @@ export class ShopCartService {
     return this.http.get<{ currentQuantity: number }>(`${this.baseUrl}/quantity?productId=${productId}&sizeId=${sizeId}`);
   }
 
-  checkout(): Observable<{ orderId: number; orderDetails: IDpOrderDetail[] }> {
-    return this.http.post<{ orderId: number; orderDetails: IDpOrderDetail[] }>(`${this.baseUrl}/Checkout`, {});
+  checkout(cart: any[]): Observable<{ orderId: number; orderDetails: IDpOrderDetail[] }> {
+    return this.http.post<{ orderId: number; orderDetails: IDpOrderDetail[] }>(`${this.baseUrl}/Checkout`, cart);
   }
 
   removeFromCart(request: IRemoveFromCartRequest): Observable<void> {

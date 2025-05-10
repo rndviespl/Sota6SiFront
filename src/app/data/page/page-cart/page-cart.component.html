@@ -33,7 +33,7 @@
             {{ item.productTitle }}
           </td>
           <td *tuiCell="'price'" tuiTd class="number">
-            {{ item.price | currency:'RUB' }}
+            {{ item.price | currency:'RUB ' }}
           </td>
           <td *tuiCell="'quantity'" tuiTd>
             <button (click)="decreaseQuantity(item)">-</button>
@@ -41,7 +41,7 @@
             <button (click)="increaseQuantity(item)">+</button>
           </td>
           <td *tuiCell="'totalPrice'" tuiTd class="number">
-            {{ getTotal(item) | currency:'RUB' }}
+            {{ getTotal(item) | currency:'RUB ' }}
           </td>
           <td *tuiCell="'actions'" tuiTd>
             <button (click)="removeFromCart(item)">Remove</button>
@@ -50,7 +50,8 @@
       </tbody>
     </table>
   </tui-scrollbar>
-  <h4>Total Amount: {{ getTotalAmount() | currency:'RUB' }}</h4>
+  <h4>Total Amount: {{ getTotalAmount() | currency:'RUB ' }}</h4>
+  <button tuiButton type="button" (click)="checkout()">Checkout</button>
 </ng-container>
 
 <p *ngIf="cartItems.length === 0">Your cart is empty.</p>

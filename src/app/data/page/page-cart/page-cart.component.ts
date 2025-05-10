@@ -9,6 +9,7 @@ import { ICartViewModel } from '../../../interface/ICartViewModel';
 import { ShopCartRepositoryService } from '../../../repositories/shop-cart-repository.service';
 import { IUpdateCartRequest } from '../../../interface/IUpdateCartRequest';
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface CartItem extends ICartItem {
   readonly date: TuiDay;
@@ -41,7 +42,11 @@ export class PageCartComponent implements OnInit {
   protected readonly totalSorter: TuiComparator<CartItem> = (a, b) =>
     tuiDefaultSort(a.price * a.quantity, b.price * b.quantity);
 
-  constructor(private cartService: ShopCartRepositoryService, private cdr: ChangeDetectorRef) { }
+  constructor(
+    private cartService: ShopCartRepositoryService,
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadCartItems();
@@ -82,34 +87,53 @@ export class PageCartComponent implements OnInit {
 
   removeFromCart(item: CartItem): void {
     this.cartService.removeFromCart({ productId: item.productId, sizeId: item.sizeId }).subscribe(() => {
-      // Filter out the removed item from the cartItems array
       this.cartItems = this.cartItems.filter(cartItem =>
         !(cartItem.productId === item.productId && cartItem.sizeId === item.sizeId)
       );
     });
   }
+
+  checkout(): void {
+    if (this.cartItems.length === 0) {
+      console.error('Cannot checkout with an empty cart.');
+      return;
+    }
   
+    this.cartService.checkout().subscribe({
+      next: (response) => {
+        console.log('Order placed successfully', response);
+  
+        // Очистка корзины после успешного заказа
+        this.cartService.clearCart();
+        this.cartItems = [];
+  
+        this.router.navigate(['/order-confirmation'], { state: { orderId: response.orderId } });
+      },
+      error: (error) => {
+        console.error('Error during checkout', error);
+        // Обработка ошибки, например, показать сообщение об ошибке пользователю
+      }
+    });
+  }
+
   private updateCartItemQuantity(item: CartItem, newQuantity: number): void {
     const request: IUpdateCartRequest = {
-        productId: item.productId,
-        quantity: newQuantity,
-        sizeId: item.sizeId // This is now valid as sizeId is part of CartItem
+      productId: item.productId,
+      quantity: newQuantity,
+      sizeId: item.sizeId
     };
 
-    // Update local state immediately
     this.cartItems = this.cartItems.map(cartItem =>
-        cartItem.productId === item.productId ? { ...cartItem, quantity: newQuantity } : cartItem
+      cartItem.productId === item.productId ? { ...cartItem, quantity: newQuantity } : cartItem
     );
 
-    // Call API to update the cart
     this.cartService.updateCart(request).subscribe(response => {
-        if (!response.success) {
-            alert(response.message);
-            // Optionally, revert the quantity if the update fails
-            this.cartItems = this.cartItems.map(cartItem =>
-                cartItem.productId === item.productId ? { ...cartItem, quantity: item.quantity } : cartItem
-            );
-        }
+      if (!response.success) {
+        alert(response.message);
+        this.cartItems = this.cartItems.map(cartItem =>
+          cartItem.productId === item.productId ? { ...cartItem, quantity: item.quantity } : cartItem
+        );
+      }
     });
   }
 
