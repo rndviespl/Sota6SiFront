@@ -1,0 +1,60 @@
+<!-- register.component.html -->
+<form
+    tuiAppearance="floating"
+    tuiCardLarge
+    tuiForm="m"
+    [formGroup]="form"
+    [style.max-width.rem]="32"
+    (ngSubmit)="onRegister()"
+>
+    <header tuiHeader>
+        <h2 tuiTitle>
+            Registration Form
+           
+        </h2>
+    </header>
+   
+    <tui-textfield>
+        <label tuiLabel>Username</label>
+        <input
+            formControlName="username"
+            placeholder="Username"
+            tuiTextfield
+            required
+        />
+    </tui-textfield>
+    <tui-error
+        formControlName="username"
+        [error]="[] | tuiFieldError | async"
+    />
+    <tui-textfield>
+        <label tuiLabel>Password</label>
+        <input
+            formControlName="password"
+            placeholder="Password"
+            tuiTextfield
+            type="password"
+            required
+        />
+    </tui-textfield>
+    <tui-error
+        formControlName="password"
+        [error]="[] | tuiFieldError | async"
+    />
+    <footer>
+        <button
+            appearance="secondary"
+            tuiButton
+            type="button"
+            (click)="navigateToLogin()"
+        >
+            Cancel
+        </button>
+        <button
+            tuiButton
+            type="submit"
+        >
+            Register
+        </button>
+    </footer>
+</form>

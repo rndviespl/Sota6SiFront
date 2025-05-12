@@ -7,5 +7,7 @@
   <div>
     <app-back-button></app-back-button>
     <app-theme-toggle></app-theme-toggle>
+    <button *ngIf="!isAuthenticated" (click)="navigateTo('/login')" tuiButton>Auth</button>
+    <button *ngIf="isAuthenticated" (click)="logout()" tuiButton>Exit</button>
   </div>
 </div>

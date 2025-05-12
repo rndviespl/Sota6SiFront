@@ -9,6 +9,6 @@ export interface IDpUser {
     dpEmail?: string;
     dpFullName?: string;
     dpRegistrationDate: Date;
-    dpPhoneNumber: string;
+    dpPhoneNumber?: string;
     dpOrders?: IDpOrder[];
 }
