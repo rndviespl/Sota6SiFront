@@ -30,4 +30,10 @@ export class AchievementsService {
   deleteAchievement(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  // Новый метод для разблокировки ачивки
+  unlockAchievement(achievementTitle: string): void {
+    console.log(`Achievement unlocked: ${achievementTitle}`);
+    // Здесь вы можете добавить логику для обновления состояния ачивки на сервере или локально
+  }
 }

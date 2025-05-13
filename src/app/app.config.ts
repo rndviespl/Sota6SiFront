@@ -2,10 +2,22 @@ import { provideEventPlugins } from "@taiga-ui/event-plugins";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
-import { provideHttpClient } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { AchievementsService } from './services/achievements.service';
+import { AuthAndAchievementInterceptor } from "./interceptors/auth-and-achievement.interceptor";
+
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideAnimations(), provideHttpClient(), provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideEventPlugins()]
+  providers: [
+    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthAndAchievementInterceptor, multi: true },
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideEventPlugins(),
+    AchievementsService // Убедитесь, что сервис добавлен в providers
+  ]
 };
+
+ 
