@@ -5,7 +5,6 @@ export interface IAchievement {
     achievementId: number;
     title: string;
     textAchievement?: string;
-    isObtained: boolean;
     dpUserProjs?: IDpUserProj[];
 }
 
