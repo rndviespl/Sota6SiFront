@@ -1,0 +1,33 @@
+<label *ngIf="!imageControl.value" tuiInputFiles>
+    <input accept="image/*" tuiInputFiles [formControl]="imageControl" />
+  </label>
+  
+  <tui-files class="tui-space_top-1">
+    <tui-file
+      *ngIf="imageControl.value | tuiFileRejected: {accept: 'image/*'} | async as file"
+      state="error"
+      [file]="file"
+      (remove)="removeImage()"
+    />
+  
+    <tui-file
+      *ngIf="loadedImage$ | async as file"
+      [file]="file"
+      (remove)="removeImage()"
+    />
+  
+    <tui-file
+      *ngIf="failedImage$ | async as file"
+      state="error"
+      [file]="file"
+      (remove)="removeImage()"
+    />
+  
+    <tui-file
+      *ngIf="loadingImage$ | async as file"
+      state="loading"
+      [file]="file"
+      (remove)="removeImage()"
+    />
+  </tui-files>
+  

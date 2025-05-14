@@ -4,6 +4,8 @@ import { PageCartComponent } from './data/page/page-cart/page-cart.component';
 import { PageItemFromCatalogComponent } from './data/page/page-item-from-catalog/page-item-from-catalog.component';
 import { LoginComponent } from './data/components/login/login.component';
 import { RegisterComponent } from './data/components/register/register.component';
+import { UserPageComponent } from './data/page/user-page/user-page.component';
+import { UserPageProjComponent } from './data/page/user-page-proj/user-page-proj.component';
 
 export const routes: Routes = [
 
@@ -33,4 +35,14 @@ export const routes: Routes = [
         component: RegisterComponent,
         title: "Регистрация"
     },
+    {
+        path:'user-page',
+        component: UserPageComponent,
+        title:"страница тестового пользователя"
+    },
+    {
+        path: 'userProj',
+        component:UserPageProjComponent,
+        title:"страница пользователя"
+    }
 ];

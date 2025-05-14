@@ -1,0 +1,26 @@
+<form (submit)="addProduct()">
+    <tui-input
+      #productNameInput
+      tuiAutoFocus
+      tuiTextfieldSize="m"
+      maxlength="200"
+      [(ngModel)]="productData.name"
+      name="productName"
+    >
+      Product Name
+    </tui-input>
+    <br />
+    <tui-input
+      #productDescriptionInput
+      tuiAutoFocus
+      tuiTextfieldSize="m"
+      maxlength="1000"
+      [(ngModel)]="productData.description"
+      name="productDescription"
+    >
+      Product Description
+    </tui-input>
+    <br />
+    <button tuiButton type="submit" [disabled]="!productFormValid">Add Product</button>
+  </form>
+  

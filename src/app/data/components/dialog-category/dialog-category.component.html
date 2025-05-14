@@ -1,0 +1,15 @@
+<form (submit)="addCategory()">
+    <tui-input
+      #categoryNameInput
+      tuiAutoFocus
+      tuiTextfieldSize="m"
+      maxlength="200"
+      [(ngModel)]="categoryData.name"
+      name="categoryName"
+    >
+      Category Name
+    </tui-input>
+    <br />
+    <button tuiButton type="submit" [disabled]="!categoryFormValid">Add Category</button>
+  </form>
+  

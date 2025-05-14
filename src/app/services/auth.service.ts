@@ -11,7 +11,7 @@ export class AuthService {
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-  
+
   constructor(private http: HttpClient) {}
 
   setAuthenticated(isAuthenticated: boolean): void {
@@ -22,7 +22,7 @@ export class AuthService {
     const payload = {
       username: user.dpUsername,
       password: user.dpPassword,
-      phoneNumber: user.dpPhoneNumber || '0000000000' // Default value if not provided
+      phoneNumber: user.dpPhoneNumber || '0000000000'
     };
     console.log('Registering user:', payload);
     return this.http.post(`${this.baseUrl}/register`, payload);
@@ -32,7 +32,7 @@ export class AuthService {
     const payload = {
       username: user.dpUsername,
       password: user.dpPassword,
-      phoneNumber: user.dpPhoneNumber || '0000000000' // Default value if not provided
+      phoneNumber: user.dpPhoneNumber || '0000000000'
     };
     console.log('Logging in user:', payload);
     return this.http.post<{ token: string }>(`${this.baseUrl}/login`, payload);

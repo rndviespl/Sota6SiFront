@@ -2,12 +2,13 @@
   <div>
     <div (click)="navigateTo('/')">Главная</div>
     <div (click)="navigateTo('/')">Каталог</div>
-    <div (click)="navigateTo('/сart')">Перейти в корзину</div>
+    <div (click)="navigateTo('/cart')">Перейти в корзину</div>
   </div>
   <div>
     <app-back-button></app-back-button>
     <app-theme-toggle></app-theme-toggle>
     <button *ngIf="!isAuthenticated" (click)="navigateTo('/login')" tuiButton>Auth</button>
     <button *ngIf="isAuthenticated" (click)="logout()" tuiButton>Exit</button>
+      <tui-avatar src="@tui.user" (click)="openUserPage()"/>
   </div>
 </div>

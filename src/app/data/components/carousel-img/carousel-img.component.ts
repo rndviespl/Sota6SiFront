@@ -43,7 +43,6 @@ export class CarouselImgComponent implements OnInit {
     this.images.forEach(image => {
       this.imagesRepository.getDpImageData(image.dpImagesId).subscribe(blob => {
         const url = URL.createObjectURL(blob);
-        console.log('Image URL:', url);
         this.imageUrls[image.dpImagesId] = this.sanitizer.bypassSecurityTrustUrl(url);
         this.cd.detectChanges();
       });

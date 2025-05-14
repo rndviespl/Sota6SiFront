@@ -1,28 +1,39 @@
-import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { BackButtonComponent } from '../back-button/back-button.component';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
-import { TuiLink } from '@taiga-ui/core';
+import { TuiLink, TuiIcon, TuiButton, TuiIconPipe } from '@taiga-ui/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { TuiDialogService } from '@taiga-ui/core';
+import { UserPageComponent } from '../../page/user-page/user-page.component';
+import { TuiAvatar } from '@taiga-ui/kit';
 
 @Component({
   selector: 'app-navbar',
   imports: [
-    CommonModule, 
-    TuiLink, 
-    ThemeToggleComponent, 
-    BackButtonComponent
+    CommonModule,
+    TuiLink,
+    TuiIcon,
+    TuiButton,
+    ThemeToggleComponent,
+    BackButtonComponent,
+    TuiAvatar,
+    AsyncPipe,
+    TuiIconPipe,
   ],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css',
-    '../../../styles/root.css',],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  styleUrls: ['./navbar.component.css', '../../../styles/root.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NavbarComponent {
   isAuthenticated: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private dialogService: TuiDialogService
+  ) {}
 
   ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe(isAuthenticated => {
@@ -36,13 +47,9 @@ export class NavbarComponent {
   }
 
   logout(): void {
-    // Remove token from localStorage
     localStorage.removeItem('token');
-    // Remove token from cookies
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    // Update authentication status
     this.authService.setAuthenticated(false);
-    // Navigate to the home page
     this.router.navigate(['/']);
   }
 
@@ -50,5 +57,12 @@ export class NavbarComponent {
     const token = localStorage.getItem('token');
     this.isAuthenticated = !!token;
     this.authService.setAuthenticated(this.isAuthenticated);
+  }
+
+  openUserPage(): void {
+    this.dialogService.open(new UserPageComponent, {
+      dismissible: true,
+      label: 'User Page',
+    }).subscribe();
   }
 }

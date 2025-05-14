@@ -1,0 +1,20 @@
+<!-- Navigation Buttons -->
+<div>
+    <button tuiButton type="button" (click)="showComponent('product')">Products</button>
+    <button tuiButton type="button" (click)="showComponent('category')">Categories</button>
+    <button tuiButton type="button" (click)="showComponent('image')">Images</button>
+  </div>
+  
+  <!-- Dynamic Component Rendering -->
+  <ng-container *ngIf="activeComponent === 'product'">
+    <app-dialog-product></app-dialog-product>
+  </ng-container>
+  
+  <ng-container *ngIf="activeComponent === 'category'">
+    <app-dialog-category></app-dialog-category>
+  </ng-container>
+  
+  <ng-container *ngIf="activeComponent === 'image'">
+    <app-dialog-image></app-dialog-image>
+  </ng-container>
+  
