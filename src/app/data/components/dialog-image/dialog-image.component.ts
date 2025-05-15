@@ -1,19 +1,29 @@
 import { CommonModule, AsyncPipe, NgIf } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TuiFileLike, TuiFiles } from '@taiga-ui/kit';
+import { TuiAutoFocus } from '@taiga-ui/cdk';
+import { TuiButton, TuiTextfield } from '@taiga-ui/core';
+import { TuiDataListWrapper, TuiFileLike, TuiFiles, TuiSlider } from '@taiga-ui/kit';
+import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { Subject, switchMap, Observable, of, timer, map, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-image',
-  imports: [CommonModule,
-    AsyncPipe, 
-    NgIf, 
-    ReactiveFormsModule, 
-    TuiFiles,],
+  imports: [CommonModule, AsyncPipe, NgIf, ReactiveFormsModule, TuiFiles,
+     
+        
+        TuiAutoFocus,
+        TuiButton,
+        TuiDataListWrapper,
+        TuiInputModule,
+        TuiSelectModule,
+        TuiSlider,
+        TuiTextfield,
+        TuiTextfieldControllerModule,
+  ],
   templateUrl: './dialog-image.component.html',
-  styleUrl: './dialog-image.component.css',
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  styleUrls: ['./dialog-image.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DialogImageComponent {
   imageControl = new FormControl<TuiFileLike | null>(null, Validators.required);

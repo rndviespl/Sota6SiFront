@@ -58,11 +58,4 @@ export class NavbarComponent {
     this.isAuthenticated = !!token;
     this.authService.setAuthenticated(this.isAuthenticated);
   }
-
-  openUserPage(): void {
-    this.dialogService.open(new UserPageComponent, {
-      dismissible: true,
-      label: 'User Page',
-    }).subscribe();
-  }
 }

@@ -1,26 +1,60 @@
-<form (submit)="addProduct()">
+<div class="dialog-container">
+  <form [formGroup]="productForm" (submit)="addProduct()">
     <tui-input
       #productNameInput
       tuiAutoFocus
       tuiTextfieldSize="m"
       maxlength="200"
-      [(ngModel)]="productData.name"
-      name="productName"
+      formControlName="name"
+      (input)="onInput($event, 'name', 200)"
+      (keydown.enter)="addProduct()"
     >
       Product Name
     </tui-input>
     <br />
     <tui-input
       #productDescriptionInput
-      tuiAutoFocus
       tuiTextfieldSize="m"
       maxlength="1000"
-      [(ngModel)]="productData.description"
-      name="productDescription"
+      formControlName="description"
+      (input)="onInput($event, 'description', 1000)"
+      (keydown.enter)="addProduct()"
     >
       Product Description
     </tui-input>
     <br />
+    <tui-input
+      tuiTextfieldSize="m"
+      type="number"
+      formControlName="price"
+    >
+      Product Price
+    </tui-input>
+    <br />
+    <tui-input
+      tuiTextfieldSize="m"
+      type="number"
+      formControlName="purchasePrice"
+    >
+      Purchase Price
+    </tui-input>
+    <br />
+    <tui-input
+      tuiTextfieldSize="m"
+      type="number"
+      formControlName="categoryId"
+    >
+      Category ID
+    </tui-input>
+    <br />
+    <tui-input
+      tuiTextfieldSize="m"
+      type="number"
+      formControlName="discountPercent"
+    >
+      Discount Percent
+    </tui-input>
+    <br />
     <button tuiButton type="submit" [disabled]="!productFormValid">Add Product</button>
   </form>
-  
+</div>
