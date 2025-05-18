@@ -1,60 +1,58 @@
 <div class="dialog-container">
-  <form [formGroup]="productForm" (submit)="addProduct()">
+  <form [formGroup]="productForm" (submit)="submit($event)">
     <tui-input
       #productNameInput
       tuiAutoFocus
       tuiTextfieldSize="m"
       maxlength="200"
-      formControlName="name"
-      (input)="onInput($event, 'name', 200)"
-      (keydown.enter)="addProduct()"
+      formControlName="dpTitle"
+      (input)="onInput($event, 'dpTitle', 200)"
     >
-      Product Name
+      Название продукта
     </tui-input>
     <br />
     <tui-input
       #productDescriptionInput
       tuiTextfieldSize="m"
       maxlength="1000"
-      formControlName="description"
-      (input)="onInput($event, 'description', 1000)"
-      (keydown.enter)="addProduct()"
+      formControlName="dpDescription"
+      (input)="onInput($event, 'dpDescription', 1000)"
     >
-      Product Description
+      Описание продукта
     </tui-input>
     <br />
     <tui-input
       tuiTextfieldSize="m"
       type="number"
-      formControlName="price"
+      formControlName="dpPrice"
     >
-      Product Price
+      Цена продукта
     </tui-input>
     <br />
     <tui-input
       tuiTextfieldSize="m"
       type="number"
-      formControlName="purchasePrice"
+      formControlName="dpPurchasePrice"
     >
-      Purchase Price
+      Закупочная цена
     </tui-input>
     <br />
     <tui-input
       tuiTextfieldSize="m"
       type="number"
-      formControlName="categoryId"
+      formControlName="dpCategoryId"
     >
-      Category ID
+      ID категории
     </tui-input>
     <br />
     <tui-input
       tuiTextfieldSize="m"
       type="number"
-      formControlName="discountPercent"
+      formControlName="dpDiscountPercent"
     >
-      Discount Percent
+      Процент скидки
     </tui-input>
     <br />
-    <button tuiButton type="submit" [disabled]="!productFormValid">Add Product</button>
+    <button tuiButton type="submit" [disabled]="!hasValue">Добавить продукт</button>
   </form>
 </div>

@@ -1,15 +1,13 @@
-<form (submit)="addCategory()">
-    <tui-input
-      #categoryNameInput
-      tuiAutoFocus
-      tuiTextfieldSize="m"
-      maxlength="200"
-      [(ngModel)]="categoryData.name"
-      name="categoryName"
-    >
-      Category Name
-    </tui-input>
-    <br />
-    <button tuiButton type="submit" [disabled]="!categoryFormValid">Add Category</button>
-  </form>
-  
+<form [formGroup]="categoryForm" (submit)="submit()">
+  <tui-input
+    #categoryNameInput
+    tuiAutoFocus
+    tuiTextfieldSize="m"
+    maxlength="200"
+    formControlName="dpCategoryTitle"
+  >
+    Category Name
+  </tui-input>
+  <br />
+  <button tuiButton type="submit" [disabled]="!categoryForm.valid">Add Category</button>
+</form>

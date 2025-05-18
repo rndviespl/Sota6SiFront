@@ -1,7 +1,28 @@
-<label *ngIf="!imageControl.value" tuiInputFiles>
-    <input accept="image/*" tuiInputFiles [formControl]="imageControl" />
-  </label>
-  
+<div class="dialog-container">
+  <form [formGroup]="imageForm" (submit)="submit($event)">
+    <tui-input
+      tuiTextfieldSize="m"
+      maxlength="200"
+      formControlName="dpProductId"
+    >
+      ID продукта
+    </tui-input>
+    <br />
+    <tui-input
+      tuiTextfieldSize="m"
+      maxlength="200"
+      formControlName="dpImageTitle"
+    >
+      Название изображения
+    </tui-input>
+    <br />
+    <label *ngIf="!imageControl.value" tuiInputFiles>
+      <input accept="image/*" tuiInputFiles [formControl]="imageControl" (change)="onFileChange($event)" />
+    </label>
+    <br />
+    <button tuiButton type="submit" [disabled]="!hasValue">Загрузить изображение</button>
+  </form>
+
   <tui-files class="tui-space_top-1">
     <tui-file
       *ngIf="imageControl.value | tuiFileRejected: {accept: 'image/*'} | async as file"
@@ -9,20 +30,20 @@
       [file]="file"
       (remove)="removeImage()"
     />
-  
+
     <tui-file
       *ngIf="loadedImage$ | async as file"
       [file]="file"
       (remove)="removeImage()"
     />
-  
+
     <tui-file
       *ngIf="failedImage$ | async as file"
       state="error"
       [file]="file"
       (remove)="removeImage()"
     />
-  
+
     <tui-file
       *ngIf="loadingImage$ | async as file"
       state="loading"
@@ -30,4 +51,4 @@
       (remove)="removeImage()"
     />
   </tui-files>
-  
+</div>
