@@ -5,8 +5,6 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { TuiLink, TuiIcon, TuiButton, TuiIconPipe } from '@taiga-ui/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { TuiDialogService } from '@taiga-ui/core';
-import { UserPageComponent } from '../../page/user-page/user-page.component';
 import { TuiAvatar } from '@taiga-ui/kit';
 
 @Component({
@@ -31,8 +29,7 @@ export class NavbarComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private dialogService: TuiDialogService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +45,10 @@ export class NavbarComponent {
 
   logout(): void {
     localStorage.removeItem('token');
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    localStorage.removeItem('userProjId');
     this.authService.setAuthenticated(false);
     this.router.navigate(['/']);
   }
-
   checkAuthStatus(): void {
     const token = localStorage.getItem('token');
     this.isAuthenticated = !!token;

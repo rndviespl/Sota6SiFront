@@ -31,5 +31,9 @@ export class UserAchievementsService {
   getCompletedAchievementsByUsername(username: string): Observable<IAchievement[]> {
     return this.http.get<IAchievement[]>(`${this.baseUrl}/Completed/${username}`);
   }
+
+  checkUserAchievementExists(userProjId: number, achievementId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/Exists/${userProjId}/${achievementId}`);
+  }
 }
 

@@ -9,11 +9,15 @@ import { AuthService } from '../services/auth.service';
 export class AuthRepositoryService {
   constructor(private authService: AuthService) {}
 
-  register(user: IDpUser): Observable<any> {
+  login(user: IDpUser): Observable<{ token: string, userProjId?: number, achievementId?: number }> {
+    return this.authService.login(user);
+  }
+
+  register(user: IDpUser): Observable<{ token: string, userProjId?: number, achievementId?: number }> {
     return this.authService.register(user);
   }
 
-  login(user: IDpUser): Observable<{ token: string }> {
-    return this.authService.login(user);
+  logout(): void {
+    this.authService.logout();
   }
 }
