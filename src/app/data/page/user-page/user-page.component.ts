@@ -5,8 +5,8 @@ import { DialogImageComponent } from "../../components/dialog-image/dialog-image
 import { DialogProductComponent } from "../../components/dialog-product/dialog-product.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiAutoFocus } from '@taiga-ui/cdk';
-import { TuiButton, TuiDialogService, TuiTextfield } from '@taiga-ui/core';
-import { TuiDataListWrapper, TuiFiles, TuiSlider } from '@taiga-ui/kit';
+import { TuiButton, TuiDialogService, TuiIcon, TuiIconPipe, TuiLink, TuiTextfield } from '@taiga-ui/core';
+import { TuiAvatar, TuiDataListWrapper, TuiFiles, TuiSlider } from '@taiga-ui/kit';
 import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { tuiDialog } from '@taiga-ui/core';
 import { IDpCategory } from '../../../interface/IDpCategory';
@@ -35,7 +35,11 @@ import { AuthProjService } from '../../../services/auth-proj.service';
     TuiDataListWrapper,
     AsyncPipe,
     NgIf,
-    TuiFiles
+    TuiFiles,
+    TuiLink,
+    TuiIcon,
+    TuiAvatar,
+    TuiIconPipe,
   ],
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.css'],
@@ -76,7 +80,7 @@ export class UserPageComponent {
     this.authProjService.setAuthenticated(this.isProjAuthenticated);
   }
 
- logoutProj(): void {
+  logoutProj(): void {
     localStorage.removeItem('projToken'); // Удаляем 'projToken'
     localStorage.removeItem('userProjId');
     this.authProjService.setAuthenticated(false);

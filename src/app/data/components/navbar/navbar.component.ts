@@ -45,7 +45,6 @@ export class NavbarComponent {
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('userProjId');
     this.authService.setAuthenticated(false);
     this.router.navigate(['/']);
   }

@@ -1,1 +1,2 @@
-<p>user-page-proj works!</p>
+ <button *ngIf="!isProjAuthenticated" (click)="navigateTo('/login-proj')" tuiButton>Proj Auth</button>
+  <button *ngIf="isProjAuthenticated" (click)="logoutProj()" tuiButton>Proj Exit</button>

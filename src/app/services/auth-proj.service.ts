@@ -59,6 +59,7 @@ export class AuthProjService {
 
   logout(): void {
     localStorage.removeItem('projToken');
+        localStorage.removeItem('token');
     localStorage.removeItem('userProjId');
     this.setAuthenticated(false);
   }

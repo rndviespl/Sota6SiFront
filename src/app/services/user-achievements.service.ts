@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+// src/app/services/user-achievements.service.ts
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IAchievement } from '../interface/IAchievement';
 import { IUserHasAchievement } from '../interface/IUserHasAchievement';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ import { IUserHasAchievement } from '../interface/IUserHasAchievement';
 export class UserAchievementsService {
   private baseUrl = `${window.location.origin}/api/UserAchievements`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private configService: ConfigService) {}
 
   getAllUserAchievements(): Observable<IUserHasAchievement[]> {
     return this.http.get<IUserHasAchievement[]>(this.baseUrl);
@@ -36,4 +38,3 @@ export class UserAchievementsService {
     return this.http.get<boolean>(`${this.baseUrl}/Exists/${userProjId}/${achievementId}`);
   }
 }
-

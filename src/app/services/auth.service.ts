@@ -28,9 +28,6 @@ export class AuthService {
       tap(response => {
         if (response.token) {
           localStorage.setItem('token', response.token);
-          if (response.userProjId) {
-            localStorage.setItem('userProjId', response.userProjId.toString());
-          }
           this.setAuthenticated(true);
         }
       })
@@ -47,9 +44,6 @@ export class AuthService {
       tap(response => {
         if (response.token) {
           localStorage.setItem('token', response.token);
-          if (response.userProjId) {
-            localStorage.setItem('userProjId', response.userProjId.toString());
-          }
           this.setAuthenticated(true);
         }
       })
@@ -58,7 +52,6 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('userProjId');
     this.setAuthenticated(false);
   }
 }

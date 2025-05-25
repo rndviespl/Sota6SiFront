@@ -4,16 +4,18 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserAchievementsService } from '../services/user-achievements.service';
+import { ConfigService } from '../services/config.service';
 
 @Injectable()
 export class AuthAndAchievementInterceptor implements HttpInterceptor {
   constructor(
     private userAchievementsService: UserAchievementsService,
-    private router: Router
+    private router: Router,
+    private configService: ConfigService
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isAuthRequest = req.url.endsWith('/login') || req.url.endsWith('/register');
+    const isAuthRequest = req.url.endsWith(this.configService.apiEndpoints.login) || req.url.endsWith(this.configService.apiEndpoints.register);
     console.log(`Intercepting request: ${req.url}`);
 
     if (!isAuthRequest) {
@@ -71,7 +73,7 @@ export class AuthAndAchievementInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         console.error('HTTP Error:', error);
-        if (error.status === 401) {
+        if (error.status === this.configService.httpStatusCodes.unauthorized) {
           console.log('Unauthorized, redirecting to /login');
           this.router.navigate(['/login']);
         }

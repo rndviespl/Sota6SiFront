@@ -1,3 +1,4 @@
+// src/app/components/login/login.component.ts
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject } from '@angular/core';
 import { AuthRepositoryService } from '../../../repositories/auth-repository.service';
 import { IDpUser } from '../../../interface/IDpUser';
@@ -10,7 +11,8 @@ import { TuiCardLarge, TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { AuthService } from '../../../services/auth.service';
 import { TuiAlertService } from '@taiga-ui/core';
 import { UserAchievementsService } from '../../../services/user-achievements.service';
-import { catchError, of, switchMap, throwError } from 'rxjs';
+import { catchError, of, switchMap } from 'rxjs';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-login',
@@ -38,12 +40,13 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, ]),
   });
 
- constructor(
+  constructor(
     private authRepository: AuthRepositoryService,
     private userAchievementsService: UserAchievementsService,
     private router: Router,
     private authService: AuthService,
-    @Inject(TuiAlertService) private readonly alertService: TuiAlertService
+    @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
+    private configService: ConfigService
   ) {}
 
   onLogin() {
@@ -61,9 +64,13 @@ export class LoginComponent {
           console.log('Login successful:', response);
           if (response && response.token) {
             this.alertService.open('Успешный вход!', { appearance: 'success' }).subscribe();
-            const username = user.dpUsername;
-            const userProjId = response.userProjId || parseInt(localStorage.getItem('userProjId') || '0', 10);
-            const achievementId = 3;
+
+            // Сохраняем данные пользователя в localStorage
+            localStorage.setItem('token', response.token);
+
+           // Получаем userProjId из localStorage
+            const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+            const achievementId = this.configService.achievementIds.login;
 
             if (userProjId > 0) {
               this.userAchievementsService.checkUserAchievementExists(userProjId, achievementId).pipe(
