@@ -1,0 +1,27 @@
+<form tuiAppearance="floating" tuiCardLarge tuiForm="m" [formGroup]="form" [style.max-width.rem]="32"
+    (ngSubmit)="onLogin()">
+    <header tuiHeader>
+        <h2 tuiTitle>
+            Login Form for Proj
+        </h2>
+    </header>
+
+    <tui-textfield>
+        <label tuiLabel>Login</label>
+        <input formControlName="login" placeholder="Login" tuiTextfield required />
+    </tui-textfield>
+    <tui-error formControlName="login" [error]="[] | tuiFieldError | async" />
+    <tui-textfield>
+        <label tuiLabel>Password</label>
+        <input formControlName="password" placeholder="Password" tuiTextfield type="password" required />
+    </tui-textfield>
+    <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
+    <footer>
+        <button appearance="secondary" tuiButton type="button" (click)="navigateToRegister()">
+            Register
+        </button>
+        <button tuiButton type="submit">
+            Login
+        </button>
+    </footer>
+</form>

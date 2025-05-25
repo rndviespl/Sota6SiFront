@@ -12,10 +12,12 @@ import { tuiDialog } from '@taiga-ui/core';
 import { IDpCategory } from '../../../interface/IDpCategory';
 import { IDpProduct } from '../../../interface/IDpProduct';
 import { IDpImage } from '../../../interface/IDpImage';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+import { AuthProjService } from '../../../services/auth-proj.service';
 
 @Component({
   selector: 'app-user-page',
-  standalone: true, // If using standalone components
   imports: [
     CommonModule,
     DialogCategoryComponent,
@@ -41,6 +43,10 @@ import { IDpImage } from '../../../interface/IDpImage';
 })
 export class UserPageComponent {
   private readonly dialogService = inject(TuiDialogService);
+  private readonly authProjService = inject(AuthProjService);
+  private readonly router = inject(Router);
+
+  isProjAuthenticated: boolean = false;
 
   private readonly productDialog = tuiDialog(DialogProductComponent, {
     dismissible: true,
@@ -56,6 +62,30 @@ export class UserPageComponent {
     dismissible: true,
     label: 'Загрузить изображение',
   });
+
+  ngOnInit(): void {
+    this.authProjService.isAuthenticated$.subscribe(isAuthenticated => {
+      this.isProjAuthenticated = isAuthenticated;
+    });
+    this.checkAuthStatus();
+  }
+
+  checkAuthStatus(): void {
+    const token = localStorage.getItem('projToken');
+    this.isProjAuthenticated = !!token;
+    this.authProjService.setAuthenticated(this.isProjAuthenticated);
+  }
+
+ logoutProj(): void {
+    localStorage.removeItem('projToken'); // Удаляем 'projToken'
+    localStorage.removeItem('userProjId');
+    this.authProjService.setAuthenticated(false);
+    this.router.navigate(['/']);
+  }
+
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
+  }
 
   openDialog(component: string): void {
     switch (component) {
