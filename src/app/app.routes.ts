@@ -17,7 +17,7 @@ export const routes: Routes = [
         title: 'Каталог'
     },
     {
-        path: 'сart',
+        path: 'cart',
         component: PageCartComponent,
         title: "Корзина товаров"
 

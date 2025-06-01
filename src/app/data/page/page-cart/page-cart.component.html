@@ -1,13 +1,6 @@
 <ng-container *ngIf="cartItems.length > 0">
   <tui-scrollbar class="taiga-scrollbar">
-    <table
-        size="l"
-        tuiTable
-        class="taiga-table"
-        [columns]="columns"
-        [direction]="-1"
-        [sorter]="totalSorter"
-    >
+    <table size="l" tuiTable class="taiga-table" [columns]="columns" [direction]="-1" [sorter]="totalSorter">
       <thead tuiThead>
         <tr tuiThGroup>
           <th *tuiHead="'productTitle'" tuiTh>

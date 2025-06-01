@@ -9,9 +9,8 @@ import { TuiAppearance, TuiButton, TuiError, TuiNotification, TuiTextfield, TuiT
 import { TuiFieldErrorPipe } from '@taiga-ui/kit';
 import { TuiCardLarge, TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { TuiAlertService } from '@taiga-ui/core';
-import { UserAchievementsService } from '../../../services/user-achievements.service';
 import { ConfigService } from '../../../services/config.service';
-import { switchMap } from 'rxjs';
+import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 
 @Component({
   selector: 'app-register',
@@ -35,13 +34,13 @@ import { switchMap } from 'rxjs';
 })
 export class RegisterComponent {
   protected readonly form = new FormGroup({
-    username: new FormControl('', [Validators.required,]),
-    password: new FormControl('', [Validators.required,]),
+    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
   constructor(
     private authRepository: AuthRepositoryService,
-    private userAchievementsService: UserAchievementsService,
+    private userAchievementsRepository: UserAchievementsRepositoryService,
     private router: Router,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
     private configService: ConfigService
@@ -58,56 +57,33 @@ export class RegisterComponent {
       };
 
       this.authRepository.register(user).subscribe({
-        next: (response: { token: string; userProjId?: number; achievementId?: number }) => {
-          console.log('Registration response:', response);
-
+        next: (response: { token: string; userProjId?: number }) => {
           if (response.token) {
             this.alertService.open('Регистрация успешна! Войдите в аккаунт.', { appearance: 'success' }).subscribe();
-            const username = user.dpUsername;
             const userProjId = response.userProjId || parseInt(localStorage.getItem('userProjId') || '0', 10);
-            const achievementId = this.configService.achievementIds.register;
 
-            if (userProjId > 0) {
-              this.userAchievementsService.checkUserAchievementExists(userProjId, achievementId).pipe(
-                switchMap(exists => {
-                  if (!exists) {
-                    return this.userAchievementsService.createUserAchievement(userProjId, achievementId).pipe(
-                      switchMap(() => this.userAchievementsService.unlockUserAchievement(userProjId, achievementId))
-                    );
-                  } else {
-                    return this.userAchievementsService.unlockUserAchievement(userProjId, achievementId);
-                  }
-                })
-              ).subscribe({
-                next: () => {
-                  this.alertService.open(`Достижение #${achievementId} разблокировано!`, { appearance: 'info' }).subscribe();
-                },
-                error: (err) => {
-                  console.error(`Ошибка при разблокировке достижения ${achievementId} для userProjId ${userProjId}:`, err);
-                }
+            this.userAchievementsRepository
+              .handleAchievement(userProjId, 'registerSuccess', 'Достижение регистрации разблокировано!')
+              .subscribe({
+                complete: () => setTimeout(() => this.router.navigate(['/login']), 2000)
               });
-            } else {
-              console.log('userProjId not found, checking achievements by username');
-              this.userAchievementsService.getCompletedAchievementsByUsername(username).subscribe({
-                next: (achievements) => {
-                  console.log('Achievements for user:', achievements);
-                },
-                error: (err) => {
-                  console.error('Ошибка при получении достижений:', err);
-                }
-              });
-            }
-
-            setTimeout(() => {
-              this.router.navigate(['/login']);
-            }, 2000);
           } else {
             this.alertService.open('Ошибка регистрации: некорректный ответ сервера', { appearance: 'error' }).subscribe();
           }
         },
         error: (error) => {
-          console.error('Registration failed:', error);
-          const errorMessage = error.error?.message || error.message || 'Ошибка регистрации: попробуйте другое имя пользователя';
+          const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'registerFailed', 'Достижение неудачной регистрации разблокировано!')
+            .subscribe();
+
+          let errorMessage = 'Ошибка регистрации: попробуйте другое имя пользователя';
+          if (error.status === this.configService.httpStatusCodes.conflict) {
+            errorMessage = 'Ошибка: имя пользователя уже занято';
+          } else if (error.status === this.configService.httpStatusCodes.badRequest) {
+            errorMessage = 'Ошибка: неверный формат данных';
+          }
+
           this.alertService.open(errorMessage, { appearance: 'error' }).subscribe();
         }
       });

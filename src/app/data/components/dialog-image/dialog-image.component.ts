@@ -1,22 +1,25 @@
+// src/app/components/dialog-image/dialog-image.component.ts
 import { Component, inject, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AsyncPipe, NgIf } from '@angular/common'; // Import AsyncPipe
+import { AsyncPipe, NgIf } from '@angular/common';
 import { TuiAutoFocus } from '@taiga-ui/cdk';
 import { TuiAlertService, TuiButton, TuiDialogContext, TuiDialogService, TuiTextfield } from '@taiga-ui/core';
 import { TuiDataListWrapper, TuiFileLike, TuiFiles, TuiSlider } from '@taiga-ui/kit';
 import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { injectContext } from '@taiga-ui/polymorpheus';
-import { Subject, switchMap, Observable, of, timer, map, finalize } from 'rxjs';
-import { ICreateDpImageRequest } from "../../../interface/ICreateDpImageRequest";
+import { Subject, Observable, of } from 'rxjs';
+import { ICreateDpImageRequest } from '../../../interface/ICreateDpImageRequest';
 import { ImagesRepositoryService } from '../../../repositories/images-repository.service';
 import { IDpImage } from '../../../interface/IDpImage';
 import { IUpdateDpImageRequest } from '../../../interface/IUpdateDpImageRequest';
+import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-dialog-image',
   standalone: true,
   imports: [
-    AsyncPipe, // Add AsyncPipe to the imports array
+    AsyncPipe,
     ReactiveFormsModule,
     TuiAutoFocus,
     TuiButton,
@@ -30,7 +33,7 @@ import { IUpdateDpImageRequest } from '../../../interface/IUpdateDpImageRequest'
     NgIf
   ],
   templateUrl: './dialog-image.component.html',
-  styleUrls: ['./dialog-image.component.css'],
+  styleUrls: ['./dialog-image.component.css']
 })
 export class DialogImageComponent implements OnInit {
   @ViewChild('productNameInput', { read: ElementRef }) productNameInputRef!: ElementRef;
@@ -38,22 +41,24 @@ export class DialogImageComponent implements OnInit {
   private readonly alerts = inject(TuiAlertService);
   private readonly dialogs = inject(TuiDialogService);
   private readonly imagesRepositoryService = inject(ImagesRepositoryService);
+  private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
+  private readonly configService = inject(ConfigService);
 
   public readonly context = injectContext<TuiDialogContext<IDpImage, IDpImage>>();
 
   protected readonly imageControl = new FormControl<TuiFileLike | null>(null, Validators.required);
   protected readonly failedImage$ = new Subject<TuiFileLike | null>();
   protected readonly loadingImage$ = new Subject<TuiFileLike | null>();
-  protected readonly loadedImage$ = this.imageControl.valueChanges.pipe(
-    switchMap((file) => this.processImage(file)),
-  );
+  protected readonly loadedImage$ = new Subject<TuiFileLike | null>();
 
   protected readonly imageForm = new FormGroup({
     dpProductId: new FormControl<number | null>(null, Validators.required),
-    dpImageTitle: new FormControl('', Validators.required),
+    dpImageTitle: new FormControl('', [Validators.required, Validators.maxLength(200)])
   });
 
   selectedFile: File | null = null;
+  private readonly maxFileSize = 5 * 1024 * 1024; // 5MB
+  private readonly allowedTypes = ['image/jpeg', 'image/png'];
 
   protected get hasValue(): boolean {
     return this.imageForm.valid && !!this.selectedFile;
@@ -64,10 +69,14 @@ export class DialogImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    this.userAchievementsRepository
+      .handleAchievement(userProjId, 'openImageDialogSuccess', 'Достижение: диалог изображения открыт!')
+      .subscribe();
     if (this.data) {
       this.imageForm.patchValue({
         dpProductId: this.data.dpProductId,
-        dpImageTitle: this.data.dpImageTitle,
+        dpImageTitle: this.data.dpImageTitle
       });
     }
   }
@@ -75,36 +84,37 @@ export class DialogImageComponent implements OnInit {
   protected removeImage(): void {
     this.imageControl.setValue(null);
     this.selectedFile = null;
+    this.loadedImage$.next(null);
+    this.failedImage$.next(null);
+    this.loadingImage$.next(null);
   }
 
   protected onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-      this.imageControl.setValue(this.selectedFile);
+      const file = input.files[0];
+      const validationError = this.validateFile(file);
+      if (validationError) {
+        this.showError(validationError);
+        this.failedImage$.next(file);
+        this.imageControl.setValue(null);
+        this.selectedFile = null;
+        return;
+      }
+      this.selectedFile = file;
+      this.imageControl.setValue(file);
+      this.loadedImage$.next(file);
     }
   }
 
-  protected processImage(file: TuiFileLike | null): Observable<TuiFileLike | null> {
-    this.failedImage$.next(null);
-
-    if (this.imageControl.invalid || !file) {
-      return of(null);
+  private validateFile(file: File): string | null {
+    if (file.size > this.maxFileSize) {
+      return `Файл слишком большой (максимум ${this.maxFileSize / 1024 / 1024}MB).`;
     }
-
-    this.loadingImage$.next(file);
-
-    return timer(2000).pipe(
-      map(() => {
-        if (Math.random() > 0.5) {
-          return file;
-        }
-
-        this.failedImage$.next(file);
-        return null;
-      }),
-      finalize(() => this.loadingImage$.next(null)),
-    );
+    if (!this.allowedTypes.includes(file.type)) {
+      return 'Поддерживаются только JPEG и PNG.';
+    }
+    return null;
   }
 
   protected submit(event?: Event): void {
@@ -113,59 +123,79 @@ export class DialogImageComponent implements OnInit {
     }
     if (this.hasValue) {
       const imageData = this.imageForm.value;
+      const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+      this.loadingImage$.next(this.selectedFile);
 
       if (this.data.dpImagesId) {
         const updateRequest: IUpdateDpImageRequest = {
           dpProductId: imageData.dpProductId!,
           dpImageTitle: imageData.dpImageTitle!,
-          file: this.selectedFile!,
+          file: this.selectedFile!
         };
-        this.updateImage(updateRequest);
+        this.updateImage(updateRequest, userProjId);
       } else {
         const createRequest: ICreateDpImageRequest = {
           dpProductId: imageData.dpProductId!,
           dpImageTitle: imageData.dpImageTitle!,
-          file: this.selectedFile!,
+          file: this.selectedFile!
         };
-        this.createImage(createRequest);
+        this.createImage(createRequest, userProjId);
       }
     } else {
-      console.error('Form is invalid.');
+      this.showError('Форма заполнена некорректно.');
     }
   }
 
- private createImage(imageData: ICreateDpImageRequest): void {
-  this.imagesRepositoryService.createDpImage(imageData).subscribe({
-    next: (createdImage) => {
-      this.context.completeWith(createdImage);
-      this.showSuccess('Изображение успешно загружено.');
-    },
-    error: (error) => {
-      console.error('Ошибка при загрузке изображения:', error);
-      this.showError('Ошибка при загрузке изображения: ' + error.message);
-    },
-  });
-}
+  private createImage(imageData: ICreateDpImageRequest, userProjId: number): void {
+    this.imagesRepositoryService.createDpImage(imageData).subscribe({
+      next: (createdImage) => {
+        this.context.completeWith(createdImage);
+        this.showSuccess('Изображение успешно загружено.');
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'addImageSuccess', 'Достижение: изображение успешно добавлено!')
+          .subscribe();
+        this.loadingImage$.next(null);
+      },
+      error: (error) => {
+        console.error('Ошибка при загрузке изображения:', error);
+        this.showError(`Ошибка при загрузке изображения: ${error.message || 'неизвестная ошибка'}`);
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'addImageFailed', 'Достижение: ошибка добавления изображения!')
+          .subscribe();
+        this.failedImage$.next(this.selectedFile);
+        this.loadingImage$.next(null);
+      }
+    });
+  }
 
-private updateImage(imageData: IUpdateDpImageRequest): void {
-  this.imagesRepositoryService.updateDpImage(this.data.dpImagesId, imageData).subscribe({
-    next: () => {
-      this.context.completeWith(this.data);
-      this.showSuccess('Изображение успешно обновлено.');
-    },
-    error: (error) => {
-      console.error('Ошибка при обновлении изображения:', error);
-      this.showError('Ошибка при обновлении изображения: ' + error.message);
-    },
-  });
-}
+  private updateImage(imageData: IUpdateDpImageRequest, userProjId: number): void {
+    this.imagesRepositoryService.updateDpImage(this.data.dpImagesId, imageData).subscribe({
+      next: () => {
+        this.context.completeWith(this.data);
+        this.showSuccess('Изображение успешно обновлено.');
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'updateImageSuccess', 'Достижение: изображение успешно обновлено!')
+          .subscribe();
+        this.loadingImage$.next(null);
+      },
+      error: (error) => {
+        console.error('Ошибка при обновлении изображения:', error);
+        this.showError(`Ошибка при обновлении изображения: ${error.message || 'неизвестная ошибка'}`);
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'updateImageFailed', 'Достижение: ошибка обновления изображения!')
+          .subscribe();
+        this.failedImage$.next(this.selectedFile);
+        this.loadingImage$.next(null);
+      }
+    });
+  }
 
   private showError(message: string): void {
     this.alerts
       .open(message, {
         label: 'Ошибка',
         appearance: 'negative',
-        autoClose: 5000,
+        autoClose: 5000
       })
       .subscribe();
   }
@@ -175,7 +205,7 @@ private updateImage(imageData: IUpdateDpImageRequest): void {
       .open(message, {
         label: 'Успех',
         appearance: 'success',
-        autoClose: 5000,
+        autoClose: 5000
       })
       .subscribe();
   }

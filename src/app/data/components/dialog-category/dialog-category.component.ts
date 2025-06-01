@@ -1,3 +1,4 @@
+// src/app/components/dialog-category/dialog-category.component.ts
 import { Component, inject, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiAutoFocus } from '@taiga-ui/cdk';
@@ -5,12 +6,15 @@ import { TuiAlertService, TuiButton, TuiDialogContext, TuiDialogService, TuiText
 import { TuiDataListWrapper, TuiSlider } from '@taiga-ui/kit';
 import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { injectContext } from '@taiga-ui/polymorpheus';
-import { IDpCategory } from "../../../interface/IDpCategory";
+import { IDpCategory } from '../../../interface/IDpCategory';
 import { CategoriesRepositoryService } from '../../../repositories/categories-repository.service';
 import { CommonModule } from '@angular/common';
+import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 
 @Component({
   selector: 'app-dialog-category',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     TuiAutoFocus,
@@ -24,7 +28,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './dialog-category.component.html',
-  styleUrls: ['./dialog-category.component.css'],
+  styleUrls: ['./dialog-category.component.css']
 })
 export class DialogCategoryComponent implements OnInit {
   @ViewChild('categoryNameInput', { read: ElementRef }) categoryNameInputRef!: ElementRef;
@@ -32,12 +36,14 @@ export class DialogCategoryComponent implements OnInit {
   private readonly alerts = inject(TuiAlertService);
   private readonly dialogs = inject(TuiDialogService);
   private readonly categoriesRepositoryService = inject(CategoriesRepositoryService);
+  private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
+  private readonly configService = inject(ConfigService);
 
   public readonly context = injectContext<TuiDialogContext<IDpCategory, IDpCategory>>();
 
   protected readonly categoryForm = new FormGroup({
     dpCategoryTitle: new FormControl('', Validators.required),
-    sizeId: new FormControl<number | null>(null),
+    sizeId: new FormControl<number | null>(null)
   });
 
   protected get hasValue(): boolean {
@@ -49,6 +55,10 @@ export class DialogCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    this.userAchievementsRepository
+      .handleAchievement(userProjId, 'openCategoryDialogSuccess', 'Достижение: диалог категории открыт!')
+      .subscribe();
     if (this.data) {
       this.categoryForm.patchValue(this.data);
     }
@@ -60,40 +70,53 @@ export class DialogCategoryComponent implements OnInit {
     }
     if (this.hasValue) {
       const categoryData = this.categoryForm.value;
+      const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
 
-      // If updating, include the dpCategoryId
       if (this.data.dpCategoryId) {
-        this.updateCategory({ ...categoryData, dpCategoryId: this.data.dpCategoryId } as IDpCategory);
+        this.updateCategory({ ...categoryData, dpCategoryId: this.data.dpCategoryId } as IDpCategory, userProjId);
       } else {
-        // If creating, exclude the dpCategoryId
-        this.createCategory(categoryData as IDpCategory);
+        this.createCategory(categoryData as IDpCategory, userProjId);
       }
     } else {
-      console.error('Form is invalid.');
+      this.showError('Форма заполнена некорректно.');
     }
   }
 
-  private createCategory(categoryData: IDpCategory): void {
+  private createCategory(categoryData: IDpCategory, userProjId: number): void {
     this.categoriesRepositoryService.createDpCategory(categoryData).subscribe({
       next: (createdCategory) => {
         this.context.completeWith(createdCategory);
         this.showSuccess('Категория успешно создана.');
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'addCategorySuccess', 'Достижение: категория успешно создана!')
+          .subscribe();
       },
-      error: () => {
+      error: (error) => {
+        console.error('Ошибка при создании категории:', error);
         this.showError('Ошибка при создании категории.');
-      },
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'addCategoryFailed', 'Достижение: ошибка создания категории!')
+          .subscribe();
+      }
     });
   }
 
-  private updateCategory(categoryData: IDpCategory): void {
+  private updateCategory(categoryData: IDpCategory, userProjId: number): void {
     this.categoriesRepositoryService.updateDpCategory(categoryData.dpCategoryId, categoryData).subscribe({
       next: () => {
-        this.context.completeWith(this.data);
+        this.context.completeWith(categoryData);
         this.showSuccess('Категория успешно обновлена.');
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'updateCategorySuccess', 'Достижение: категория успешно обновлена!')
+          .subscribe();
       },
-      error: () => {
+      error: (error) => {
+        console.error('Ошибка при обновлении категории:', error);
         this.showError('Ошибка при обновлении категории.');
-      },
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'updateCategoryFailed', 'Достижение: ошибка обновления категории!')
+          .subscribe();
+      }
     });
   }
 
@@ -102,7 +125,7 @@ export class DialogCategoryComponent implements OnInit {
       .open(message, {
         label: 'Ошибка',
         appearance: 'negative',
-        autoClose: 5000,
+        autoClose: 5000
       })
       .subscribe();
   }
@@ -112,7 +135,7 @@ export class DialogCategoryComponent implements OnInit {
       .open(message, {
         label: 'Успех',
         appearance: 'success',
-        autoClose: 5000,
+        autoClose: 5000
       })
       .subscribe();
   }
@@ -120,7 +143,6 @@ export class DialogCategoryComponent implements OnInit {
   protected onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const cleanedValue = input.value.replace(/[^a-zA-Z0-9]/g, '');
-
     const maxLength = 200;
     const finalValue = this.checkLengthAndWarn(cleanedValue, maxLength);
 
@@ -130,7 +152,7 @@ export class DialogCategoryComponent implements OnInit {
 
   private checkLengthAndWarn(value: string, maxLength: number, warningThreshold: number = 15): string {
     if (value.length > maxLength) {
-      this.showError(`Вы превысили максимальную длину в ${maxLength} символов. Больше символов добавить нельзя.`);
+      this.showError(`Вы превысили максимальную длину в ${maxLength} символов.`);
       return value.slice(0, maxLength);
     } else if (value.length > maxLength - warningThreshold) {
       this.showWarning(`Вы приближаетесь к лимиту символов. Осталось ${maxLength - value.length} символов.`);
@@ -143,10 +165,12 @@ export class DialogCategoryComponent implements OnInit {
   }
 
   private showWarning(message: string): void {
-    this.alerts.open(message, {
-      label: 'Предупреждение',
-      appearance: 'warning',
-      autoClose: 5000,
-    }).subscribe();
+    this.alerts
+      .open(message, {
+        label: 'Предупреждение',
+        appearance: 'warning',
+        autoClose: 5000
+      })
+      .subscribe();
   }
 }

@@ -1,10 +1,11 @@
 // src/app/services/user-achievements.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of, switchMap } from 'rxjs';
 import { IAchievement } from '../interface/IAchievement';
 import { IUserHasAchievement } from '../interface/IUserHasAchievement';
 import { ConfigService } from './config.service';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ import { ConfigService } from './config.service';
 export class UserAchievementsService {
   private baseUrl = `${window.location.origin}/api/UserAchievements`;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {}
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService,
+    private alertService: TuiAlertService
+  ) { }
 
   getAllUserAchievements(): Observable<IUserHasAchievement[]> {
     return this.http.get<IUserHasAchievement[]>(this.baseUrl);
@@ -36,5 +41,45 @@ export class UserAchievementsService {
 
   checkUserAchievementExists(userProjId: number, achievementId: number): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/Exists/${userProjId}/${achievementId}`);
+  }
+
+  /**
+   * Универсальный метод для обработки достижения (создание и разблокировка)
+   * @param userProjId Идентификатор пользователя
+   * @param achievementKey Ключ достижения из ConfigService.achievementIds
+   * @param successMessage Сообщение для уведомления при успешной разблокировке
+   * @returns Observable<void>
+   */
+  handleAchievement(
+    userProjId: number,
+    achievementKey: keyof typeof this.configService.achievementIds,
+    successMessage: string
+  ): Observable<void> {
+    if (userProjId <= 0) {
+      console.warn('Invalid userProjId, skipping achievement handling');
+      return of(void 0);
+    }
+
+    const achievementId = this.configService.achievementIds[achievementKey];
+
+    return this.checkUserAchievementExists(userProjId, achievementId).pipe(
+      switchMap(exists => {
+        if (!exists) {
+          return this.createUserAchievement(userProjId, achievementId).pipe(
+            switchMap(() => this.unlockUserAchievement(userProjId, achievementId))
+          );
+        }
+        return this.unlockUserAchievement(userProjId, achievementId);
+      }),
+      switchMap(() => {
+        this.alertService.open(successMessage, { appearance: 'info' }).subscribe();
+        return of(void 0);
+      }),
+      catchError(error => {
+        console.error(`Failed to handle achievement ${achievementId} for userProjId ${userProjId}:`, error);
+        this.alertService.open('Ошибка при обработке достижения', { appearance: 'error' }).subscribe();
+        return of(void 0);
+      })
+    );
   }
 }

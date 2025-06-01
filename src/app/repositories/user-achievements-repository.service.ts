@@ -3,13 +3,17 @@ import { Observable } from 'rxjs';
 import { IAchievement } from '../interface/IAchievement';
 import { UserAchievementsService } from '../services/user-achievements.service';
 import { IUserHasAchievement } from '../interface/IUserHasAchievement';
+import { ConfigService } from '../services/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAchievementsRepositoryService {
 
-  constructor(private userAchievementsService: UserAchievementsService) {}
+  constructor(
+    private userAchievementsService: UserAchievementsService,
+    private configService: ConfigService
+  ) {}
 
   getAllUserAchievements(): Observable<IUserHasAchievement[]> {
     return this.userAchievementsService.getAllUserAchievements();
@@ -29,5 +33,20 @@ export class UserAchievementsRepositoryService {
 
   getCompletedAchievementsByUsername(username: string): Observable<IAchievement[]> {
     return this.userAchievementsService.getCompletedAchievementsByUsername(username);
+  } 
+
+  /**
+   * Универсальный метод для обработки достижения
+   * @param userProjId Идентификатор пользователя
+   * @param achievementKey Ключ достижения из ConfigService.achievementIds
+   * @param successMessage Сообщение для уведомления
+   * @returns Observable<void>
+   */
+  handleAchievement(
+    userProjId: number,
+    achievementKey: keyof typeof this.configService.achievementIds,
+    successMessage: string
+  ): Observable<void> {
+    return this.userAchievementsService.handleAchievement(userProjId, achievementKey, successMessage);
   }
 }

@@ -10,9 +10,8 @@ import { TuiFieldErrorPipe } from '@taiga-ui/kit';
 import { TuiCardLarge, TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { AuthService } from '../../../services/auth.service';
 import { TuiAlertService } from '@taiga-ui/core';
-import { UserAchievementsService } from '../../../services/user-achievements.service';
-import { catchError, of, switchMap } from 'rxjs';
 import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 
 @Component({
   selector: 'app-login',
@@ -36,13 +35,13 @@ import { ConfigService } from '../../../services/config.service';
 })
 export class LoginComponent {
   protected readonly form = new FormGroup({
-    username: new FormControl('', [Validators.required, ]),
-    password: new FormControl('', [Validators.required, ]),
+    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
   constructor(
     private authRepository: AuthRepositoryService,
-    private userAchievementsService: UserAchievementsService,
+    private userAchievementsRepository: UserAchievementsRepositoryService,
     private router: Router,
     private authService: AuthService,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
@@ -61,47 +60,32 @@ export class LoginComponent {
 
       this.authRepository.login(user).subscribe({
         next: (response) => {
-          console.log('Login successful:', response);
           if (response && response.token) {
             this.alertService.open('Успешный вход!', { appearance: 'success' }).subscribe();
-
-            // Сохраняем данные пользователя в localStorage
             localStorage.setItem('token', response.token);
 
-           // Получаем userProjId из localStorage
             const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
-            const achievementId = this.configService.achievementIds.login;
-
-            if (userProjId > 0) {
-              this.userAchievementsService.checkUserAchievementExists(userProjId, achievementId).pipe(
-                switchMap(exists => {
-                  if (!exists) {
-                    return this.userAchievementsService.createUserAchievement(userProjId, achievementId).pipe(
-                      switchMap(() => this.userAchievementsService.unlockUserAchievement(userProjId, achievementId))
-                    );
-                  }
-                  return this.userAchievementsService.unlockUserAchievement(userProjId, achievementId);
-                }),
-                catchError(error => {
-                  console.error('Error handling achievement:', error);
-                  return of(null); // Continue without blocking
-                })
-              ).subscribe({
-                next: () => {
-                  this.alertService.open(`Достижение #${achievementId} разблокировано!`, { appearance: 'info' }).subscribe();
-                },
-                error: (err) => console.error(`Failed to unlock achievement ${achievementId} for userProjId ${userProjId}:`, err)
+            this.userAchievementsRepository
+              .handleAchievement(userProjId, 'loginSuccess', 'тест-кейс входа разблокировано!')
+              .subscribe({
+                complete: () => this.router.navigate(['/'])
               });
-            } else {
-              console.log('userProjId not found, skipping achievement unlock');
-            }
-
-            this.router.navigate(['/']);
           }
         },
         error: (error) => {
-          console.error('Login failed:', error);
-          this.alertService.open('Ошибка входа: неверное имя пользователя или пароль', { appearance: 'error' }).subscribe();
+          const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'loginFailed', 'тест-кейс неудачного входа разблокировано!')
+            .subscribe();
+
+          let errorMessage = 'Ошибка входа: неверное имя пользователя или пароль';
+          if (error.status === this.configService.httpStatusCodes.unauthorized) {
+            errorMessage = 'Ошибка: неверные учетные данные';
+          } else if (error.status === this.configService.httpStatusCodes.serverError) {
+            errorMessage = 'Ошибка сервера, попробуйте позже';
+          }
+
+          this.alertService.open(errorMessage, { appearance: 'error' }).subscribe();
         }
       });
     }

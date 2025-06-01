@@ -1,16 +1,20 @@
+// src/app/components/dialog-product/dialog-product.component.ts
 import { Component, inject, ViewChild, ElementRef, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiAutoFocus } from '@taiga-ui/cdk';
 import { TuiAlertService, TuiButton, TuiDialogContext, TuiDialogService, TuiTextfield } from '@taiga-ui/core';
-import { TuiDataListWrapper, TuiFiles, TuiSlider } from '@taiga-ui/kit';
+import { TuiDataListWrapper, TuiSlider } from '@taiga-ui/kit';
 import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
 import { injectContext } from '@taiga-ui/polymorpheus';
-import { IDpProduct } from "../../../interface/IDpProduct";
+import { IDpProduct } from '../../../interface/IDpProduct';
 import { ProductsRepositoryService } from '../../../repositories/products-repository.service';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
+import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 
 @Component({
   selector: 'app-dialog-product',
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -22,11 +26,12 @@ import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
     TuiSlider,
     TuiTextfield,
     TuiTextfieldControllerModule,
-   
+    AsyncPipe,
+    NgIf
   ],
   templateUrl: './dialog-product.component.html',
   styleUrls: ['./dialog-product.component.css'],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DialogProductComponent implements OnInit {
   @ViewChild('productNameInput', { read: ElementRef }) productNameInputRef!: ElementRef;
@@ -34,16 +39,18 @@ export class DialogProductComponent implements OnInit {
   private readonly alerts = inject(TuiAlertService);
   private readonly dialogs = inject(TuiDialogService);
   private readonly productsRepositoryService = inject(ProductsRepositoryService);
+  private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
+  private readonly configService = inject(ConfigService);
 
   public readonly context = injectContext<TuiDialogContext<IDpProduct, IDpProduct>>();
 
   protected readonly productForm = new FormGroup({
     dpTitle: new FormControl('', Validators.required),
     dpDescription: new FormControl(''),
-    dpPrice: new FormControl(0, Validators.required),
-    dpPurchasePrice: new FormControl(0, Validators.required),
+    dpPrice: new FormControl(0, [Validators.required, Validators.min(0)]),
+    dpPurchasePrice: new FormControl(0, [Validators.required, Validators.min(0)]),
     dpCategoryId: new FormControl(0),
-    dpDiscountPercent: new FormControl(0),
+    dpDiscountPercent: new FormControl(0, [Validators.min(0), Validators.max(100)])
   });
 
   protected get hasValue(): boolean {
@@ -55,6 +62,10 @@ export class DialogProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    this.userAchievementsRepository
+      .handleAchievement(userProjId, 'openProductDialogSuccess', 'Достижение: диалог продукта открыт!')
+      .subscribe();
     if (this.data) {
       this.productForm.patchValue(this.data);
     }
@@ -66,40 +77,53 @@ export class DialogProductComponent implements OnInit {
     }
     if (this.hasValue) {
       const productData = this.productForm.value;
+      const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
 
-      // If updating, include the dpProductId
       if (this.data.dpProductId) {
-        this.updateProduct({ ...productData, dpProductId: this.data.dpProductId } as IDpProduct);
+        this.updateProduct({ ...productData, dpProductId: this.data.dpProductId } as IDpProduct, userProjId);
       } else {
-        // If creating, exclude the dpProductId
-        this.createProduct(productData as IDpProduct);
+        this.createProduct(productData as IDpProduct, userProjId);
       }
     } else {
-      console.error('Form is invalid.');
+      this.showError('Форма заполнена некорректно.');
     }
   }
 
-  private createProduct(productData: IDpProduct): void {
+  private createProduct(productData: IDpProduct, userProjId: number): void {
     this.productsRepositoryService.createProduct(productData).subscribe({
       next: (createdProduct) => {
         this.context.completeWith(createdProduct);
         this.showSuccess('Продукт успешно создан.');
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'createProductSuccess', 'Достижение: продукт успешно создан!')
+          .subscribe();
       },
-      error: () => {
+      error: (error) => {
+        console.error('Ошибка при создании продукта:', error);
         this.showError('Ошибка при создании продукта.');
-      },
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'createProductFailed', 'Достижение: ошибка создания продукта!')
+          .subscribe();
+      }
     });
   }
 
-  private updateProduct(productData: IDpProduct): void {
+  private updateProduct(productData: IDpProduct, userProjId: number): void {
     this.productsRepositoryService.updateProduct(productData.dpProductId, productData).subscribe({
       next: () => {
-        this.context.completeWith(this.data);
-        this.showSuccess('Продукт успешно обновлен.');
+        this.context.completeWith(productData);
+        this.showSuccess('Продукт успешно обновлён.');
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'updateProductSuccess', 'Достижение: продукт успешно обновлён!')
+          .subscribe();
       },
-      error: () => {
+      error: (error) => {
+        console.error('Ошибка при обновлении продукта:', error);
         this.showError('Ошибка при обновлении продукта.');
-      },
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, 'updateProductFailed', 'Достижение: ошибка обновления продукта!')
+          .subscribe();
+      }
     });
   }
 
@@ -108,7 +132,7 @@ export class DialogProductComponent implements OnInit {
       .open(message, {
         label: 'Ошибка',
         appearance: 'negative',
-        autoClose: 5000,
+        autoClose: 5000
       })
       .subscribe();
   }
@@ -118,7 +142,7 @@ export class DialogProductComponent implements OnInit {
       .open(message, {
         label: 'Успех',
         appearance: 'success',
-        autoClose: 5000,
+        autoClose: 5000
       })
       .subscribe();
   }
@@ -142,10 +166,12 @@ export class DialogProductComponent implements OnInit {
   }
 
   private showWarning(message: string): void {
-    this.alerts.open(message, {
-      label: 'Предупреждение',
-      appearance: 'warning',
-      autoClose: 5000,
-    }).subscribe();
+    this.alerts
+      .open(message, {
+        label: 'Предупреждение',
+        appearance: 'warning',
+        autoClose: 5000
+      })
+      .subscribe();
   }
 }

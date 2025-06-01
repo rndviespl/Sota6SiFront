@@ -1,15 +1,17 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IDpProduct } from '../../../interface/IDpProduct';
 import { ProductsRepositoryService } from '../../../repositories/products-repository.service';
 import { CarouselImgComponent } from '../../components/carousel-img/carousel-img.component';
 import { CommonModule } from '@angular/common';
-import { TuiAppearance, TuiButton } from '@taiga-ui/core';
+import { TuiAlertService, TuiAppearance, TuiButton } from '@taiga-ui/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { SecurityContext } from '@angular/core';
 import { IDpImage } from '../../../interface/IDpImage';
 import { FormsModule } from '@angular/forms';
 import { ShopCartRepositoryService } from '../../../repositories/shop-cart-repository.service';
+import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-page-item-from-catalog',
@@ -26,10 +28,12 @@ export class PageItemFromCatalogComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsRepositoryService: ProductsRepositoryService,
-    private cartService: ShopCartRepositoryService,
-    private sanitizer: DomSanitizer
+   private sanitizer: DomSanitizer,
+   private cartService: ShopCartRepositoryService,
+    private userAchievementsRepository: UserAchievementsRepositoryService,
+    private configService: ConfigService,
+    @Inject(TuiAlertService) private readonly alertService: TuiAlertService
   ) {}
-
   get images(): IDpImage[] {
     return this.productInfo?.dpImages || [];
   }
@@ -38,15 +42,29 @@ export class PageItemFromCatalogComponent implements OnInit {
     this.loadProductInfo();
   }
 
-  private loadProductInfo(): void {
+ private loadProductInfo(): void {
     const dpProductId = this.route.snapshot.paramMap.get('dpProductId');
     if (dpProductId) {
+      const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
       this.productsRepositoryService.getProductById(+dpProductId).subscribe({
         next: (product: IDpProduct) => {
           this.productInfo = product;
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'viewProductSuccess', 'тест-кейс: просмотр продукта разблокировано!')
+            .subscribe();
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'loadProductInfoSuccess', 'тест-кейс: загрузка информации о продукте разблокирована!')
+            .subscribe();
         },
         error: (error) => {
           console.error('Ошибка при загрузке информации о продукте:', error);
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'viewProductFailed', 'тест-кейс: ошибка просмотра продукта разблокирована!')
+            .subscribe();
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'loadProductInfoFailed', 'тест-кейс: ошибка загрузки информации о продукте разблокирована!')
+            .subscribe();
+          this.alertService.open('Не удалось загрузить информацию о продукте', { appearance: 'error' }).subscribe();
         }
       });
     }
@@ -54,16 +72,28 @@ export class PageItemFromCatalogComponent implements OnInit {
 
   addToCart(): void {
     if (this.productInfo) {
+      const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
       const request = {
         productId: this.productInfo.dpProductId,
         quantity: this.quantity,
-        sizeId: this.selectedSizeId // This can be undefined
+        sizeId: this.selectedSizeId
       };
-      this.cartService.addToCart(request).subscribe(response => {
-        alert(response.message);
+      this.cartService.addToCart(request).subscribe({
+        next: (response) => {
+          this.alertService.open(response.message || 'Товар добавлен в корзину!', { appearance: 'success' }).subscribe();
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'addToCartSuccess', 'тест-кейс: товар успешно добавлен в корзину!')
+            .subscribe();
+        },
+        error: (error) => {
+          this.alertService.open('Ошибка при добавлении товара в корзину', { appearance: 'error' }).subscribe();
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, 'addToCartFailed', 'тест-кейс: ошибка добавления товара в корзину!')
+            .subscribe();
+        }
       });
     } else {
-      alert('Произошла ошибка при добавлении товара в корзину');
+      this.alertService.open('Ошибка: информация о продукте недоступна', { appearance: 'error' }).subscribe();
     }
   }
 
