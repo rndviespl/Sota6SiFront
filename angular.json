@@ -40,7 +40,6 @@
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
               "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
-              "src/styles.css",
               "src/app/styles/root.css"
             ],
             "scripts": []

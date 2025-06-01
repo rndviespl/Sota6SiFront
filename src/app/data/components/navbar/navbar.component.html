@@ -1,14 +1,14 @@
 <div class="header">
-  <div>
-    <div (click)="navigateTo('/')">Главная</div>
-    <div (click)="navigateTo('/')">Каталог</div>
-    <div (click)="navigateTo('/cart')">Перейти в корзину</div>
+ <div>
+    <div class="nav-link" (click)="navigateTo('/')">Главная</div>
+    <div class="nav-link" (click)="navigateTo('/')">Каталог</div>
+    <div class="nav-link" (click)="navigateTo('/cart')">Перейти в корзину</div>
   </div>
   <div>
     <app-back-button></app-back-button>
     <app-theme-toggle></app-theme-toggle>
-    <button *ngIf="!isAuthenticated" (click)="navigateTo('/login')" tuiButton>Auth</button>
-    <button *ngIf="isAuthenticated" (click)="logout()" tuiButton>Exit</button>
-      <tui-avatar src="@tui.user" (click)="navigateTo('/user-page')"/>
+    <button size="m" type="button" *ngIf="!isAuthenticated" (click)="navigateTo('/login')" tuiButton>Auth</button>
+    <button size="m" type="button" *ngIf="isAuthenticated" (click)="logout()" tuiButton>Exit</button>
+    <tui-avatar src="@tui.user" (click)="navigateTo('/user-page')" />
   </div>
 </div>
