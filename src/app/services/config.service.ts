@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigService {
   readonly achievementIds = {
-  loginSuccess: 1,             // Успешный вход
+    loginSuccess: 1,             // Успешный вход
     registerSuccess: 2,          // Успешная регистрация
     addToCartSuccess: 3,         // Добавление в корзину
     checkoutSuccess: 4,          // Оформление заказа

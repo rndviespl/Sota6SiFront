@@ -3,7 +3,7 @@ import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { DialogCategoryComponent } from "../../components/dialog-category/dialog-category.component";
 import { DialogImageComponent } from "../../components/dialog-image/dialog-image.component";
 import { DialogProductComponent } from "../../components/dialog-product/dialog-product.component";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiAutoFocus } from '@taiga-ui/cdk';
 import { TuiButton, TuiDialogService, TuiIcon, TuiIconPipe, TuiLink, TuiTextfield } from '@taiga-ui/core';
 import { TuiAvatar, TuiDataListWrapper, TuiFiles, TuiSlider } from '@taiga-ui/kit';
@@ -15,6 +15,9 @@ import { IDpImage } from '../../../interface/IDpImage';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthProjService } from '../../../services/auth-proj.service';
+import { CategoriesRepositoryService } from '../../../repositories/categories-repository.service';
+import { ImagesRepositoryService } from '../../../repositories/images-repository.service';
+import { ProductsRepositoryService } from '../../../repositories/products-repository.service';
 
 @Component({
   selector: 'app-user-page',
@@ -49,6 +52,22 @@ export class UserPageComponent {
   private readonly dialogService = inject(TuiDialogService);
   private readonly authProjService = inject(AuthProjService);
   private readonly router = inject(Router);
+  products: IDpProduct[] = [];
+  categories: IDpCategory[] = [];
+  images: IDpImage[] = [];
+
+  editProductForm = new FormGroup({
+    id: new FormControl<number | null>(null, Validators.required)
+  });
+
+  editCategoryForm = new FormGroup({
+    id: new FormControl<number | null>(null, Validators.required)
+  });
+
+  editImageForm = new FormGroup({
+    id: new FormControl<number | null>(null, Validators.required)
+  });
+
 
   isProjAuthenticated: boolean = false;
 
@@ -67,6 +86,13 @@ export class UserPageComponent {
     label: 'Загрузить изображение',
   });
 
+  constructor(
+    private productsRepository: ProductsRepositoryService,
+    private categoriesRepository: CategoriesRepositoryService,
+    private imagesRepository: ImagesRepositoryService
+  ) {}
+
+  
   ngOnInit(): void {
     this.authProjService.isAuthenticated$.subscribe(isAuthenticated => {
       this.isProjAuthenticated = isAuthenticated;
@@ -97,6 +123,7 @@ export class UserPageComponent {
         this.productDialog({} as IDpProduct).subscribe({
           next: (data) => {
             console.log('Creating product with data:', JSON.stringify(data, null, 2));
+            this.products.push(data); // Добавить в массив
           },
           complete: () => {
             console.info('Product dialog closed');
@@ -124,5 +151,62 @@ export class UserPageComponent {
         });
         break;
     }
+  }
+
+  editProductById(id: number | null): void {
+    if (id == null) return;
+    this.productsRepository.getProductById(id).subscribe({
+      next: (product) => {
+        this.productDialog(product).subscribe({
+          next: (data) => {
+            console.log('Updated product:', data);
+          },
+          complete: () => {
+            console.info('Product edit dialog closed');
+          }
+        });
+      },
+      error: () => {
+        console.warn('Продукт с таким ID не найден');
+      }
+    });
+  }
+
+  editCategoryById(id: number | null): void {
+    if (id == null) return;
+    this.categoriesRepository.getDpCategoryById(id).subscribe({
+      next: (category) => {
+        this.categoryDialog(category).subscribe({
+          next: (data) => {
+            console.log('Updated category:', data);
+          },
+          complete: () => {
+            console.info('Category edit dialog closed');
+          }
+        });
+      },
+      error: () => {
+        console.warn('Категория с таким ID не найдена');
+      }
+    });
+  }
+
+  editImageById(id: number | null): void {
+    if (id == null) return;
+    this.imagesRepository.getDpImageById(id).subscribe({
+      next: (image) => {
+        this.imageDialog(image).subscribe({
+          next: (data) => {
+            console.log('Updated image:', data);
+          },
+          complete: () => {
+            console.info('Image edit dialog closed');
+          }
+        });
+      },
+      error: () => {
+        console.warn('Изображение с таким ID не найдено');
+      }
+    });
   }
 }

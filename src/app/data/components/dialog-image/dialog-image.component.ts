@@ -71,7 +71,7 @@ export class DialogImageComponent implements OnInit {
   ngOnInit(): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
     this.userAchievementsRepository
-      .handleAchievement(userProjId, 'openImageDialogSuccess', 'Достижение: диалог изображения открыт!')
+      .handleAchievement(userProjId, 'openImageDialogSuccess', 'тест-кейс: диалог изображения открыт!')
       .subscribe();
     if (this.data) {
       this.imageForm.patchValue({
@@ -152,7 +152,7 @@ export class DialogImageComponent implements OnInit {
         this.context.completeWith(createdImage);
         this.showSuccess('Изображение успешно загружено.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'addImageSuccess', 'Достижение: изображение успешно добавлено!')
+          .handleAchievement(userProjId, 'addImageSuccess', 'тест-кейс: изображение успешно добавлено!')
           .subscribe();
         this.loadingImage$.next(null);
       },
@@ -160,7 +160,7 @@ export class DialogImageComponent implements OnInit {
         console.error('Ошибка при загрузке изображения:', error);
         this.showError(`Ошибка при загрузке изображения: ${error.message || 'неизвестная ошибка'}`);
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'addImageFailed', 'Достижение: ошибка добавления изображения!')
+          .handleAchievement(userProjId, 'addImageFailed', 'тест-кейс: ошибка добавления изображения!')
           .subscribe();
         this.failedImage$.next(this.selectedFile);
         this.loadingImage$.next(null);
@@ -174,7 +174,7 @@ export class DialogImageComponent implements OnInit {
         this.context.completeWith(this.data);
         this.showSuccess('Изображение успешно обновлено.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'updateImageSuccess', 'Достижение: изображение успешно обновлено!')
+          .handleAchievement(userProjId, 'updateImageSuccess', 'тест-кейс: изображение успешно обновлено!')
           .subscribe();
         this.loadingImage$.next(null);
       },
@@ -182,7 +182,7 @@ export class DialogImageComponent implements OnInit {
         console.error('Ошибка при обновлении изображения:', error);
         this.showError(`Ошибка при обновлении изображения: ${error.message || 'неизвестная ошибка'}`);
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'updateImageFailed', 'Достижение: ошибка обновления изображения!')
+          .handleAchievement(userProjId, 'updateImageFailed', 'тест-кейс: ошибка обновления изображения!')
           .subscribe();
         this.failedImage$.next(this.selectedFile);
         this.loadingImage$.next(null);
