@@ -10,6 +10,7 @@ import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@
 import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component';
 import { DialogImageComponent } from '../../components/dialog-image/dialog-image.component';
 import { DialogProductComponent } from '../../components/dialog-product/dialog-product.component';
+import { AchievmentsPageForUserComponent } from '../achievments-page-for-user/achievments-page-for-user.component';
 
 @Component({
   selector: 'app-user-page-proj',
@@ -28,6 +29,7 @@ import { DialogProductComponent } from '../../components/dialog-product/dialog-p
     NgIf,
     TuiFiles,
     TuiLink,
+    AchievmentsPageForUserComponent
   ],
   templateUrl: './user-page-proj.component.html',
   styleUrl: './user-page-proj.component.css'
