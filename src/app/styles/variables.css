@@ -1,39 +1,68 @@
 :root {
-    --primary-color: #212529;
-    --secondary-color: #343A40;
-    --tertiary-color: #495057;
-    --quaternary-color: #6C757D;
-    --quinary-color: #ADB5BD;
+    /* Основные цвета */
+    --primary-color: #4a6baf; /* Taiga UI primary */
+    --secondary-color: #3a5a9a;
+    --tertiary-color: #6c757d;
+    --quaternary-color: #adb5bd;
+    --quinary-color: #212529;
     --background-color: #ffffff;
     --text-color: #212529;
+    --text-color-secondary: #6c757d;
+    --border-color: #e0e0e0;
+
+    /* Taiga UI переменные */
+    --tui-base-01: #ffffff; /* Фон */
+    --tui-base-02: #f5f7fa; /* Вторичный фон */
+    --tui-base-03: #e0e0e0; /* Границы */
+    --tui-base-04: #bdbdbd; /* Неактивный текст */
+    --tui-primary: #4a6baf; /* Основной акцент */
+    --tui-success-fill: #43a047; /* Успех */
+    --tui-error-fill: #e53935; /* Ошибка */
+    --tui-text-01: #212529; /* Основной текст */
+    --tui-font-text: 'Segoe UI', Arial, sans-serif;
+
+    /* Компоненты */
     --card-background-color: #ffffff;
-    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     --header-background-color: #212529;
     --header-text-color: #ffffff;
-    --border-color: #dddddd;
     --button-background-color: #ffffff;
-    --button-background-color-hover: #e6e6e6;
+    --button-background-color-hover: #f5f7fa;
     --button-font-size: 1rem;
-    --button-padding: 0.625rem 1.25rem;
-    --button-margin: 0.625rem 0.5rem;
-    --button-border-radius: 0.3125rem;
-    --button-font-weight: bold;
-    --button-transition: background-color 0.3s;
+    --button-padding: 0.75rem 1.5rem;
+    --button-margin: 0.5rem;
+    --button-border-radius: 6px;
+    --button-font-weight: 600;
+    --button-transition: all 0.2s ease;
 }
 
 [data-theme="dark"] {
-    --primary-color: #ADB5BD;
-    --secondary-color: #6C757D;
+    /* Основные цвета */
+    --primary-color: #adb5bd;
+    --secondary-color: #6c757d;
     --tertiary-color: #495057;
-    --quaternary-color: #343A40;
+    --quaternary-color: #343a40;
     --quinary-color: #212529;
     --background-color: #1a1a1a;
     --text-color: #e0e0e0;
-    --card-background-color: #2c3e50;
-    --card-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --text-color-secondary: #adb5bd;
+    --border-color: #444444;
+
+    /* Taiga UI переменные */
+    --tui-base-01: #2c3e50; /* Фон */
+    --tui-base-02: #34495e; /* Вторичный фон */
+    --tui-base-03: #546e7a; /* Границы */
+    --tui-base-04: #78909c; /* Неактивный текст */
+    --tui-primary: #5c6bc0; /* Основной акцент */
+    --tui-success-fill: #66bb6a;
+    --tui-error-fill: #ef5350;
+    --tui-text-01: #e0e0e0;
+
+    /* Компоненты */
+    --card-background-color: #34495e;
+    --card-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
     --header-background-color: #1d3557;
     --header-text-color: #ffffff;
-    --border-color: #444444;
-    --button-background-color: #ffffff;
-    --button-background-color-hover: #e6e6e6;
+    --button-background-color: #34495e;
+    --button-background-color-hover: #546e7a;
 }

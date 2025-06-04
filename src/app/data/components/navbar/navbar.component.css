@@ -1,9 +1,0 @@
-.nav-link {
-    color: var(--text-color--primary, #ffffff);
-    cursor: pointer;
-    padding: 0 1rem;
-}
-.nav-link:hover {
-    text-decoration: underline;
-    opacity: 0.8;
-}

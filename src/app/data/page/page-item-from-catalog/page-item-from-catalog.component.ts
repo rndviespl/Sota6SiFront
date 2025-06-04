@@ -15,7 +15,7 @@ import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-page-item-from-catalog',
-  imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton, FormsModule],
+  imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton, FormsModule,],
   templateUrl: './page-item-from-catalog.component.html',
   styleUrls: ['../../../styles/root.css', './page-item-from-catalog.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

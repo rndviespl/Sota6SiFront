@@ -1,0 +1,17 @@
+@import 'variables.css';
+
+/* Стили для навигации */
+.nav-link {
+    color: var(--header-text-color);
+    cursor: pointer;
+    padding: 0 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+    color: var(--tui-primary);
+}

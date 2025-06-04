@@ -2,44 +2,42 @@
 
 /* Стили для заголовков */
 h3 {
-    margin: 1rem;
+    margin: 1rem 0;
     font-size: 1.5rem;
-    color: var(--primary-color);
-    width: 65%;
+    color: var(--tui-primary);
+    font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    height: 2rem;
+    max-width: 65%;
 }
 
 /* Стили для текста */
 p {
-    margin: 0.625rem 0;
-    color: var(--text-color);
+    margin: 0.5rem 0;
+    color: var(--tui-text-01);
     font-size: 1rem;
     line-height: 1.5;
-    height: calc(1.5em * 2);
+    max-height: calc(1.5rem * 2);
     overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
     word-wrap: break-word;
     white-space: normal;
 }
 
 p::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 6px;
 }
 
 p::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 0.625rem;
+    background: var(--tui-base-02);
+    border-radius: 6px;
 }
 
 p::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 0.625rem;
+    background: var(--tui-base-04);
+    border-radius: 6px;
 }
 
 p::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--tui-primary);
 }

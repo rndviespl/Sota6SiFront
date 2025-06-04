@@ -11,29 +11,54 @@ button, .btn {
     font-weight: var(--button-font-weight);
     transition: var(--button-transition);
     font-size: var(--button-font-size);
-    color: var(--text-color);
+    color: var(--tui-text-01);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:hover, .btn:hover {
     background-color: var(--button-background-color-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active, .btn:active {
+    transform: translateY(0);
 }
 
 /* Основная кнопка */
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--background-color);
+    background: linear-gradient(135deg, var(--tui-primary), var(--secondary-color));
+    color: var(--tui-base-01);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    background: linear-gradient(135deg, var(--secondary-color), var(--tui-primary));
 }
 
 /* Кнопка удаления */
 .btn-danger {
-    background: linear-gradient(135deg, var(--quaternary-color), var(--tertiary-color));
-    color: var(--background-color);
+    background: linear-gradient(135deg, var(--tui-error-fill), var(--tertiary-color));
+    color: var(--tui-base-01);
 }
 
 .btn-danger:hover {
-    background: linear-gradient(135deg, var(--tertiary-color), var(--quaternary-color));
+    background: linear-gradient(135deg, var(--tertiary-color), var(--tui-error-fill));
+}
+
+/* Кнопки действий (из PageItemFromCatalogComponent) */
+.btn-add-to-cart, .btn-view-details {
+    background-color: var(--tui-base-01);
+    border: 1px solid var(--tui-base-03);
+    color: var(--tui-text-01);
+    padding: 0.5rem 1rem;
+    margin: 0;
+}
+
+.btn-add-to-cart:hover, .btn-view-details:hover {
+    background-color: var(--tui-primary);
+    color: var(--tui-base-01);
+    border-color: var(--tui-primary);
 }
