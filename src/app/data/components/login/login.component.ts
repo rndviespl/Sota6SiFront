@@ -66,7 +66,7 @@ export class LoginComponent {
 
             const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
             this.userAchievementsRepository
-              .handleAchievement(userProjId, 'loginSuccess', 'тест-кейс входа разблокировано!')
+              .handleAchievement(userProjId, this.configService.achievementIds.loginSuccess, 'тест-кейс входа разблокировано!')
               .subscribe({
                 complete: () => this.router.navigate(['/'])
               });
@@ -75,7 +75,7 @@ export class LoginComponent {
         error: (error) => {
           const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'loginFailed', 'тест-кейс неудачного входа разблокировано!')
+            .handleAchievement(userProjId, this.configService.achievementIds.loginFailed, 'тест-кейс неудачного входа разблокировано!')
             .subscribe();
 
           let errorMessage = 'Ошибка входа: неверное имя пользователя или пароль';

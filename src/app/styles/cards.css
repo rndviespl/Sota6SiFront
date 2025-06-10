@@ -1,25 +1,157 @@
-@import 'variables.css';
+/* Стили для карточки продукта */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: var(--button-border-radius);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: var(--card-shadow);
+    background-color: var(--card-background-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-/* Стили для карточек */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.product-image-container {
+    flex: 1;
+    position: relative;
+    aspect-ratio: 4 / 3;
+    /* Фиксируем пропорции для стабильности карусели */
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--button-border-radius) 0 0 var(--button-border-radius);
+}
+
+.product-image app-carousel-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.product-image app-carousel-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Изображение заполняет контейнер, сохраняя пропорции */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.product-details-container {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-title {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    color: var(--tui-primary);
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 65%;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    color: var(--tui-text-01);
+    margin: 0.5rem 0;
+}
+
+.product-description {
+    font-size: 1rem;
+    color: var(--tui-text-01);
+    margin: 0.5rem 0;
+    line-height: 1.5;
+    max-height: calc(1.5rem * 2);
+    overflow-y: auto;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.product-category {
+    font-size: 1rem;
+    color: var(--text-color-secondary);
+    margin: 0.5rem 0 1rem 0;
+}
+
+.product-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 1px solid var(--tui-base-03);
+    border-radius: var(--button-border-radius);
+    background-color: var(--tui-base-01);
+    color: var(--tui-text-01);
+    font-family: var(--tui-font-text);
+}
+
+.size-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .product-row {
+        flex-direction: column;
+    }
+
+    .product-image-container {
+        flex: none;
+        width: 100%;
+    }
+
+    .product-image {
+        border-radius: var(--button-border-radius) var(--button-border-radius) 0 0;
+    }
+
+    .product-title {
+        max-width: 100%;
+    }
+}
+
 .card {
     border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
+    border-radius: var(--button-border-radius);
     overflow: hidden;
     box-shadow: var(--card-shadow);
     margin: 1rem;
     padding: 1rem;
     background-color: var(--card-background-color);
-    width: 100%;
-    max-width: 300px;
     transition: transform 0.3s, box-shadow 0.3s;
-}
-.card-title, .card-price {
-    color: var(--text-color);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card-title {

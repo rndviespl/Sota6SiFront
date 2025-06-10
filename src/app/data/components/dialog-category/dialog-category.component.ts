@@ -57,7 +57,11 @@ export class DialogCategoryComponent implements OnInit {
   ngOnInit(): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
     this.userAchievementsRepository
-      .handleAchievement(userProjId, 'openCategoryDialogSuccess', 'Достижение: диалог категории открыт!')
+      .handleAchievement(
+        userProjId,
+        this.configService.achievementIds.openCategoryDialogSuccess,
+        'Достижение: диалог категории открыт!'
+      )
       .subscribe();
     if (this.data) {
       this.categoryForm.patchValue(this.data);
@@ -88,14 +92,22 @@ export class DialogCategoryComponent implements OnInit {
         this.context.completeWith(createdCategory);
         this.showSuccess('Категория успешно создана.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'addCategorySuccess', 'Достижение: категория успешно создана!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.addCategorySuccess,
+            'Достижение: категория успешно создана!'
+          )
           .subscribe();
       },
       error: (error) => {
         console.error('Ошибка при создании категории:', error);
         this.showError('Ошибка при создании категории.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'addCategoryFailed', 'Достижение: ошибка создания категории!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.addCategoryFailed, // Исправляем
+            'Достижения: ошибка создания категории!'
+          )
           .subscribe();
       }
     });
@@ -107,14 +119,14 @@ export class DialogCategoryComponent implements OnInit {
         this.context.completeWith(categoryData);
         this.showSuccess('Категория успешно обновлена.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'updateCategorySuccess', 'Достижение: категория успешно обновлена!')
+          .handleAchievement(userProjId, this.configService.achievementIds.updateCategorySuccess, 'Достижение: категория успешно обновлена!')
           .subscribe();
       },
       error: (error) => {
         console.error('Ошибка при обновлении категории:', error);
         this.showError('Ошибка при обновлении категории.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'updateCategoryFailed', 'Достижение: ошибка обновления категории!')
+          .handleAchievement(userProjId, this.configService.achievementIds.updateCategoryFailed, 'Достижение: ошибка обновления категории!')
           .subscribe();
       }
     });

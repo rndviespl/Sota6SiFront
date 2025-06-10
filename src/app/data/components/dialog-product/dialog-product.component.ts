@@ -64,7 +64,7 @@ export class DialogProductComponent implements OnInit {
   ngOnInit(): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
     this.userAchievementsRepository
-      .handleAchievement(userProjId, 'openProductDialogSuccess', 'тест-кейс: диалог продукта открыт!')
+      .handleAchievement(userProjId, this.configService.achievementIds.openProductDialogSuccess, 'тест-кейс: диалог продукта открыт!')
       .subscribe();
     if (this.data) {
       this.productForm.patchValue(this.data);
@@ -95,14 +95,14 @@ export class DialogProductComponent implements OnInit {
         this.context.completeWith(createdProduct);
         this.showSuccess('Продукт успешно создан.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'createProductSuccess', 'тест-кейс: продукт успешно создан!')
+          .handleAchievement(userProjId, this.configService.achievementIds.createProductSuccess, 'тест-кейс: продукт успешно создан!')
           .subscribe();
       },
       error: (error) => {
         console.error('Ошибка при создании продукта:', error);
         this.showError('Ошибка при создании продукта.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'createProductFailed', 'тест-кейс: ошибка создания продукта!')
+          .handleAchievement(userProjId, this.configService.achievementIds.createProductFailed, 'тест-кейс: ошибка создания продукта!')
           .subscribe();
       }
     });
@@ -114,14 +114,14 @@ export class DialogProductComponent implements OnInit {
         this.context.completeWith(productData);
         this.showSuccess('Продукт успешно обновлён.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'updateProductSuccess', 'тест-кейс: продукт успешно обновлён!')
+          .handleAchievement(userProjId, this.configService.achievementIds.updateProductSuccess, 'тест-кейс: продукт успешно обновлён!')
           .subscribe();
       },
       error: (error) => {
         console.error('Ошибка при обновлении продукта:', error);
         this.showError('Ошибка при обновлении продукта.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'updateProductFailed', 'тест-кейс: ошибка обновления продукта!')
+          .handleAchievement(userProjId, this.configService.achievementIds.updateProductFailed, 'тест-кейс: ошибка обновления продукта!')
           .subscribe();
       }
     });

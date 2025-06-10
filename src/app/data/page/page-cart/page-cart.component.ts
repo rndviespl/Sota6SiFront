@@ -1,15 +1,15 @@
 import { AsyncPipe, CommonModule, CurrencyPipe, NgForOf, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TuiButton, TuiAppearance, TuiNumberFormat, TuiAlertService } from '@taiga-ui/core';
+import { TuiButton, TuiAppearance, TuiAlertService, TuiScrollbar, TuiIcon } from '@taiga-ui/core';
 import { TuiTable, TuiComparator } from '@taiga-ui/addon-table';
 import { TuiDay, tuiDefaultSort } from '@taiga-ui/cdk';
 import { ICartItem } from '../../../interface/ICartItem';
 import { ICartViewModel } from '../../../interface/ICartViewModel';
-import { ShopCartRepositoryService } from '../../../repositories/shop-cart-repository.service';
-import { IUpdateCartRequest } from '../../../interface/IUpdateCartRequest';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { IUpdateCartRequest } from '../../../interface/IUpdateCartRequest';
+import { ShopCartRepositoryService } from '../../../repositories/shop-cart-repository.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
 
@@ -26,21 +26,22 @@ interface CartItem extends ICartItem {
     FormsModule,
     NgForOf,
     NgIf,
-    TuiAppearance,
     TuiButton,
     TuiTable,
-    TuiNumberFormat,
-    CommonModule
+    CommonModule,
+    TuiScrollbar,
+    TuiIcon
   ],
   templateUrl: './page-cart.component.html',
   styleUrls: ['./page-cart.component.css', '../../../styles/root.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageCartComponent implements OnInit {
   protected readonly options = { updateOn: 'blur' } as const;
   protected cartItems: CartItem[] = [];
   protected readonly columns = ['productTitle', 'price', 'quantity', 'totalPrice', 'actions'] as const;
+  protected isLoading = false;
+  private readonly siteUserId = 1;
 
   protected readonly totalSorter: TuiComparator<CartItem> = (a, b) =>
     tuiDefaultSort(a.price * a.quantity, b.price * b.quantity);
@@ -48,7 +49,7 @@ export class PageCartComponent implements OnInit {
   constructor(
     private cartService: ShopCartRepositoryService,
     private cdr: ChangeDetectorRef,
-    private router: Router,
+    public router: Router,
     private userAchievementsRepository: UserAchievementsRepositoryService,
     private configService: ConfigService,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService
@@ -59,17 +60,21 @@ export class PageCartComponent implements OnInit {
   }
 
   private loadCartItems(): void {
+    this.isLoading = true;
     this.cartService.getCart().subscribe({
       next: (cartViewModel: ICartViewModel) => {
         this.cartItems = cartViewModel.cartItems.map(item => ({
           ...item,
           date: TuiDay.currentLocal(),
         }));
+        this.isLoading = false;
         this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Ошибка при загрузке корзины:', error);
-        this.alertService.open('Не удалось загрузить корзину', { appearance: 'error' }).subscribe();
+        this.alertService.open('Не удалось загрузить корзину. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
+        this.isLoading = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -100,23 +105,27 @@ export class PageCartComponent implements OnInit {
 
   removeFromCart(item: CartItem): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    this.isLoading = true;
     this.cartService.removeFromCart({ productId: item.productId, sizeId: item.sizeId }).subscribe({
       next: () => {
         this.cartItems = this.cartItems.filter(cartItem =>
           !(cartItem.productId === item.productId && cartItem.sizeId === item.sizeId)
         );
+        this.isLoading = false;
         this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'removeFromCartSuccess', 'Достижение: товар успешно удалён из корзины!')
+          .handleAchievement(userProjId, 1, 'Товар успешно удалён из корзины!')
           .subscribe();
         this.alertService.open('Товар удалён из корзины', { appearance: 'success' }).subscribe();
       },
       error: (error) => {
         console.error('Ошибка при удалении товара из корзины:', error);
+        this.isLoading = false;
+        this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'removeFromCartFailed', 'Достижение: ошибка удаления товара из корзины!')
+          .handleAchievement(userProjId, 2, 'Ошибка удаления товара из корзины!')
           .subscribe();
-        this.alertService.open('Не удалось удалить товар из корзины', { appearance: 'error' }).subscribe();
+        this.alertService.open('Не удалось удалить товар. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
       }
     });
   }
@@ -125,38 +134,40 @@ export class PageCartComponent implements OnInit {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
     if (this.cartItems.length === 0) {
       this.userAchievementsRepository
-        .handleAchievement(userProjId, 'checkoutEmptyCart', 'Достижение: попытка оформления пустой корзины!')
+        .handleAchievement(userProjId, 3, 'Попытка оформления пустой корзины!')
         .subscribe();
       this.alertService.open('Корзина пуста, добавьте товары перед оформлением', { appearance: 'error' }).subscribe();
       return;
     }
 
+    this.isLoading = true;
     this.cartService.checkout().subscribe({
       next: (response) => {
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'checkoutSuccess', 'Достижение: заказ успешно оформлен!')
+          .handleAchievement(userProjId, 4, 'Заказ успешно оформлен!')
           .subscribe();
         this.alertService.open('Заказ успешно оформлен!', { appearance: 'success' }).subscribe();
-
-        // Очистка корзины после успешного заказа
         this.cartService.clearCart();
         this.cartItems = [];
+        this.isLoading = false;
         this.cdr.markForCheck();
-
         this.router.navigate(['/order-confirmation'], { state: { orderId: response.orderId } });
       },
       error: (error) => {
         console.error('Ошибка при оформлении заказа:', error);
+        this.isLoading = false;
+        this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'checkoutFailed', 'Достижение: ошибка оформления заказа!')
+          .handleAchievement(userProjId, 5, 'Ошибка оформления заказа!')
           .subscribe();
-        this.alertService.open('Не удалось оформить заказ', { appearance: 'error' }).subscribe();
+        this.alertService.open('Не удалось оформить заказ. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
       }
     });
   }
 
   private updateCartItemQuantity(item: CartItem, newQuantity: number): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    this.isLoading = true;
     const request: IUpdateCartRequest = {
       productId: item.productId,
       quantity: newQuantity,
@@ -174,9 +185,9 @@ export class PageCartComponent implements OnInit {
       next: (response) => {
         if (response.success) {
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'updateCartQuantitySuccess', 'Достижение: количество товара успешно обновлено!')
+            .handleAchievement(userProjId, 6, 'Количество товара успешно обновлено!')
             .subscribe();
-          this.alertService.open('Количество товара обновлено', { appearance: 'success' }).subscribe();
+          this.alertService.open('Количество товара успешно обновлено', { appearance: 'success' }).subscribe();
         } else {
           this.cartItems = this.cartItems.map(cartItem =>
             cartItem.productId === item.productId && cartItem.sizeId === item.sizeId
@@ -185,10 +196,12 @@ export class PageCartComponent implements OnInit {
           );
           this.cdr.markForCheck();
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'updateCartQuantityFailed', 'Достижение: ошибка обновления количества товара!')
+            .handleAchievement(userProjId, 7, 'Ошибка обновления количества товара!')
             .subscribe();
-          this.alertService.open(response.message || 'Ошибка при обновлении количества', { appearance: 'error' }).subscribe();
+          this.alertService.open('Не удалось обновить количество. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
         }
+        this.isLoading = false;
+        this.cdr.markForCheck();
       },
       error: (error) => {
         this.cartItems = this.cartItems.map(cartItem =>
@@ -198,9 +211,11 @@ export class PageCartComponent implements OnInit {
         );
         this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'updateCartQuantityFailed', 'Достижение: ошибка обновления количества товара!')
+          .handleAchievement(userProjId, 7, 'Ошибка обновления количества товара!')
           .subscribe();
-        this.alertService.open('Ошибка при обновлении количества товара', { appearance: 'error' }).subscribe();
+        this.alertService.open('Ошибка при обновлении количества. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
+        this.isLoading = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -208,10 +223,14 @@ export class PageCartComponent implements OnInit {
   protected onValueChange<K extends keyof CartItem>(
     value: CartItem[K],
     key: K,
-    current: CartItem,
+    current: CartItem
   ): void {
     const updated = { ...current, [key]: value };
     this.cartItems = this.cartItems.map((item) => (item === current ? updated : item));
     this.cdr.markForCheck();
+  }
+
+  protected onSortChange(event: any): void {
+    // Логика сортировки, если нужна
   }
 }

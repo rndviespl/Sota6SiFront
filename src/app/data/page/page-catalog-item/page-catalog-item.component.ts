@@ -35,14 +35,14 @@ export class PageCatalogItemComponent implements OnInit {
       next: (productList: IDpProduct[]) => {
         this.products = productList;
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'loadProductsSuccess', 'Достижение: каталог продуктов успешно загружен!')
+          .handleAchievement(userProjId, this.configService.achievementIds.loadProductsSuccess, 'Достижение: каталог продуктов успешно загружен!')
           .subscribe();
         this.alertService.open('Каталог успешно загружен!', { appearance: 'success' }).subscribe();
       },
       error: (error) => {
         console.error('Ошибка при загрузке товаров:', error);
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 'loadProductsFailed', 'Достижение: ошибка загрузки каталога продуктов!')
+          .handleAchievement(userProjId, this.configService.achievementIds.loadProductsFailed, 'Достижение: ошибка загрузки каталога продуктов!')
           .subscribe();
         this.alertService.open('Не удалось загрузить каталог продуктов', { appearance: 'error' }).subscribe();
       }

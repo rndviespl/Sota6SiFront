@@ -5,6 +5,7 @@ import { TuiSwitch } from '@taiga-ui/kit';
 import { FormsModule } from '@angular/forms';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { CommonModule } from '@angular/common';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-theme-toggle',
@@ -19,7 +20,11 @@ export class ThemeToggleComponent {
   private readonly media = inject(WA_WINDOW).matchMedia('(prefers-color-scheme: dark)');
   protected readonly darkMode = inject(TUI_DARK_MODE);
   private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
-
+ 
+  constructor(
+    private readonly configService: ConfigService = inject(ConfigService)
+  ) { }
+  
   toggle = this.darkMode();
   private toggleCount = 0;
 
@@ -34,16 +39,16 @@ export class ThemeToggleComponent {
     // Через раз успех/ошибка
     if (this.toggleCount % 2 === 1) {
       if (this.toggle) {
-        this.userAchievementsRepository.handleAchievement(userProjId, 'switchToDarkThemeSuccess', 'тест-кейс: Успешно включена тёмная тема!').subscribe();
+        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToDarkThemeSuccess, 'тест-кейс: Успешно включена тёмная тема!').subscribe();
       } else {
-        this.userAchievementsRepository.handleAchievement(userProjId, 'switchToLightThemeSuccess', 'тест-кейс: Успешно включена светлая тема!').subscribe();
+        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToLightThemeSuccess, 'тест-кейс: Успешно включена светлая тема!').subscribe();
       }
-      this.userAchievementsRepository.handleAchievement(userProjId, 'toggleThemeSuccess', 'тест-кейс: Тема успешно переключена!').subscribe();
+      this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.toggleThemeSuccess, 'тест-кейс: Тема успешно переключена!').subscribe();
     } else {
       if (this.toggle) {
-        this.userAchievementsRepository.handleAchievement(userProjId, 'switchToDarkThemeFailed', 'тест-кейс: Ошибка включения тёмной темы!').subscribe();
+        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToDarkThemeFailed, 'тест-кейс: Ошибка включения тёмной темы!').subscribe();
       } else {
-        this.userAchievementsRepository.handleAchievement(userProjId, 'switchToLightThemeFailed', 'тест-кейс: Ошибка включения светлой темы!').subscribe();
+        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToLightThemeFailed, 'тест-кейс: Ошибка включения светлой темы!').subscribe();
       }
     }
   }
@@ -53,6 +58,6 @@ export class ThemeToggleComponent {
     this.storage.removeItem(this.key);
 
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
-    this.userAchievementsRepository.handleAchievement(userProjId, 'resetThemeSuccess', 'тест-кейс: Тема сброшена к системной!').subscribe();
+    this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.resetThemeSuccess, 'тест-кейс: Тема сброшена к системной!').subscribe();
   }
 }

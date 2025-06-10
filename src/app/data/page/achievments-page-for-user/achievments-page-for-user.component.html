@@ -11,7 +11,7 @@
       <td *tuiCell="'title'" tuiTd>{{ ach.title }}</td>
       <td *tuiCell="'textAchievement'" tuiTd>{{ ach.textAchievement }}</td>
       <td *tuiCell="'status'" tuiTd>
-        <span *ngIf="isCompleted(ach.achievementId)" class="completed">✔ Выполнено</span>
+        <span *ngIf="isCompleted(ach.achievementId)" class="completed">Выполнено</span>
         <span *ngIf="!isCompleted(ach.achievementId)" class="not-completed">—</span>
       </td>
     </tr>

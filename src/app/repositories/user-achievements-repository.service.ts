@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IAchievement } from '../interface/IAchievement';
-import { UserAchievementsService } from '../services/user-achievements.service';
 import { IUserHasAchievement } from '../interface/IUserHasAchievement';
-import { ConfigService } from '../services/config.service';
+import { UserAchievementsService } from '../services/user-achievements.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAchievementsRepositoryService {
-
   constructor(
-    private userAchievementsService: UserAchievementsService,
-    private configService: ConfigService
+    private userAchievementsService: UserAchievementsService
   ) {}
 
   getAllUserAchievements(): Observable<IUserHasAchievement[]> {
@@ -33,20 +30,20 @@ export class UserAchievementsRepositoryService {
 
   getCompletedAchievementsByUsername(username: string): Observable<IAchievement[]> {
     return this.userAchievementsService.getCompletedAchievementsByUsername(username);
-  } 
+  }
 
   /**
    * Универсальный метод для обработки достижения
    * @param userProjId Идентификатор пользователя
-   * @param achievementKey Ключ достижения из ConfigService.achievementIds
+   * @param achievementId Идентификатор достижения
    * @param successMessage Сообщение для уведомления
    * @returns Observable<void>
    */
   handleAchievement(
     userProjId: number,
-    achievementKey: keyof typeof this.configService.achievementIds,
+    achievementId: number,
     successMessage: string
   ): Observable<void> {
-    return this.userAchievementsService.handleAchievement(userProjId, achievementKey, successMessage);
+    return this.userAchievementsService.handleAchievement(userProjId, achievementId, successMessage);
   }
 }

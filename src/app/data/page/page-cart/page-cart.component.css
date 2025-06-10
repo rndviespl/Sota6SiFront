@@ -1,1 +1,43 @@
- 
+ .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--tui-base-01);
+  border-radius: 8px;
+  box-shadow: var(--tui-shadow);
+}
+
+.empty-cart h3 {
+  color: var(--tui-text-01);
+  margin-bottom: 1rem;
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-input {
+  width: 60px;
+  text-align: center;
+}
+
+.total-label {
+  font-weight: bold;
+  text-align: right;
+}
+
+.number {
+  text-align: right;
+}

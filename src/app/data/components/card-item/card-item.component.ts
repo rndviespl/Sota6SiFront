@@ -6,6 +6,7 @@ import { CarouselImgComponent } from '../carousel-img/carousel-img.component';
 import { IDpImage } from '../../../interface/IDpImage';
 import { Router } from '@angular/router';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-card-item',
@@ -24,8 +25,9 @@ export class CardItemComponent {
 
   constructor(
     private router: Router,
+    private configService: ConfigService,
     private userAchievementsRepository: UserAchievementsRepositoryService
-  ) {}
+  ) { }
 
   get images(): IDpImage[] {
     return this.productInfo.dpImages || [];
@@ -36,13 +38,25 @@ export class CardItemComponent {
     this.router.navigate(['/ItemFromCatalog', product.dpProductId])
       .then(success => {
         if (success) {
-          this.userAchievementsRepository.handleAchievement(userProjId, 'navigateToProductSuccess', 'тест-кейс: Переход к товару выполнен!').subscribe();
+          this.userAchievementsRepository.handleAchievement(
+            userProjId,
+            this.configService.achievementIds.navigateToProductSuccess, // Используем числовой ID
+            'тест-кейс: Переход к товару выполнен!'
+          ).subscribe();
         } else {
-          this.userAchievementsRepository.handleAchievement(userProjId, 'navigateToProductFailed', 'тест-кейс: Ошибка перехода к товару!').subscribe();
+          this.userAchievementsRepository.handleAchievement(
+            userProjId,
+            this.configService.achievementIds.navigateToProductFailed, // Используем числовой ID
+            'тест-кейс: Ошибка перехода к товару!'
+          ).subscribe();
         }
       })
       .catch(() => {
-        this.userAchievementsRepository.handleAchievement(userProjId, 'navigateToProductFailed', 'тест-кейс: Ошибка перехода к товару!').subscribe();
+        this.userAchievementsRepository.handleAchievement(
+          userProjId,
+          this.configService.achievementIds.navigateToProductFailed, // Используем числовой ID
+          'тест-кейс: Ошибка перехода к товару!'
+        ).subscribe();
       });
   }
 }

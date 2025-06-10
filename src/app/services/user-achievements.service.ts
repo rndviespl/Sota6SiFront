@@ -1,7 +1,6 @@
-// src/app/services/user-achievements.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, switchMap } from 'rxjs';
+import { catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { IAchievement } from '../interface/IAchievement';
 import { IUserHasAchievement } from '../interface/IUserHasAchievement';
 import { ConfigService } from './config.service';
@@ -11,7 +10,7 @@ import { TuiAlertService } from '@taiga-ui/core';
   providedIn: 'root'
 })
 export class UserAchievementsService {
-  private baseUrl = `${window.location.origin}/api/UserAchievements`;
+  private baseUrl = `${window.location.origin}/api/UserAchievements`; // Убрали window.location.origin, используем прокси
 
   constructor(
     private http: HttpClient,
@@ -40,44 +39,52 @@ export class UserAchievementsService {
   }
 
   checkUserAchievementExists(userProjId: number, achievementId: number): Observable<boolean> {
-    return this.http.get<boolean>(`${this.baseUrl}/Exists/${userProjId}/${achievementId}`);
+    return this.http.get<boolean>(`${this.baseUrl}/Exists/${userProjId}/${achievementId}`)
+      .pipe(
+        catchError(error => {
+          if (error.status === 404) {
+            console.warn(`Достижение ${achievementId} или пользователь ${userProjId} не найдены`);
+            return of(false); // Возвращаем false, если пользователь или достижение не существуют
+          }
+          console.error('Ошибка при проверке достижения:', error);
+          return of(false);
+        })
+      );
   }
 
   /**
-   * Универсальный метод для обработки достижения (создание и разблокировка)
-   * @param userProjId Идентификатор пользователя
-   * @param achievementKey Ключ достижения из ConfigService.achievementIds
-   * @param successMessage Сообщение для уведомления при успешной разблокировке
+   * Универсальный метод для обработки достижения
+   * @param userProjId Идентификатор пользователя проекта
+   * @param achievementId Идентификатор достижения
+   * @param successMessage Сообщение для уведомления
    * @returns Observable<void>
    */
   handleAchievement(
     userProjId: number,
-    achievementKey: keyof typeof this.configService.achievementIds,
+    achievementId: number,
     successMessage: string
   ): Observable<void> {
-    if (userProjId <= 0) {
-      console.warn('Invalid userProjId, skipping achievement handling');
+    if (userProjId <= 0 || achievementId <= 0) {
+      console.warn('Некорректный userProjId или achievementId:', { userProjId, achievementId });
       return of(void 0);
     }
 
-    const achievementId = this.configService.achievementIds[achievementKey];
-
     return this.checkUserAchievementExists(userProjId, achievementId).pipe(
       switchMap(exists => {
-        if (!exists) {
-          return this.createUserAchievement(userProjId, achievementId).pipe(
-            switchMap(() => this.unlockUserAchievement(userProjId, achievementId))
-          );
+        if (exists) {
+          console.log(`Достижение ${achievementId} уже выполнено для userProjId ${userProjId}`);
+          return of(void 0); // Ничего не делаем, если достижение уже есть
         }
-        return this.unlockUserAchievement(userProjId, achievementId);
-      }),
-      switchMap(() => {
-        this.alertService.open(successMessage, { appearance: 'info' }).subscribe();
-        return of(void 0);
+        return this.createUserAchievement(userProjId, achievementId).pipe(
+          switchMap(() => this.unlockUserAchievement(userProjId, achievementId)),
+          tap(() => {
+            this.alertService.open(successMessage, { appearance: 'info' }).subscribe();
+          })
+        );
       }),
       catchError(error => {
-        console.error(`Failed to handle achievement ${achievementId} for userProjId ${userProjId}:`, error);
-        this.alertService.open('Ошибка при обработке достижения', { appearance: 'error' }).subscribe();
+        console.error(`Ошибка при обработке достижения ${achievementId} для userProjId ${userProjId}:`, error);
+        this.alertService.open('Ошибка при обработке достижения. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
         return of(void 0);
       })
     );

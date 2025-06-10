@@ -63,7 +63,7 @@ export class RegisterComponent {
             const userProjId = response.userProjId || parseInt(localStorage.getItem('userProjId') || '0', 10);
 
             this.userAchievementsRepository
-              .handleAchievement(userProjId, 'registerSuccess', 'Достижение регистрации разблокировано!')
+              .handleAchievement(userProjId, this.configService.achievementIds.registerSuccess, 'Достижение регистрации разблокировано!')
               .subscribe({
                 complete: () => setTimeout(() => this.router.navigate(['/login']), 2000)
               });
@@ -74,7 +74,7 @@ export class RegisterComponent {
         error: (error) => {
           const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'registerFailed', 'Достижение неудачной регистрации разблокировано!')
+            .handleAchievement(userProjId, this.configService.achievementIds.registerFailed, 'Достижение неудачной регистрации разблокировано!')
             .subscribe();
 
           let errorMessage = 'Ошибка регистрации: попробуйте другое имя пользователя';

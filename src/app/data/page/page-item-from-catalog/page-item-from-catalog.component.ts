@@ -50,19 +50,19 @@ export class PageItemFromCatalogComponent implements OnInit {
         next: (product: IDpProduct) => {
           this.productInfo = product;
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'viewProductSuccess', 'тест-кейс: просмотр продукта разблокировано!')
+            .handleAchievement(userProjId, this.configService.achievementIds.viewProductSuccess, 'тест-кейс: просмотр продукта разблокировано!')
             .subscribe();
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'loadProductInfoSuccess', 'тест-кейс: загрузка информации о продукте разблокирована!')
+            .handleAchievement(userProjId, this.configService.achievementIds.loadProductInfoSuccess, 'тест-кейс: загрузка информации о продукте разблокирована!')
             .subscribe();
         },
         error: (error) => {
           console.error('Ошибка при загрузке информации о продукте:', error);
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'viewProductFailed', 'тест-кейс: ошибка просмотра продукта разблокирована!')
+            .handleAchievement(userProjId, this.configService.achievementIds.viewProductFailed, 'тест-кейс: ошибка просмотра продукта разблокирована!')
             .subscribe();
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'loadProductInfoFailed', 'тест-кейс: ошибка загрузки информации о продукте разблокирована!')
+            .handleAchievement(userProjId, this.configService.achievementIds.loadProductInfoFailed, 'тест-кейс: ошибка загрузки информации о продукте разблокирована!')
             .subscribe();
           this.alertService.open('Не удалось загрузить информацию о продукте', { appearance: 'error' }).subscribe();
         }
@@ -82,13 +82,13 @@ export class PageItemFromCatalogComponent implements OnInit {
         next: (response) => {
           this.alertService.open(response.message || 'Товар добавлен в корзину!', { appearance: 'success' }).subscribe();
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'addToCartSuccess', 'тест-кейс: товар успешно добавлен в корзину!')
+            .handleAchievement(userProjId, this.configService.achievementIds.addToCartSuccess, 'тест-кейс: товар успешно добавлен в корзину!')
             .subscribe();
         },
         error: (error) => {
           this.alertService.open('Ошибка при добавлении товара в корзину', { appearance: 'error' }).subscribe();
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 'addToCartFailed', 'тест-кейс: ошибка добавления товара в корзину!')
+            .handleAchievement(userProjId, this.configService.achievementIds.addToCartFailed, 'тест-кейс: ошибка добавления товара в корзину!')
             .subscribe();
         }
       });
