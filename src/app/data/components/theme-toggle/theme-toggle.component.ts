@@ -1,14 +1,15 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { TUI_DARK_MODE_KEY, TUI_DARK_MODE } from '@taiga-ui/core';
+import { TUI_DARK_MODE_KEY, TUI_DARK_MODE, TuiAlertService } from '@taiga-ui/core';
 import { WA_LOCAL_STORAGE, WA_WINDOW } from '@ng-web-apis/common';
 import { TuiSwitch } from '@taiga-ui/kit';
 import { FormsModule } from '@angular/forms';
-import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { CommonModule } from '@angular/common';
+import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
 
 @Component({
   selector: 'app-theme-toggle',
+  standalone: true,
   imports: [CommonModule, TuiSwitch, FormsModule],
   templateUrl: './theme-toggle.component.html',
   styleUrls: ['./theme-toggle.component.css', '../../../styles/root.css'],
@@ -18,46 +19,77 @@ export class ThemeToggleComponent {
   private readonly key = inject(TUI_DARK_MODE_KEY);
   private readonly storage = inject(WA_LOCAL_STORAGE);
   private readonly media = inject(WA_WINDOW).matchMedia('(prefers-color-scheme: dark)');
-  protected readonly darkMode = inject(TUI_DARK_MODE);
+  private readonly darkMode = inject(TUI_DARK_MODE);
   private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
- 
-  constructor(
-    private readonly configService: ConfigService = inject(ConfigService)
-  ) { }
-  
+  private readonly alertService = inject(TuiAlertService);
+  private readonly configService = inject(ConfigService);
+
   toggle = this.darkMode();
   private toggleCount = 0;
+
+  constructor() {
+    // Инициализация темы из локального хранилища, если она есть
+    const savedTheme = this.storage.getItem(this.key);
+    if (savedTheme) {
+      this.toggle = savedTheme === 'true';
+      this.darkMode.set(this.toggle);
+      document.body.classList.toggle('dark-theme', this.toggle);
+    }
+  }
 
   toggleTheme(): void {
     this.toggle = !this.toggle;
     this.darkMode.set(this.toggle);
     document.body.classList.toggle('dark-theme', this.toggle);
+    this.storage.setItem(this.key, this.toggle.toString());
 
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
     this.toggleCount++;
 
-    // Через раз успех/ошибка
-    if (this.toggleCount % 2 === 1) {
-      if (this.toggle) {
-        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToDarkThemeSuccess, 'тест-кейс: Успешно включена тёмная тема!').subscribe();
-      } else {
-        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToLightThemeSuccess, 'тест-кейс: Успешно включена светлая тема!').subscribe();
-      }
-      this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.toggleThemeSuccess, 'тест-кейс: Тема успешно переключена!').subscribe();
+    // Логика достижений: чередуем успех и ошибку
+    if (this.toggleCount % 2 === 0) {
+      // Успешное переключение темы
+      const achievementId = this.toggle
+        ? this.configService.achievementIds.switchToDarkThemeSuccess
+        : this.configService.achievementIds.switchToLightThemeSuccess;
+      this.recordAchievement(userProjId, achievementId, `Успешно включена ${this.toggle ? 'тёмная' : 'светлая'} тема!`);
+      this.alertService.open(`Тема переключена на ${this.toggle ? 'тёмную' : 'светлую'}!`, { appearance: 'success' }).subscribe();
     } else {
-      if (this.toggle) {
-        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToDarkThemeFailed, 'тест-кейс: Ошибка включения тёмной темы!').subscribe();
-      } else {
-        this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.switchToLightThemeFailed, 'тест-кейс: Ошибка включения светлой темы!').subscribe();
-      }
+      // Ошибка переключения темы
+      const achievementId = this.toggle
+        ? this.configService.achievementIds.switchToDarkThemeFailed
+        : this.configService.achievementIds.switchToLightThemeFailed;
+      this.recordAchievement(userProjId, achievementId, `Ошибка включения ${this.toggle ? 'тёмной' : 'светлой'} темы!`);
+      this.alertService.open(`Ошибка переключения темы на ${this.toggle ? 'тёмную' : 'светлую'}!`, { appearance: 'error' }).subscribe();
     }
   }
 
-  protected reset(): void {
-    this.darkMode.set(this.media.matches);
+  reset(): void {
+    const systemTheme = this.media.matches;
+    this.toggle = systemTheme;
+    this.darkMode.set(systemTheme);
     this.storage.removeItem(this.key);
+    this.toggleCount = 0;
 
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
-    this.userAchievementsRepository.handleAchievement(userProjId, this.configService.achievementIds.resetThemeSuccess, 'тест-кейс: Тема сброшена к системной!').subscribe();
+    this.recordAchievement(
+      userProjId,
+      this.configService.achievementIds.resetThemeSuccess,
+      'Тема сброшена к системной!'
+    );
+    this.alertService.open('Тема сброшена к системной!', { appearance: 'success' }).subscribe();
+  }
+
+  private recordAchievement(userProjId: number, achievementId: number, message: string): void {
+    if (userProjId <= 0) {
+      console.warn('Некорректный userProjId:', userProjId);
+      return;
+    }
+
+    this.userAchievementsRepository.handleAchievement(userProjId, achievementId, message).subscribe({
+      error: (err) => {
+        console.error('Ошибка при записи достижения:', err);
+      }
+    });
   }
 }

@@ -46,7 +46,7 @@ export class LoginComponent {
     private authService: AuthService,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
     private configService: ConfigService
-  ) {}
+  ) { }
 
   onLogin() {
     if (this.form.valid) {

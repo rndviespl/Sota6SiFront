@@ -114,7 +114,7 @@ export class PageCartComponent implements OnInit {
         this.isLoading = false;
         this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 1, 'Товар успешно удалён из корзины!')
+          .handleAchievement(userProjId, this.configService.achievementIds.removeFromCartSuccess, 'Товар успешно удалён из корзины!')
           .subscribe();
         this.alertService.open('Товар удалён из корзины', { appearance: 'success' }).subscribe();
       },
@@ -123,7 +123,7 @@ export class PageCartComponent implements OnInit {
         this.isLoading = false;
         this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 2, 'Ошибка удаления товара из корзины!')
+          .handleAchievement(userProjId, this.configService.achievementIds.removeFromCartFailed, 'Ошибка удаления товара из корзины!')
           .subscribe();
         this.alertService.open('Не удалось удалить товар. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
       }
@@ -134,7 +134,7 @@ export class PageCartComponent implements OnInit {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
     if (this.cartItems.length === 0) {
       this.userAchievementsRepository
-        .handleAchievement(userProjId, 3, 'Попытка оформления пустой корзины!')
+        .handleAchievement(userProjId, this.configService.achievementIds.checkoutEmptyCart, 'Попытка оформления пустой корзины!')
         .subscribe();
       this.alertService.open('Корзина пуста, добавьте товары перед оформлением', { appearance: 'error' }).subscribe();
       return;
@@ -144,7 +144,7 @@ export class PageCartComponent implements OnInit {
     this.cartService.checkout().subscribe({
       next: (response) => {
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 4, 'Заказ успешно оформлен!')
+          .handleAchievement(userProjId, this.configService.achievementIds.checkoutSuccess, 'Заказ успешно оформлен!')
           .subscribe();
         this.alertService.open('Заказ успешно оформлен!', { appearance: 'success' }).subscribe();
         this.cartService.clearCart();
@@ -158,7 +158,7 @@ export class PageCartComponent implements OnInit {
         this.isLoading = false;
         this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 5, 'Ошибка оформления заказа!')
+          .handleAchievement(userProjId, this.configService.achievementIds.checkoutFailed, 'Ошибка оформления заказа!')
           .subscribe();
         this.alertService.open('Не удалось оформить заказ. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
       }
@@ -185,7 +185,7 @@ export class PageCartComponent implements OnInit {
       next: (response) => {
         if (response.success) {
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 6, 'Количество товара успешно обновлено!')
+            .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantitySuccess, 'Количество товара успешно обновлено!')
             .subscribe();
           this.alertService.open('Количество товара успешно обновлено', { appearance: 'success' }).subscribe();
         } else {
@@ -196,7 +196,7 @@ export class PageCartComponent implements OnInit {
           );
           this.cdr.markForCheck();
           this.userAchievementsRepository
-            .handleAchievement(userProjId, 7, 'Ошибка обновления количества товара!')
+            .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantityFailed, 'Ошибка обновления количества товара!')
             .subscribe();
           this.alertService.open('Не удалось обновить количество. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
         }
@@ -211,7 +211,7 @@ export class PageCartComponent implements OnInit {
         );
         this.cdr.markForCheck();
         this.userAchievementsRepository
-          .handleAchievement(userProjId, 7, 'Ошибка обновления количества товара!')
+          .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantityFailed, 'Ошибка обновления количества товара!')
           .subscribe();
         this.alertService.open('Ошибка при обновлении количества. Попробуйте ещё раз!', { appearance: 'error' }).subscribe();
         this.isLoading = false;

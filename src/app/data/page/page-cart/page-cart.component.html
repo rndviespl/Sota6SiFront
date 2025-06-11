@@ -5,6 +5,9 @@
   <div *ngIf="cartItems.length === 0" class="empty-cart">
     <h3>Корзина пуста</h3>
     <p>Добавьте товары, чтобы продолжить</p>
+    <button tuiButton appearance="primary" (click)="checkout()" [disabled]="isLoading">
+      Оформить заказ
+    </button>
     <button tuiButton appearance="primary" (click)="router.navigate(['/products'])">
       Перейти к товарам
     </button>
@@ -30,17 +33,9 @@
                 <button tuiButton appearance="flat" size="s" (click)="decreaseQuantity(item)" [disabled]="isLoading">
                   <tui-icon name="tuiIconMinus"></tui-icon>
                 </button>
-                <input
-                  type="number"
-                  [(ngModel)]="item.quantity"
-                  [ngModelOptions]="options"
-                  (ngModelChange)="onValueChange($event, 'quantity', item)"
-                  min="1"
-                  max="100"
-                  step="1"
-                  class="quantity-input"
-                  [disabled]="isLoading"
-                />
+                <input type="number" [(ngModel)]="item.quantity" [ngModelOptions]="options"
+                  (ngModelChange)="onValueChange($event, 'quantity', item)" min="1" max="100" step="1"
+                  class="quantity-input" [disabled]="isLoading" />
                 <button tuiButton appearance="flat" size="s" (click)="increaseQuantity(item)" [disabled]="isLoading">
                   <tui-icon name="tuiIconPlus"></tui-icon>
                 </button>

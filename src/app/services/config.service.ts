@@ -30,6 +30,7 @@ export class ConfigService {
     updateCategorySuccess: 23,   // Обновление категории
     updateImageSuccess: 24,      // Обновление изображения
     updateProductSuccess: 25,    // Обновление продукта
+    navigateToAboutPageSuccess: 49,
     // Отрицательные тест-кейсы
     loginFailed: 26,             // Ошибка входа
     registerFailed: 27,          // Ошибка регистрации
@@ -53,7 +54,8 @@ export class ConfigService {
     updateCategoryFailed: 45,    // Ошибка обновления категории
     updateImageFailed: 46,       // Ошибка обновления изображения
     updateProductFailed: 47,     // Ошибка обновления продукта
-    checkoutEmptyCart: 48        // Пустая корзина (переназначено)
+    checkoutEmptyCart: 48,       // Пустая корзина (переназначено)
+    navigateToAboutPageFailed: 50,
   };
 
   readonly apiEndpoints = {
