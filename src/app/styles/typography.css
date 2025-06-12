@@ -9,6 +9,8 @@ h3 {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    padding: 0.5rem;
+    background: var(--tui-base-01);
     max-width: 65%;
 }
 
@@ -20,6 +22,7 @@ p {
     line-height: 1.5;
     max-height: calc(1.5rem * 2);
     overflow-y: auto;
+    padding: 0.5rem;
     word-wrap: break-word;
     white-space: normal;
 }
@@ -39,5 +42,26 @@ p::-webkit-scrollbar-thumb {
 }
 
 p::-webkit-scrollbar-thumb:hover {
+    background: var(--tui-primary);
+}
+
+/* Темная тема */
+[data-theme="dark"] h3 {
+    color: var(--tui-base-01);
+}
+
+[data-theme="dark"] p {
+    color: var(--tui-base-01);
+}
+
+[data-theme="dark"] p::-webkit-scrollbar-track {
+    background: var(--tui-base-02);
+}
+
+[data-theme="dark"] p::-webkit-scrollbar-thumb {
+    background: var(--tui-base-04);
+}
+
+[data-theme="dark"] p::-webkit-scrollbar-thumb:hover {
     background: var(--tui-primary);
 }

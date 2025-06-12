@@ -1,26 +1,19 @@
 <div class="product-card">
-    <div class="product-row">
-      <div class="product-image-container">
-        <app-carousel-img [images]="images" class="product-image" (imageClick)="onImageClick($event)"></app-carousel-img>
-      </div>
-      <div class="product-details-container">
-        <h3 class="product-title">{{ productInfo?.dpTitle }}</h3>
-        <p class="product-price">{{ productInfo?.dpPrice | currency }}</p>
-        <p class="product-description">{{ productInfo?.dpDescription }}</p>
-        <p class="product-category">{{ productInfo?.dpCategory?.dpCategoryTitle }}</p>
-        <div class="product-actions">
-          <div class="quantity-container">
-            <input type="number" [(ngModel)]="quantity" min="1" max="100" step="1" class="form-control quantity-input" />
-          </div>
-          <div class="size-container" *ngIf="productInfo && productInfo.dpProductAttributes && productInfo.dpProductAttributes.length > 0">
-            <label *ngFor="let attribute of productInfo.dpProductAttributes" class="btn btn-outline-primary">
-              <input type="radio" name="sizeId" [(ngModel)]="selectedSizeId" [value]="attribute.dpSizeNavigation?.sizeId" />
-              {{ attribute.dpSizeNavigation?.size }}
-            </label>
-          </div>
-         <button type="button" class="btn btn-add-to-cart" (click)="addToCart()">Добавить в корзину</button>
+  <div class="product-row">
+    <div class="product-image-container">
+      <app-carousel-img [images]="images" class="product-image" (imageClick)="onImageClick($event)"></app-carousel-img>
+    </div>
+    <div class="product-details-container">
+      <h3 class="product-title">{{ productInfo?.dpTitle }}</h3>
+      <p class="product-price">{{ productInfo?.dpPrice | currency }}</p>
+      <p class="product-description">{{ productInfo?.dpDescription }}</p>
+      <p class="product-category">{{ productInfo?.dpCategory?.dpCategoryTitle }}</p>
+      <div class="product-actions">
+        <div class="quantity-container">
+          <input type="number" [(ngModel)]="quantity" min="1" max="100" step="1" class="form-control quantity-input" />
         </div>
+        <button type="button" class="btn-add-to-cart" (click)="addToCart()">Добавить в корзину</button>
       </div>
     </div>
   </div>
-  
+</div>

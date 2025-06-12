@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { IDpImage } from '../../../interface/IDpImage';
 import { ImagesRepositoryService } from '../../../repositories/images-repository.service';
@@ -38,13 +38,27 @@ export class CarouselImgComponent implements OnInit {
   ngOnInit(): void {
     this.loadImageUrls();
   }
-
+  
+ ngOnChanges(changes: SimpleChanges): void {
+    if (changes['images']) {
+      this.loadImageUrls();
+    }
+  }
   private loadImageUrls(): void {
+      this.imageUrls = {};
+       if (!this.images || this.images.length === 0) {
+      this.cd.detectChanges();
+      return;
+    }
+    let loaded = 0;
     this.images.forEach(image => {
       this.imagesRepository.getDpImageData(image.dpImagesId).subscribe(blob => {
         const url = URL.createObjectURL(blob);
         this.imageUrls[image.dpImagesId] = this.sanitizer.bypassSecurityTrustUrl(url);
-        this.cd.detectChanges();
+        loaded++;
+        if (loaded === this.images.length) {
+          this.cd.detectChanges();
+        }
       });
     });
   }

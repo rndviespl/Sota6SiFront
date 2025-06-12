@@ -30,7 +30,7 @@ import { AuthService } from '../../../services/auth.service';
     TuiIconPipe,
   ],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.css',
+  styleUrls: ['./about.component.css', '../../../styles/root.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

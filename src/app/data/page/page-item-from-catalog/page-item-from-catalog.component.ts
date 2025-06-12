@@ -18,7 +18,7 @@ import { ConfigService } from '../../../services/config.service';
   imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton, FormsModule,],
   templateUrl: './page-item-from-catalog.component.html',
   styleUrls: ['../../../styles/root.css', './page-item-from-catalog.component.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PageItemFromCatalogComponent implements OnInit {
   productInfo: IDpProduct = {} as IDpProduct;

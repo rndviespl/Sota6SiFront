@@ -14,6 +14,7 @@
     align-items: center;
     aspect-ratio: 4 / 3;
     width: 100%;
+    height: 100%;
     overflow: hidden;
     position: relative;
 }
@@ -30,4 +31,14 @@
 
 .pagination {
     margin: 0.625rem auto 0;
+}
+
+.wrapper {
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
 }

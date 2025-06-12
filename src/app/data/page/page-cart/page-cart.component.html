@@ -31,17 +31,17 @@
             <td *tuiCell="'quantity'" tuiTd>
               <div class="quantity-container">
                 <button tuiButton appearance="flat" size="s" (click)="decreaseQuantity(item)" [disabled]="isLoading">
-                  <tui-icon name="tuiIconMinus"></tui-icon>
+                 -
                 </button>
                 <input type="number" [(ngModel)]="item.quantity" [ngModelOptions]="options"
                   (ngModelChange)="onValueChange($event, 'quantity', item)" min="1" max="100" step="1"
                   class="quantity-input" [disabled]="isLoading" />
                 <button tuiButton appearance="flat" size="s" (click)="increaseQuantity(item)" [disabled]="isLoading">
-                  <tui-icon name="tuiIconPlus"></tui-icon>
+                  + 
                 </button>
               </div>
             </td>
-            <td *tuiCell="'totalPrice'" tuiTd class="number">{{ getTotal(item) | currency:'RUB' }}</td>
+            <td *tuiCell="'totalPrice'" tuiTd class="number">{{ getTotal(item) | currency:'RUB ' }}</td>
             <td *tuiCell="'actions'" tuiTd>
               <button tuiButton appearance="destructive" size="s" (click)="removeFromCart(item)" [disabled]="isLoading">
                 Удалить
@@ -52,7 +52,7 @@
         <tfoot>
           <tr>
             <td colspan="3" class="total-label">Общая сумма:</td>
-            <td class="number">{{ getTotalAmount() | currency:'RUB' }}</td>
+            <td class="number">{{ getTotalAmount() | currency:'RUB ' }}</td>
             <td>
               <button tuiButton appearance="primary" (click)="checkout()" [disabled]="isLoading">
                 Оформить заказ

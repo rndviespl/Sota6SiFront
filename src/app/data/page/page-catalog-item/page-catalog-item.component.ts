@@ -37,7 +37,7 @@ export class PageCatalogItemComponent implements OnInit {
         this.userAchievementsRepository
           .handleAchievement(userProjId, this.configService.achievementIds.loadProductsSuccess, 'Достижение: каталог продуктов успешно загружен!')
           .subscribe();
-        this.alertService.open('Каталог успешно загружен!', { appearance: 'success' }).subscribe();
+        // this.alertService.open('Каталог успешно загружен!', { appearance: 'success' }).subscribe();
       },
       error: (error) => {
         console.error('Ошибка при загрузке товаров:', error);
