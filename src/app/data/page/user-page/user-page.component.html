@@ -8,7 +8,7 @@
   <form [formGroup]="editProductForm" (ngSubmit)="editProductById(editProductForm.value.id ?? null)">
     <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id"
       placeholder="Введите ID продукта для редактирования" type="number">
-      Product ID
+      ID Продукта
     </tui-input>
     <button tuiButton type="submit" [disabled]="!editProductForm.valid">Редактировать продукт</button>
   </form>
@@ -16,7 +16,7 @@
   <form [formGroup]="editCategoryForm" (ngSubmit)="editCategoryById(editCategoryForm.value.id ?? null)">
     <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id"
       placeholder="Введите ID категории для редактирования" type="number">
-      Category ID
+      ID Категории
     </tui-input>
     <button tuiButton type="submit" [disabled]="!editCategoryForm.valid">Редактировать категорию</button>
   </form>
@@ -24,7 +24,7 @@
   <form [formGroup]="editImageForm" (ngSubmit)="editImageById(editImageForm.value.id ?? null)">
     <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id"
       placeholder="Введите ID изображения для редактирования" type="number">
-      Image ID
+      ID Изображения
     </tui-input>
     <button tuiButton type="submit" [disabled]="!editImageForm.valid">Редактировать изображение</button>
   </form>

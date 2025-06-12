@@ -73,17 +73,17 @@ export class UserPageComponent {
 
   private readonly productDialog = tuiDialog(DialogProductComponent, {
     dismissible: true,
-    label: 'Создать продукт',
+    label: 'Добавить запись о продукте',
   });
 
   private readonly categoryDialog = tuiDialog(DialogCategoryComponent, {
     dismissible: true,
-    label: 'Создать категорию',
+    label: 'Добавить запись о категории',
   });
 
   private readonly imageDialog = tuiDialog(DialogImageComponent, {
     dismissible: true,
-    label: 'Загрузить изображение',
+    label: 'Загрузить изображение продукта',
   });
 
   constructor(

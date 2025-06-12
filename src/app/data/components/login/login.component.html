@@ -3,27 +3,26 @@
     (ngSubmit)="onLogin()">
     <header tuiHeader>
         <h2 tuiTitle>
-            Login Form
-
+            Форма авторизации
         </h2>
     </header>
 
     <tui-textfield>
-        <label tuiLabel>Username</label>
-        <input formControlName="username" placeholder="Username" tuiTextfield required />
+        <label tuiLabel>Логин пользователя</label>
+        <input formControlName="username" placeholder="Логин пользователя" tuiTextfield required />
     </tui-textfield>
     <tui-error formControlName="username" [error]="[] | tuiFieldError | async" />
     <tui-textfield>
-        <label tuiLabel>Password</label>
-        <input formControlName="password" placeholder="Password" tuiTextfield type="password" required />
+        <label tuiLabel>Пароль</label>
+        <input formControlName="password" placeholder="Пароль" tuiTextfield type="password" required />
     </tui-textfield>
     <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
     <footer>
         <button appearance="secondary" tuiButton type="button" (click)="navigateToRegister()">
-            Register
+            Регистрация
         </button>
         <button tuiButton type="submit">
-            Login
+            Войти
         </button>
     </footer>
 </form>

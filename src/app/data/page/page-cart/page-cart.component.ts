@@ -1,5 +1,5 @@
 import { AsyncPipe, CommonModule, CurrencyPipe, NgForOf, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TuiButton, TuiAppearance, TuiAlertService, TuiScrollbar, TuiIcon } from '@taiga-ui/core';
 import { TuiTable, TuiComparator } from '@taiga-ui/addon-table';
@@ -35,6 +35,7 @@ interface CartItem extends ICartItem {
   templateUrl: './page-cart.component.html',
   styleUrls: ['./page-cart.component.css', '../../../styles/root.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PageCartComponent implements OnInit {
   protected readonly options = { updateOn: 'blur' } as const;
