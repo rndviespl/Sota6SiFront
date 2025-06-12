@@ -41,7 +41,6 @@ export class PageCartComponent implements OnInit {
   protected cartItems: CartItem[] = [];
   protected readonly columns = ['productTitle', 'price', 'quantity', 'totalPrice', 'actions'] as const;
   protected isLoading = false;
-  private readonly siteUserId = 1;
 
   protected readonly totalSorter: TuiComparator<CartItem> = (a, b) =>
     tuiDefaultSort(a.price * a.quantity, b.price * b.quantity);
@@ -60,7 +59,6 @@ export class PageCartComponent implements OnInit {
   }
 
   private loadCartItems(): void {
-    this.isLoading = true;
     this.cartService.getCart().subscribe({
       next: (cartViewModel: ICartViewModel) => {
         this.cartItems = cartViewModel.cartItems.map(item => ({
@@ -167,7 +165,6 @@ export class PageCartComponent implements OnInit {
 
   private updateCartItemQuantity(item: CartItem, newQuantity: number): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
-    this.isLoading = true;
     const request: IUpdateCartRequest = {
       productId: item.productId,
       quantity: newQuantity,

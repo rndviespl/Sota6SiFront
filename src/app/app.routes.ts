@@ -8,6 +8,7 @@ import { UserPageComponent } from './data/page/user-page/user-page.component';
 import { UserPageProjComponent } from './data/page/user-page-proj/user-page-proj.component';
 import { LoginProjComponent } from './data/components/login-proj/login-proj.component';
 import { RegisterProjComponent } from './data/components/register-proj/register-proj.component';
+import { AboutComponent } from './data/page/about/about.component';
 
 export const routes: Routes = [
 
@@ -38,14 +39,14 @@ export const routes: Routes = [
         title: "Регистрация"
     },
     {
-        path:'user-page',
+        path: 'user-page',
         component: UserPageComponent,
-        title:"страница тестового пользователя"
+        title: "страница тестового пользователя"
     },
     {
         path: 'userProj',
-        component:UserPageProjComponent,
-        title:"страница пользователя"
+        component: UserPageProjComponent,
+        title: "страница пользователя"
     },
     {
         path: 'login-proj',
@@ -56,5 +57,10 @@ export const routes: Routes = [
         path: 'register-proj',
         component: RegisterProjComponent,
         title: "Регистрация для проекта"
-    }
+    },
+    { 
+        path: 'about', 
+        component: AboutComponent, 
+        title: "О приложении" 
+    },
 ];
