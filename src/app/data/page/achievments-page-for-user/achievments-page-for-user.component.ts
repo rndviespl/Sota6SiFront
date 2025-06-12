@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IAchievement } from '../../../interface/IAchievement';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
@@ -11,6 +11,8 @@ import {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
+import { Router } from '@angular/router';
+import { AuthProjService } from '../../../services/auth-proj.service';
 
 
 @Component({
@@ -29,11 +31,17 @@ export class AchievmentsPageForUserComponent implements OnInit {
   completedAchievementIds: number[] = [];
   username: string = '';
   userId: number | null = null;
+private readonly authProjService = inject(AuthProjService);
+  private readonly router = inject(Router);
+  private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
+
+  isProjAuthenticated: boolean = false;
+  private logoutAttempt = 0;
 
   constructor(
-    private configService: ConfigService,
-    private userAchievementsRepo: UserAchievementsRepositoryService,
-    private achievementsRepo: AchievementsRepositoryService
+    private readonly configService: ConfigService = inject(ConfigService),
+    private readonly userAchievementsRepo: UserAchievementsRepositoryService = inject(UserAchievementsRepositoryService),
+    private readonly achievementsRepo: AchievementsRepositoryService = inject(AchievementsRepositoryService)
   ) { }
 
   ngOnInit(): void {
@@ -89,5 +97,13 @@ export class AchievmentsPageForUserComponent implements OnInit {
 
   isCompleted(achievementId: number): boolean {
     return this.completedAchievementIds.includes(achievementId);
+  } 
+
+   onNotWorkingButtonClick(): void {
+    const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    this.userAchievementsRepository
+      .handleAchievement(userProjId, this.configService.achievementIds.buttonNotWorking, 'Кнопка не работает!')
+      .subscribe();
+    // Можно добавить уведомление или визуальный эффект
   }
 }

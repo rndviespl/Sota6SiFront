@@ -3,13 +3,9 @@ import { Router } from '@angular/router';
 import { AuthProjService } from '../../../services/auth-proj.service';
 import { CommonModule, AsyncPipe, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiAutoFocus } from '@taiga-ui/cdk';
 import { TuiTextfield, TuiButton, TuiLink, TuiIcon, TuiIconPipe } from '@taiga-ui/core';
 import { TuiSlider, TuiDataListWrapper, TuiFiles, TuiAvatar } from '@taiga-ui/kit';
 import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@taiga-ui/legacy';
-import { DialogCategoryComponent } from '../../components/dialog-category/dialog-category.component';
-import { DialogImageComponent } from '../../components/dialog-image/dialog-image.component';
-import { DialogProductComponent } from '../../components/dialog-product/dialog-product.component';
 import { AchievmentsPageForUserComponent } from '../achievments-page-for-user/achievments-page-for-user.component';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
@@ -47,11 +43,36 @@ export class UserPageProjComponent {
   constructor(
     private readonly configService: ConfigService = inject(ConfigService)
   ) { }
-  
+
   ngOnInit(): void {
-    this.authProjService.isAuthenticated$.subscribe(isAuthenticated => {
-      this.isProjAuthenticated = isAuthenticated;
-    });
+    const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+
+    // Случайно определяем успех или ошибку (50/50)
+    const isSuccess = Math.random() < 0.3;
+
+    this.isProjAuthenticated = !!localStorage.getItem('projToken');
+    this.authProjService.setAuthenticated(this.isProjAuthenticated);
+
+    if (isSuccess) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.updateProfileSuccess,
+          'Успешное обновление профиля'
+        )
+        .subscribe();
+      // Можно добавить alert или другой способ уведомления
+      // alert('Тест-кейс: успешное обновление профиля!');
+    } else {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.updateProfileFailed,
+          'Ошибка обновления профиля!'
+        )
+        .subscribe();
+      // alert('Тест-кейс: ошибка обновления профиля!');
+    }
     this.checkAuthStatus();
   }
 
@@ -84,13 +105,5 @@ export class UserPageProjComponent {
 
   navigateTo(path: string): void {
     this.router.navigate([path]);
-  }
-
-  onNotWorkingButtonClick(): void {
-    const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
-    this.userAchievementsRepository
-      .handleAchievement(userProjId, this.configService.achievementIds.buttonNotWorking, 'Кнопка не работает!')
-      .subscribe();
-    // Можно добавить уведомление или визуальный эффект
   }
 }

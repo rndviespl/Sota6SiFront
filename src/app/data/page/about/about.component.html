@@ -117,8 +117,9 @@
     </tui-accordion-item>
   </tui-accordion>
 
-  <div class="actions tui-space_top-4">
+ <div class="actions tui-space_top-4">
     <button tuiButton appearance="primary" routerLink="/">Перейти в каталог</button>
     <button tuiButton appearance="outline" (click)="navigateToHome()">На главную</button>
-  </div>
+    <tui-avatar src="@tui.user" class="user-avatar" (click)="navigateTo('/user-page')" />
+</div>
 </tui-island>

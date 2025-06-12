@@ -1,10 +1,11 @@
 <div>
-  <h1>экран тест пользователя <tui-avatar src="@tui.user" (click)="navigateTo('/userProj')"/>  </h1>
+<div><h1>экран тест пользователя <tui-avatar src="@tui.user" (click)="navigateTo('/userProj')" /> <br> переключение темы приложения <app-theme-toggle></app-theme-toggle></h1>
+ </div>
   <button tuiButton type="button" (click)="openDialog('product')">Добавить продукт</button>
   <button tuiButton type="button" (click)="openDialog('category')">Добавить категорию</button>
   <button tuiButton type="button" (click)="openDialog('image')">Добавить изображение</button>
 
- 
+
   <form [formGroup]="editProductForm" (ngSubmit)="editProductById(editProductForm.value.id ?? null)">
     <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id"
       placeholder="Введите ID продукта для редактирования" type="number">

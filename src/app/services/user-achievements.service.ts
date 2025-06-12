@@ -34,9 +34,8 @@ export class UserAchievementsService {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
-    return this.http.get<IUserHasAchievement[]>(this.baseUrl).pipe(
-      catchError(this.handleError('Ошибка при получении всех достижений'))
-    );
+    return this.http.get<IUserHasAchievement[]>(this.baseUrl)
+   
   }
 
   /**
@@ -49,9 +48,8 @@ export class UserAchievementsService {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
-    return this.http.get<IUserHasAchievement>(`${this.baseUrl}/${userProjId}/${achievementId}`).pipe(
-      catchError(this.handleError('Ошибка при получении достижения'))
-    );
+    return this.http.get<IUserHasAchievement>(`${this.baseUrl}/${userProjId}/${achievementId}`)
+  
   }
 
   /**
@@ -66,7 +64,6 @@ export class UserAchievementsService {
     }
     return this.http
       .post<IUserHasAchievement>(`${this.baseUrl}/Create/${userProjId}/${achievementId}`, {})
-      .pipe(catchError(this.handleError('Ошибка при создании достижения')));
   }
 
   /**
@@ -81,7 +78,7 @@ export class UserAchievementsService {
     }
     return this.http
       .put<void>(`${this.baseUrl}/Unlock/${userProjId}/${achievementId}`, {})
-      .pipe(catchError(this.handleError('Ошибка при разблокировке достижения')));
+     
   }
 
   /**
@@ -95,13 +92,12 @@ export class UserAchievementsService {
     }
     return this.http
       .get<IAchievement[]>(`${this.baseUrl}/Completed/${username}`)
-      .pipe(catchError(this.handleError('Ошибка при получении завершенных достижений')));
   }
 
-  /**
-   * Проверка существования достижения у пользователя
+ /**
+   * Проверка существования тест-кейса у пользователя
    * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор достижения
+   * @param achievementId Идентификатор тест-кейса
    * @returns Observable<boolean>
    */
   checkUserAchievementExists(userProjId: number, achievementId: number): Observable<boolean> {
@@ -111,19 +107,19 @@ export class UserAchievementsService {
     return this.http.get<boolean>(`${this.baseUrl}/Exists/${userProjId}/${achievementId}`).pipe(
       catchError(error => {
         if (error.status === this.configService.httpStatusCodes.notFound) {
-          console.warn(`Достижение ${achievementId} или пользователь ${userProjId} не найдены`);
+          console.warn(`Тест-кейс ${achievementId} или пользователь ${userProjId} не найдены`);
           return of(false);
         }
-        console.error('Ошибка при проверке достижения:', error);
+        console.error('Ошибка при проверке тест-кейса:', error);
         return of(false);
       })
     );
   }
 
-  /**
-   * Универсальный метод для обработки достижения
+ /**
+   * Универсальный метод для обработки тест-кейса
    * @param userProjId Идентификатор пользователя проекта
-   * @param achievementId Идентификатор достижения
+   * @param achievementId Идентификатор тест-кейса
    * @param successMessage Сообщение для успешного уведомления
    * @returns Observable<void>
    */
@@ -146,12 +142,21 @@ export class UserAchievementsService {
       this.alertService
         .open('Не удалось обработать тест-кейс из-за сбоя сервера!', { appearance: 'error' })
         .subscribe();
-      // Регистрируем отрицательное достижение
+      // Регистрируем отрицательный тест-кейс
       return this.createUserAchievement(userProjId, failedAchievementId).pipe(
-        switchMap(() => this.unlockUserAchievement(userProjId, failedAchievementId)),
+        switchMap(result => {
+          if (result === null) {
+            // Тест-кейс уже существует
+            this.alertService
+              .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
+              .subscribe();
+            return of(void 0);
+          }
+          return this.unlockUserAchievement(userProjId, failedAchievementId);
+        }),
         tap(() => {
           this.alertService
-            .open(`тест-кейс ошибки: ${successMessage.replace('Успешно', 'Ошибка')}`, {
+            .open(`Тест-кейс ошибки: ${successMessage.replace('выполнен', 'ошибка')}`, {
               appearance: 'error'
             })
             .subscribe();
@@ -163,29 +168,50 @@ export class UserAchievementsService {
       );
     }
 
-    // Нормальная обработка достижения
+    // Нормальная обработка тест-кейса
     return this.checkUserAchievementExists(userProjId, achievementId).pipe(
       switchMap(exists => {
         if (exists) {
-          console.log(`тест-кейс ${achievementId} уже выполнено для userProjId ${userProjId}`);
-          return of(void 0); // Ничего не делаем, если достижение уже есть
+          console.log(`Тест-кейс ${achievementId} уже выполнен для userProjId ${userProjId}`);
+          this.alertService
+            .open('Тест-кейс уже выполнен!', { appearance: 'info' })
+            .subscribe();
+          return of(void 0); // Ничего не делаем, если тест-кейс уже есть
         }
         return this.createUserAchievement(userProjId, achievementId).pipe(
-          switchMap(() => this.unlockUserAchievement(userProjId, achievementId)),
+          switchMap(result => {
+            if (result === null) {
+              // Тест-кейс уже существует
+              this.alertService
+                .open('Тест-кейса успешно выполнена!', { appearance: 'success' })
+                .subscribe();
+              return of(void 0);
+            }
+            return this.unlockUserAchievement(userProjId, achievementId);
+          }),
           tap(() => {
-            this.alertService.open(successMessage, { appearance: 'info' }).subscribe();
+            this.alertService.open(successMessage, { appearance: 'success' }).subscribe();
           })
         );
       }),
       catchError(error => {
         console.error(`Ошибка при обработке тест-кейса ${achievementId} для userProjId ${userProjId}:`, error);
         const failedAchievementId = this.getFailedAchievementId(achievementId);
-        // Регистрируем отрицательное достижение при ошибке
+        // Регистрируем отрицательный тест-кейс при ошибке
         return this.createUserAchievement(userProjId, failedAchievementId).pipe(
-          switchMap(() => this.unlockUserAchievement(userProjId, failedAchievementId)),
+          switchMap(result => {
+            if (result === null) {
+              // Ошибочный тест-кейс уже существует
+              this.alertService
+                .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
+                .subscribe();
+              return of(void 0);
+            }
+            return this.unlockUserAchievement(userProjId, failedAchievementId);
+          }),
           tap(() => {
             this.alertService
-              .open(`Тест-кейс ошибки: ${successMessage.replace('Успешно', 'Ошибка')}`, {
+              .open(`Тест-кейс ошибки: ${successMessage.replace('выполнен', 'ошибка')}`, {
                 appearance: 'error'
               })
               .subscribe();
@@ -200,9 +226,9 @@ export class UserAchievementsService {
   }
 
   /**
-   * Получение ID отрицательного достижения на основе положительного
-   * @param successAchievementId ID успешного достижения
-   * @returns ID соответствующего отрицательного достижения
+   * Получение ID отрицательного тест-кейса на основе положительного
+   * @param successAchievementId ID успешного тест-кейса
+   * @returns ID соответствующего отрицательного тест-кейса
    */
   private getFailedAchievementId(successAchievementId: number): number {
     const successToFailedMap: { [key: number]: number } = {
@@ -239,22 +265,13 @@ export class UserAchievementsService {
       [this.configService.achievementIds.updateCategorySuccess]:
         this.configService.achievementIds.updateCategoryFailed,
       [this.configService.achievementIds.updateImageSuccess]: this.configService.achievementIds.updateImageFailed,
-      [this.configService.achievementIds.updateProductSuccess]: this.configService.achievementIds.updateProductFailed
+      [this.configService.achievementIds.updateProductSuccess]: this.configService.achievementIds.updateProductFailed,
+      [this.configService.achievementIds.navigateToAboutPageSuccess]:
+        this.configService.achievementIds.navigateToAboutPageFailed
     };
 
     return successToFailedMap[successAchievementId] || this.configService.achievementIds.buttonNotWorking;
   }
 
-  /**
-   * Обработка ошибок HTTP-запросов
-   * @param message Сообщение об ошибке
-   * @returns Функция обработки ошибки
-   */
-  private handleError(message: string) {
-    return (error: any): Observable<never> => {
-      console.error(message, error);
-      this.alertService.open(`${message}: ${error.message || 'Неизвестная ошибка'}`, { appearance: 'error' }).subscribe();
-      return throwError(() => error);
-    };
-  }
+
 }

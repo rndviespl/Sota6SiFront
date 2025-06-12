@@ -1,9 +1,9 @@
 <table tuiTable [columns]="['title', 'textAchievement', 'status']">
   <thead>
     <tr tuiThGroup>
-      <th *tuiHead="'title'" tuiTh>Название</th>
-      <th *tuiHead="'textAchievement'" tuiTh>Описание</th>
-      <th *tuiHead="'status'" tuiTh>Статус</th>
+      <th *tuiHead="'title'" tuiTh (click)="onNotWorkingButtonClick()">Название</th>
+      <th *tuiHead="'textAchievement'" tuiTh (click)="onNotWorkingButtonClick()">Описание</th>
+      <th *tuiHead="'status'" tuiTh (click)="onNotWorkingButtonClick()">Статус</th>
     </tr>
   </thead>
   <tbody tuiTbody>

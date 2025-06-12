@@ -1,0 +1,10 @@
+.user-avatar tui-svg,
+.user-avatar svg {
+    color: var(--avatar-color, #212529);
+    fill: var(--avatar-color, #212529);
+}
+[data-theme="dark"] .user-avatar tui-svg,
+[data-theme="dark"] .user-avatar svg {
+    color: #fff;
+    fill: #fff;
+}

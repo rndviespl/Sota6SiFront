@@ -18,6 +18,7 @@ import { AuthProjService } from '../../../services/auth-proj.service';
 import { CategoriesRepositoryService } from '../../../repositories/categories-repository.service';
 import { ImagesRepositoryService } from '../../../repositories/images-repository.service';
 import { ProductsRepositoryService } from '../../../repositories/products-repository.service';
+import { ThemeToggleComponent } from '../../components/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-user-page',
@@ -43,6 +44,7 @@ import { ProductsRepositoryService } from '../../../repositories/products-reposi
     TuiIcon,
     TuiAvatar,
     TuiIconPipe,
+    ThemeToggleComponent
   ],
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.css'],
@@ -90,9 +92,9 @@ export class UserPageComponent {
     private productsRepository: ProductsRepositoryService,
     private categoriesRepository: CategoriesRepositoryService,
     private imagesRepository: ImagesRepositoryService
-  ) {}
+  ) { }
 
-  
+
   ngOnInit(): void {
     this.authProjService.isAuthenticated$.subscribe(isAuthenticated => {
       this.isProjAuthenticated = isAuthenticated;

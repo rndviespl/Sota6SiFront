@@ -1,11 +1,14 @@
 import { Component, ChangeDetectionStrategy, inject, OnInit, OnDestroy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TuiButton, TuiTitle, TuiAlertService } from '@taiga-ui/core';
-import { TuiAccordion, TuiAccordionItem } from '@taiga-ui/kit';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { TuiButton, TuiTitle, TuiAlertService, TuiIcon, TuiIconPipe, TuiLink } from '@taiga-ui/core';
+import { TuiAccordion, TuiAccordionItem, TuiAvatar } from '@taiga-ui/kit';
 import { Subscription } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ConfigService } from '../../../services/config.service';
 import { UserAchievementsService } from '../../../services/user-achievements.service';
+import { BackButtonComponent } from '../../components/back-button/back-button.component';
+import { ThemeToggleComponent } from '../../components/theme-toggle/theme-toggle.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-about',
@@ -15,7 +18,16 @@ import { UserAchievementsService } from '../../../services/user-achievements.ser
     TuiTitle,
     TuiAccordion,
     TuiAccordionItem,
-    RouterLink
+    RouterLink,
+     CommonModule,
+    TuiLink,
+    TuiIcon,
+    TuiButton,
+    ThemeToggleComponent,
+    BackButtonComponent,
+    TuiAvatar,
+    AsyncPipe,
+    TuiIconPipe,
   ],
   templateUrl: './about.component.html',
   styleUrl: './about.component.css',
@@ -27,7 +39,10 @@ private readonly userAchievementsService = inject(UserAchievementsService);
   private readonly configService = inject(ConfigService);
   private readonly alertService = inject(TuiAlertService);
   private readonly subscriptions = new Subscription();
-
+ 
+  constructor(
+    private router: Router,
+  ) {}
   ngOnInit(): void {
     this.recordNavigationAchievement();
   }
@@ -54,7 +69,9 @@ private readonly userAchievementsService = inject(UserAchievementsService);
       });
     this.subscriptions.add(sub);
   }
-
+ navigateTo(path: string): void {
+    this.router.navigate([path]);
+  }
   /**
    * Переходит на главную страницу
    */

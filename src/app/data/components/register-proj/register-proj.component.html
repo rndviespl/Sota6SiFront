@@ -1,27 +1,29 @@
-<form tuiAppearance="floating" tuiCardLarge tuiForm="m" [formGroup]="form" [style.max-width.rem]="32"
-    (ngSubmit)="onRegister()">
-    <header tuiHeader>
-        <h2 tuiTitle>
-            Форма регистрации для пользователя с тестами
-        </h2>
-    </header>
+<div class="form-container">
+    <form tuiAppearance="floating" tuiCardLarge tuiForm="m" [formGroup]="form" [style.max-width.rem]="32"
+        (ngSubmit)="onRegister()">
+        <header tuiHeader>
+            <h2 tuiTitle>
+                Форма регистрации для пользователя с тестами
+            </h2>
+        </header>
 
-    <tui-textfield>
-        <label tuiLabel>Логин</label>
-        <input formControlName="login" placeholder="Логин" tuiTextfield required />
-    </tui-textfield>
-    <tui-error formControlName="login" [error]="[] | tuiFieldError | async" />
-    <tui-textfield>
-        <label tuiLabel>Пароль</label>
-        <input formControlName="password" placeholder="Пароль" tuiTextfield type="password" required />
-    </tui-textfield>
-    <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
-    <footer>
-        <button appearance="secondary" tuiButton type="button" (click)="navigateToLogin()">
-            Отмена
-        </button>
-        <button tuiButton type="submit">
-            Зарегистрироваться
-        </button>
-    </footer>
-</form>
+        <tui-textfield>
+            <label tuiLabel>Логин</label>
+            <input formControlName="login" placeholder="Логин" tuiTextfield required />
+        </tui-textfield>
+        <tui-error formControlName="login" [error]="[] | tuiFieldError | async" />
+        <tui-textfield>
+            <label tuiLabel>Пароль</label>
+            <input formControlName="password" placeholder="Пароль" tuiTextfield type="password" required />
+        </tui-textfield>
+        <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
+        <footer>
+            <button appearance="secondary" tuiButton type="button" (click)="navigateToLogin()">
+                Отмена
+            </button>
+            <button tuiButton type="submit">
+                Зарегистрироваться
+            </button>
+        </footer>
+    </form>
+</div>

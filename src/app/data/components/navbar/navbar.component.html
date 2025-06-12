@@ -6,9 +6,7 @@
   </div>
   <div>
     <app-back-button></app-back-button>
-    <app-theme-toggle></app-theme-toggle>
     <button size="m" type="button" *ngIf="!isAuthenticated" (click)="navigateTo('/login')" tuiButton>Войти</button>
     <button size="m" type="button" *ngIf="isAuthenticated" (click)="logout()" tuiButton>Выйти</button>
-    <tui-avatar src="@tui.user" (click)="navigateTo('/user-page')" />
   </div>
 </div>

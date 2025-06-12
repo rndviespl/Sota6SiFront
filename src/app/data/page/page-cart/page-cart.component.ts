@@ -62,6 +62,7 @@ export class PageCartComponent implements OnInit {
   private loadCartItems(): void {
     this.cartService.getCart().subscribe({
       next: (cartViewModel: ICartViewModel) => {
+         console.log(cartViewModel);
         this.cartItems = cartViewModel.cartItems.map(item => ({
           ...item,
           date: TuiDay.currentLocal(),

@@ -17,12 +17,12 @@ export class ShopCartRepositoryService {
   constructor(
     private productsRepositoryService: ProductsRepositoryService,
     private shopCartService: ShopCartService
-  ) {}
+  ) { }
 
   getCart(): Observable<ICartViewModel> {
     try {
       const cartItems = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
-
+      console.log('cartItems from localStorage:', cartItems);
       if (cartItems.length === 0) {
         return of({ cartItems: [], products: [] });
       }
@@ -95,18 +95,18 @@ export class ShopCartRepositoryService {
 
   checkout(): Observable<{ orderId: number; orderDetails: any[] }> {
     const cart = JSON.parse(localStorage.getItem(this.cartKey) || '[]');
-  
+
     if (cart.length === 0) {
       return of({ orderId: 0, orderDetails: [] });
     }
-  
+
     // Убедитесь, что данные корректны перед отправкой
     const cartData = cart.map((item: IAddToCartRequest) => ({
       productId: item.productId,
       quantity: item.quantity,
       sizeId: item.sizeId || null // Убедитесь, что sizeId может быть null
     }));
-  
+
     // Отправьте данные на бэкенд
     return this.shopCartService.checkout(cartData);
   }
@@ -124,7 +124,7 @@ export class ShopCartRepositoryService {
   exportToExcel(orderId: number): Observable<Blob> {
     return this.shopCartService.exportToExcel(orderId);
   }
-  
+
   clearCart(): void {
     localStorage.removeItem(this.cartKey);
   }
