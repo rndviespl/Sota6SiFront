@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ShopCartRepositoryService } from '../../../repositories/shop-cart-repository.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-page-item-from-catalog',
@@ -31,6 +32,7 @@ export class PageItemFromCatalogComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private cartService: ShopCartRepositoryService,
     private userAchievementsRepository: UserAchievementsRepositoryService,
+    private userAchievementsService: UserAchievementsService,
     private configService: ConfigService,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService
   ) { }
@@ -73,6 +75,16 @@ export class PageItemFromCatalogComponent implements OnInit {
   addToCart(): void {
     if (this.productInfo) {
       const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+       // Если включён режим "всегда ошибка" — только негативный тест-кейс
+      if (this.userAchievementsService.getAlwaysFailMode()) {
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.addToCartFailed, 'Тест-кейс: ошибка добавления товара в корзину!')
+          .subscribe();
+        this.alertService.open('Тест-кейс: ошибка добавления товара в корзину (режим всегда ошибка включён)', { appearance: 'error' }).subscribe();
+        return;
+      }
+
+
       const request = {
         productId: this.productInfo.dpProductId,
         quantity: this.quantity,

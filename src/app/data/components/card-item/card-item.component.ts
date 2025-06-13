@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input } from '@angular/core';
 import { IDpProduct } from '../../../interface/IDpProduct';
 import { CommonModule } from '@angular/common';
 import { TuiAppearance, TuiButton } from '@taiga-ui/core';
@@ -7,6 +7,7 @@ import { IDpImage } from '../../../interface/IDpImage';
 import { Router } from '@angular/router';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-card-item',
@@ -26,7 +27,8 @@ export class CardItemComponent {
   constructor(
     private router: Router,
     private configService: ConfigService,
-    private userAchievementsRepository: UserAchievementsRepositoryService
+    private userAchievementsRepository: UserAchievementsRepositoryService,
+    private userAchievementsService: UserAchievementsService = inject(UserAchievementsService)
   ) { }
 
   get images(): IDpImage[] {
@@ -35,6 +37,19 @@ export class CardItemComponent {
 
   navigateToProduct(product: IDpProduct): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      // Галочка включена — 50% шанс на ошибку
+      if (Math.random() < 0.5) {
+        this.userAchievementsRepository.handleAchievement(
+          userProjId,
+          this.configService.achievementIds.navigateToProductFailed,
+          'Тест-кейс: ошибка перехода к товару! (режим всегда ошибка, рандом)'
+        ).subscribe();
+        return;
+      }
+      // 50% шанс — обычная логика перехода
+    }
     this.router.navigate(['/ItemFromCatalog', product.dpProductId])
       .then(success => {
         if (success) {

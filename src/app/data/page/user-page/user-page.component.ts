@@ -47,7 +47,7 @@ import { ThemeToggleComponent } from '../../components/theme-toggle/theme-toggle
     ThemeToggleComponent
   ],
   templateUrl: './user-page.component.html',
-  styleUrls: ['./user-page.component.css'],
+  styleUrls: ['./user-page.component.css', '../../../styles/root.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UserPageComponent {

@@ -1,5 +1,5 @@
 import { AsyncPipe, CommonModule, CurrencyPipe, NgForOf, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TuiButton, TuiAppearance, TuiAlertService, TuiScrollbar, TuiIcon } from '@taiga-ui/core';
 import { TuiTable, TuiComparator } from '@taiga-ui/addon-table';
@@ -12,6 +12,7 @@ import { IUpdateCartRequest } from '../../../interface/IUpdateCartRequest';
 import { ShopCartRepositoryService } from '../../../repositories/shop-cart-repository.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 interface CartItem extends ICartItem {
   readonly date: TuiDay;
@@ -42,7 +43,7 @@ export class PageCartComponent implements OnInit {
   protected cartItems: CartItem[] = [];
   protected readonly columns = ['productTitle', 'price', 'quantity', 'totalPrice', 'actions'] as const;
   protected isLoading = false;
-
+  private readonly userAchievementsService = inject(UserAchievementsService);
   protected readonly totalSorter: TuiComparator<CartItem> = (a, b) =>
     tuiDefaultSort(a.price * a.quantity, b.price * b.quantity);
 
@@ -62,7 +63,7 @@ export class PageCartComponent implements OnInit {
   private loadCartItems(): void {
     this.cartService.getCart().subscribe({
       next: (cartViewModel: ICartViewModel) => {
-         console.log(cartViewModel);
+        console.log(cartViewModel);
         this.cartItems = cartViewModel.cartItems.map(item => ({
           ...item,
           date: TuiDay.currentLocal(),
@@ -105,6 +106,14 @@ export class PageCartComponent implements OnInit {
 
   removeFromCart(item: CartItem): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    // Если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(userProjId, this.configService.achievementIds.removeFromCartFailed, 'Тест-кейс: ошибка удаления товара из корзины!')
+        .subscribe();
+      this.alertService.open('Тест-кейс: не удалось удалить товар (режим всегда ошибка включён)', { appearance: 'error' }).subscribe();
+      return;
+    }
     this.isLoading = true;
     this.cartService.removeFromCart({ productId: item.productId, sizeId: item.sizeId }).subscribe({
       next: () => {
@@ -132,14 +141,23 @@ export class PageCartComponent implements OnInit {
 
   checkout(): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+
     if (this.cartItems.length === 0) {
       this.userAchievementsRepository
-        .handleAchievement(userProjId, this.configService.achievementIds.checkoutEmptyCart, 'Попытка оформления пустой корзины!')
+        .handleAchievement(userProjId, this.configService.achievementIds.checkoutEmptyCart, 'Тест-кейс: Попытка оформления пустой корзины!')
         .subscribe();
       this.alertService.open('Корзина пуста, добавьте товары перед оформлением', { appearance: 'error' }).subscribe();
       return;
     }
 
+    // Если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(userProjId, this.configService.achievementIds.checkoutFailed, 'Тест-кейс: ошибка оформления заказа!')
+        .subscribe();
+      this.alertService.open('Тест-кейс: не удалось оформить заказ (режим всегда ошибка включён)', { appearance: 'error' }).subscribe();
+      return;
+    }
     this.isLoading = true;
     this.cartService.checkout().subscribe({
       next: (response) => {
@@ -167,6 +185,16 @@ export class PageCartComponent implements OnInit {
 
   private updateCartItemQuantity(item: CartItem, newQuantity: number): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    
+    // Если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantityFailed, 'Тест-кейс: ошибка обновления количества товара!')
+        .subscribe();
+      this.alertService.open('Тест-кейс: не удалось обновить количество (режим всегда ошибка включён)', { appearance: 'error' }).subscribe();
+      return;
+    }
+    
     const request: IUpdateCartRequest = {
       productId: item.productId,
       quantity: newQuantity,

@@ -8,6 +8,7 @@ import { ConfigService } from '../../../services/config.service';
 import { TuiAlertService } from '@taiga-ui/core';
 import { Inject } from '@angular/core';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-page-catalog-item',
@@ -21,28 +22,48 @@ export class PageCatalogItemComponent implements OnInit {
   constructor(
     private productsRepository: ProductsRepositoryService,
     private userAchievementsRepository: UserAchievementsRepositoryService,
+    private userAchievementsService: UserAchievementsService,
     private configService: ConfigService,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.loadProductsOrFail();
   }
 
-  private loadProducts(): void {
+  loadProductsOrFail() {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      // Галочка включена — 50% шанс на ошибку
+      if (Math.random() < 0.5) {
+        this.userAchievementsRepository.handleAchievement(
+          userProjId,
+          this.configService.achievementIds.loadProductsFailed,
+          'тест-кейс: ошибка загрузки каталога продуктов! (режим всегда ошибка, рандом)'
+        ).subscribe();
+        return;
+      }
+      // 50% шанс — обычная загрузка
+    }
+
+    // Галочка выключена или выпал шанс на успех — обычная загрузка
+    this.loadProducts(userProjId);
+  }
+
+  private loadProducts(userProjId: number): void {
     this.productsRepository.getAllProducts().subscribe({
       next: (productList: IDpProduct[]) => {
         this.products = productList;
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.loadProductsSuccess, 'Достижение: каталог продуктов успешно загружен!')
+          .handleAchievement(userProjId, this.configService.achievementIds.loadProductsSuccess, 'тест-кейс: каталог продуктов успешно загружен!')
           .subscribe();
         // this.alertService.open('Каталог успешно загружен!', { appearance: 'success' }).subscribe();
       },
       error: (error) => {
         console.error('Ошибка при загрузке товаров:', error);
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.loadProductsFailed, 'Достижение: ошибка загрузки каталога продуктов!')
+          .handleAchievement(userProjId, this.configService.achievementIds.loadProductsFailed, 'тест-кейс: ошибка загрузки каталога продуктов!')
           .subscribe();
         this.alertService.open('Не удалось загрузить каталог продуктов', { appearance: 'error' }).subscribe();
       }

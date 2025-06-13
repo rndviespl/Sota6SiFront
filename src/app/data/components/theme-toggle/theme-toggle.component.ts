@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-theme-toggle',
@@ -21,6 +22,7 @@ export class ThemeToggleComponent {
   private readonly media = inject(WA_WINDOW).matchMedia('(prefers-color-scheme: dark)');
   private readonly darkMode = inject(TUI_DARK_MODE);
   private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
+  private readonly userAchievementsService = inject(UserAchievementsService);
   private readonly alertService = inject(TuiAlertService);
   private readonly configService = inject(ConfigService);
 
@@ -47,6 +49,16 @@ export class ThemeToggleComponent {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
     this.toggleCount++;
 
+    // Если включён режим "всегда ошибка" — всегда негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      const achievementId = this.toggle
+        ? this.configService.achievementIds.switchToDarkThemeFailed
+        : this.configService.achievementIds.switchToLightThemeFailed;
+      this.recordAchievement(userProjId, achievementId, `Тест-кейс: ошибка включения ${this.toggle ? 'тёмной' : 'светлой'} темы!`);
+      this.alertService.open(`Тест-кейс: ошибка переключения темы на ${this.toggle ? 'тёмную' : 'светлую'}!`, { appearance: 'error' }).subscribe();
+      return;
+    }
+    
     // Логика достижений: чередуем успех и ошибку
     if (this.toggleCount % 2 === 0) {
       // Успешное переключение темы

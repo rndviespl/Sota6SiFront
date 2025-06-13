@@ -1,5 +1,5 @@
 // src/app/components/login/login.component.ts
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Inject } from '@angular/core';
 import { AuthRepositoryService } from '../../../repositories/auth-repository.service';
 import { IDpUser } from '../../../interface/IDpUser';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 import { TuiAlertService } from '@taiga-ui/core';
 import { ConfigService } from '../../../services/config.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-login',
@@ -42,6 +43,7 @@ export class LoginComponent {
   constructor(
     private authRepository: AuthRepositoryService,
     private userAchievementsRepository: UserAchievementsRepositoryService,
+    private userAchievementsService: UserAchievementsService = inject(UserAchievementsService),
     private router: Router,
     private authService: AuthService,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
@@ -57,7 +59,16 @@ export class LoginComponent {
         dpRegistrationDate: new Date(),
         dpPhoneNumber: '0000000000'
       };
-
+      // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+      if (this.userAchievementsService.getAlwaysFailMode()) {
+        const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.loginFailed, 'тест-кейс неудачного входа разблокировано!')
+          .subscribe();
+        this.alertService.open('Тест-кейс: ошибка входа (режим всегда ошибка включён)', { appearance: 'error' }).subscribe();
+        return;
+      }
+      
       this.authRepository.login(user).subscribe({
         next: (response) => {
           if (response && response.token) {

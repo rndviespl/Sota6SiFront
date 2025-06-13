@@ -1,5 +1,5 @@
 // src/app/components/register/register.component.ts
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Inject } from '@angular/core';
 import { AuthRepositoryService } from '../../../repositories/auth-repository.service';
 import { IDpUser } from '../../../interface/IDpUser';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { TuiCardLarge, TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { TuiAlertService } from '@taiga-ui/core';
 import { ConfigService } from '../../../services/config.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-register',
@@ -41,6 +42,7 @@ export class RegisterComponent {
   constructor(
     private authRepository: AuthRepositoryService,
     private userAchievementsRepository: UserAchievementsRepositoryService,
+    private userAchievementsService: UserAchievementsService = inject(UserAchievementsService),
     private router: Router,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
     private configService: ConfigService
@@ -55,7 +57,17 @@ export class RegisterComponent {
         dpRegistrationDate: new Date(),
         dpPhoneNumber: '0000000000'
       };
-
+      // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+      if (this.userAchievementsService.getAlwaysFailMode()) {
+        const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.registerFailed, 'тест-кейс неудачной регистрации разблокировано!')
+          .subscribe();
+        this.alertService.open('Тест-кейс: ошибка регистрации (режим всегда ошибка включён)', { appearance: 'error' }).subscribe();
+        return;
+      }
+      // Галочка выключена — обычная логика
+      // Выполняем регистрацию пользователя
       this.authRepository.register(user).subscribe({
         next: (response: { token: string; userProjId?: number }) => {
           if (response.token) {

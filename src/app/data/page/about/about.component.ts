@@ -43,32 +43,11 @@ private readonly userAchievementsService = inject(UserAchievementsService);
   constructor(
     private router: Router,
   ) {}
-  ngOnInit(): void {
-    this.recordNavigationAchievement();
-  }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  /**
-   * Регистрирует достижение за переход на страницу "О нас"
-   */
-  private recordNavigationAchievement(): void {
-    const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
-    const sub = this.userAchievementsService
-      .handleAchievement(
-        userProjId,
-        this.configService.achievementIds.navigateToAboutPageSuccess,
-        'тест-кейс: Переход на страницу "О нас" выполнен!'
-      )
-      .subscribe({
-        error: () => {
-          // Ошибка обрабатывается в UserAchievementsService, включая navigateToAboutPageFailed
-        }
-      });
-    this.subscriptions.add(sub);
-  }
  navigateTo(path: string): void {
     this.router.navigate([path]);
   }
@@ -76,6 +55,6 @@ private readonly userAchievementsService = inject(UserAchievementsService);
    * Переходит на главную страницу
    */
   navigateToHome(): void {
-    // Реализация навигации, если нужно
+    this.navigateTo('/');
   }
 }

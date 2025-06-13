@@ -11,6 +11,7 @@ import { ProductsRepositoryService } from '../../../repositories/products-reposi
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { ConfigService } from '../../../services/config.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-dialog-product',
@@ -41,6 +42,7 @@ export class DialogProductComponent implements OnInit {
   private readonly productsRepositoryService = inject(ProductsRepositoryService);
   private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
   private readonly configService = inject(ConfigService);
+  private readonly userAchievementsService = inject(UserAchievementsService);
 
   public readonly context = injectContext<TuiDialogContext<IDpProduct, IDpProduct>>();
 
@@ -90,38 +92,82 @@ export class DialogProductComponent implements OnInit {
   }
 
   private createProduct(productData: IDpProduct, userProjId: number): void {
+    // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.createProductFailed,
+          'тест-кейс: ошибка создания продукта!'
+        )
+        .subscribe();
+      this.showError('Тест-кейс: ошибка создания продукта!');
+      return;
+    }
+
+    // Обычная логика создания продукта
     this.productsRepositoryService.createProduct(productData).subscribe({
       next: (createdProduct) => {
         this.context.completeWith(createdProduct);
         this.showSuccess('Продукт успешно создан.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.createProductSuccess, 'тест-кейс: продукт успешно создан!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.createProductSuccess,
+            'тест-кейс: продукт успешно создан!'
+          )
           .subscribe();
       },
       error: (error) => {
         console.error('Ошибка при создании продукта:', error);
         this.showError('Ошибка при создании продукта.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.createProductFailed, 'тест-кейс: ошибка создания продукта!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.createProductFailed,
+            'тест-кейс: ошибка создания продукта!'
+          )
           .subscribe();
       }
     });
   }
 
   private updateProduct(productData: IDpProduct, userProjId: number): void {
+    // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.updateProductFailed,
+          'тест-кейс: ошибка обновления продукта!'
+        )
+        .subscribe();
+      this.showError('Тест-кейс: ошибка обновления продукта!');
+      return;
+    }
+
+    // Обычная логика обновления продукта
     this.productsRepositoryService.updateProduct(productData.dpProductId, productData).subscribe({
       next: () => {
         this.context.completeWith(productData);
         this.showSuccess('Продукт успешно обновлён.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.updateProductSuccess, 'тест-кейс: продукт успешно обновлён!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.updateProductSuccess,
+            'тест-кейс: продукт успешно обновлён!'
+          )
           .subscribe();
       },
       error: (error) => {
         console.error('Ошибка при обновлении продукта:', error);
         this.showError('Ошибка при обновлении продукта.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.updateProductFailed, 'тест-кейс: ошибка обновления продукта!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.updateProductFailed,
+            'тест-кейс: ошибка обновления продукта!'
+          )
           .subscribe();
       }
     });

@@ -14,6 +14,7 @@ import { IDpImage } from '../../../interface/IDpImage';
 import { IUpdateDpImageRequest } from '../../../interface/IUpdateDpImageRequest';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-dialog-image',
@@ -43,6 +44,7 @@ export class DialogImageComponent implements OnInit {
   private readonly imagesRepositoryService = inject(ImagesRepositoryService);
   private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
   private readonly configService = inject(ConfigService);
+  private readonly userAchievementsService = inject(UserAchievementsService);
 
   public readonly context = injectContext<TuiDialogContext<IDpImage, IDpImage>>();
 
@@ -147,12 +149,32 @@ export class DialogImageComponent implements OnInit {
   }
 
   private createImage(imageData: ICreateDpImageRequest, userProjId: number): void {
+    // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.addImageFailed,
+          'тест-кейс: ошибка добавления изображения!'
+        )
+        .subscribe();
+      this.showError('Тест-кейс: ошибка добавления изображения!');
+      this.failedImage$.next(this.selectedFile);
+      this.loadingImage$.next(null);
+      return;
+    }
+
+    // Обычная логика
     this.imagesRepositoryService.createDpImage(imageData).subscribe({
       next: (createdImage) => {
         this.context.completeWith(createdImage);
         this.showSuccess('Изображение успешно загружено.');
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.addImageSuccess, 'тест-кейс: изображение успешно добавлено!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.addImageSuccess,
+            'тест-кейс: изображение успешно добавлено!'
+          )
           .subscribe();
         this.loadingImage$.next(null);
       },
@@ -160,7 +182,11 @@ export class DialogImageComponent implements OnInit {
         console.error('Ошибка при загрузке изображения:', error);
         this.showError(`Ошибка при загрузке изображения: ${error.message || 'неизвестная ошибка'}`);
         this.userAchievementsRepository
-          .handleAchievement(userProjId, this.configService.achievementIds.addImageFailed, 'тест-кейс: ошибка добавления изображения!')
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.addImageFailed,
+            'тест-кейс: ошибка добавления изображения!'
+          )
           .subscribe();
         this.failedImage$.next(this.selectedFile);
         this.loadingImage$.next(null);
@@ -169,6 +195,20 @@ export class DialogImageComponent implements OnInit {
   }
 
   private updateImage(imageData: IUpdateDpImageRequest, userProjId: number): void {
+    // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.updateImageFailed,
+          'тест-кейс: ошибка обновления изображения!'
+        )
+        .subscribe();
+      this.showError('Тест-кейс: ошибка обновления изображения!');
+      return;
+    }
+
+    // Обычная логика обновления изображения
     this.imagesRepositoryService.updateDpImage(this.data.dpImagesId, imageData).subscribe({
       next: () => {
         this.context.completeWith(this.data);

@@ -1,33 +1,52 @@
-<div>
-<div><h1>экран тест пользователя <tui-avatar src="@tui.user" (click)="navigateTo('/userProj')" /> <br> переключение темы приложения <app-theme-toggle></app-theme-toggle></h1>
- </div>
-  <button tuiButton type="button" (click)="openDialog('product')">Добавить продукт</button>
-  <button tuiButton type="button" (click)="openDialog('category')">Добавить категорию</button>
-  <button tuiButton type="button" (click)="openDialog('image')">Добавить изображение</button>
+<div class="user-page-content">
+  <div>
+    <h1>
+      Экран тест пользователя
+      <tui-avatar src="@tui.user" appearance="primary" size="s" (click)="navigateTo('/userProj')" class="user-avatar" />
+      <br />
+      Переключение темы приложения
+      <app-theme-toggle></app-theme-toggle>
+    </h1>
+  </div>
 
+  <div class="action-buttons">
+    <button tuiButton appearance="primary" type="button" (click)="openDialog('product')">
+      Добавить продукт
+    </button>
+    <button tuiButton appearance="primary" type="button" (click)="openDialog('category')">
+      Добавить категорию
+    </button>
+    <button tuiButton appearance="primary" type="button" (click)="openDialog('image')">
+      Добавить изображение
+    </button>
+  </div>
 
   <form [formGroup]="editProductForm" (ngSubmit)="editProductById(editProductForm.value.id ?? null)">
-    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id"
-      placeholder="Введите ID продукта для редактирования" type="number">
+    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id" placeholder="Введите ID продукта" type="number">
       ID Продукта
     </tui-input>
-    <button tuiButton type="submit" [disabled]="!editProductForm.valid">Редактировать продукт</button>
+    <button tuiButton appearance="primary" type="submit" [disabled]="!editProductForm.valid">
+      Редактировать продукт
+    </button>
   </form>
 
   <form [formGroup]="editCategoryForm" (ngSubmit)="editCategoryById(editCategoryForm.value.id ?? null)">
-    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id"
-      placeholder="Введите ID категории для редактирования" type="number">
+    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id" placeholder="Введите ID категории"
+      type="number">
       ID Категории
     </tui-input>
-    <button tuiButton type="submit" [disabled]="!editCategoryForm.valid">Редактировать категорию</button>
+    <button tuiButton appearance="primary" type="submit" [disabled]="!editCategoryForm.valid">
+      Редактировать категорию
+    </button>
   </form>
 
   <form [formGroup]="editImageForm" (ngSubmit)="editImageById(editImageForm.value.id ?? null)">
-    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id"
-      placeholder="Введите ID изображения для редактирования" type="number">
+    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id" placeholder="Введите ID изображения"
+      type="number">
       ID Изображения
     </tui-input>
-    <button tuiButton type="submit" [disabled]="!editImageForm.valid">Редактировать изображение</button>
+    <button tuiButton appearance="primary" type="submit" [disabled]="!editImageForm.valid">
+      Редактировать изображение
+    </button>
   </form>
-
 </div>

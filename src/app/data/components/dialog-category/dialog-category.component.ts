@@ -11,6 +11,7 @@ import { CategoriesRepositoryService } from '../../../repositories/categories-re
 import { CommonModule } from '@angular/common';
 import { ConfigService } from '../../../services/config.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-dialog-category',
@@ -38,6 +39,7 @@ export class DialogCategoryComponent implements OnInit {
   private readonly categoriesRepositoryService = inject(CategoriesRepositoryService);
   private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
   private readonly configService = inject(ConfigService);
+  private readonly userAchievementsService = inject(UserAchievementsService);
 
   public readonly context = injectContext<TuiDialogContext<IDpCategory, IDpCategory>>();
 
@@ -87,6 +89,18 @@ export class DialogCategoryComponent implements OnInit {
   }
 
   private createCategory(categoryData: IDpCategory, userProjId: number): void {
+    // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.addCategoryFailed,
+          'Тест-кейс: ошибка создания категории!'
+        )
+        .subscribe();
+      this.showError('Тест-кейс: ошибка создания категории!');
+      return;
+    }
     this.categoriesRepositoryService.createDpCategory(categoryData).subscribe({
       next: (createdCategory) => {
         this.context.completeWith(createdCategory);
@@ -114,6 +128,18 @@ export class DialogCategoryComponent implements OnInit {
   }
 
   private updateCategory(categoryData: IDpCategory, userProjId: number): void {
+    // Проверка: если включён режим "всегда ошибка" — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.addCategoryFailed,
+          'Тест-кейс: ошибка создания категории!'
+        )
+        .subscribe();
+      this.showError('Тест-кейс: ошибка создания категории!');
+      return;
+    }
     this.categoriesRepositoryService.updateDpCategory(categoryData.dpCategoryId, categoryData).subscribe({
       next: () => {
         this.context.completeWith(categoryData);
