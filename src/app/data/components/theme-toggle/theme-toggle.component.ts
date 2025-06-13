@@ -40,6 +40,7 @@ export class ThemeToggleComponent {
   toggleTheme(): void {
     this.toggle = !this.toggle;
     this.darkMode.set(this.toggle);
+    document.body.classList.add('dark-theme');
     document.body.classList.toggle('dark-theme', this.toggle);
     this.storage.setItem(this.key, this.toggle.toString());
 

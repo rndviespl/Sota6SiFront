@@ -1,7 +1,7 @@
 <div class="card-item">
     <app-carousel-img [images]="images"></app-carousel-img>
     <h3 class="card-title">{{ productInfo.dpTitle }}</h3>
-    <p class="card-price">{{ productInfo.dpPrice | currency }}</p>
+    <p class="card-price">{{ productInfo.dpPrice | currency:'RUB ' }}</p>
     <button type="button" class="btn btn-view-details" (click)="navigateToProduct(productInfo)">
         <tui-icon name="tuiIconChevronRightLarge"></tui-icon>
         Перейти к товару

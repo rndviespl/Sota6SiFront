@@ -62,3 +62,8 @@ button:active, .btn:active {
     color: var(--tui-base-01);
     border-color: var(--tui-primary);
 }
+
+[data-theme="dark"] .btn-primary,
+[data-theme="dark"] .btn-danger {
+    color: var(--tui-text-01); /* Светлый текст для читаемости */
+}

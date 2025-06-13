@@ -4,7 +4,6 @@
 h3 {
     margin: 1rem 0;
     font-size: 1.5rem;
-    color: var(--tui-primary);
     font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -17,7 +16,6 @@ h3 {
 /* Стили для текста */
 p {
     margin: 0.5rem 0;
-    color: var(--tui-text-01);
     font-size: 1rem;
     line-height: 1.5;
     max-height: calc(1.5rem * 2);
@@ -45,13 +43,12 @@ p::-webkit-scrollbar-thumb:hover {
     background: var(--tui-primary);
 }
 
-/* Темная тема */
-[data-theme="dark"] h3 {
-    color: var(--tui-base-01);
+h3, p {
 }
 
+[data-theme="dark"] h3,
 [data-theme="dark"] p {
-    color: var(--tui-base-01);
+  color: var(--tui-text-01);
 }
 
 [data-theme="dark"] p::-webkit-scrollbar-track {

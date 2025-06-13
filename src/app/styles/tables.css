@@ -8,7 +8,6 @@ table[tuiTable] {
   border-spacing: 0;
   margin: 1.5rem 0;
   font-size: 0.95rem;
-  color: var(--tui-text-01);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
   background-color: var(--tui-base-01);
   border-radius: 12px;
@@ -65,7 +64,6 @@ table[tuiTable] tbody tr:hover {
 table[tuiTable] td {
   padding: 1rem 1.25rem;
   vertical-align: middle;
-  color: var(--tui-text-01);
 }
 
 /* Стили для статусов */
@@ -91,7 +89,7 @@ table[tuiTable] td {
 /* Темная тема */
 [data-theme="dark"] table[tuiTable] th,
 [data-theme="dark"] table[tuiTable] td {
-  color: var(--tui-text-01);
+    color: var(--tui-text-01);
 }
 
 [data-theme="dark"] .completed {

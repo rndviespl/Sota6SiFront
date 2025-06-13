@@ -1,3 +1,5 @@
+@import '../../../styles/variables.css';
+
 .about-page {
   max-width: 90%; /* Относительная ширина для гибкости */
   width: min(50rem, 90vw); /* Ограничение ширины ≈ 800px при базовом 1rem = 16px */
@@ -26,7 +28,6 @@
   margin-bottom: 1rem; /* tui.spacing(4) ≈ 16px → 1rem */
   font-size: 1rem; /* tui.font-size('m') ≈ 16px → 1rem */
   line-height: 1.5;
-  color: var(--tui-text-01);
 }
 
 .accordion-header {
@@ -49,7 +50,6 @@
   gap: 0.25rem; /* tui.spacing(1) ≈ 4px → 0.25rem */
   margin-bottom: 0.5rem; /* tui.spacing(2) ≈ 8px → 0.5rem */
   font-size: 1rem; /* tui.font-size('m') ≈ 16px → 1rem */
-  color: var(--tui-text-01);
 }
 
 .feature-list li::before {
@@ -104,12 +104,14 @@
     }
 }
 
-body.dark-theme .about-page {
-  background: var(--tui-base-02-dark);
-  box-shadow: 0 0.25rem 1rem var(--tui-shadow-dark); /* 4px → 0.25rem, 16px → 1rem */
+/* Замените их на [data-theme="dark"] */
+[data-theme="dark"] .about-page {
+  background: var(--tui-base-02); /* Используйте правильную переменную для фона */
+  box-shadow: 0 0.25rem 1rem var(--tui-shadow);
 }
 
-body.dark-theme .about-section,
-body.dark-theme .feature-list li {
-  color: var(--tui-text-01-dark);
+[data-theme="dark"] .about-section,
+[data-theme="dark"] .feature-list li {
+  color: var(--text-color-dark); /* Светлый цвет текста */
 }
+
