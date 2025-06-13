@@ -17,7 +17,7 @@ import { ConfigService } from '../../../services/config.service';
   selector: 'app-page-item-from-catalog',
   imports: [CarouselImgComponent, CommonModule, TuiAppearance, TuiButton, FormsModule,],
   templateUrl: './page-item-from-catalog.component.html',
-  styleUrls: [ './page-item-from-catalog.component.css'],
+  styleUrls: ['./page-item-from-catalog.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PageItemFromCatalogComponent implements OnInit {
@@ -28,12 +28,12 @@ export class PageItemFromCatalogComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsRepositoryService: ProductsRepositoryService,
-   private sanitizer: DomSanitizer,
-   private cartService: ShopCartRepositoryService,
+    private sanitizer: DomSanitizer,
+    private cartService: ShopCartRepositoryService,
     private userAchievementsRepository: UserAchievementsRepositoryService,
     private configService: ConfigService,
     @Inject(TuiAlertService) private readonly alertService: TuiAlertService
-  ) {}
+  ) { }
   get images(): IDpImage[] {
     return this.productInfo?.dpImages || [];
   }
@@ -42,7 +42,7 @@ export class PageItemFromCatalogComponent implements OnInit {
     this.loadProductInfo();
   }
 
- private loadProductInfo(): void {
+  private loadProductInfo(): void {
     const dpProductId = this.route.snapshot.paramMap.get('dpProductId');
     if (dpProductId) {
       const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
@@ -80,10 +80,11 @@ export class PageItemFromCatalogComponent implements OnInit {
       };
       this.cartService.addToCart(request).subscribe({
         next: (response) => {
-          this.alertService.open(response.message || 'Товар добавлен в корзину!', { appearance: 'success' }).subscribe();
           this.userAchievementsRepository
             .handleAchievement(userProjId, this.configService.achievementIds.addToCartSuccess, 'тест-кейс: товар успешно добавлен в корзину!')
             .subscribe();
+          this.alertService.open(response.message || 'Товар добавлен в корзину!', { appearance: 'success' }).subscribe();
+
         },
         error: (error) => {
           this.alertService.open('Ошибка при добавлении товара в корзину', { appearance: 'error' }).subscribe();

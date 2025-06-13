@@ -130,36 +130,36 @@ export class UserAchievementsService {
   ): Observable<void> {
     if (userProjId <= 0 || achievementId <= 0) {
       console.warn('Некорректный userProjId или achievementId:', { userProjId, achievementId });
-      // this.alertService
-      //   .open('Некорректные данные для обработки тест-кейса!', { appearance: 'error' })
-      //   .subscribe();
+      this.alertService
+        .open('Некорректные данные для обработки тест-кейса!', { appearance: 'error' })
+        .subscribe();
       return of(void 0);
     }
 
     // Имитация сбоя с 50% вероятностью
     if (this.simulateServerFailure()) {
       const failedAchievementId = this.getFailedAchievementId(achievementId);
-      // this.alertService
-      //   .open('Не удалось обработать тест-кейс из-за сбоя сервера!', { appearance: 'error' })
-      //   .subscribe();
+      this.alertService
+        .open('Не удалось обработать тест-кейс из-за сбоя сервера!', { appearance: 'error' })
+        .subscribe();
       // Регистрируем отрицательный тест-кейс
       return this.createUserAchievement(userProjId, failedAchievementId).pipe(
         switchMap(result => {
           if (result === null) {
             // Тест-кейс уже существует
-            // this.alertService
-            //   .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
-            //   .subscribe();
+            this.alertService
+              .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
+              .subscribe();
             return of(void 0);
           }
           return this.unlockUserAchievement(userProjId, failedAchievementId);
         }),
         tap(() => {
-          // this.alertService
-          //   .open(`Тест-кейс ошибки: ${successMessage.replace('выполнен', 'ошибка')}`, {
-          //     appearance: 'error'
-          //   })
-          //   .subscribe();
+          this.alertService
+            .open(`Тест-кейс ошибки: ${successMessage.replace('выполнен', 'ошибка')}`, {
+              appearance: 'error'
+            })
+            .subscribe();
         }),
         catchError(error => {
           console.error(`Ошибка при регистрации отрицательного тест-кейса ${failedAchievementId}:`, error);
@@ -173,9 +173,9 @@ export class UserAchievementsService {
       switchMap(exists => {
         if (exists) {
           console.log(`Тест-кейс ${achievementId} уже выполнен для userProjId ${userProjId}`);
-          // this.alertService
-          //   .open('Тест-кейс уже выполнен!', { appearance: 'info' })
-          //   .subscribe();
+          this.alertService
+            .open('Тест-кейс уже выполнен!', { appearance: 'info' })
+            .subscribe();
           return of(void 0); // Ничего не делаем, если тест-кейс уже есть
         }
         return this.createUserAchievement(userProjId, achievementId).pipe(
