@@ -11,20 +11,25 @@ import { TuiAlertService } from '@taiga-ui/core';
 })
 export class UserAchievementsService {
   private readonly baseUrl = '/api/UserAchievements'; // Прокси для API
+private static readonly ALWAYS_FAIL_KEY = 'alwaysFailMode';
 
   constructor(
     private readonly http: HttpClient,
     private readonly configService: ConfigService,
     private readonly alertService: TuiAlertService
-  ) {}
+  ) { }
 
-  /**
-   * Имитация сбоя сервера с вероятностью 50%
-   * @returns true, если сбой произошел, false - в противном случае
-   */
-  private simulateServerFailure(): boolean {
-    return Math.random() < 0.5;
-  }
+setAlwaysFailMode(value: boolean) {
+  localStorage.setItem(UserAchievementsService.ALWAYS_FAIL_KEY, value ? '1' : '0');
+}
+
+getAlwaysFailMode(): boolean {
+  return localStorage.getItem(UserAchievementsService.ALWAYS_FAIL_KEY) === '1';
+}
+
+private simulateServerFailure(): boolean {
+   return this.getAlwaysFailMode();
+}
 
   /**
    * Получение всех достижений пользователя
@@ -35,7 +40,7 @@ export class UserAchievementsService {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
     return this.http.get<IUserHasAchievement[]>(this.baseUrl)
-   
+
   }
 
   /**
@@ -49,7 +54,7 @@ export class UserAchievementsService {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
     return this.http.get<IUserHasAchievement>(`${this.baseUrl}/${userProjId}/${achievementId}`)
-  
+
   }
 
   /**
@@ -78,7 +83,7 @@ export class UserAchievementsService {
     }
     return this.http
       .put<void>(`${this.baseUrl}/Unlock/${userProjId}/${achievementId}`, {})
-     
+
   }
 
   /**
@@ -94,12 +99,12 @@ export class UserAchievementsService {
       .get<IAchievement[]>(`${this.baseUrl}/Completed/${username}`)
   }
 
- /**
-   * Проверка существования тест-кейса у пользователя
-   * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор тест-кейса
-   * @returns Observable<boolean>
-   */
+  /**
+    * Проверка существования тест-кейса у пользователя
+    * @param userProjId Идентификатор пользователя
+    * @param achievementId Идентификатор тест-кейса
+    * @returns Observable<boolean>
+    */
   checkUserAchievementExists(userProjId: number, achievementId: number): Observable<boolean> {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
@@ -116,13 +121,13 @@ export class UserAchievementsService {
     );
   }
 
- /**
-   * Универсальный метод для обработки тест-кейса
-   * @param userProjId Идентификатор пользователя проекта
-   * @param achievementId Идентификатор тест-кейса
-   * @param successMessage Сообщение для успешного уведомления
-   * @returns Observable<void>
-   */
+  /**
+    * Универсальный метод для обработки тест-кейса
+    * @param userProjId Идентификатор пользователя проекта
+    * @param achievementId Идентификатор тест-кейса
+    * @param successMessage Сообщение для успешного уведомления
+    * @returns Observable<void>
+    */
   handleAchievement(
     userProjId: number,
     achievementId: number,

@@ -9,6 +9,7 @@ import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from '@
 import { AchievmentsPageForUserComponent } from '../achievments-page-for-user/achievments-page-for-user.component';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { ConfigService } from '../../../services/config.service';
+import { UserAchievementsService } from '../../../services/user-achievements.service';
 
 @Component({
   selector: 'app-user-page-proj',
@@ -36,17 +37,18 @@ export class UserPageProjComponent {
   private readonly authProjService = inject(AuthProjService);
   private readonly router = inject(Router);
   private readonly userAchievementsRepository = inject(UserAchievementsRepositoryService);
-
+  alwaysFailMode = false;
   isProjAuthenticated: boolean = false;
   private logoutAttempt = 0;
 
   constructor(
-    private readonly configService: ConfigService = inject(ConfigService)
+    private readonly configService: ConfigService = inject(ConfigService),
+    private userAchievementsService: UserAchievementsService = inject(UserAchievementsService)
   ) { }
 
   ngOnInit(): void {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
-
+    this.alwaysFailMode = this.userAchievementsService.getAlwaysFailMode();
     // Случайно определяем успех или ошибку (50/50)
     const isSuccess = Math.random() < 0.3;
 
@@ -74,6 +76,10 @@ export class UserPageProjComponent {
       // alert('Тест-кейс: ошибка обновления профиля!');
     }
     this.checkAuthStatus();
+  }
+
+  toggleAlwaysFail() {
+    this.userAchievementsService.setAlwaysFailMode(this.alwaysFailMode);
   }
 
   checkAuthStatus(): void {

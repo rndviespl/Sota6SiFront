@@ -1,3 +1,7 @@
  <button *ngIf="!isProjAuthenticated" (click)="navigateTo('/login-proj')" tuiButton>Авторизация пользователя с тестами</button>
   <button *ngIf="isProjAuthenticated" (click)="logoutProj()" tuiButton>Выйти из аккаунта пользователя с тестами</button>
+  <label>
+  <input type="checkbox" [(ngModel)]="alwaysFailMode" (change)="toggleAlwaysFail()" />
+  Всегда имитировать ошибку тест-кейсов
+</label>
 <app-achievments-page-for-user></app-achievments-page-for-user>
