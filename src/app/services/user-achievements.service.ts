@@ -271,8 +271,6 @@ private simulateServerFailure(): boolean {
         this.configService.achievementIds.updateCategoryFailed,
       [this.configService.achievementIds.updateImageSuccess]: this.configService.achievementIds.updateImageFailed,
       [this.configService.achievementIds.updateProductSuccess]: this.configService.achievementIds.updateProductFailed,
-      [this.configService.achievementIds.navigateToAboutPageSuccess]:
-        this.configService.achievementIds.navigateToAboutPageFailed
     };
 
     return successToFailedMap[successAchievementId] || this.configService.achievementIds.buttonNotWorking;
