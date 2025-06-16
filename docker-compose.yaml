@@ -1,17 +1,6 @@
+version: '3.8'
 services:
-  frontend:
-    container_name: sota6si_frontend
-    hostname: sota6si_frontend
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile
+  sota-front:
+    build: .
     ports:
-      - "4200:4200"
-    depends_on:
-      - api
-    networks:
-      - frontend
-
-networks:
-  frontend:
+      - "80:80"
