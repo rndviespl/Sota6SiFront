@@ -1,22 +1,4 @@
 services:
-  api:
-    container_name: sota6si_api
-    hostname: sota6si_api
-    restart: always
-    build:
-      context: ../Sota6Si
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Server=db;Database=Sota6SiDb;User=sa;Password=pwd123;
-    depends_on:
-      - db
-    networks:
-      - backend
-      - frontend
-
   frontend:
     container_name: sota6si_frontend
     hostname: sota6si_frontend
@@ -25,30 +7,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "4200:80"
+      - "4200:4200"
     depends_on:
       - api
     networks:
       - frontend
 
-  db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sota6si_mssql
-    environment:
-      SA_PASSWORD: "pwd123"
-      ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
-    volumes:
-      - mssql_data:/var/opt/mssql
-    networks:
-      - backend
-
-volumes:
-  mssql_data:
-
 networks:
-  backend:
-    driver: bridge
   frontend:
-    driver: bridge
