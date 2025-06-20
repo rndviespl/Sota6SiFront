@@ -79,11 +79,10 @@
               "buildTarget": "Sota6SiFront:build:development"
             }
           },
-          
           "defaultConfiguration": "development",
           "options": {
-           "proxyConfig": "src/proxy.conf.json"
-         }
+            "proxyConfig": "src/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

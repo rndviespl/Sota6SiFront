@@ -1,16 +1,17 @@
 <div class="page-cart-item">
-    <div class="container">
-        <div *ngIf="isLoading" class="loading-animation">
-            <img src="public/loading.gif" alt="Загрузка..." width="120" height="120" />
-            <div>Загрузка каталога...</div>
-        </div>
-        <div *ngIf="!isLoading && products.length === 0">
-            <h1>Товары не найдены.</h1>
-        </div>
-        <div *ngIf="!isLoading" class="grid">
-            <div *ngFor="let product of products" class="card">
-                <app-card-item [productInfo]="product"></app-card-item>
-            </div>
-        </div>
+  <div class="container">
+    <div *ngIf="isLoading" class="loading-animation">
+      <img src="public/loading.gif" alt="Загрузка..." width="120" height="120" />
+      <img src="public/polish-cow.gif" alt="Загрузка..." width="120" height="120" />
+      <div>Загрузка каталога...</div>
     </div>
+    <div *ngIf="!isLoading && (products$ | async)?.length === 0">
+      <h1>Товары не найдены.</h1>
+    </div>
+    <div *ngIf="!isLoading" class="grid">
+      <div *ngFor="let product of products$ | async; trackBy: trackByProductId" class="card">
+        <app-card-item [productInfo]="product"></app-card-item>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,30 +13,29 @@ export class ProductsRepositoryService {
     private imagesRepository: ImagesRepositoryService
   ) {}
 
- getAllProducts(): Observable<IDpProduct[]> {
-  return this.productsService.getAllProducts().pipe(
-    switchMap((products: IDpProduct[]) =>
-      this.imagesRepository.getAllDpImages().pipe(
-        map(images => {
-          // Для каждого товара подставляем только его изображения
-          return products.map(product => ({
-            ...product,
-            dpImages: images.filter(image => image.dpProductId === product.dpProductId)
-          }));
-        })
-      )
-    )
-  );
-}
-  
-  getProductById(id: number): Observable<IDpProduct> {
+getAllProducts(): Observable<IDpProduct[]> {
+    return forkJoin({
+      products: this.productsService.getAllProducts(),
+      images: this.imagesRepository.getAllDpImagesWithData() // Новый метод
+    }).pipe(
+      map(({ products, images }) => {
+        return products.map(product => ({
+          ...product,
+          dpImages: images.filter(image => image.dpProductId === product.dpProductId)
+        }));
+      })
+    );
+  }
+
+  // Остальные методы без изменений
+getProductById(id: number): Observable<IDpProduct> {
     return this.productsService.getProductById(id).pipe(
       switchMap((product: IDpProduct) =>
-        this.imagesRepository.getAllDpImages().pipe(
-          map(images => {
-            product.dpImages = images.filter(image => image.dpProductId === product.dpProductId);
-            return product;
-          })
+        this.imagesRepository.getDpImagesByProductId(product.dpProductId).pipe(
+          map(images => ({
+            ...product,
+            dpImages: images
+          }))
         )
       )
     );

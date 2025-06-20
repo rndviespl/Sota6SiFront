@@ -13,9 +13,15 @@ export class DpImagesService {
 
   constructor(private http: HttpClient) {}
 
-  getAllDpImages(): Observable<IDpImage[]> {
+ getAllDpImages(): Observable<IDpImage[]> {
+    console.log('[DpImagesService] HTTP GET всех изображений');
     return this.http.get<IDpImage[]>(this.baseUrl);
-  }
+}
+
+getDpImagesByProductId(productId: number): Observable<IDpImage[]> {
+    console.log(`[DpImagesService] HTTP GET изображений для товара ${productId}`);
+    return this.http.get<IDpImage[]>(`${this.baseUrl}/ByProduct/${productId}`);
+}
 
   getDpImageById(id: number): Observable<IDpImage> {
     return this.http.get<IDpImage>(`${this.baseUrl}/${id}`);
