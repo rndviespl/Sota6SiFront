@@ -13,21 +13,21 @@ export class ProductsRepositoryService {
     private imagesRepository: ImagesRepositoryService
   ) {}
 
-  getAllProducts(): Observable<IDpProduct[]> {
-    return this.productsService.getAllProducts().pipe(
-      switchMap((products: IDpProduct[]) => {
-        const imageObservables = products.map(product =>
-          this.imagesRepository.getAllDpImages().pipe(
-            map(images => {
-              product.dpImages = images.filter(image => image.dpProductId === product.dpProductId);
-              return product;
-            })
-          )
-        );
-        return forkJoin(imageObservables);
-      })
-    );
-  }
+ getAllProducts(): Observable<IDpProduct[]> {
+  return this.productsService.getAllProducts().pipe(
+    switchMap((products: IDpProduct[]) =>
+      this.imagesRepository.getAllDpImages().pipe(
+        map(images => {
+          // Для каждого товара подставляем только его изображения
+          return products.map(product => ({
+            ...product,
+            dpImages: images.filter(image => image.dpProductId === product.dpProductId)
+          }));
+        })
+      )
+    )
+  );
+}
   
   getProductById(id: number): Observable<IDpProduct> {
     return this.productsService.getProductById(id).pipe(
