@@ -18,6 +18,7 @@ import { UserAchievementsService } from '../../../services/user-achievements.ser
 })
 export class PageCatalogItemComponent implements OnInit {
   products: IDpProduct[] = [];
+  isLoading = false;
 
   constructor(
     private productsRepository: ProductsRepositoryService,
@@ -33,6 +34,7 @@ export class PageCatalogItemComponent implements OnInit {
 
   loadProductsOrFail() {
     const userProjId = parseInt(localStorage.getItem('userProjId') || '0', 10);
+    this.isLoading = true;
 
     if (this.userAchievementsService.getAlwaysFailMode()) {
       // Галочка включена — 50% шанс на ошибку
@@ -42,6 +44,7 @@ export class PageCatalogItemComponent implements OnInit {
           this.configService.achievementIds.loadProductsFailed,
           'тест-кейс: ошибка загрузки каталога продуктов! (режим всегда ошибка, рандом)'
         ).subscribe();
+        this.isLoading = false;
         return;
       }
       // 50% шанс — обычная загрузка
@@ -55,6 +58,7 @@ export class PageCatalogItemComponent implements OnInit {
     this.productsRepository.getAllProducts().subscribe({
       next: (productList: IDpProduct[]) => {
         this.products = productList;
+        this.isLoading = false;
         this.userAchievementsRepository
           .handleAchievement(userProjId, this.configService.achievementIds.loadProductsSuccess, 'тест-кейс: каталог продуктов успешно загружен!')
           .subscribe();
@@ -62,6 +66,7 @@ export class PageCatalogItemComponent implements OnInit {
       },
       error: (error) => {
         console.error('Ошибка при загрузке товаров:', error);
+        this.isLoading = false;
         this.userAchievementsRepository
           .handleAchievement(userProjId, this.configService.achievementIds.loadProductsFailed, 'тест-кейс: ошибка загрузки каталога продуктов!')
           .subscribe();

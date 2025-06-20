@@ -1,9 +1,13 @@
 <div class="page-cart-item">
     <div class="container">
-        <div *ngIf="products.length === 0">
+        <div *ngIf="isLoading" class="loading-animation">
+            <img src="public/loading.gif" alt="Загрузка..." width="120" height="120" />
+            <div>Загрузка каталога...</div>
+        </div>
+        <div *ngIf="!isLoading && products.length === 0">
             <h1>Товары не найдены.</h1>
         </div>
-        <div class="grid">
+        <div *ngIf="!isLoading" class="grid">
             <div *ngFor="let product of products" class="card">
                 <app-card-item [productInfo]="product"></app-card-item>
             </div>

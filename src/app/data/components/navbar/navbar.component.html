@@ -1,10 +1,14 @@
 <div class="header">
- <div>
+  <div>
     <div class="nav-link" (click)="navigateTo('/about')">О приложении</div>
     <div class="nav-link" (click)="navigateTo('/')">Каталог</div>
     <div class="nav-link" (click)="navigateTo('/cart')">Перейти в корзину</div>
   </div>
   <div>
+<label class="always-fail-label" style="margin: 0 12px; font-size: 0.95em;">
+  <input type="checkbox" [(ngModel)]="alwaysFailMode" (change)="toggleAlwaysFail()" />
+  Всегда имитировать ошибку тест-кейсов
+</label>
     <app-back-button></app-back-button>
     <button size="m" type="button" *ngIf="!isAuthenticated" (click)="navigateTo('/login')" tuiButton>Войти</button>
     <button size="m" type="button" *ngIf="isAuthenticated" (click)="logout()" tuiButton>Выйти</button>

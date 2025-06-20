@@ -8,3 +8,10 @@
     color: #fff;
     fill: #fff;
 }
+label.always-fail-label {
+    color: #fff;
+}
+
+[data-theme="dark"] label.always-fail-label {
+    color: #fff;
+}
