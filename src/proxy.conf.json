@@ -1,6 +1,6 @@
 {
      "/api": {
-        "target": "http://localhost:5243",
+        "target": "http://viespl.ru:8080",
         "secure": false
     }
     
