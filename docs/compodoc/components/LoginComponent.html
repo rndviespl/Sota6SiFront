@@ -1,0 +1,795 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>sota6-si-front documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">sota6-si-front documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LoginComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/data/components/login/login.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-login</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>TuiAppearance</code>
+                            <code>TuiButton</code>
+                                <code><a href="../miscellaneous/variables.html#Large" target="_self" >TuiCardLarge</a></code>
+                            <code>TuiError</code>
+                            <code>TuiFieldErrorPipe</code>
+                            <code>TuiForm</code>
+                            <code>TuiHeader</code>
+                            <code>TuiNotification</code>
+                            <code>TuiTextfield</code>
+                            <code>TuiTitle</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./login.component.css,<br>../../../styles/root.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./login.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#form" >form</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#navigateToRegister" >navigateToRegister</a>
+                            </li>
+                            <li>
+                                <a href="#onLogin" >onLogin</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authRepository: <a href="../injectables/AuthRepositoryService.html" target="_self">AuthRepositoryService</a>, userAchievementsRepository: <a href="../injectables/UserAchievementsRepositoryService.html" target="_self">UserAchievementsRepositoryService</a>, userAchievementsService: <a href="../injectables/UserAchievementsService.html" target="_self">UserAchievementsService</a>, router: Router, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, alertService: TuiAlertService, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/data/components/login/login.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthRepositoryService.html" target="_self" >AuthRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userAchievementsRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserAchievementsRepositoryService.html" target="_self" >UserAchievementsRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userAchievementsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserAchievementsService.html" target="_self" >UserAchievementsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertService</td>
+                                                  
+                                                        <td>
+                                                                    <code>TuiAlertService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToRegister"></a>
+                    <span class="name">
+                        <span ><b>navigateToRegister</b></span>
+                        <a href="#navigateToRegister"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToRegister()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/data/components/login/login.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onLogin"></a>
+                    <span class="name">
+                        <span ><b>onLogin</b></span>
+                        <a href="#onLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onLogin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/data/components/login/login.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    username: new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(3)]),
+    password: new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(6)]),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/data/components/login/login.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Inject } from &#x27;@angular/core&#x27;;
+import { AuthRepositoryService } from &#x27;../../../repositories/auth-repository.service&#x27;;
+import { IDpUser } from &#x27;../../../interface/IDpUser&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { TuiAppearance, TuiButton, TuiError, TuiNotification, TuiTextfield, TuiTitle } from &#x27;@taiga-ui/core&#x27;;
+import { TuiFieldErrorPipe } from &#x27;@taiga-ui/kit&#x27;;
+import { TuiCardLarge, TuiForm, TuiHeader } from &#x27;@taiga-ui/layout&#x27;;
+import { AuthService } from &#x27;../../../services/auth.service&#x27;;
+import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
+import { ConfigService } from &#x27;../../../services/config.service&#x27;;
+import { UserAchievementsRepositoryService } from &#x27;../../../repositories/user-achievements-repository.service&#x27;;
+import { UserAchievementsService } from &#x27;../../../services/user-achievements.service&#x27;;
+
+@Component({
+  selector: &#x27;app-login&#x27;,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TuiAppearance,
+    TuiButton,
+    TuiCardLarge,
+    TuiError,
+    TuiFieldErrorPipe,
+    TuiForm,
+    TuiHeader,
+    TuiNotification,
+    TuiTextfield,
+    TuiTitle,
+  ],
+  templateUrl: &#x27;./login.component.html&#x27;,
+  styleUrls: [&#x27;./login.component.css&#x27;, &#x27;../../../styles/root.css&#x27;],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class LoginComponent {
+  protected readonly form &#x3D; new FormGroup({
+    username: new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(3)]),
+    password: new FormControl(&#x27;&#x27;, [Validators.required, Validators.minLength(6)]),
+  });
+
+  constructor(
+    private authRepository: AuthRepositoryService,
+    private userAchievementsRepository: UserAchievementsRepositoryService,
+    private userAchievementsService: UserAchievementsService &#x3D; inject(UserAchievementsService),
+    private router: Router,
+    private authService: AuthService,
+    @Inject(TuiAlertService) private readonly alertService: TuiAlertService,
+    private configService: ConfigService
+  ) { }
+
+  onLogin() {
+    if (this.form.valid) {
+      const user: IDpUser &#x3D; {
+        dpUserId: 0,
+        dpUsername: this.form.value.username || &#x27;&#x27;,
+        dpPassword: this.form.value.password || &#x27;&#x27;,
+        dpRegistrationDate: new Date(),
+        dpPhoneNumber: &#x27;0000000000&#x27;
+      };
+      // Проверка: если включён режим &quot;всегда ошибка&quot; — только негативный тест-кейс
+      if (this.userAchievementsService.getAlwaysFailMode()) {
+        const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.loginFailed, &#x27;тест-кейс неудачного входа разблокировано!&#x27;)
+          .subscribe();
+        this.alertService.open(&#x27;Тест-кейс: ошибка входа (режим всегда ошибка включён)&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+        return;
+      }
+      
+      this.authRepository.login(user).subscribe({
+        next: (response) &#x3D;&gt; {
+          if (response &amp;&amp; response.token) {
+            this.alertService.open(&#x27;Успешный вход!&#x27;, { appearance: &#x27;success&#x27; }).subscribe();
+            localStorage.setItem(&#x27;token&#x27;, response.token);
+
+            const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+            this.userAchievementsRepository
+              .handleAchievement(userProjId, this.configService.achievementIds.loginSuccess, &#x27;тест-кейс входа разблокировано!&#x27;)
+              .subscribe({
+                complete: () &#x3D;&gt; this.router.navigate([&#x27;/&#x27;])
+              });
+          }
+        },
+        error: (error) &#x3D;&gt; {
+          const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, this.configService.achievementIds.loginFailed, &#x27;тест-кейс неудачного входа разблокировано!&#x27;)
+            .subscribe();
+
+          let errorMessage &#x3D; &#x27;Ошибка входа: неверное имя пользователя или пароль&#x27;;
+          if (error.status &#x3D;&#x3D;&#x3D; this.configService.httpStatusCodes.unauthorized) {
+            errorMessage &#x3D; &#x27;Ошибка: неверные учетные данные&#x27;;
+          } else if (error.status &#x3D;&#x3D;&#x3D; this.configService.httpStatusCodes.serverError) {
+            errorMessage &#x3D; &#x27;Ошибка сервера, попробуйте позже&#x27;;
+          }
+
+          this.alertService.open(errorMessage, { appearance: &#x27;error&#x27; }).subscribe();
+        }
+      });
+    }
+  }
+
+  navigateToRegister() {
+    this.router.navigate([&#x27;/register&#x27;]);
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;form-container&quot;&gt;
+    &lt;form tuiAppearance&#x3D;&quot;floating&quot; tuiCardLarge tuiForm&#x3D;&quot;m&quot; [formGroup]&#x3D;&quot;form&quot; [style.max-width.rem]&#x3D;&quot;32&quot;
+        (ngSubmit)&#x3D;&quot;onLogin()&quot;&gt;
+        &lt;header tuiHeader&gt;
+            &lt;h2 tuiTitle&gt;Форма авторизации&lt;/h2&gt;
+        &lt;/header&gt;
+
+        &lt;tui-textfield&gt;
+            &lt;label tuiLabel&gt;Логин пользователя&lt;/label&gt;
+            &lt;input formControlName&#x3D;&quot;username&quot; placeholder&#x3D;&quot;Логин пользователя&quot; tuiTextfield required /&gt;
+        &lt;/tui-textfield&gt;
+        &lt;tui-error formControlName&#x3D;&quot;username&quot; [error]&#x3D;&quot;[] | tuiFieldError | async&quot; /&gt;
+        &lt;tui-textfield&gt;
+            &lt;label tuiLabel&gt;Пароль&lt;/label&gt;
+            &lt;input formControlName&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Пароль&quot; tuiTextfield type&#x3D;&quot;password&quot; required /&gt;
+        &lt;/tui-textfield&gt;
+        &lt;tui-error formControlName&#x3D;&quot;password&quot; [error]&#x3D;&quot;[] | tuiFieldError | async&quot; /&gt;
+        &lt;footer&gt;
+            &lt;button appearance&#x3D;&quot;secondary&quot; tuiButton type&#x3D;&quot;button&quot; (click)&#x3D;&quot;navigateToRegister()&quot;&gt;
+                Регистрация
+            &lt;/button&gt;
+            &lt;button tuiButton type&#x3D;&quot;submit&quot;&gt;Войти&lt;/button&gt;
+        &lt;/footer&gt;
+    &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./login.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--tui-base-01);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+form[tuiCardLarge] {
+  width: 100%;
+  max-width: 32rem;
+  box-shadow: 0 0.25rem 1rem var(--tui-shadow);
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 47.9375rem) {
+  .form-container {
+    padding: 0.5rem;
+  }
+
+  form[tuiCardLarge] {
+    max-width: 90%;
+  }
+}
+
+body.dark-theme .form-container {
+  background: var(--tui-base-02-dark);
+}
+
+body.dark-theme form[tuiCardLarge] {
+  box-shadow: 0 0.25rem 1rem var(--tui-shadow-dark);
+}</code></pre>
+                <p class="comment">
+                    <code>../../../styles/root.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;variables.css&#x27;;
+@import &#x27;buttons.css&#x27;;
+@import &#x27;cards.css&#x27;;
+@import &#x27;navigation.css&#x27;;
+@import &#x27;header.css&#x27;;
+@import &#x27;carousel.css&#x27;;
+@import &#x27;icons.css&#x27;;
+@import &#x27;layout.css&#x27;;
+@import &#x27;tables.css&#x27;;
+@import &#x27;typography.css&#x27;;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="form-container">    <form tuiAppearance="floating" tuiCardLarge tuiForm="m" [formGroup]="form" [style.max-width.rem]="32"        (ngSubmit)="onLogin()">        <header tuiHeader>            <h2 tuiTitle>Форма авторизации</h2>        </header>        <tui-textfield>            <label tuiLabel>Логин пользователя</label>            <input formControlName="username" placeholder="Логин пользователя" tuiTextfield required />        </tui-textfield>        <tui-error formControlName="username" [error]="[] | tuiFieldError | async" />        <tui-textfield>            <label tuiLabel>Пароль</label>            <input formControlName="password" placeholder="Пароль" tuiTextfield type="password" required />        </tui-textfield>        <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />        <footer>            <button appearance="secondary" tuiButton type="button" (click)="navigateToRegister()">                Регистрация            </button>            <button tuiButton type="submit">Войти</button>        </footer>    </form></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'ButtonComponent', 'selector': 'storybook-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'storybook-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageComponent', 'selector': 'storybook-page'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoginComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

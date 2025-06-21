@@ -1,0 +1,1904 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>sota6-si-front documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">sota6-si-front documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PageCartComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/data/page/page-cart/page-cart.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-page-cart</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>AsyncPipe</code>
+                            <code>CurrencyPipe</code>
+                            <code>FormsModule</code>
+                            <code>NgForOf</code>
+                            <code>NgIf</code>
+                            <code>TuiButton</code>
+                            <code>TuiTable</code>
+                            <code>CommonModule</code>
+                            <code>TuiScrollbar</code>
+                            <code>TuiIcon</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./page-cart.component.css,<br>../../../styles/root.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./page-cart.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#cartItems" >cartItems</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#columns" >columns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#options" >options</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#totalSorter" >totalSorter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userAchievementsService" >userAchievementsService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checkout" >checkout</a>
+                            </li>
+                            <li>
+                                <a href="#decreaseQuantity" >decreaseQuantity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getTotal" >getTotal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getTotalAmount" >getTotalAmount</a>
+                            </li>
+                            <li>
+                                <a href="#increaseQuantity" >increaseQuantity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadCartItems" >loadCartItems</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#onSortChange" >onSortChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#onValueChange" >onValueChange</a>
+                            </li>
+                            <li>
+                                <a href="#removeFromCart" >removeFromCart</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#trackByIndex" >trackByIndex</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateCartItemQuantity" >updateCartItemQuantity</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cartService: <a href="../injectables/ShopCartRepositoryService.html" target="_self">ShopCartRepositoryService</a>, cdr: ChangeDetectorRef, router: Router, userAchievementsRepository: <a href="../injectables/UserAchievementsRepositoryService.html" target="_self">UserAchievementsRepositoryService</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, alertService: TuiAlertService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cartService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ShopCartRepositoryService.html" target="_self" >ShopCartRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cdr</td>
+                                                  
+                                                        <td>
+                                                                    <code>ChangeDetectorRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userAchievementsRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserAchievementsRepositoryService.html" target="_self" >UserAchievementsRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertService</td>
+                                                  
+                                                        <td>
+                                                                    <code>TuiAlertService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkout"></a>
+                    <span class="name">
+                        <span ><b>checkout</b></span>
+                        <a href="#checkout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="decreaseQuantity"></a>
+                    <span class="name">
+                        <span ><b>decreaseQuantity</b></span>
+                        <a href="#decreaseQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>decreaseQuantity(item: <a href="../interfaces/CartItem.html" target="_self">CartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/CartItem.html" target="_self" >CartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotal"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>getTotal</b></span>
+                        <a href="#getTotal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTotal(undefined: <a href="../interfaces/CartItem.html" target="_self">CartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                            <code><a href="../interfaces/CartItem.html" target="_self" >CartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalAmount"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>getTotalAmount</b></span>
+                        <a href="#getTotalAmount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTotalAmount()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="increaseQuantity"></a>
+                    <span class="name">
+                        <span ><b>increaseQuantity</b></span>
+                        <a href="#increaseQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>increaseQuantity(item: <a href="../interfaces/CartItem.html" target="_self">CartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/CartItem.html" target="_self" >CartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadCartItems"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadCartItems</b></span>
+                        <a href="#loadCartItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadCartItems()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSortChange"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>onSortChange</b></span>
+                        <a href="#onSortChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSortChange(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="260"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:260</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onValueChange"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>onValueChange</b></span>
+                        <a href="#onValueChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onValueChange(value: <a href="../interfaces/CartItem.html" target="_self">CartItem</a>, key: K, current: <a href="../interfaces/CartItem.html" target="_self">CartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="250"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:250</a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>K</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/CartItem.html" target="_self" >CartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                        <code>K</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>current</td>
+                                            <td>
+                                                            <code><a href="../interfaces/CartItem.html" target="_self" >CartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeFromCart"></a>
+                    <span class="name">
+                        <span ><b>removeFromCart</b></span>
+                        <a href="#removeFromCart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeFromCart(item: <a href="../interfaces/CartItem.html" target="_self">CartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/CartItem.html" target="_self" >CartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trackByIndex"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>trackByIndex</b></span>
+                        <a href="#trackByIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>trackByIndex(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCartItemQuantity"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateCartItemQuantity</b></span>
+                        <a href="#updateCartItemQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateCartItemQuantity(item: <a href="../interfaces/CartItem.html" target="_self">CartItem</a>, newQuantity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/CartItem.html" target="_self" >CartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>newQuantity</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cartItems"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>cartItems</b></span>
+                        <a href="#cartItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CartItem.html" target="_self" >CartItem[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="columns"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>columns</b></span>
+                        <a href="#columns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;productTitle&#x27;, &#x27;price&#x27;, &#x27;quantity&#x27;, &#x27;totalPrice&#x27;, &#x27;actions&#x27;] as const</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="options"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>options</b></span>
+                        <a href="#options"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{ updateOn: &#x27;blur&#x27; } as const</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Router</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalSorter"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalSorter</b></span>
+                        <a href="#totalSorter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CartItem.html" target="_self" >TuiComparator&lt;CartItem&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userAchievementsService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userAchievementsService</b></span>
+                        <a href="#userAchievementsService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserAchievementsService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/page/page-cart/page-cart.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe, CommonModule, CurrencyPipe, NgForOf, NgIf } from &#x27;@angular/common&#x27;;
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject, Inject, OnInit } from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { TuiButton, TuiAppearance, TuiAlertService, TuiScrollbar, TuiIcon } from &#x27;@taiga-ui/core&#x27;;
+import { TuiTable, TuiComparator } from &#x27;@taiga-ui/addon-table&#x27;;
+import { TuiDay, tuiDefaultSort } from &#x27;@taiga-ui/cdk&#x27;;
+import { ICartItem } from &#x27;../../../interface/ICartItem&#x27;;
+import { ICartViewModel } from &#x27;../../../interface/ICartViewModel&#x27;;
+import { ChangeDetectorRef } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { IUpdateCartRequest } from &#x27;../../../interface/IUpdateCartRequest&#x27;;
+import { ShopCartRepositoryService } from &#x27;../../../repositories/shop-cart-repository.service&#x27;;
+import { UserAchievementsRepositoryService } from &#x27;../../../repositories/user-achievements-repository.service&#x27;;
+import { ConfigService } from &#x27;../../../services/config.service&#x27;;
+import { UserAchievementsService } from &#x27;../../../services/user-achievements.service&#x27;;
+
+interface CartItem extends ICartItem {
+  readonly date: TuiDay;
+}
+
+@Component({
+  selector: &#x27;app-page-cart&#x27;,
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    CurrencyPipe,
+    FormsModule,
+    NgForOf,
+    NgIf,
+    TuiButton,
+    TuiTable,
+    CommonModule,
+    TuiScrollbar,
+    TuiIcon
+  ],
+  templateUrl: &#x27;./page-cart.component.html&#x27;,
+  styleUrls: [&#x27;./page-cart.component.css&#x27;, &#x27;../../../styles/root.css&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class PageCartComponent implements OnInit {
+  protected readonly options &#x3D; { updateOn: &#x27;blur&#x27; } as const;
+  protected cartItems: CartItem[] &#x3D; [];
+  protected readonly columns &#x3D; [&#x27;productTitle&#x27;, &#x27;price&#x27;, &#x27;quantity&#x27;, &#x27;totalPrice&#x27;, &#x27;actions&#x27;] as const;
+  protected isLoading &#x3D; false;
+  private readonly userAchievementsService &#x3D; inject(UserAchievementsService);
+  protected readonly totalSorter: TuiComparator&lt;CartItem&gt; &#x3D; (a, b) &#x3D;&gt;
+    tuiDefaultSort(a.price * a.quantity, b.price * b.quantity);
+
+  constructor(
+    private cartService: ShopCartRepositoryService,
+    private cdr: ChangeDetectorRef,
+    public router: Router,
+    private userAchievementsRepository: UserAchievementsRepositoryService,
+    private configService: ConfigService,
+    @Inject(TuiAlertService) private readonly alertService: TuiAlertService
+  ) { }
+
+  ngOnInit(): void {
+    this.loadCartItems();
+  }
+
+  private loadCartItems(): void {
+    this.cartService.getCart().subscribe({
+      next: (cartViewModel: ICartViewModel) &#x3D;&gt; {
+        console.log(cartViewModel);
+        this.cartItems &#x3D; cartViewModel.cartItems.map(item &#x3D;&gt; ({
+          ...item,
+          date: TuiDay.currentLocal(),
+        }));
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Ошибка при загрузке корзины:&#x27;, error);
+        this.alertService.open(&#x27;Не удалось загрузить корзину. Попробуйте ещё раз!&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
+  protected trackByIndex(index: number): number {
+    return index;
+  }
+
+  protected getTotal({ price, quantity }: CartItem): number {
+    return price * quantity;
+  }
+
+  protected getTotalAmount(): number {
+    return this.cartItems.reduce((sum, item) &#x3D;&gt; sum + this.getTotal(item), 0);
+  }
+
+  increaseQuantity(item: CartItem): void {
+    const newQuantity &#x3D; item.quantity + 1;
+    this.updateCartItemQuantity(item, newQuantity);
+  }
+
+  decreaseQuantity(item: CartItem): void {
+    if (item.quantity &gt; 1) {
+      const newQuantity &#x3D; item.quantity - 1;
+      this.updateCartItemQuantity(item, newQuantity);
+    }
+  }
+
+  removeFromCart(item: CartItem): void {
+    const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+    // Если включён режим &quot;всегда ошибка&quot; — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(userProjId, this.configService.achievementIds.removeFromCartFailed, &#x27;Тест-кейс: ошибка удаления товара из корзины!&#x27;)
+        .subscribe();
+      this.alertService.open(&#x27;Тест-кейс: не удалось удалить товар (режим всегда ошибка включён)&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+      return;
+    }
+    this.isLoading &#x3D; true;
+    this.cartService.removeFromCart({ productId: item.productId, sizeId: item.sizeId }).subscribe({
+      next: () &#x3D;&gt; {
+        this.cartItems &#x3D; this.cartItems.filter(cartItem &#x3D;&gt;
+          !(cartItem.productId &#x3D;&#x3D;&#x3D; item.productId &amp;&amp; cartItem.sizeId &#x3D;&#x3D;&#x3D; item.sizeId)
+        );
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.removeFromCartSuccess, &#x27;Товар успешно удалён из корзины!&#x27;)
+          .subscribe();
+        this.alertService.open(&#x27;Товар удалён из корзины&#x27;, { appearance: &#x27;success&#x27; }).subscribe();
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Ошибка при удалении товара из корзины:&#x27;, error);
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.removeFromCartFailed, &#x27;Ошибка удаления товара из корзины!&#x27;)
+          .subscribe();
+        this.alertService.open(&#x27;Не удалось удалить товар. Попробуйте ещё раз!&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+      }
+    });
+  }
+
+  checkout(): void {
+    const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+
+    if (this.cartItems.length &#x3D;&#x3D;&#x3D; 0) {
+      this.userAchievementsRepository
+        .handleAchievement(userProjId, this.configService.achievementIds.checkoutEmptyCart, &#x27;Тест-кейс: Попытка оформления пустой корзины!&#x27;)
+        .subscribe();
+      this.alertService.open(&#x27;Корзина пуста, добавьте товары перед оформлением&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+      return;
+    }
+
+    // Если включён режим &quot;всегда ошибка&quot; — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(userProjId, this.configService.achievementIds.checkoutFailed, &#x27;Тест-кейс: ошибка оформления заказа!&#x27;)
+        .subscribe();
+      this.alertService.open(&#x27;Тест-кейс: не удалось оформить заказ (режим всегда ошибка включён)&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+      return;
+    }
+    this.isLoading &#x3D; true;
+    this.cartService.checkout().subscribe({
+      next: (response) &#x3D;&gt; {
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.checkoutSuccess, &#x27;Заказ успешно оформлен!&#x27;)
+          .subscribe();
+        this.alertService.open(&#x27;Заказ успешно оформлен!&#x27;, { appearance: &#x27;success&#x27; }).subscribe();
+        this.cartService.clearCart();
+        this.cartItems &#x3D; [];
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+        this.router.navigate([&#x27;/order-confirmation&#x27;], { state: { orderId: response.orderId } });
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Ошибка при оформлении заказа:&#x27;, error);
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.checkoutFailed, &#x27;Ошибка оформления заказа!&#x27;)
+          .subscribe();
+        this.alertService.open(&#x27;Не удалось оформить заказ. Попробуйте ещё раз!&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+      }
+    });
+  }
+
+  private updateCartItemQuantity(item: CartItem, newQuantity: number): void {
+    const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+    
+    // Если включён режим &quot;всегда ошибка&quot; — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantityFailed, &#x27;Тест-кейс: ошибка обновления количества товара!&#x27;)
+        .subscribe();
+      this.alertService.open(&#x27;Тест-кейс: не удалось обновить количество (режим всегда ошибка включён)&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+      return;
+    }
+    
+    const request: IUpdateCartRequest &#x3D; {
+      productId: item.productId,
+      quantity: newQuantity,
+      sizeId: item.sizeId
+    };
+
+    this.cartItems &#x3D; this.cartItems.map(cartItem &#x3D;&gt;
+      cartItem.productId &#x3D;&#x3D;&#x3D; item.productId &amp;&amp; cartItem.sizeId &#x3D;&#x3D;&#x3D; item.sizeId
+        ? { ...cartItem, quantity: newQuantity }
+        : cartItem
+    );
+    this.cdr.markForCheck();
+
+    this.cartService.updateCart(request).subscribe({
+      next: (response) &#x3D;&gt; {
+        if (response.success) {
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantitySuccess, &#x27;Количество товара успешно обновлено!&#x27;)
+            .subscribe();
+          this.alertService.open(&#x27;Количество товара успешно обновлено&#x27;, { appearance: &#x27;success&#x27; }).subscribe();
+        } else {
+          this.cartItems &#x3D; this.cartItems.map(cartItem &#x3D;&gt;
+            cartItem.productId &#x3D;&#x3D;&#x3D; item.productId &amp;&amp; cartItem.sizeId &#x3D;&#x3D;&#x3D; item.sizeId
+              ? { ...cartItem, quantity: item.quantity }
+              : cartItem
+          );
+          this.cdr.markForCheck();
+          this.userAchievementsRepository
+            .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantityFailed, &#x27;Ошибка обновления количества товара!&#x27;)
+            .subscribe();
+          this.alertService.open(&#x27;Не удалось обновить количество. Попробуйте ещё раз!&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+        }
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+      },
+      error: (error) &#x3D;&gt; {
+        this.cartItems &#x3D; this.cartItems.map(cartItem &#x3D;&gt;
+          cartItem.productId &#x3D;&#x3D;&#x3D; item.productId &amp;&amp; cartItem.sizeId &#x3D;&#x3D;&#x3D; item.sizeId
+            ? { ...cartItem, quantity: item.quantity }
+            : cartItem
+        );
+        this.cdr.markForCheck();
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.updateCartQuantityFailed, &#x27;Ошибка обновления количества товара!&#x27;)
+          .subscribe();
+        this.alertService.open(&#x27;Ошибка при обновлении количества. Попробуйте ещё раз!&#x27;, { appearance: &#x27;error&#x27; }).subscribe();
+        this.isLoading &#x3D; false;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
+  protected onValueChange&lt;K extends keyof CartItem&gt;(
+    value: CartItem[K],
+    key: K,
+    current: CartItem
+  ): void {
+    const updated &#x3D; { ...current, [key]: value };
+    this.cartItems &#x3D; this.cartItems.map((item) &#x3D;&gt; (item &#x3D;&#x3D;&#x3D; current ? updated : item));
+    this.cdr.markForCheck();
+  }
+
+  protected onSortChange(event: any): void {
+    // Логика сортировки, если нужна
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
+  &lt;div class&#x3D;&quot;header-section&quot;&gt;
+    &lt;h1&gt;Корзина&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf&#x3D;&quot;cartItems.length &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;empty-cart&quot;&gt;
+    &lt;h3&gt;Корзина пуста&lt;/h3&gt;
+    &lt;p&gt;Добавьте товары, чтобы продолжить&lt;/p&gt;
+    &lt;button tuiButton appearance&#x3D;&quot;primary&quot; (click)&#x3D;&quot;checkout()&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
+      Оформить заказ
+    &lt;/button&gt;
+    &lt;button tuiButton appearance&#x3D;&quot;primary&quot; (click)&#x3D;&quot;router.navigate([&#x27;/&#x27;])&quot;&gt;
+      Перейти к товарам
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;cartItems.length &gt; 0&quot;&gt;
+    &lt;tui-scrollbar class&#x3D;&quot;taiga-scrollbar&quot;&gt;
+      &lt;table tuiTable size&#x3D;&quot;l&quot; [columns]&#x3D;&quot;columns&quot; [direction]&#x3D;&quot;-1&quot; [sorter]&#x3D;&quot;totalSorter&quot;&gt;
+        &lt;thead tuiThead&gt;
+          &lt;tr tuiThGroup&gt;
+            &lt;th *tuiHead&#x3D;&quot;&#x27;productTitle&#x27;&quot; tuiTh&gt;Название товара&lt;/th&gt;
+            &lt;th *tuiHead&#x3D;&quot;&#x27;price&#x27;&quot; tuiTh class&#x3D;&quot;number&quot;&gt;Цена&lt;/th&gt;
+            &lt;th *tuiHead&#x3D;&quot;&#x27;quantity&#x27;&quot; tuiTh&gt;Количество&lt;/th&gt;
+            &lt;th *tuiHead&#x3D;&quot;&#x27;totalPrice&#x27;&quot; tuiTh class&#x3D;&quot;number&quot;&gt;Итого&lt;/th&gt;
+            &lt;th *tuiHead&#x3D;&quot;&#x27;actions&#x27;&quot; tuiTh&gt;Действия&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody tuiTbody&gt;
+          &lt;tr *ngFor&#x3D;&quot;let item of cartItems; trackBy: trackByIndex&quot; tuiTr&gt;
+            &lt;td *tuiCell&#x3D;&quot;&#x27;productTitle&#x27;&quot; tuiTd&gt;{{ item.productTitle }}&lt;/td&gt;
+            &lt;td *tuiCell&#x3D;&quot;&#x27;price&#x27;&quot; tuiTd class&#x3D;&quot;number&quot;&gt;{{ item.price | currency:&#x27;RUB&#x27; }}&lt;/td&gt;
+            &lt;td *tuiCell&#x3D;&quot;&#x27;quantity&#x27;&quot; tuiTd&gt;
+              &lt;div class&#x3D;&quot;quantity-container&quot;&gt;
+                &lt;button tuiButton appearance&#x3D;&quot;flat&quot; size&#x3D;&quot;s&quot; (click)&#x3D;&quot;decreaseQuantity(item)&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
+                 -
+                &lt;/button&gt;
+                &lt;input type&#x3D;&quot;number&quot; [(ngModel)]&#x3D;&quot;item.quantity&quot; [ngModelOptions]&#x3D;&quot;options&quot;
+                  (ngModelChange)&#x3D;&quot;onValueChange($event, &#x27;quantity&#x27;, item)&quot; min&#x3D;&quot;1&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot;
+                  class&#x3D;&quot;quantity-input&quot; [disabled]&#x3D;&quot;isLoading&quot; /&gt;
+                &lt;button tuiButton appearance&#x3D;&quot;flat&quot; size&#x3D;&quot;s&quot; (click)&#x3D;&quot;increaseQuantity(item)&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
+                  + 
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td *tuiCell&#x3D;&quot;&#x27;totalPrice&#x27;&quot; tuiTd class&#x3D;&quot;number&quot;&gt;{{ getTotal(item) | currency:&#x27;RUB &#x27; }}&lt;/td&gt;
+            &lt;td *tuiCell&#x3D;&quot;&#x27;actions&#x27;&quot; tuiTd&gt;
+              &lt;button tuiButton appearance&#x3D;&quot;destructive&quot; size&#x3D;&quot;s&quot; (click)&#x3D;&quot;removeFromCart(item)&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
+                Удалить
+              &lt;/button&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tfoot&gt;
+          &lt;tr&gt;
+            &lt;td colspan&#x3D;&quot;3&quot; class&#x3D;&quot;total-label&quot;&gt;Общая сумма:&lt;/td&gt;
+            &lt;td class&#x3D;&quot;number&quot;&gt;{{ getTotalAmount() | currency:&#x27;RUB &#x27; }}&lt;/td&gt;
+            &lt;td&gt;
+              &lt;button tuiButton appearance&#x3D;&quot;primary&quot; (click)&#x3D;&quot;checkout()&quot; [disabled]&#x3D;&quot;isLoading&quot;&gt;
+                Оформить заказ
+              &lt;/button&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tfoot&gt;
+      &lt;/table&gt;
+    &lt;/tui-scrollbar&gt;
+  &lt;/ng-container&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./page-cart.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"> .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--tui-base-01);
+  border-radius: 8px;
+  box-shadow: var(--tui-shadow);
+}
+
+.empty-cart h3 {
+  color: var(--tui-text-01);
+  margin-bottom: 1rem;
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-input {
+  width: 60px;
+  text-align: center;
+}
+
+.total-label {
+  font-weight: bold;
+  text-align: right;
+}
+
+.number {
+  text-align: right;
+}
+
+</code></pre>
+                <p class="comment">
+                    <code>../../../styles/root.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;variables.css&#x27;;
+@import &#x27;buttons.css&#x27;;
+@import &#x27;cards.css&#x27;;
+@import &#x27;navigation.css&#x27;;
+@import &#x27;header.css&#x27;;
+@import &#x27;carousel.css&#x27;;
+@import &#x27;icons.css&#x27;;
+@import &#x27;layout.css&#x27;;
+@import &#x27;tables.css&#x27;;
+@import &#x27;typography.css&#x27;;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container">  <div class="header-section">    <h1>Корзина</h1>  </div>  <div *ngIf="cartItems.length === 0" class="empty-cart">    <h3>Корзина пуста</h3>    <p>Добавьте товары, чтобы продолжить</p>    <button tuiButton appearance="primary" (click)="checkout()" [disabled]="isLoading">      Оформить заказ    </button>    <button tuiButton appearance="primary" (click)="router.navigate([\'/\'])">      Перейти к товарам    </button>  </div>  <ng-container *ngIf="cartItems.length > 0">    <tui-scrollbar class="taiga-scrollbar">      <table tuiTable size="l" [columns]="columns" [direction]="-1" [sorter]="totalSorter">        <thead tuiThead>          <tr tuiThGroup>            <th *tuiHead="\'productTitle\'" tuiTh>Название товара</th>            <th *tuiHead="\'price\'" tuiTh class="number">Цена</th>            <th *tuiHead="\'quantity\'" tuiTh>Количество</th>            <th *tuiHead="\'totalPrice\'" tuiTh class="number">Итого</th>            <th *tuiHead="\'actions\'" tuiTh>Действия</th>          </tr>        </thead>        <tbody tuiTbody>          <tr *ngFor="let item of cartItems; trackBy: trackByIndex" tuiTr>            <td *tuiCell="\'productTitle\'" tuiTd>{{ item.productTitle }}</td>            <td *tuiCell="\'price\'" tuiTd class="number">{{ item.price | currency:\'RUB\' }}</td>            <td *tuiCell="\'quantity\'" tuiTd>              <div class="quantity-container">                <button tuiButton appearance="flat" size="s" (click)="decreaseQuantity(item)" [disabled]="isLoading">                 -                </button>                <input type="number" [(ngModel)]="item.quantity" [ngModelOptions]="options"                  (ngModelChange)="onValueChange($event, \'quantity\', item)" min="1" max="100" step="1"                  class="quantity-input" [disabled]="isLoading" />                <button tuiButton appearance="flat" size="s" (click)="increaseQuantity(item)" [disabled]="isLoading">                  +                 </button>              </div>            </td>            <td *tuiCell="\'totalPrice\'" tuiTd class="number">{{ getTotal(item) | currency:\'RUB \' }}</td>            <td *tuiCell="\'actions\'" tuiTd>              <button tuiButton appearance="destructive" size="s" (click)="removeFromCart(item)" [disabled]="isLoading">                Удалить              </button>            </td>          </tr>        </tbody>        <tfoot>          <tr>            <td colspan="3" class="total-label">Общая сумма:</td>            <td class="number">{{ getTotalAmount() | currency:\'RUB \' }}</td>            <td>              <button tuiButton appearance="primary" (click)="checkout()" [disabled]="isLoading">                Оформить заказ              </button>            </td>          </tr>        </tfoot>      </table>    </tui-scrollbar>  </ng-container></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'ButtonComponent', 'selector': 'storybook-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'storybook-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageComponent', 'selector': 'storybook-page'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PageCartComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PageCartComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

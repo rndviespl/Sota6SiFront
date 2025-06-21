@@ -8,7 +8,11 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "storybook": "ng run Sota6SiFront:storybook",
-    "build-storybook": "ng run Sota6SiFront:build-storybook"
+    "build-storybook": "ng run Sota6SiFront:build-storybook",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc": "npx compodoc -p tsconfig.doc.json -s --output docs/compodoc",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +49,7 @@
     "@storybook/addon-docs": "^9.0.12",
     "@storybook/addon-onboarding": "^9.0.12",
     "@storybook/angular": "^9.0.12",
+    "@storybook/auto-config": "^0.0.3",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
@@ -54,6 +59,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "react": "^19.1.0",
     "storybook": "^9.0.12",
+    "ts-morph": "^26.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.7.2"
   }
 }
