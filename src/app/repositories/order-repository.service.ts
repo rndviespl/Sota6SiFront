@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { IDpOrder } from '../interface/IDpOrder';
 import { DpOrdersService } from '../services/dp-orders.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

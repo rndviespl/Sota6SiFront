@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с корзиной покупок (Shop Cart).</p>
+<p>Позволяет получать содержимое корзины, добавлять и удалять товары, обновлять корзину, оформлять заказ и экспортировать заказ в Excel.</p>
+
+            </p>
 
 
 
@@ -194,7 +202,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/dp-shop-cart.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/services/dp-shop-cart.service.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -257,14 +265,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:85</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Добавляет товар в корзину.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/ShopCart/AddToCart
+// Body:
+// {
+//   &quot;productId&quot;: 1,
+//   &quot;quantity&quot;: 2,
+//   &quot;sizeId&quot;: 2
+// }
+this.shopCartService.addToCart({
+  productId: 1,
+  quantity: 2,
+  sizeId: 2
+}).subscribe(res =&gt; {
+  // res: { success: true, message: &quot;Product added to cart.&quot; }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -275,6 +298,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -289,6 +313,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Данные для добавления товара.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -298,7 +326,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат добавления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -324,14 +353,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:124</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Оформляет заказ по содержимому корзины.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/ShopCart/Checkout
+// Body:
+// [
+//   { &quot;productId&quot;: 1, &quot;quantity&quot;: 2, &quot;sizeId&quot;: 2 },
+//   { &quot;productId&quot;: 3, &quot;quantity&quot;: 1, &quot;sizeId&quot;: 1 }
+// ]
+this.shopCartService.checkout([
+  { productId: 1, quantity: 2, sizeId: 2 },
+  { productId: 3, quantity: 1, sizeId: 1 }
+]).subscribe(order =&gt; {
+  // order: { orderId: number, orderDetails: [...] }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -342,6 +384,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -356,6 +399,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Массив товаров для оформления заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -365,7 +412,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Информация о заказе.</p>
+
                             </div>
                 </td>
             </tr>
@@ -391,14 +439,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:151</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Экспортирует заказ в Excel.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.shopCartService.exportToExcel(123).subscribe(blob =&gt; {
+  const url = URL.createObjectURL(blob);
+  window.open(url);
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -409,6 +462,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -423,6 +477,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -432,7 +490,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Файл Excel.</p>
+
                             </div>
                 </td>
             </tr>
@@ -458,19 +517,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:35</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает текущее содержимое корзины.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/ShopCart
+this.shopCartService.getCart().subscribe(cart =&gt; {
+  // cart: { cartItems: [...], products: [...] }
+  console.log(cart);
+});</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/ICartViewModel.html" target="_self" >Observable&lt;ICartViewModel&gt;</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Модель корзины.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -495,14 +564,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:101</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает текущее количество товара определённого размера в корзине.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/ShopCart/quantity?productId=1&amp;sizeId=2
+this.shopCartService.getCartQuantity(1, 2).subscribe(q =&gt; {
+  // q: { currentQuantity: number }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -513,6 +587,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -527,6 +602,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор товара.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>sizeId</td>
@@ -539,6 +618,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор размера.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -548,7 +631,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Текущее количество.</p>
+
                             </div>
                 </td>
             </tr>
@@ -574,14 +658,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет товар из корзины.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.shopCartService.removeFromCart({ productId: 1, sizeId: 2 }).subscribe(() =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -592,6 +678,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -606,6 +693,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Данные для удаления товара.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -615,7 +706,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -641,14 +733,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/services/dp-shop-cart.service.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет содержимое корзины.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/ShopCart/UpdateCart
+// Body:
+// {
+//   &quot;productId&quot;: 1,
+//   &quot;quantity&quot;: 3,
+//   &quot;sizeId&quot;: 2
+// }
+this.shopCartService.updateCart({
+  productId: 1,
+  quantity: 3,
+  sizeId: 2
+}).subscribe(res =&gt; {
+  // res: { success: true, message: &quot;Cart updated!&quot; }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -659,6 +766,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -673,6 +781,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Данные для обновления корзины.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -682,7 +794,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -713,7 +826,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/dp-shop-cart.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/services/dp-shop-cart.service.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -735,6 +848,12 @@ import { IUpdateCartRequest } from &#x27;../interface/IUpdateCartRequest&#x27;;
 import { IDpOrderDetail } from &#x27;../interface/IDpOrderDetail&#x27;;
 import { IRemoveFromCartRequest } from &#x27;../interface/IRemoveFromCartRequest&#x27;;
 
+/**
+ * Сервис для работы с корзиной покупок (Shop Cart).
+ *
+ * @remarks
+ * Позволяет получать содержимое корзины, добавлять и удалять товары, обновлять корзину, оформлять заказ и экспортировать заказ в Excel.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -743,30 +862,133 @@ export class ShopCartService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает текущее содержимое корзины.
+   *
+   * @returns {Observable&lt;ICartViewModel&gt;} Модель корзины.
+   * @example
+   * // GET /api/ShopCart
+   * this.shopCartService.getCart().subscribe(cart &#x3D;&gt; {
+   *   // cart: { cartItems: [...], products: [...] }
+   *   console.log(cart);
+   * });
+   */
   getCart(): Observable&lt;ICartViewModel&gt; {
     return this.http.get&lt;ICartViewModel&gt;(this.baseUrl);
   }
 
+  /**
+   * Обновляет содержимое корзины.
+   *
+   * @param {IUpdateCartRequest} request Данные для обновления корзины.
+   * @returns {Observable&lt;{ success: boolean; message: string }&gt;} Результат обновления.
+   * @example
+   * // POST /api/ShopCart/UpdateCart
+   * // Body:
+   * // {
+   * //   &quot;productId&quot;: 1,
+   * //   &quot;quantity&quot;: 3,
+   * //   &quot;sizeId&quot;: 2
+   * // }
+   * this.shopCartService.updateCart({
+   *   productId: 1,
+   *   quantity: 3,
+   *   sizeId: 2
+   * }).subscribe(res &#x3D;&gt; {
+   *   // res: { success: true, message: &quot;Cart updated!&quot; }
+   * });
+   */
   updateCart(request: IUpdateCartRequest): Observable&lt;{ success: boolean; message: string }&gt; {
     return this.http.post&lt;{ success: boolean; message: string }&gt;(&#x60;${this.baseUrl}/UpdateCart&#x60;, request);
   }
 
+  /**
+   * Добавляет товар в корзину.
+   *
+   * @param {IAddToCartRequest} request Данные для добавления товара.
+   * @returns {Observable&lt;{ success: boolean; message: string }&gt;} Результат добавления.
+   * @example
+   * // POST /api/ShopCart/AddToCart
+   * // Body:
+   * // {
+   * //   &quot;productId&quot;: 1,
+   * //   &quot;quantity&quot;: 2,
+   * //   &quot;sizeId&quot;: 2
+   * // }
+   * this.shopCartService.addToCart({
+   *   productId: 1,
+   *   quantity: 2,
+   *   sizeId: 2
+   * }).subscribe(res &#x3D;&gt; {
+   *   // res: { success: true, message: &quot;Product added to cart.&quot; }
+   * });
+   */
   addToCart(request: IAddToCartRequest): Observable&lt;{ success: boolean; message: string }&gt; {
     return this.http.post&lt;{ success: boolean; message: string }&gt;(&#x60;${this.baseUrl}/AddToCart&#x60;, request);
   }
 
+  /**
+   * Получает текущее количество товара определённого размера в корзине.
+   *
+   * @param {number} productId Идентификатор товара.
+   * @param {number} sizeId Идентификатор размера.
+   * @returns {Observable&lt;{ currentQuantity: number }&gt;} Текущее количество.
+   * @example
+   * // GET /api/ShopCart/quantity?productId&#x3D;1&amp;sizeId&#x3D;2
+   * this.shopCartService.getCartQuantity(1, 2).subscribe(q &#x3D;&gt; {
+   *   // q: { currentQuantity: number }
+   * });
+   */
   getCartQuantity(productId: number, sizeId: number): Observable&lt;{ currentQuantity: number }&gt; {
     return this.http.get&lt;{ currentQuantity: number }&gt;(&#x60;${this.baseUrl}/quantity?productId&#x3D;${productId}&amp;sizeId&#x3D;${sizeId}&#x60;);
   }
 
+  /**
+   * Оформляет заказ по содержимому корзины.
+   *
+   * @param {any[]} cart Массив товаров для оформления заказа.
+   * @returns {Observable&lt;{ orderId: number; orderDetails: IDpOrderDetail[] }&gt;} Информация о заказе.
+   * @example
+   * // POST /api/ShopCart/Checkout
+   * // Body:
+   * // [
+   * //   { &quot;productId&quot;: 1, &quot;quantity&quot;: 2, &quot;sizeId&quot;: 2 },
+   * //   { &quot;productId&quot;: 3, &quot;quantity&quot;: 1, &quot;sizeId&quot;: 1 }
+   * // ]
+   * this.shopCartService.checkout([
+   *   { productId: 1, quantity: 2, sizeId: 2 },
+   *   { productId: 3, quantity: 1, sizeId: 1 }
+   * ]).subscribe(order &#x3D;&gt; {
+   *   // order: { orderId: number, orderDetails: [...] }
+   * });
+   */
   checkout(cart: any[]): Observable&lt;{ orderId: number; orderDetails: IDpOrderDetail[] }&gt; {
     return this.http.post&lt;{ orderId: number; orderDetails: IDpOrderDetail[] }&gt;(&#x60;${this.baseUrl}/Checkout&#x60;, cart);
   }
 
+  /**
+   * Удаляет товар из корзины.
+   *
+   * @param {IRemoveFromCartRequest} request Данные для удаления товара.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * this.shopCartService.removeFromCart({ productId: 1, sizeId: 2 }).subscribe(() &#x3D;&gt; ...);
+   */
   removeFromCart(request: IRemoveFromCartRequest): Observable&lt;void&gt; {
     return this.http.post&lt;void&gt;(&#x60;${this.baseUrl}/RemoveFromCart&#x60;, request);
   }
 
+  /**
+   * Экспортирует заказ в Excel.
+   *
+   * @param {number} orderId Идентификатор заказа.
+   * @returns {Observable&lt;Blob&gt;} Файл Excel.
+   * @example
+   * this.shopCartService.exportToExcel(123).subscribe(blob &#x3D;&gt; {
+   *   const url &#x3D; URL.createObjectURL(blob);
+   *   window.open(url);
+   * });
+   */
   exportToExcel(orderId: number): Observable&lt;Blob&gt; {
     return this.http.post(&#x60;${this.baseUrl}/export?orderId&#x3D;${orderId}&#x60;, {}, { responseType: &#x27;blob&#x27; });
   }

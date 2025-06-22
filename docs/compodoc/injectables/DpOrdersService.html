@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с заказами (Orders).</p>
+<p>Позволяет получать, создавать, обновлять и удалять заказы через API.</p>
+
+            </p>
 
 
 
@@ -188,7 +196,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/dp-orders.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-orders.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -251,14 +259,31 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/services/dp-orders.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/services/dp-orders.service.ts:73</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт новый заказ.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/DpOrders
+// Body:
+// {
+//   &quot;dpOrderId&quot;: 0,
+//   &quot;dpUserId&quot;: 1,
+//   &quot;orderDate&quot;: &quot;2025-06-22T12:00:00&quot;,
+//   &quot;orderStatus&quot;: &quot;Новый&quot;
+// }
+this.dpOrdersService.createDpOrder({
+  dpOrderId: 0,
+  dpUserId: 1,
+  orderDate: new Date().toISOString(),
+  orderStatus: &#39;Новый&#39;
+}).subscribe(newOrder =&gt; {
+  // newOrder: { dpOrderId, dpUserId, orderDate, orderStatus, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -269,6 +294,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,6 +309,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,7 +322,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданный заказ.</p>
+
                             </div>
                 </td>
             </tr>
@@ -318,14 +349,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/services/dp-orders.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/services/dp-orders.service.ts:116</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет заказ по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/DpOrders/1
+this.dpOrdersService.deleteDpOrder(1).subscribe(() =&gt; {
+  // Заказ удалён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -336,6 +372,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,6 +387,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -359,7 +400,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -385,19 +427,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/app/services/dp-orders.service.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/services/dp-orders.service.ts:31</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех заказов.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpOrders
+this.dpOrdersService.getAllDpOrders().subscribe(orders =&gt; {
+  // orders: [{ dpOrderId, dpUserId, orderDate, orderStatus, ... }]
+  console.log(orders);
+});</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/IDpOrder.html" target="_self" >Observable&lt;IDpOrder[]&gt;</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список заказов.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -422,14 +474,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/app/services/dp-orders.service.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/services/dp-orders.service.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает заказ по его идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpOrders/1
+this.dpOrdersService.getDpOrderById(1).subscribe(order =&gt; {
+  // order: { dpOrderId, dpUserId, orderDate, orderStatus, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -440,6 +497,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -454,6 +512,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -463,7 +525,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Заказ.</p>
+
                             </div>
                 </td>
             </tr>
@@ -489,14 +552,31 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/services/dp-orders.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/services/dp-orders.service.ts:101</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующий заказ.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/DpOrders/1
+// Body:
+// {
+//   &quot;dpOrderId&quot;: 1,
+//   &quot;dpUserId&quot;: 1,
+//   &quot;orderDate&quot;: &quot;2025-06-22T12:00:00&quot;,
+//   &quot;orderStatus&quot;: &quot;Обновлён&quot;
+// }
+this.dpOrdersService.updateDpOrder(1, {
+  dpOrderId: 1,
+  dpUserId: 1,
+  orderDate: new Date().toISOString(),
+  orderStatus: &#39;Обновлён&#39;
+}).subscribe(() =&gt; {
+  // Заказ обновлён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -507,6 +587,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -521,6 +602,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор заказа.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dpOrder</td>
@@ -533,6 +618,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённый объект заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -542,7 +631,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -573,7 +663,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/dp-orders.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-orders.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -591,6 +681,12 @@ import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { IDpOrder } from &#x27;../interface/IDpOrder&#x27;;
 
+/**
+ * Сервис для работы с заказами (Orders).
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять и удалять заказы через API.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -599,22 +695,102 @@ export class DpOrdersService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех заказов.
+   *
+   * @returns {Observable&lt;IDpOrder[]&gt;} Список заказов.
+   * @example
+   * // GET /api/DpOrders
+   * this.dpOrdersService.getAllDpOrders().subscribe(orders &#x3D;&gt; {
+   *   // orders: [{ dpOrderId, dpUserId, orderDate, orderStatus, ... }]
+   *   console.log(orders);
+   * });
+   */
   getAllDpOrders(): Observable&lt;IDpOrder[]&gt; {
     return this.http.get&lt;IDpOrder[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает заказ по его идентификатору.
+   *
+   * @param {number} id Идентификатор заказа.
+   * @returns {Observable&lt;IDpOrder&gt;} Заказ.
+   * @example
+   * // GET /api/DpOrders/1
+   * this.dpOrdersService.getDpOrderById(1).subscribe(order &#x3D;&gt; {
+   *   // order: { dpOrderId, dpUserId, orderDate, orderStatus, ... }
+   * });
+   */
   getDpOrderById(id: number): Observable&lt;IDpOrder&gt; {
     return this.http.get&lt;IDpOrder&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Создаёт новый заказ.
+   *
+   * @param {IDpOrder} dpOrder Объект заказа.
+   * @returns {Observable&lt;IDpOrder&gt;} Созданный заказ.
+   * @example
+   * // POST /api/DpOrders
+   * // Body:
+   * // {
+   * //   &quot;dpOrderId&quot;: 0,
+   * //   &quot;dpUserId&quot;: 1,
+   * //   &quot;orderDate&quot;: &quot;2025-06-22T12:00:00&quot;,
+   * //   &quot;orderStatus&quot;: &quot;Новый&quot;
+   * // }
+   * this.dpOrdersService.createDpOrder({
+   *   dpOrderId: 0,
+   *   dpUserId: 1,
+   *   orderDate: new Date().toISOString(),
+   *   orderStatus: &#x27;Новый&#x27;
+   * }).subscribe(newOrder &#x3D;&gt; {
+   *   // newOrder: { dpOrderId, dpUserId, orderDate, orderStatus, ... }
+   * });
+   */
   createDpOrder(dpOrder: IDpOrder): Observable&lt;IDpOrder&gt; {
     return this.http.post&lt;IDpOrder&gt;(this.baseUrl, dpOrder);
   }
 
+  /**
+   * Обновляет существующий заказ.
+   *
+   * @param {number} id Идентификатор заказа.
+   * @param {IDpOrder} dpOrder Обновлённый объект заказа.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/DpOrders/1
+   * // Body:
+   * // {
+   * //   &quot;dpOrderId&quot;: 1,
+   * //   &quot;dpUserId&quot;: 1,
+   * //   &quot;orderDate&quot;: &quot;2025-06-22T12:00:00&quot;,
+   * //   &quot;orderStatus&quot;: &quot;Обновлён&quot;
+   * // }
+   * this.dpOrdersService.updateDpOrder(1, {
+   *   dpOrderId: 1,
+   *   dpUserId: 1,
+   *   orderDate: new Date().toISOString(),
+   *   orderStatus: &#x27;Обновлён&#x27;
+   * }).subscribe(() &#x3D;&gt; {
+   *   // Заказ обновлён
+   * });
+   */
   updateDpOrder(id: number, dpOrder: IDpOrder): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, dpOrder);
   }
 
+  /**
+   * Удаляет заказ по идентификатору.
+   *
+   * @param {number} id Идентификатор заказа.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/DpOrders/1
+   * this.dpOrdersService.deleteDpOrder(1).subscribe(() &#x3D;&gt; {
+   *   // Заказ удалён
+   * });
+   */
   deleteDpOrder(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }

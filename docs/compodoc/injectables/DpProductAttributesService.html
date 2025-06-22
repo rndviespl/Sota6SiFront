@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с атрибутами товаров (Product Attributes).</p>
+<p>Позволяет получать, создавать, обновлять и удалять атрибуты товаров через API.</p>
+
+            </p>
 
 
 
@@ -188,7 +196,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-product-attributes.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-product-attributes.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -251,14 +259,32 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт новый атрибут товара.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/DpProductAttributes
+// Body:
+// {
+//   &quot;dpAttributesId&quot;: 0,
+//   &quot;dpProductId&quot;: 1,
+//   &quot;dpSize&quot;: &quot;M&quot;,
+//   &quot;dpColor&quot;: &quot;Red&quot;,
+//   ...другие поля...
+// }
+this.dpProductAttributesService.createDpProductAttribute({
+  dpAttributesId: 0,
+  dpProductId: 1,
+  dpSize: &#39;M&#39;,
+  dpColor: &#39;Red&#39;
+}).subscribe(attr =&gt; {
+  // attr: { ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -269,6 +295,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,6 +310,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект атрибута.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,7 +323,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданный атрибут.</p>
+
                             </div>
                 </td>
             </tr>
@@ -318,14 +350,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:118</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет атрибут товара по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/DpProductAttributes/1
+this.dpProductAttributesService.deleteDpProductAttribute(1).subscribe(() =&gt; {
+  // Атрибут удалён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -336,6 +373,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,6 +388,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор атрибута.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -359,7 +401,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -385,19 +428,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:31</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех атрибутов товаров.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpProductAttributes
+this.dpProductAttributesService.getAllDpProductAttributes().subscribe(attrs =&gt; {
+  // attrs: [{ dpAttributesId, dpProductId, dpSize, ... }]
+  console.log(attrs);
+});</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Observable&lt;IDpProductAttribute[]&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список атрибутов товаров.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -422,14 +475,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает атрибут товара по его идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpProductAttributes/1
+this.dpProductAttributesService.getDpProductAttributeById(1).subscribe(attr =&gt; {
+  // attr: { dpAttributesId, dpProductId, dpSize, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -440,6 +498,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -454,6 +513,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор атрибута.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -463,7 +526,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Атрибут товара.</p>
+
                             </div>
                 </td>
             </tr>
@@ -489,14 +553,32 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/services/dp-product-attributes.service.ts:103</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующий атрибут товара.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/DpProductAttributes/1
+// Body:
+// {
+//   &quot;dpAttributesId&quot;: 1,
+//   &quot;dpProductId&quot;: 1,
+//   &quot;dpSize&quot;: &quot;L&quot;,
+//   &quot;dpColor&quot;: &quot;Blue&quot;,
+//   ...другие поля...
+// }
+this.dpProductAttributesService.updateDpProductAttribute(1, {
+  dpAttributesId: 1,
+  dpProductId: 1,
+  dpSize: &#39;L&#39;,
+  dpColor: &#39;Blue&#39;
+}).subscribe(() =&gt; {
+  // Атрибут обновлён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -507,6 +589,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -521,6 +604,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор атрибута.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dpProductAttribute</td>
@@ -533,6 +620,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённый объект атрибута.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -542,7 +633,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -573,7 +665,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-product-attributes.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-product-attributes.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -591,31 +683,118 @@ import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { IDpProductAttribute } from &#x27;../interface/IDpProductAttribute&#x27;;
 
+/**
+ * Сервис для работы с атрибутами товаров (Product Attributes).
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять и удалять атрибуты товаров через API.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-
 export class DpProductAttributesService {
   private baseUrl &#x3D; &#x60;${window.location.origin}/api/DpProductAttributes&#x60;;
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех атрибутов товаров.
+   *
+   * @returns {Observable&lt;IDpProductAttribute[]&gt;} Список атрибутов товаров.
+   * @example
+   * // GET /api/DpProductAttributes
+   * this.dpProductAttributesService.getAllDpProductAttributes().subscribe(attrs &#x3D;&gt; {
+   *   // attrs: [{ dpAttributesId, dpProductId, dpSize, ... }]
+   *   console.log(attrs);
+   * });
+   */
   getAllDpProductAttributes(): Observable&lt;IDpProductAttribute[]&gt; {
     return this.http.get&lt;IDpProductAttribute[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает атрибут товара по его идентификатору.
+   *
+   * @param {number} id Идентификатор атрибута.
+   * @returns {Observable&lt;IDpProductAttribute&gt;} Атрибут товара.
+   * @example
+   * // GET /api/DpProductAttributes/1
+   * this.dpProductAttributesService.getDpProductAttributeById(1).subscribe(attr &#x3D;&gt; {
+   *   // attr: { dpAttributesId, dpProductId, dpSize, ... }
+   * });
+   */
   getDpProductAttributeById(id: number): Observable&lt;IDpProductAttribute&gt; {
     return this.http.get&lt;IDpProductAttribute&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Создаёт новый атрибут товара.
+   *
+   * @param {IDpProductAttribute} dpProductAttribute Объект атрибута.
+   * @returns {Observable&lt;IDpProductAttribute&gt;} Созданный атрибут.
+   * @example
+   * // POST /api/DpProductAttributes
+   * // Body:
+   * // {
+   * //   &quot;dpAttributesId&quot;: 0,
+   * //   &quot;dpProductId&quot;: 1,
+   * //   &quot;dpSize&quot;: &quot;M&quot;,
+   * //   &quot;dpColor&quot;: &quot;Red&quot;,
+   * //   ...другие поля...
+   * // }
+   * this.dpProductAttributesService.createDpProductAttribute({
+   *   dpAttributesId: 0,
+   *   dpProductId: 1,
+   *   dpSize: &#x27;M&#x27;,
+   *   dpColor: &#x27;Red&#x27;
+   * }).subscribe(attr &#x3D;&gt; {
+   *   // attr: { ... }
+   * });
+   */
   createDpProductAttribute(dpProductAttribute: IDpProductAttribute): Observable&lt;IDpProductAttribute&gt; {
     return this.http.post&lt;IDpProductAttribute&gt;(this.baseUrl, dpProductAttribute);
   }
 
+  /**
+   * Обновляет существующий атрибут товара.
+   *
+   * @param {number} id Идентификатор атрибута.
+   * @param {IDpProductAttribute} dpProductAttribute Обновлённый объект атрибута.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/DpProductAttributes/1
+   * // Body:
+   * // {
+   * //   &quot;dpAttributesId&quot;: 1,
+   * //   &quot;dpProductId&quot;: 1,
+   * //   &quot;dpSize&quot;: &quot;L&quot;,
+   * //   &quot;dpColor&quot;: &quot;Blue&quot;,
+   * //   ...другие поля...
+   * // }
+   * this.dpProductAttributesService.updateDpProductAttribute(1, {
+   *   dpAttributesId: 1,
+   *   dpProductId: 1,
+   *   dpSize: &#x27;L&#x27;,
+   *   dpColor: &#x27;Blue&#x27;
+   * }).subscribe(() &#x3D;&gt; {
+   *   // Атрибут обновлён
+   * });
+   */
   updateDpProductAttribute(id: number, dpProductAttribute: IDpProductAttribute): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, dpProductAttribute);
   }
 
+  /**
+   * Удаляет атрибут товара по идентификатору.
+   *
+   * @param {number} id Идентификатор атрибута.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/DpProductAttributes/1
+   * this.dpProductAttributesService.deleteDpProductAttribute(1).subscribe(() &#x3D;&gt; {
+   *   // Атрибут удалён
+   * });
+   */
   deleteDpProductAttribute(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }

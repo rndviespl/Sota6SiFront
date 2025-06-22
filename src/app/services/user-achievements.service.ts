@@ -6,12 +6,18 @@ import { IUserHasAchievement } from '../interface/IUserHasAchievement';
 import { ConfigService } from './config.service';
 import { TuiAlertService } from '@taiga-ui/core';
 
+/**
+ * Сервис для работы с тест-кейсами пользователя.
+ *
+ * @remarks
+ * Позволяет получать, создавать, разблокировать тест-кейсы, а также имитировать ошибки тест-кейсов для тестирования UI и логики.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class UserAchievementsService {
   private readonly baseUrl = '/api/UserAchievements'; // Прокси для API
-private static readonly ALWAYS_FAIL_KEY = 'alwaysFailMode';
+  private static readonly ALWAYS_FAIL_KEY = 'alwaysFailMode';
 
   constructor(
     private readonly http: HttpClient,
@@ -19,92 +25,132 @@ private static readonly ALWAYS_FAIL_KEY = 'alwaysFailMode';
     private readonly alertService: TuiAlertService
   ) { }
 
-setAlwaysFailMode(value: boolean) {
-  localStorage.setItem(UserAchievementsService.ALWAYS_FAIL_KEY, value ? '1' : '0');
-}
-
-getAlwaysFailMode(): boolean {
-  return localStorage.getItem(UserAchievementsService.ALWAYS_FAIL_KEY) === '1';
-}
-
-private simulateServerFailure(): boolean {
-   return this.getAlwaysFailMode();
-}
+  /**
+   * Включает или выключает режим имитации ошибок тест-кейсов.
+   * @param {boolean} value true — всегда имитировать ошибку, false — обычный режим.
+   * @example
+   * this.userAchievementsService.setAlwaysFailMode(true);
+   */
+  setAlwaysFailMode(value: boolean) {
+    localStorage.setItem(UserAchievementsService.ALWAYS_FAIL_KEY, value ? '1' : '0');
+  }
 
   /**
-   * Получение всех достижений пользователя
-   * @returns Observable с массивом достижений
+   * Проверяет, включён ли режим имитации ошибок тест-кейсов.
+   * @returns {boolean} true, если режим включён.
+   * @example
+   * if (this.userAchievementsService.getAlwaysFailMode()) { ... }
+   */
+  getAlwaysFailMode(): boolean {
+    return localStorage.getItem(UserAchievementsService.ALWAYS_FAIL_KEY) === '1';
+  }
+
+  private simulateServerFailure(): boolean {
+    return this.getAlwaysFailMode();
+  }
+
+  /**
+   * Получение всех тест-кейсов пользователя.
+   * @returns {Observable<IUserHasAchievement[]>} Массив тест-кейсов пользователя.
+   * @example
+   * // GET /api/UserAchievements
+   * this.userAchievementsService.getAllUserAchievements().subscribe(list => {
+   *   // list: [{ dpUserProjId, achievementId, isObtained, ... }]
+   *   console.log(list);
+   * });
    */
   getAllUserAchievements(): Observable<IUserHasAchievement[]> {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
-    return this.http.get<IUserHasAchievement[]>(this.baseUrl)
-
+    return this.http.get<IUserHasAchievement[]>(this.baseUrl);
   }
 
   /**
-   * Получение конкретного достижения пользователя
-   * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор достижения
-   * @returns Observable с достижением
+   * Получение конкретного тест-кейса пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable<IUserHasAchievement>} Тест-кейс пользователя.
+   * @example
+   * // GET /api/UserAchievements/1/14
+   * this.userAchievementsService.getUserAchievement(1, 14).subscribe(ach => {
+   *   // ach: { dpUserProjId, achievementId, isObtained, ... }
+   * });
    */
   getUserAchievement(userProjId: number, achievementId: number): Observable<IUserHasAchievement> {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
-    return this.http.get<IUserHasAchievement>(`${this.baseUrl}/${userProjId}/${achievementId}`)
-
+    return this.http.get<IUserHasAchievement>(`${this.baseUrl}/${userProjId}/${achievementId}`);
   }
 
   /**
-   * Создание достижения для пользователя
-   * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор достижения
-   * @returns Observable с созданным достижением
+   * Создание тест-кейса для пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable<IUserHasAchievement>} Созданный тест-кейс.
+   * @example
+   * // POST /api/UserAchievements/Create/1/14
+   * this.userAchievementsService.createUserAchievement(1, 14).subscribe(ach => {
+   *   // ach: { dpUserProjId, achievementId, isObtained, ... }
+   * });
    */
   createUserAchievement(userProjId: number, achievementId: number): Observable<IUserHasAchievement> {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
     return this.http
-      .post<IUserHasAchievement>(`${this.baseUrl}/Create/${userProjId}/${achievementId}`, {})
+      .post<IUserHasAchievement>(`${this.baseUrl}/Create/${userProjId}/${achievementId}`, {});
   }
 
   /**
-   * Разблокировка достижения для пользователя
-   * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор достижения
-   * @returns Observable<void>
+   * Разблокировка тест-кейса для пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable<void>} Результат разблокировки.
+   * @example
+   * // PUT /api/UserAchievements/Unlock/1/14
+   * this.userAchievementsService.unlockUserAchievement(1, 14).subscribe(() => {
+   *   // Тест-кейс разблокирован
+   * });
    */
   unlockUserAchievement(userProjId: number, achievementId: number): Observable<void> {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
     return this.http
-      .put<void>(`${this.baseUrl}/Unlock/${userProjId}/${achievementId}`, {})
-
+      .put<void>(`${this.baseUrl}/Unlock/${userProjId}/${achievementId}`, {});
   }
 
   /**
-   * Получение завершенных достижений по имени пользователя
-   * @param username Имя пользователя
-   * @returns Observable с массивом завершенных достижений
+   * Получение завершённых тест-кейсов по имени пользователя.
+   * @param {string} username Имя пользователя.
+   * @returns {Observable<IAchievement[]>} Массив завершённых тест-кейсов.
+   * @example
+   * // GET /api/UserAchievements/Completed/vasya
+   * this.userAchievementsService.getCompletedAchievementsByUsername('vasya').subscribe(list => {
+   *   // list: [{ achievementId, title, ... }]
+   * });
    */
   getCompletedAchievementsByUsername(username: string): Observable<IAchievement[]> {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
     }
     return this.http
-      .get<IAchievement[]>(`${this.baseUrl}/Completed/${username}`)
+      .get<IAchievement[]>(`${this.baseUrl}/Completed/${username}`);
   }
 
   /**
-    * Проверка существования тест-кейса у пользователя
-    * @param userProjId Идентификатор пользователя
-    * @param achievementId Идентификатор тест-кейса
-    * @returns Observable<boolean>
-    */
+   * Проверка существования тест-кейса у пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable<boolean>} true, если тест-кейс уже есть.
+   * @example
+   * // GET /api/UserAchievements/Exists/1/14
+   * this.userAchievementsService.checkUserAchievementExists(1, 14).subscribe(exists => {
+   *   // exists: true/false
+   * });
+   */
   checkUserAchievementExists(userProjId: number, achievementId: number): Observable<boolean> {
     if (this.simulateServerFailure()) {
       return throwError(() => new Error('Имитация сбоя сервера'));
@@ -122,12 +168,14 @@ private simulateServerFailure(): boolean {
   }
 
   /**
-    * Универсальный метод для обработки тест-кейса
-    * @param userProjId Идентификатор пользователя проекта
-    * @param achievementId Идентификатор тест-кейса
-    * @param successMessage Сообщение для успешного уведомления
-    * @returns Observable<void>
-    */
+   * Универсальный метод для обработки тест-кейса (создание, разблокировка, имитация ошибки).
+   * @param {number} userProjId Идентификатор пользователя проекта.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @param {string} successMessage Сообщение для успешного уведомления.
+   * @returns {Observable<void>} Результат обработки.
+   * @example
+   * this.userAchievementsService.handleAchievement(1, 14, 'Каталог успешно загружен!').subscribe();
+   */
   handleAchievement(
     userProjId: number,
     achievementId: number,
@@ -152,9 +200,9 @@ private simulateServerFailure(): boolean {
         switchMap(result => {
           if (result === null) {
             // Тест-кейс уже существует
-            this.alertService
-              .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
-              .subscribe();
+            // this.alertService
+            //   .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
+            //   .subscribe();
             return of(void 0);
           }
           return this.unlockUserAchievement(userProjId, failedAchievementId);
@@ -178,9 +226,9 @@ private simulateServerFailure(): boolean {
       switchMap(exists => {
         if (exists) {
           console.log(`Тест-кейс ${achievementId} уже выполнен для userProjId ${userProjId}`);
-          this.alertService
-            .open('Тест-кейс уже выполнен!', { appearance: 'info' })
-            .subscribe();
+          // this.alertService
+          //   .open('Тест-кейс уже выполнен!', { appearance: 'info' })
+          //   .subscribe();
           return of(void 0); // Ничего не делаем, если тест-кейс уже есть
         }
         return this.createUserAchievement(userProjId, achievementId).pipe(
@@ -207,9 +255,9 @@ private simulateServerFailure(): boolean {
           switchMap(result => {
             if (result === null) {
               // Ошибочный тест-кейс уже существует
-              this.alertService
-                .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
-                .subscribe();
+              // this.alertService
+              //   .open('Тест-кейс ошибки уже выполнен!', { appearance: 'info' })
+              //   .subscribe();
               return of(void 0);
             }
             return this.unlockUserAchievement(userProjId, failedAchievementId);
@@ -231,9 +279,11 @@ private simulateServerFailure(): boolean {
   }
 
   /**
-   * Получение ID отрицательного тест-кейса на основе положительного
-   * @param successAchievementId ID успешного тест-кейса
-   * @returns ID соответствующего отрицательного тест-кейса
+   * Получение ID отрицательного тест-кейса на основе положительного.
+   * @param {number} successAchievementId ID успешного тест-кейса.
+   * @returns {number} ID соответствующего отрицательного тест-кейса.
+   * @example
+   * const failedId = this.userAchievementsService.getFailedAchievementId(14);
    */
   private getFailedAchievementId(successAchievementId: number): number {
     const successToFailedMap: { [key: number]: number } = {
@@ -275,6 +325,4 @@ private simulateServerFailure(): boolean {
 
     return successToFailedMap[successAchievementId] || this.configService.achievementIds.buttonNotWorking;
   }
-
-
 }

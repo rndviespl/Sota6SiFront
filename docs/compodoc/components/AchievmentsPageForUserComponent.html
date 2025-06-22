@@ -277,7 +277,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, userAchievementsRepo: <a href="../injectables/UserAchievementsRepositoryService.html" target="_self">UserAchievementsRepositoryService</a>, achievementsRepo: <a href="../injectables/AchievementsRepositoryService.html" target="_self">AchievementsRepositoryService</a>)</code>
+<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, userAchievementsRepo: UserAchievementsRepositoryService, achievementsRepo: AchievementsRepositoryService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -315,7 +315,7 @@
                                                         <td>userAchievementsRepo</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UserAchievementsRepositoryService.html" target="_self" >UserAchievementsRepositoryService</a></code>
+                                                                    <code>UserAchievementsRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -327,7 +327,7 @@
                                                         <td>achievementsRepo</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/AchievementsRepositoryService.html" target="_self" >AchievementsRepositoryService</a></code>
+                                                                    <code>AchievementsRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -955,7 +955,7 @@ private readonly authProjService &#x3D; inject(AuthProjService);
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="achievements-table-wrapper">  <table tuiTable [columns]="[\'title\', \'textAchievement\', \'status\']">    <thead>      <tr tuiThGroup>        <th *tuiHead="\'title\'" tuiTh (click)="onNotWorkingButtonClick()">Название</th>        <th *tuiHead="\'textAchievement\'" tuiTh (click)="onNotWorkingButtonClick()">Описание</th>        <th *tuiHead="\'status\'" tuiTh (click)="onNotWorkingButtonClick()">Статус</th>      </tr>    </thead>    <tbody tuiTbody>      <tr *ngFor="let ach of allAchievements" tuiTr>        <td *tuiCell="\'title\'" tuiTd>{{ ach.title }}</td>        <td *tuiCell="\'textAchievement\'" tuiTd>{{ ach.textAchievement }}</td>        <td *tuiCell="\'status\'" tuiTd>          <span *ngIf="isCompleted(ach.achievementId)" class="completed">Выполнено</span>          <span *ngIf="!isCompleted(ach.achievementId)" class="not-completed">—</span>        </td>      </tr>    </tbody>  </table></div></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'ButtonComponent', 'selector': 'storybook-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'storybook-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageComponent', 'selector': 'storybook-page'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AchievmentsPageForUserComponent'};
 </script>

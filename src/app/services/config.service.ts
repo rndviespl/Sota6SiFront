@@ -1,9 +1,25 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Сервис для хранения глобальных констант и конфигураций приложения.
+ *
+ * @remarks
+ * Содержит идентификаторы достижений, API endpoints и коды HTTP-статусов, используемые во всём приложении.
+ *
+ * @example
+ * const id = this.configService.achievementIds.loginSuccess;
+ * const url = this.configService.apiEndpoints.login;
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
+  /**
+   * Идентификаторы достижений (успешные и неуспешные сценарии).
+   *
+   * @example
+   * this.configService.achievementIds.addToCartSuccess
+   */
   readonly achievementIds = {
     loginSuccess: 1,             // Успешный вход
     registerSuccess: 2,          // Успешная регистрация
@@ -56,6 +72,12 @@ export class ConfigService {
     checkoutEmptyCart: 48,       // Пустая корзина (переназначено)
   };
 
+  /**
+   * Пути к API endpoint'ам.
+   *
+   * @example
+   * this.configService.apiEndpoints.login
+   */
   readonly apiEndpoints = {
     login: '/api/login',
     register: '/api/register',
@@ -76,6 +98,12 @@ export class ConfigService {
     logoutProj: '/api/auth/logout-proj'
   };
 
+  /**
+   * Коды HTTP-статусов для обработки ответов сервера.
+   *
+   * @example
+   * if (response.status === this.configService.httpStatusCodes.success) { ... }
+   */
   readonly httpStatusCodes = {
     // 2xx: Успешные
     success: 200,          // Успешный запрос

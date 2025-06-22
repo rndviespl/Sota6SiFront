@@ -271,7 +271,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: ActivatedRoute, productsRepositoryService: <a href="../injectables/ProductsRepositoryService.html" target="_self">ProductsRepositoryService</a>, sanitizer: DomSanitizer, cartService: <a href="../injectables/ShopCartRepositoryService.html" target="_self">ShopCartRepositoryService</a>, userAchievementsRepository: <a href="../injectables/UserAchievementsRepositoryService.html" target="_self">UserAchievementsRepositoryService</a>, userAchievementsService: <a href="../injectables/UserAchievementsService.html" target="_self">UserAchievementsService</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, alertService: TuiAlertService)</code>
+<code>constructor(route: ActivatedRoute, productsRepositoryService: ProductsRepositoryService, sanitizer: DomSanitizer, cartService: ShopCartRepositoryService, userAchievementsRepository: UserAchievementsRepositoryService, userAchievementsService: <a href="../injectables/UserAchievementsService.html" target="_self">UserAchievementsService</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, alertService: TuiAlertService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -309,7 +309,7 @@
                                                         <td>productsRepositoryService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ProductsRepositoryService.html" target="_self" >ProductsRepositoryService</a></code>
+                                                                    <code>ProductsRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -333,7 +333,7 @@
                                                         <td>cartService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ShopCartRepositoryService.html" target="_self" >ShopCartRepositoryService</a></code>
+                                                                    <code>ShopCartRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -345,7 +345,7 @@
                                                         <td>userAchievementsRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UserAchievementsRepositoryService.html" target="_self" >UserAchievementsRepositoryService</a></code>
+                                                                    <code>UserAchievementsRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -1249,7 +1249,7 @@ export class PageItemFromCatalogComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="product-card fade-in">  <div class="product-row">    <div class="product-image-container">      <app-carousel-img [images]="images" class="product-image" (imageClick)="onImageClick($event)"></app-carousel-img>    </div>    <div class="product-details-container">      <h3 class="product-title">{{ productInfo?.dpTitle }}</h3>      <p class="product-price">{{ productInfo?.dpPrice | currency:\'RUB \' }}</p>      <p class="product-description">{{ productInfo?.dpDescription }}</p>      <p class="product-category">{{ productInfo?.dpCategory?.dpCategoryTitle }}</p>      <div class="product-actions">        <div class="quantity-container">           <input type="number" [(ngModel)]="quantity" min="1" max="100" step="1"  class="quantity-input">        </div>               <button type="button" tuiButton appearance="primary" class="btn-add-to-cart" (click)="addToCart()">          Добавить в корзину        </button>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'ButtonComponent', 'selector': 'storybook-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'storybook-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageComponent', 'selector': 'storybook-page'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PageItemFromCatalogComponent'};
 </script>

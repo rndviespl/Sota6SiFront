@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с товарами (Products).</p>
+<p>Позволяет получать, создавать, обновлять, удалять товары, а также добавлять товары в корзину через API.</p>
+
+            </p>
 
 
 
@@ -191,7 +199,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-products.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/services/dp-products.service.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -254,14 +262,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/services/dp-products.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/services/dp-products.service.ts:142</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Добавляет товар в корзину.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/Products/AddToCart
+// Body:
+// {
+//   &quot;productId&quot;: 1,
+//   &quot;quantity&quot;: 2,
+//   &quot;sizeId&quot;: 3
+// }
+this.productsService.addToCart({
+  productId: 1,
+  quantity: 2,
+  sizeId: 3
+}).subscribe(res =&gt; {
+  // res: { success: true, message: &quot;Product added to cart.&quot; }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -272,6 +295,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -286,6 +310,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Данные для добавления в корзину.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -295,7 +323,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат операции.</p>
+
                             </div>
                 </td>
             </tr>
@@ -321,14 +350,32 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/services/dp-products.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/services/dp-products.service.ts:75</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт новый товар.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/Products
+// Body:
+// {
+//   &quot;dpProductId&quot;: 0,
+//   &quot;dpProductTitle&quot;: &quot;Кроссовки&quot;,
+//   &quot;dpCategoryId&quot;: 2,
+//   &quot;dpProductDescription&quot;: &quot;Описание товара&quot;,
+//   ...другие поля...
+// }
+this.productsService.createProduct({
+  dpProductId: 0,
+  dpProductTitle: &#39;Кроссовки&#39;,
+  dpCategoryId: 2,
+  dpProductDescription: &#39;Описание товара&#39;
+}).subscribe(newProduct =&gt; {
+  // newProduct: { ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -339,6 +386,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -353,6 +401,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект товара.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -362,7 +414,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданный товар.</p>
+
                             </div>
                 </td>
             </tr>
@@ -388,14 +441,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/services/dp-products.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/services/dp-products.service.ts:117</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет товар по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/Products/1
+this.productsService.deleteProduct(1).subscribe(() =&gt; {
+  // Товар удалён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -406,6 +464,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -420,6 +479,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор товара.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -429,7 +492,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -455,19 +519,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/services/dp-products.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/app/services/dp-products.service.ts:32</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех товаров.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/Products
+this.productsService.getAllProducts().subscribe(products =&gt; {
+  // products: [{ dpProductId, dpProductTitle, ... }]
+  console.log(products);
+});</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/IDpProduct.html" target="_self" >Observable&lt;IDpProduct[]&gt;</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список товаров.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -492,14 +566,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/services/dp-products.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/services/dp-products.service.ts:47</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает товар по его идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/Products/1
+this.productsService.getProductById(1).subscribe(product =&gt; {
+  // product: { dpProductId, dpProductTitle, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -510,6 +589,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -524,6 +604,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор товара.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -533,7 +617,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Товар.</p>
+
                             </div>
                 </td>
             </tr>
@@ -559,14 +644,30 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/services/dp-products.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/services/dp-products.service.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующий товар.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/Products/1
+// Body:
+// {
+//   &quot;dpProductId&quot;: 1,
+//   &quot;dpProductTitle&quot;: &quot;Обновлённый товар&quot;,
+//   &quot;dpCategoryId&quot;: 2,
+//   ...другие поля...
+// }
+this.productsService.updateProduct(1, {
+  dpProductId: 1,
+  dpProductTitle: &#39;Обновлённый товар&#39;,
+  dpCategoryId: 2
+}).subscribe(() =&gt; {
+  // Товар обновлён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -577,6 +678,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -591,6 +693,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор товара.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>product</td>
@@ -603,6 +709,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённый объект товара.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -612,7 +722,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -643,7 +754,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-products.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/services/dp-products.service.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -662,6 +773,12 @@ import { Observable } from &#x27;rxjs&#x27;;
 import { IDpProduct } from &#x27;../interface/IDpProduct&#x27;;
 import { IAddToCartRequest } from &#x27;../interface/IAddToCartRequest&#x27;;
 
+/**
+ * Сервис для работы с товарами (Products).
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять, удалять товары, а также добавлять товары в корзину через API.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -670,26 +787,127 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех товаров.
+   *
+   * @returns {Observable&lt;IDpProduct[]&gt;} Список товаров.
+   * @example
+   * // GET /api/Products
+   * this.productsService.getAllProducts().subscribe(products &#x3D;&gt; {
+   *   // products: [{ dpProductId, dpProductTitle, ... }]
+   *   console.log(products);
+   * });
+   */
   getAllProducts(): Observable&lt;IDpProduct[]&gt; {
     return this.http.get&lt;IDpProduct[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает товар по его идентификатору.
+   *
+   * @param {number} id Идентификатор товара.
+   * @returns {Observable&lt;IDpProduct&gt;} Товар.
+   * @example
+   * // GET /api/Products/1
+   * this.productsService.getProductById(1).subscribe(product &#x3D;&gt; {
+   *   // product: { dpProductId, dpProductTitle, ... }
+   * });
+   */
   getProductById(id: number): Observable&lt;IDpProduct&gt; {
     return this.http.get&lt;IDpProduct&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Создаёт новый товар.
+   *
+   * @param {IDpProduct} product Объект товара.
+   * @returns {Observable&lt;IDpProduct&gt;} Созданный товар.
+   * @example
+   * // POST /api/Products
+   * // Body:
+   * // {
+   * //   &quot;dpProductId&quot;: 0,
+   * //   &quot;dpProductTitle&quot;: &quot;Кроссовки&quot;,
+   * //   &quot;dpCategoryId&quot;: 2,
+   * //   &quot;dpProductDescription&quot;: &quot;Описание товара&quot;,
+   * //   ...другие поля...
+   * // }
+   * this.productsService.createProduct({
+   *   dpProductId: 0,
+   *   dpProductTitle: &#x27;Кроссовки&#x27;,
+   *   dpCategoryId: 2,
+   *   dpProductDescription: &#x27;Описание товара&#x27;
+   * }).subscribe(newProduct &#x3D;&gt; {
+   *   // newProduct: { ... }
+   * });
+   */
   createProduct(product: IDpProduct): Observable&lt;IDpProduct&gt; {
     return this.http.post&lt;IDpProduct&gt;(this.baseUrl, product);
   }
 
+  /**
+   * Обновляет существующий товар.
+   *
+   * @param {number} id Идентификатор товара.
+   * @param {IDpProduct} product Обновлённый объект товара.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/Products/1
+   * // Body:
+   * // {
+   * //   &quot;dpProductId&quot;: 1,
+   * //   &quot;dpProductTitle&quot;: &quot;Обновлённый товар&quot;,
+   * //   &quot;dpCategoryId&quot;: 2,
+   * //   ...другие поля...
+   * // }
+   * this.productsService.updateProduct(1, {
+   *   dpProductId: 1,
+   *   dpProductTitle: &#x27;Обновлённый товар&#x27;,
+   *   dpCategoryId: 2
+   * }).subscribe(() &#x3D;&gt; {
+   *   // Товар обновлён
+   * });
+   */
   updateProduct(id: number, product: IDpProduct): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, product);
   }
 
+  /**
+   * Удаляет товар по идентификатору.
+   *
+   * @param {number} id Идентификатор товара.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/Products/1
+   * this.productsService.deleteProduct(1).subscribe(() &#x3D;&gt; {
+   *   // Товар удалён
+   * });
+   */
   deleteProduct(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Добавляет товар в корзину.
+   *
+   * @param {IAddToCartRequest} request Данные для добавления в корзину.
+   * @returns {Observable&lt;{ success: boolean; message: string }&gt;} Результат операции.
+   * @example
+   * // POST /api/Products/AddToCart
+   * // Body:
+   * // {
+   * //   &quot;productId&quot;: 1,
+   * //   &quot;quantity&quot;: 2,
+   * //   &quot;sizeId&quot;: 3
+   * // }
+   * this.productsService.addToCart({
+   *   productId: 1,
+   *   quantity: 2,
+   *   sizeId: 3
+   * }).subscribe(res &#x3D;&gt; {
+   *   // res: { success: true, message: &quot;Product added to cart.&quot; }
+   * });
+   */
   addToCart(request: IAddToCartRequest): Observable&lt;{ success: boolean; message: string }&gt; {
     return this.http.post&lt;{ success: boolean; message: string }&gt;(&#x60;${this.baseUrl}/AddToCart&#x60;, request);
   }

@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { IDpSize } from '../interface/IDpSize';
 import { DpSizesService } from '../services/dp-sizes.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

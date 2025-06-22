@@ -4,6 +4,10 @@ import { IAchievement } from '../interface/IAchievement';
 import { IUserHasAchievement } from '../interface/IUserHasAchievement';
 import { UserAchievementsService } from '../services/user-achievements.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

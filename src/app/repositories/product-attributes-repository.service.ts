@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { IDpProductAttribute } from '../interface/IDpProductAttribute';
 import { DpProductAttributesService } from '../services/dp-product-attributes.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

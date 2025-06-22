@@ -119,6 +119,34 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для авторизации и регистрации пользователей проекта.</p>
+<p>Позволяет выполнять вход, регистрацию, выход и отслеживать статус авторизации пользователя.
+Работает с backend-контроллером по адресу <code>/api/AuthProj</code>.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Вход пользователя (POST):
+// URL: /api/AuthProj/login
+// Body:
+// {
+//   &quot;login&quot;: &quot;user&quot;,
+//   &quot;password&quot;: &quot;pass&quot;
+// }
+this.authProjService.login({ login: &#39;user&#39;, password: &#39;pass&#39; }).subscribe(res =&gt; {
+  // res: { token: string, userProjId: number }
+});</code></pre></div><p>// Регистрация пользователя (POST):
+// URL: /api/AuthProj/register
+// Body:
+// {
+//   &quot;login&quot;: &quot;newuser&quot;,
+//   &quot;password&quot;: &quot;newpass&quot;
+// }
+this.authProjService.register({ login: &#39;newuser&#39;, password: &#39;newpass&#39; }).subscribe(res =&gt; {
+  // res: { token: string, userProjId: number }
+});</p>
+
+            </p>
 
 
 
@@ -196,7 +224,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/auth-proj.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/services/auth-proj.service.ts:47</a></div>
                             </td>
                         </tr>
 
@@ -259,14 +287,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/services/auth-proj.service.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/services/auth-proj.service.ts:129</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Проверяет статус авторизации пользователя по наличию токена.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -296,14 +326,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/services/auth-proj.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/services/auth-proj.service.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Выполняет вход пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/AuthProj/login
+// Body:
+// {
+//   &quot;login&quot;: &quot;user&quot;,
+//   &quot;password&quot;: &quot;pass&quot;
+// }
+this.authProjService.login({ login: &#39;user&#39;, password: &#39;pass&#39; }).subscribe(res =&gt; {
+  // res: { token: string, userProjId: number }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -314,6 +354,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -328,6 +369,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Данные пользователя (логин и пароль).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -337,7 +382,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Ответ с токеном и ID пользователя.</p>
+
                             </div>
                 </td>
             </tr>
@@ -363,19 +409,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">src/app/services/auth-proj.service.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/services/auth-proj.service.ts:140</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Выполняет выход пользователя, очищая локальное хранилище.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.authProjService.logout();</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -400,14 +451,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/services/auth-proj.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/services/auth-proj.service.ts:101</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Регистрирует нового пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/AuthProj/register
+// Body:
+// {
+//   &quot;login&quot;: &quot;newuser&quot;,
+//   &quot;password&quot;: &quot;newpass&quot;
+// }
+this.authProjService.register({ login: &#39;newuser&#39;, password: &#39;newpass&#39; }).subscribe(res =&gt; {
+  // res: { token: string, userProjId: number }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -418,6 +479,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -432,6 +494,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Данные пользователя (логин и пароль).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -441,7 +507,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Ответ с токеном и ID пользователя.</p>
+
                             </div>
                 </td>
             </tr>
@@ -467,14 +534,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/services/auth-proj.service.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/services/auth-proj.service.ts:122</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Устанавливает статус авторизации пользователя.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -485,6 +554,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -499,6 +569,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Новый статус авторизации.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -539,7 +613,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/auth-proj.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/services/auth-proj.service.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -565,10 +639,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/auth-proj.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/services/auth-proj.service.ts:47</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Observable для отслеживания статуса авторизации пользователя.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -591,7 +671,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/auth-proj.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/services/auth-proj.service.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -610,18 +690,68 @@ import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
 import { tap } from &#x27;rxjs/operators&#x27;;
 import { IDpUserProj } from &#x27;../interface/IDpUserProj&#x27;;
 
+/**
+ * Сервис для авторизации и регистрации пользователей проекта.
+ *
+ * @remarks
+ * Позволяет выполнять вход, регистрацию, выход и отслеживать статус авторизации пользователя.
+ * Работает с backend-контроллером по адресу &#x60;/api/AuthProj&#x60;.
+ *
+ * @example
+ * // Вход пользователя (POST):
+ * // URL: /api/AuthProj/login
+ * // Body:
+ * // {
+ * //   &quot;login&quot;: &quot;user&quot;,
+ * //   &quot;password&quot;: &quot;pass&quot;
+ * // }
+ * this.authProjService.login({ login: &#x27;user&#x27;, password: &#x27;pass&#x27; }).subscribe(res &#x3D;&gt; {
+ *   // res: { token: string, userProjId: number }
+ * });
+ *
+ * // Регистрация пользователя (POST):
+ * // URL: /api/AuthProj/register
+ * // Body:
+ * // {
+ * //   &quot;login&quot;: &quot;newuser&quot;,
+ * //   &quot;password&quot;: &quot;newpass&quot;
+ * // }
+ * this.authProjService.register({ login: &#x27;newuser&#x27;, password: &#x27;newpass&#x27; }).subscribe(res &#x3D;&gt; {
+ *   // res: { token: string, userProjId: number }
+ * });
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class AuthProjService {
   private baseUrl &#x3D; &#x60;${window.location.origin}/api/AuthProj&#x60;;
   private isAuthenticatedSubject &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+
+  /**
+   * Observable для отслеживания статуса авторизации пользователя.
+   */
   public isAuthenticated$ &#x3D; this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.checkAuthStatus();
   }
 
+  /**
+   * Выполняет вход пользователя.
+   *
+   * @param {IDpUserProj} userProj Данные пользователя (логин и пароль).
+   * @returns {Observable&lt;{ token: string, userProjId: number }&gt;} Ответ с токеном и ID пользователя.
+   * @example
+   * // POST /api/AuthProj/login
+   * // Body:
+   * // {
+   * //   &quot;login&quot;: &quot;user&quot;,
+   * //   &quot;password&quot;: &quot;pass&quot;
+   * // }
+   * this.authProjService.login({ login: &#x27;user&#x27;, password: &#x27;pass&#x27; }).subscribe(res &#x3D;&gt; {
+   *   // res: { token: string, userProjId: number }
+   * });
+   */
   login(userProj: IDpUserProj): Observable&lt;{ token: string, userProjId: number }&gt; {
     const payload &#x3D; {
       login: userProj.login,
@@ -638,6 +768,22 @@ export class AuthProjService {
     );
   }
 
+  /**
+   * Регистрирует нового пользователя.
+   *
+   * @param {IDpUserProj} userProj Данные пользователя (логин и пароль).
+   * @returns {Observable&lt;{ token: string, userProjId: number }&gt;} Ответ с токеном и ID пользователя.
+   * @example
+   * // POST /api/AuthProj/register
+   * // Body:
+   * // {
+   * //   &quot;login&quot;: &quot;newuser&quot;,
+   * //   &quot;password&quot;: &quot;newpass&quot;
+   * // }
+   * this.authProjService.register({ login: &#x27;newuser&#x27;, password: &#x27;newpass&#x27; }).subscribe(res &#x3D;&gt; {
+   *   // res: { token: string, userProjId: number }
+   * });
+   */
   register(userProj: IDpUserProj): Observable&lt;{ token: string, userProjId: number }&gt; {
     const payload &#x3D; {
       login: userProj.login,
@@ -654,18 +800,32 @@ export class AuthProjService {
     );
   }
 
+  /**
+   * Устанавливает статус авторизации пользователя.
+   *
+   * @param {boolean} isAuthenticated Новый статус авторизации.
+   */
   setAuthenticated(isAuthenticated: boolean): void {
     this.isAuthenticatedSubject.next(isAuthenticated);
   }
 
+  /**
+   * Проверяет статус авторизации пользователя по наличию токена.
+   */
   checkAuthStatus(): void {
     const token &#x3D; localStorage.getItem(&#x27;projToken&#x27;);
     this.setAuthenticated(!!token);
   }
 
+  /**
+   * Выполняет выход пользователя, очищая локальное хранилище.
+   *
+   * @example
+   * this.authProjService.logout();
+   */
   logout(): void {
     localStorage.removeItem(&#x27;projToken&#x27;);
-        localStorage.removeItem(&#x27;token&#x27;);
+    localStorage.removeItem(&#x27;token&#x27;);
     localStorage.removeItem(&#x27;userProjId&#x27;);
     this.setAuthenticated(false);
   }

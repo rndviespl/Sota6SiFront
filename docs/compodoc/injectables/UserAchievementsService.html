@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с тест-кейсами пользователя.</p>
+<p>Позволяет получать, создавать, разблокировать тест-кейсы, а также имитировать ошибки тест-кейсов для тестирования UI и логики.</p>
+
+            </p>
 
 
 
@@ -215,7 +223,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/user-achievements.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/services/user-achievements.service.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -302,16 +310,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:154</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Проверка существования тест-кейса у пользователя</p>
-</div>
+                        <div class="io-description"><p>Проверка существования тест-кейса у пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/UserAchievements/Exists/1/14
+this.userAchievementsService.checkUserAchievementExists(1, 14).subscribe(exists =&gt; {
+  // exists: true/false
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -338,7 +349,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор пользователя</p>
+                                                    <p>Идентификатор пользователя.</p>
 
                                             </td>
                                         </tr>
@@ -354,7 +365,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор тест-кейса</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -366,7 +377,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable<boolean></p>
+                                <p>true, если тест-кейс уже есть.</p>
 
                             </div>
                 </td>
@@ -393,16 +404,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:98</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Создание достижения для пользователя</p>
-</div>
+                        <div class="io-description"><p>Создание тест-кейса для пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/UserAchievements/Create/1/14
+this.userAchievementsService.createUserAchievement(1, 14).subscribe(ach =&gt; {
+  // ach: { dpUserProjId, achievementId, isObtained, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -429,7 +443,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор пользователя</p>
+                                                    <p>Идентификатор пользователя.</p>
 
                                             </td>
                                         </tr>
@@ -445,7 +459,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор достижения</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -453,11 +467,11 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;IUserHasAchievement&gt;</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/IUserHasAchievement.html" target="_self" >Observable&lt;IUserHasAchievement&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable с созданным достижением</p>
+                                <p>Созданный тест-кейс.</p>
 
                             </div>
                 </td>
@@ -484,23 +498,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Получение всех достижений пользователя</p>
-</div>
+                        <div class="io-description"><p>Получение всех тест-кейсов пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/UserAchievements
+this.userAchievementsService.getAllUserAchievements().subscribe(list =&gt; {
+  // list: [{ dpUserProjId, achievementId, isObtained, ... }]
+  console.log(list);
+});</code></pre></div></div>
 
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;IUserHasAchievement[]&gt;</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/IUserHasAchievement.html" target="_self" >Observable&lt;IUserHasAchievement[]&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable с массивом достижений</p>
+                                <p>Массив тест-кейсов пользователя.</p>
 
                             </div>
                 </td>
@@ -527,19 +545,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:44</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Проверяет, включён ли режим имитации ошибок тест-кейсов.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">if (this.userAchievementsService.getAlwaysFailMode()) { ... }</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>true, если режим включён.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -564,16 +588,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:135</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Получение завершенных достижений по имени пользователя</p>
-</div>
+                        <div class="io-description"><p>Получение завершённых тест-кейсов по имени пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/UserAchievements/Completed/vasya
+this.userAchievementsService.getCompletedAchievementsByUsername(&#39;vasya&#39;).subscribe(list =&gt; {
+  // list: [{ achievementId, title, ... }]
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -600,7 +627,7 @@
 
 
                                             <td>
-                                                    <p>Имя пользователя</p>
+                                                    <p>Имя пользователя.</p>
 
                                             </td>
                                         </tr>
@@ -612,7 +639,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable с массивом завершенных достижений</p>
+                                <p>Массив завершённых тест-кейсов.</p>
 
                             </div>
                 </td>
@@ -641,16 +668,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="238"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:238</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="288"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:288</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Получение ID отрицательного тест-кейса на основе положительного</p>
-</div>
+                        <div class="io-description"><p>Получение ID отрицательного тест-кейса на основе положительного.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const failedId = this.userAchievementsService.getFailedAchievementId(14);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -677,7 +704,7 @@
 
 
                                             <td>
-                                                    <p>ID успешного тест-кейса</p>
+                                                    <p>ID успешного тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -689,7 +716,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>ID соответствующего отрицательного тест-кейса</p>
+                                <p>ID соответствующего отрицательного тест-кейса.</p>
 
                             </div>
                 </td>
@@ -716,16 +743,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:80</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Получение конкретного достижения пользователя</p>
-</div>
+                        <div class="io-description"><p>Получение конкретного тест-кейса пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/UserAchievements/1/14
+this.userAchievementsService.getUserAchievement(1, 14).subscribe(ach =&gt; {
+  // ach: { dpUserProjId, achievementId, isObtained, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -752,7 +782,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор пользователя</p>
+                                                    <p>Идентификатор пользователя.</p>
 
                                             </td>
                                         </tr>
@@ -768,7 +798,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор достижения</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -776,11 +806,11 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;IUserHasAchievement&gt;</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/IUserHasAchievement.html" target="_self" >Observable&lt;IUserHasAchievement&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>Observable с достижением</p>
+                                <p>Тест-кейс пользователя.</p>
 
                             </div>
                 </td>
@@ -807,16 +837,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:179</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Универсальный метод для обработки тест-кейса</p>
-</div>
+                        <div class="io-description"><p>Универсальный метод для обработки тест-кейса (создание, разблокировка, имитация ошибки).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.userAchievementsService.handleAchievement(1, 14, &#39;Каталог успешно загружен!&#39;).subscribe();</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -843,7 +873,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор пользователя проекта</p>
+                                                    <p>Идентификатор пользователя проекта.</p>
 
                                             </td>
                                         </tr>
@@ -859,7 +889,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор тест-кейса</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -875,7 +905,7 @@
 
 
                                             <td>
-                                                    <p>Сообщение для успешного уведомления</p>
+                                                    <p>Сообщение для успешного уведомления.</p>
 
                                             </td>
                                         </tr>
@@ -887,7 +917,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable<void></p>
+                                <p>Результат обработки.</p>
 
                             </div>
                 </td>
@@ -914,14 +944,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:34</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Включает или выключает режим имитации ошибок тест-кейсов.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.userAchievementsService.setAlwaysFailMode(true);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -932,6 +964,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -946,6 +979,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>true — всегда имитировать ошибку, false — обычный режим.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -983,8 +1020,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -1020,16 +1057,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/services/user-achievements.service.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/services/user-achievements.service.ts:117</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Разблокировка достижения для пользователя</p>
-</div>
+                        <div class="io-description"><p>Разблокировка тест-кейса для пользователя.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/UserAchievements/Unlock/1/14
+this.userAchievementsService.unlockUserAchievement(1, 14).subscribe(() =&gt; {
+  // Тест-кейс разблокирован
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1056,7 +1096,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор пользователя</p>
+                                                    <p>Идентификатор пользователя.</p>
 
                                             </td>
                                         </tr>
@@ -1072,7 +1112,7 @@
 
 
                                             <td>
-                                                    <p>Идентификатор достижения</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -1084,7 +1124,7 @@
 
                         </div>
                             <div class="io-description">
-                                <p>Observable<void></p>
+                                <p>Результат разблокировки.</p>
 
                             </div>
                 </td>
@@ -1124,7 +1164,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/user-achievements.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/services/user-achievements.service.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -1157,7 +1197,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/user-achievements.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/services/user-achievements.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -1178,12 +1218,18 @@ import { IUserHasAchievement } from &#x27;../interface/IUserHasAchievement&#x27;
 import { ConfigService } from &#x27;./config.service&#x27;;
 import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
 
+/**
+ * Сервис для работы с тест-кейсами пользователя.
+ *
+ * @remarks
+ * Позволяет получать, создавать, разблокировать тест-кейсы, а также имитировать ошибки тест-кейсов для тестирования UI и логики.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class UserAchievementsService {
   private readonly baseUrl &#x3D; &#x27;/api/UserAchievements&#x27;; // Прокси для API
-private static readonly ALWAYS_FAIL_KEY &#x3D; &#x27;alwaysFailMode&#x27;;
+  private static readonly ALWAYS_FAIL_KEY &#x3D; &#x27;alwaysFailMode&#x27;;
 
   constructor(
     private readonly http: HttpClient,
@@ -1191,92 +1237,132 @@ private static readonly ALWAYS_FAIL_KEY &#x3D; &#x27;alwaysFailMode&#x27;;
     private readonly alertService: TuiAlertService
   ) { }
 
-setAlwaysFailMode(value: boolean) {
-  localStorage.setItem(UserAchievementsService.ALWAYS_FAIL_KEY, value ? &#x27;1&#x27; : &#x27;0&#x27;);
-}
-
-getAlwaysFailMode(): boolean {
-  return localStorage.getItem(UserAchievementsService.ALWAYS_FAIL_KEY) &#x3D;&#x3D;&#x3D; &#x27;1&#x27;;
-}
-
-private simulateServerFailure(): boolean {
-   return this.getAlwaysFailMode();
-}
+  /**
+   * Включает или выключает режим имитации ошибок тест-кейсов.
+   * @param {boolean} value true — всегда имитировать ошибку, false — обычный режим.
+   * @example
+   * this.userAchievementsService.setAlwaysFailMode(true);
+   */
+  setAlwaysFailMode(value: boolean) {
+    localStorage.setItem(UserAchievementsService.ALWAYS_FAIL_KEY, value ? &#x27;1&#x27; : &#x27;0&#x27;);
+  }
 
   /**
-   * Получение всех достижений пользователя
-   * @returns Observable с массивом достижений
+   * Проверяет, включён ли режим имитации ошибок тест-кейсов.
+   * @returns {boolean} true, если режим включён.
+   * @example
+   * if (this.userAchievementsService.getAlwaysFailMode()) { ... }
+   */
+  getAlwaysFailMode(): boolean {
+    return localStorage.getItem(UserAchievementsService.ALWAYS_FAIL_KEY) &#x3D;&#x3D;&#x3D; &#x27;1&#x27;;
+  }
+
+  private simulateServerFailure(): boolean {
+    return this.getAlwaysFailMode();
+  }
+
+  /**
+   * Получение всех тест-кейсов пользователя.
+   * @returns {Observable&lt;IUserHasAchievement[]&gt;} Массив тест-кейсов пользователя.
+   * @example
+   * // GET /api/UserAchievements
+   * this.userAchievementsService.getAllUserAchievements().subscribe(list &#x3D;&gt; {
+   *   // list: [{ dpUserProjId, achievementId, isObtained, ... }]
+   *   console.log(list);
+   * });
    */
   getAllUserAchievements(): Observable&lt;IUserHasAchievement[]&gt; {
     if (this.simulateServerFailure()) {
       return throwError(() &#x3D;&gt; new Error(&#x27;Имитация сбоя сервера&#x27;));
     }
-    return this.http.get&lt;IUserHasAchievement[]&gt;(this.baseUrl)
-
+    return this.http.get&lt;IUserHasAchievement[]&gt;(this.baseUrl);
   }
 
   /**
-   * Получение конкретного достижения пользователя
-   * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор достижения
-   * @returns Observable с достижением
+   * Получение конкретного тест-кейса пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable&lt;IUserHasAchievement&gt;} Тест-кейс пользователя.
+   * @example
+   * // GET /api/UserAchievements/1/14
+   * this.userAchievementsService.getUserAchievement(1, 14).subscribe(ach &#x3D;&gt; {
+   *   // ach: { dpUserProjId, achievementId, isObtained, ... }
+   * });
    */
   getUserAchievement(userProjId: number, achievementId: number): Observable&lt;IUserHasAchievement&gt; {
     if (this.simulateServerFailure()) {
       return throwError(() &#x3D;&gt; new Error(&#x27;Имитация сбоя сервера&#x27;));
     }
-    return this.http.get&lt;IUserHasAchievement&gt;(&#x60;${this.baseUrl}/${userProjId}/${achievementId}&#x60;)
-
+    return this.http.get&lt;IUserHasAchievement&gt;(&#x60;${this.baseUrl}/${userProjId}/${achievementId}&#x60;);
   }
 
   /**
-   * Создание достижения для пользователя
-   * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор достижения
-   * @returns Observable с созданным достижением
+   * Создание тест-кейса для пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable&lt;IUserHasAchievement&gt;} Созданный тест-кейс.
+   * @example
+   * // POST /api/UserAchievements/Create/1/14
+   * this.userAchievementsService.createUserAchievement(1, 14).subscribe(ach &#x3D;&gt; {
+   *   // ach: { dpUserProjId, achievementId, isObtained, ... }
+   * });
    */
   createUserAchievement(userProjId: number, achievementId: number): Observable&lt;IUserHasAchievement&gt; {
     if (this.simulateServerFailure()) {
       return throwError(() &#x3D;&gt; new Error(&#x27;Имитация сбоя сервера&#x27;));
     }
     return this.http
-      .post&lt;IUserHasAchievement&gt;(&#x60;${this.baseUrl}/Create/${userProjId}/${achievementId}&#x60;, {})
+      .post&lt;IUserHasAchievement&gt;(&#x60;${this.baseUrl}/Create/${userProjId}/${achievementId}&#x60;, {});
   }
 
   /**
-   * Разблокировка достижения для пользователя
-   * @param userProjId Идентификатор пользователя
-   * @param achievementId Идентификатор достижения
-   * @returns Observable&lt;void&gt;
+   * Разблокировка тест-кейса для пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable&lt;void&gt;} Результат разблокировки.
+   * @example
+   * // PUT /api/UserAchievements/Unlock/1/14
+   * this.userAchievementsService.unlockUserAchievement(1, 14).subscribe(() &#x3D;&gt; {
+   *   // Тест-кейс разблокирован
+   * });
    */
   unlockUserAchievement(userProjId: number, achievementId: number): Observable&lt;void&gt; {
     if (this.simulateServerFailure()) {
       return throwError(() &#x3D;&gt; new Error(&#x27;Имитация сбоя сервера&#x27;));
     }
     return this.http
-      .put&lt;void&gt;(&#x60;${this.baseUrl}/Unlock/${userProjId}/${achievementId}&#x60;, {})
-
+      .put&lt;void&gt;(&#x60;${this.baseUrl}/Unlock/${userProjId}/${achievementId}&#x60;, {});
   }
 
   /**
-   * Получение завершенных достижений по имени пользователя
-   * @param username Имя пользователя
-   * @returns Observable с массивом завершенных достижений
+   * Получение завершённых тест-кейсов по имени пользователя.
+   * @param {string} username Имя пользователя.
+   * @returns {Observable&lt;IAchievement[]&gt;} Массив завершённых тест-кейсов.
+   * @example
+   * // GET /api/UserAchievements/Completed/vasya
+   * this.userAchievementsService.getCompletedAchievementsByUsername(&#x27;vasya&#x27;).subscribe(list &#x3D;&gt; {
+   *   // list: [{ achievementId, title, ... }]
+   * });
    */
   getCompletedAchievementsByUsername(username: string): Observable&lt;IAchievement[]&gt; {
     if (this.simulateServerFailure()) {
       return throwError(() &#x3D;&gt; new Error(&#x27;Имитация сбоя сервера&#x27;));
     }
     return this.http
-      .get&lt;IAchievement[]&gt;(&#x60;${this.baseUrl}/Completed/${username}&#x60;)
+      .get&lt;IAchievement[]&gt;(&#x60;${this.baseUrl}/Completed/${username}&#x60;);
   }
 
   /**
-    * Проверка существования тест-кейса у пользователя
-    * @param userProjId Идентификатор пользователя
-    * @param achievementId Идентификатор тест-кейса
-    * @returns Observable&lt;boolean&gt;
-    */
+   * Проверка существования тест-кейса у пользователя.
+   * @param {number} userProjId Идентификатор пользователя.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @returns {Observable&lt;boolean&gt;} true, если тест-кейс уже есть.
+   * @example
+   * // GET /api/UserAchievements/Exists/1/14
+   * this.userAchievementsService.checkUserAchievementExists(1, 14).subscribe(exists &#x3D;&gt; {
+   *   // exists: true/false
+   * });
+   */
   checkUserAchievementExists(userProjId: number, achievementId: number): Observable&lt;boolean&gt; {
     if (this.simulateServerFailure()) {
       return throwError(() &#x3D;&gt; new Error(&#x27;Имитация сбоя сервера&#x27;));
@@ -1294,12 +1380,14 @@ private simulateServerFailure(): boolean {
   }
 
   /**
-    * Универсальный метод для обработки тест-кейса
-    * @param userProjId Идентификатор пользователя проекта
-    * @param achievementId Идентификатор тест-кейса
-    * @param successMessage Сообщение для успешного уведомления
-    * @returns Observable&lt;void&gt;
-    */
+   * Универсальный метод для обработки тест-кейса (создание, разблокировка, имитация ошибки).
+   * @param {number} userProjId Идентификатор пользователя проекта.
+   * @param {number} achievementId Идентификатор тест-кейса.
+   * @param {string} successMessage Сообщение для успешного уведомления.
+   * @returns {Observable&lt;void&gt;} Результат обработки.
+   * @example
+   * this.userAchievementsService.handleAchievement(1, 14, &#x27;Каталог успешно загружен!&#x27;).subscribe();
+   */
   handleAchievement(
     userProjId: number,
     achievementId: number,
@@ -1324,9 +1412,9 @@ private simulateServerFailure(): boolean {
         switchMap(result &#x3D;&gt; {
           if (result &#x3D;&#x3D;&#x3D; null) {
             // Тест-кейс уже существует
-            this.alertService
-              .open(&#x27;Тест-кейс ошибки уже выполнен!&#x27;, { appearance: &#x27;info&#x27; })
-              .subscribe();
+            // this.alertService
+            //   .open(&#x27;Тест-кейс ошибки уже выполнен!&#x27;, { appearance: &#x27;info&#x27; })
+            //   .subscribe();
             return of(void 0);
           }
           return this.unlockUserAchievement(userProjId, failedAchievementId);
@@ -1350,9 +1438,9 @@ private simulateServerFailure(): boolean {
       switchMap(exists &#x3D;&gt; {
         if (exists) {
           console.log(&#x60;Тест-кейс ${achievementId} уже выполнен для userProjId ${userProjId}&#x60;);
-          this.alertService
-            .open(&#x27;Тест-кейс уже выполнен!&#x27;, { appearance: &#x27;info&#x27; })
-            .subscribe();
+          // this.alertService
+          //   .open(&#x27;Тест-кейс уже выполнен!&#x27;, { appearance: &#x27;info&#x27; })
+          //   .subscribe();
           return of(void 0); // Ничего не делаем, если тест-кейс уже есть
         }
         return this.createUserAchievement(userProjId, achievementId).pipe(
@@ -1379,9 +1467,9 @@ private simulateServerFailure(): boolean {
           switchMap(result &#x3D;&gt; {
             if (result &#x3D;&#x3D;&#x3D; null) {
               // Ошибочный тест-кейс уже существует
-              this.alertService
-                .open(&#x27;Тест-кейс ошибки уже выполнен!&#x27;, { appearance: &#x27;info&#x27; })
-                .subscribe();
+              // this.alertService
+              //   .open(&#x27;Тест-кейс ошибки уже выполнен!&#x27;, { appearance: &#x27;info&#x27; })
+              //   .subscribe();
               return of(void 0);
             }
             return this.unlockUserAchievement(userProjId, failedAchievementId);
@@ -1403,9 +1491,11 @@ private simulateServerFailure(): boolean {
   }
 
   /**
-   * Получение ID отрицательного тест-кейса на основе положительного
-   * @param successAchievementId ID успешного тест-кейса
-   * @returns ID соответствующего отрицательного тест-кейса
+   * Получение ID отрицательного тест-кейса на основе положительного.
+   * @param {number} successAchievementId ID успешного тест-кейса.
+   * @returns {number} ID соответствующего отрицательного тест-кейса.
+   * @example
+   * const failedId &#x3D; this.userAchievementsService.getFailedAchievementId(14);
    */
   private getFailedAchievementId(successAchievementId: number): number {
     const successToFailedMap: { [key: number]: number } &#x3D; {
@@ -1447,8 +1537,6 @@ private simulateServerFailure(): boolean {
 
     return successToFailedMap[successAchievementId] || this.configService.achievementIds.buttonNotWorking;
   }
-
-
 }</code></pre>
     </div>
 

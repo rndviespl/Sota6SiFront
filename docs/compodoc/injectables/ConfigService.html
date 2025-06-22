@@ -119,6 +119,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для хранения глобальных констант и конфигураций приложения.</p>
+<p>Содержит идентификаторы достижений, API endpoints и коды HTTP-статусов, используемые во всём приложении.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const id = this.configService.achievementIds.loginSuccess;
+const url = this.configService.apiEndpoints.login;</code></pre></div>
+            </p>
 
 
 
@@ -241,10 +250,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/services/config.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/services/config.service.ts:23</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Идентификаторы достижений (успешные и неуспешные сценарии).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.configService.achievementIds.addToCartSuccess</code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -291,10 +306,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/services/config.service.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/services/config.service.ts:81</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Пути к API endpoint&#39;ам.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.configService.apiEndpoints.login</code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -343,10 +364,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/services/config.service.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/services/config.service.ts:107</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Коды HTTP-статусов для обработки ответов сервера.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">if (response.status === this.configService.httpStatusCodes.success) { ... }</code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -358,10 +385,26 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
+/**
+ * Сервис для хранения глобальных констант и конфигураций приложения.
+ *
+ * @remarks
+ * Содержит идентификаторы достижений, API endpoints и коды HTTP-статусов, используемые во всём приложении.
+ *
+ * @example
+ * const id &#x3D; this.configService.achievementIds.loginSuccess;
+ * const url &#x3D; this.configService.apiEndpoints.login;
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class ConfigService {
+  /**
+   * Идентификаторы достижений (успешные и неуспешные сценарии).
+   *
+   * @example
+   * this.configService.achievementIds.addToCartSuccess
+   */
   readonly achievementIds &#x3D; {
     loginSuccess: 1,             // Успешный вход
     registerSuccess: 2,          // Успешная регистрация
@@ -414,6 +457,12 @@ export class ConfigService {
     checkoutEmptyCart: 48,       // Пустая корзина (переназначено)
   };
 
+  /**
+   * Пути к API endpoint&#x27;ам.
+   *
+   * @example
+   * this.configService.apiEndpoints.login
+   */
   readonly apiEndpoints &#x3D; {
     login: &#x27;/api/login&#x27;,
     register: &#x27;/api/register&#x27;,
@@ -434,6 +483,12 @@ export class ConfigService {
     logoutProj: &#x27;/api/auth/logout-proj&#x27;
   };
 
+  /**
+   * Коды HTTP-статусов для обработки ответов сервера.
+   *
+   * @example
+   * if (response.status &#x3D;&#x3D;&#x3D; this.configService.httpStatusCodes.success) { ... }
+   */
   readonly httpStatusCodes &#x3D; {
     // 2xx: Успешные
     success: 200,          // Успешный запрос

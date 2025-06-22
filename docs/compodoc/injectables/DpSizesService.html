@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с размерами товаров (Sizes).</p>
+<p>Позволяет получать, создавать, обновлять и удалять размеры товаров через API.</p>
+
+            </p>
 
 
 
@@ -188,7 +196,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-sizes.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-sizes.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -251,14 +259,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт новый размер.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/DpSizes
+// Body:
+// {
+//   &quot;sizeId&quot;: 0,
+//   &quot;size&quot;: &quot;XL&quot;
+// }
+this.dpSizesService.createDpSize({
+  sizeId: 0,
+  size: &#39;XL&#39;
+}).subscribe(newSize =&gt; {
+  // newSize: { sizeId, size }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -269,6 +290,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,6 +305,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект размера.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,7 +318,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданный размер.</p>
+
                             </div>
                 </td>
             </tr>
@@ -318,14 +345,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:108</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет размер по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/DpSizes/1
+this.dpSizesService.deleteDpSize(1).subscribe(() =&gt; {
+  // Размер удалён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -336,6 +368,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,6 +383,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор размера.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -359,7 +396,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -385,19 +423,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:31</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех размеров.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpSizes
+this.dpSizesService.getAllDpSizes().subscribe(sizes =&gt; {
+  // sizes: [{ sizeId, size, ... }]
+  console.log(sizes);
+});</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/IDpSize.html" target="_self" >Observable&lt;IDpSize[]&gt;</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список размеров.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -422,14 +470,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает размер по его идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpSizes/1
+this.dpSizesService.getDpSizeById(1).subscribe(size =&gt; {
+  // size: { sizeId, size, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -440,6 +493,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -454,6 +508,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор размера.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -463,7 +521,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Размер.</p>
+
                             </div>
                 </td>
             </tr>
@@ -489,14 +548,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/services/dp-sizes.service.ts:93</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующий размер.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/DpSizes/1
+// Body:
+// {
+//   &quot;sizeId&quot;: 1,
+//   &quot;size&quot;: &quot;XXL&quot;
+// }
+this.dpSizesService.updateDpSize(1, {
+  sizeId: 1,
+  size: &#39;XXL&#39;
+}).subscribe(() =&gt; {
+  // Размер обновлён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -507,6 +579,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -521,6 +594,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор размера.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dpSize</td>
@@ -533,6 +610,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённый объект размера.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -542,7 +623,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -573,7 +655,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-sizes.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-sizes.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -591,36 +673,112 @@ import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { IDpSize } from &#x27;../interface/IDpSize&#x27;;
 
+/**
+ * Сервис для работы с размерами товаров (Sizes).
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять и удалять размеры товаров через API.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-
 export class DpSizesService {
   private baseUrl &#x3D; &#x60;${window.location.origin}/api/DpSizes&#x60;;
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех размеров.
+   *
+   * @returns {Observable&lt;IDpSize[]&gt;} Список размеров.
+   * @example
+   * // GET /api/DpSizes
+   * this.dpSizesService.getAllDpSizes().subscribe(sizes &#x3D;&gt; {
+   *   // sizes: [{ sizeId, size, ... }]
+   *   console.log(sizes);
+   * });
+   */
   getAllDpSizes(): Observable&lt;IDpSize[]&gt; {
     return this.http.get&lt;IDpSize[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает размер по его идентификатору.
+   *
+   * @param {number} id Идентификатор размера.
+   * @returns {Observable&lt;IDpSize&gt;} Размер.
+   * @example
+   * // GET /api/DpSizes/1
+   * this.dpSizesService.getDpSizeById(1).subscribe(size &#x3D;&gt; {
+   *   // size: { sizeId, size, ... }
+   * });
+   */
   getDpSizeById(id: number): Observable&lt;IDpSize&gt; {
     return this.http.get&lt;IDpSize&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
-  createDpSize(dpSize: IDpSize): Observable&lt;IDpSize&gt; {
+  /**
+   * Создаёт новый размер.
+   *
+   * @param {IDpSize} dpSize Объект размера.
+   * @returns {Observable&lt;IDpSize&gt;} Созданный размер.
+   * @example
+   * // POST /api/DpSizes
+   * // Body:
+   * // {
+   * //   &quot;sizeId&quot;: 0,
+   * //   &quot;size&quot;: &quot;XL&quot;
+   * // }
+   * this.dpSizesService.createDpSize({
+   *   sizeId: 0,
+   *   size: &#x27;XL&#x27;
+   * }).subscribe(newSize &#x3D;&gt; {
+   *   // newSize: { sizeId, size }
+   * });
+   */
+createDpSize(dpSize: IDpSize): Observable&lt;IDpSize&gt; {
     return this.http.post&lt;IDpSize&gt;(this.baseUrl, dpSize);
   }
 
+  /**
+   * Обновляет существующий размер.
+   *
+   * @param {number} id Идентификатор размера.
+   * @param {IDpSize} dpSize Обновлённый объект размера.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/DpSizes/1
+   * // Body:
+   * // {
+   * //   &quot;sizeId&quot;: 1,
+   * //   &quot;size&quot;: &quot;XXL&quot;
+   * // }
+   * this.dpSizesService.updateDpSize(1, {
+   *   sizeId: 1,
+   *   size: &#x27;XXL&#x27;
+   * }).subscribe(() &#x3D;&gt; {
+   *   // Размер обновлён
+   * });
+   */
   updateDpSize(id: number, dpSize: IDpSize): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, dpSize);
   }
 
+  /**
+   * Удаляет размер по идентификатору.
+   *
+   * @param {number} id Идентификатор размера.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/DpSizes/1
+   * this.dpSizesService.deleteDpSize(1).subscribe(() &#x3D;&gt; {
+   *   // Размер удалён
+   * });
+   */
   deleteDpSize(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>

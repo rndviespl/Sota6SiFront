@@ -318,7 +318,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(productsRepository: <a href="../injectables/ProductsRepositoryService.html" target="_self">ProductsRepositoryService</a>, categoriesRepository: <a href="../injectables/CategoriesRepositoryService.html" target="_self">CategoriesRepositoryService</a>, imagesRepository: <a href="../injectables/ImagesRepositoryService.html" target="_self">ImagesRepositoryService</a>)</code>
+<code>constructor(productsRepository: ProductsRepositoryService, categoriesRepository: CategoriesRepositoryService, imagesRepository: ImagesRepositoryService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -344,7 +344,7 @@
                                                         <td>productsRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ProductsRepositoryService.html" target="_self" >ProductsRepositoryService</a></code>
+                                                                    <code>ProductsRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -356,7 +356,7 @@
                                                         <td>categoriesRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/CategoriesRepositoryService.html" target="_self" >CategoriesRepositoryService</a></code>
+                                                                    <code>CategoriesRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -368,7 +368,7 @@
                                                         <td>imagesRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ImagesRepositoryService.html" target="_self" >ImagesRepositoryService</a></code>
+                                                                    <code>ImagesRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -1673,7 +1673,7 @@ p {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="user-page-content">  <div>    <h1>      Экран тест пользователя      <tui-avatar src="@tui.user" appearance="primary" size="s" (click)="navigateTo(\'/userProj\')" class="user-avatar" />      <br />      Переключение темы приложения      <app-theme-toggle></app-theme-toggle>    </h1>  </div>  <div class="action-buttons">    <button tuiButton appearance="primary" type="button" (click)="openDialog(\'product\')">      Добавить продукт    </button>    <button tuiButton appearance="primary" type="button" (click)="openDialog(\'category\')">      Добавить категорию    </button>    <button tuiButton appearance="primary" type="button" (click)="openDialog(\'image\')">      Добавить изображение    </button>  </div>  <form [formGroup]="editProductForm" (ngSubmit)="editProductById(editProductForm.value.id ?? null)">    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id" placeholder="Введите ID продукта" type="number">      ID Продукта    </tui-input>    <button tuiButton appearance="primary" type="submit" [disabled]="!editProductForm.valid">      Редактировать продукт    </button>  </form>  <form [formGroup]="editCategoryForm" (ngSubmit)="editCategoryById(editCategoryForm.value.id ?? null)">    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id" placeholder="Введите ID категории"      type="number">      ID Категории    </tui-input>    <button tuiButton appearance="primary" type="submit" [disabled]="!editCategoryForm.valid">      Редактировать категорию    </button>  </form>  <form [formGroup]="editImageForm" (ngSubmit)="editImageById(editImageForm.value.id ?? null)">    <tui-input tuiTextfieldSize="m" maxlength="10" formControlName="id" placeholder="Введите ID изображения"      type="number">      ID Изображения    </tui-input>    <button tuiButton appearance="primary" type="submit" [disabled]="!editImageForm.valid">      Редактировать изображение    </button>  </form></div></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'ButtonComponent', 'selector': 'storybook-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'storybook-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageComponent', 'selector': 'storybook-page'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'UserPageComponent'};
 </script>

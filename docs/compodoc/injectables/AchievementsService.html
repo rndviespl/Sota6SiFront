@@ -119,6 +119,35 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с достижениями (Achievements).</p>
+<p>Позволяет получать, создавать, обновлять и удалять достижения через API.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Получить все достижения (GET):
+GET /api/Achievements</code></pre></div><p>// Получить достижение по id (GET):
+GET /api/Achievements/1</p>
+<p>// Создать достижение (POST):
+POST /api/Achievements
+Body:
+{
+  &quot;achievementId&quot;: 0,
+  &quot;title&quot;: &quot;Новое достижение&quot;,
+  &quot;textAchievement&quot;: &quot;Описание достижения&quot;
+}</p>
+<p>// Обновить достижение (PUT):
+PUT /api/Achievements/1
+Body:
+{
+  &quot;achievementId&quot;: 1,
+  &quot;title&quot;: &quot;Обновлённое достижение&quot;,
+  &quot;textAchievement&quot;: &quot;Новое описание&quot;
+}</p>
+<p>// Удалить достижение (DELETE):
+DELETE /api/Achievements/1</p>
+
+            </p>
 
 
 
@@ -191,7 +220,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/achievements.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/services/achievements.service.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -254,14 +283,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/services/achievements.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/services/achievements.service.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт новое достижение.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/Achievements
+// Body:
+// {
+//   &quot;achievementId&quot;: 0,
+//   &quot;title&quot;: &quot;Новое достижение&quot;,
+//   &quot;textAchievement&quot;: &quot;Описание достижения&quot;
+// }
+this.achievementsService.createAchievement({
+  achievementId: 0,
+  title: &#39;Новое достижение&#39;,
+  textAchievement: &#39;Описание достижения&#39;
+}).subscribe(newAch =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -272,6 +314,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -286,6 +329,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект достижения.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -295,7 +342,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданное достижение.</p>
+
                             </div>
                 </td>
             </tr>
@@ -321,14 +369,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/services/achievements.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/services/achievements.service.ts:129</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет достижение по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/Achievements/1
+this.achievementsService.deleteAchievement(1).subscribe(() =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -339,6 +390,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -353,6 +405,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор достижения.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -362,7 +418,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -388,14 +445,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/app/services/achievements.service.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/services/achievements.service.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает достижение по его идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/Achievements/1
+this.achievementsService.getAchievementById(1).subscribe(ach =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -406,6 +466,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -420,6 +481,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор достижения.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -429,7 +494,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Достижение.</p>
+
                             </div>
                 </td>
             </tr>
@@ -455,19 +521,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/app/services/achievements.service.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/services/achievements.service.ts:56</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех достижений.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/Achievements
+this.achievementsService.getAllAchievements().subscribe(list =&gt; console.log(list));</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/IAchievement.html" target="_self" >Observable&lt;IAchievement[]&gt;</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список достижений.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -492,14 +565,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/services/achievements.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/services/achievements.service.ts:140</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Разблокирует достижение по названию.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.achievementsService.unlockAchievement(&#39;First Login&#39;);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -510,6 +585,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -524,6 +600,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Название достижения.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -559,14 +639,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/services/achievements.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/services/achievements.service.ts:116</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующее достижение.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/Achievements/1
+// Body:
+// {
+//   &quot;achievementId&quot;: 1,
+//   &quot;title&quot;: &quot;Обновлённое достижение&quot;,
+//   &quot;textAchievement&quot;: &quot;Новое описание&quot;
+// }
+this.achievementsService.updateAchievement(1, {
+  achievementId: 1,
+  title: &#39;Обновлённое достижение&#39;,
+  textAchievement: &#39;Новое описание&#39;
+}).subscribe(() =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -577,6 +670,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -591,6 +685,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор достижения.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>achievement</td>
@@ -603,6 +701,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённый объект достижения.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -612,7 +714,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -643,7 +746,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/achievements.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/services/achievements.service.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -661,6 +764,40 @@ import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { IAchievement } from &#x27;../interface/IAchievement&#x27;;
 
+/**
+ * Сервис для работы с достижениями (Achievements).
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять и удалять достижения через API.
+ *
+ * @example
+ * // Получить все достижения (GET):
+ * GET /api/Achievements
+ *
+ * // Получить достижение по id (GET):
+ * GET /api/Achievements/1
+ *
+ * // Создать достижение (POST):
+ * POST /api/Achievements
+ * Body:
+ * {
+ *   &quot;achievementId&quot;: 0,
+ *   &quot;title&quot;: &quot;Новое достижение&quot;,
+ *   &quot;textAchievement&quot;: &quot;Описание достижения&quot;
+ * }
+ *
+ * // Обновить достижение (PUT):
+ * PUT /api/Achievements/1
+ * Body:
+ * {
+ *   &quot;achievementId&quot;: 1,
+ *   &quot;title&quot;: &quot;Обновлённое достижение&quot;,
+ *   &quot;textAchievement&quot;: &quot;Новое описание&quot;
+ * }
+ *
+ * // Удалить достижение (DELETE):
+ * DELETE /api/Achievements/1
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
@@ -669,27 +806,98 @@ export class AchievementsService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех достижений.
+   *
+   * @returns {Observable&lt;IAchievement[]&gt;} Список достижений.
+   * @example
+   * // GET /api/Achievements
+   * this.achievementsService.getAllAchievements().subscribe(list &#x3D;&gt; console.log(list));
+   */
   getAllAchievements(): Observable&lt;IAchievement[]&gt; {
     return this.http.get&lt;IAchievement[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает достижение по его идентификатору.
+   *
+   * @param {number} id Идентификатор достижения.
+   * @returns {Observable&lt;IAchievement&gt;} Достижение.
+   * @example
+   * // GET /api/Achievements/1
+   * this.achievementsService.getAchievementById(1).subscribe(ach &#x3D;&gt; ...);
+   */
   getAchievementById(id: number): Observable&lt;IAchievement&gt; {
     return this.http.get&lt;IAchievement&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Создаёт новое достижение.
+   *
+   * @param {IAchievement} achievement Объект достижения.
+   * @returns {Observable&lt;IAchievement&gt;} Созданное достижение.
+   * @example
+   * // POST /api/Achievements
+   * // Body:
+   * // {
+   * //   &quot;achievementId&quot;: 0,
+   * //   &quot;title&quot;: &quot;Новое достижение&quot;,
+   * //   &quot;textAchievement&quot;: &quot;Описание достижения&quot;
+   * // }
+   * this.achievementsService.createAchievement({
+   *   achievementId: 0,
+   *   title: &#x27;Новое достижение&#x27;,
+   *   textAchievement: &#x27;Описание достижения&#x27;
+   * }).subscribe(newAch &#x3D;&gt; ...);
+   */
   createAchievement(achievement: IAchievement): Observable&lt;IAchievement&gt; {
     return this.http.post&lt;IAchievement&gt;(this.baseUrl, achievement);
   }
 
+  /**
+   * Обновляет существующее достижение.
+   *
+   * @param {number} id Идентификатор достижения.
+   * @param {IAchievement} achievement Обновлённый объект достижения.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/Achievements/1
+   * // Body:
+   * // {
+   * //   &quot;achievementId&quot;: 1,
+   * //   &quot;title&quot;: &quot;Обновлённое достижение&quot;,
+   * //   &quot;textAchievement&quot;: &quot;Новое описание&quot;
+   * // }
+   * this.achievementsService.updateAchievement(1, {
+   *   achievementId: 1,
+   *   title: &#x27;Обновлённое достижение&#x27;,
+   *   textAchievement: &#x27;Новое описание&#x27;
+   * }).subscribe(() &#x3D;&gt; ...);
+   */
   updateAchievement(id: number, achievement: IAchievement): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, achievement);
   }
 
+  /**
+   * Удаляет достижение по идентификатору.
+   *
+   * @param {number} id Идентификатор достижения.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/Achievements/1
+   * this.achievementsService.deleteAchievement(1).subscribe(() &#x3D;&gt; ...);
+   */
   deleteAchievement(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
-  // Новый метод для разблокировки ачивки
+  /**
+   * Разблокирует достижение по названию.
+   *
+   * @param {string} achievementTitle Название достижения.
+   * @example
+   * this.achievementsService.unlockAchievement(&#x27;First Login&#x27;);
+   */
   unlockAchievement(achievementTitle: string): void {
     console.log(&#x60;Achievement unlocked: ${achievementTitle}&#x60;);
     // Здесь вы можете добавить логику для обновления состояния ачивки на сервере или локально

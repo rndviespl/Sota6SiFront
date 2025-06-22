@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { IDpCategory } from '../interface/IDpCategory';
 import { DpCategoriesService } from '../services/dp-categories.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

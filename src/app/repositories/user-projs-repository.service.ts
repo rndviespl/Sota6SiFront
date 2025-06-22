@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { IDpUserProj } from '../interface/IDpUserProj';
 import { DpUserProjsService } from '../services/dp-user-projs.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

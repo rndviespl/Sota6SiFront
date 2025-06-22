@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с пользователями проектов (UserProjs).</p>
+<p>Позволяет получать, создавать, обновлять и удалять пользователей проектов через API.</p>
+
+            </p>
 
 
 
@@ -188,7 +196,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-user-projs.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-user-projs.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -251,14 +259,28 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:70</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт нового пользователя проекта.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/DpUserProjs
+// Body:
+// {
+//   &quot;dpUserProjId&quot;: 0,
+//   &quot;userName&quot;: &quot;Иван&quot;,
+//   ...другие поля...
+// }
+this.dpUserProjsService.createDpUserProj({
+  dpUserProjId: 0,
+  userName: &#39;Иван&#39;
+}).subscribe(newUser =&gt; {
+  // newUser: { ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -269,6 +291,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,6 +306,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект пользователя проекта.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,7 +319,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданный пользователь проекта.</p>
+
                             </div>
                 </td>
             </tr>
@@ -318,14 +346,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:110</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет пользователя проекта по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/DpUserProjs/1
+this.dpUserProjsService.deleteDpUserProj(1).subscribe(() =&gt; {
+  // Пользователь удалён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -336,6 +369,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,6 +384,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор пользователя проекта.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -359,7 +397,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -385,19 +424,29 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:31</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех пользователей проектов.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpUserProjs
+this.dpUserProjsService.getAllDpUserProjs().subscribe(users =&gt; {
+  // users: [{ dpUserProjId, userName, ... }]
+  console.log(users);
+});</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Observable&lt;IDpUserProj[]&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список пользователей проектов.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -422,14 +471,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает пользователя проекта по его идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpUserProjs/1
+this.dpUserProjsService.getDpUserProjById(1).subscribe(user =&gt; {
+  // user: { dpUserProjId, userName, ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -440,6 +494,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -454,6 +509,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор пользователя проекта.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -463,7 +522,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Пользователь проекта.</p>
+
                             </div>
                 </td>
             </tr>
@@ -489,14 +549,28 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/services/dp-user-projs.service.ts:95</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующего пользователя проекта.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/DpUserProjs/1
+// Body:
+// {
+//   &quot;dpUserProjId&quot;: 1,
+//   &quot;userName&quot;: &quot;Пётр&quot;,
+//   ...другие поля...
+// }
+this.dpUserProjsService.updateDpUserProj(1, {
+  dpUserProjId: 1,
+  userName: &#39;Пётр&#39;
+}).subscribe(() =&gt; {
+  // Пользователь обновлён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -507,6 +581,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -521,6 +596,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор пользователя проекта.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dpUserProj</td>
@@ -533,6 +612,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённый объект пользователя проекта.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -542,7 +625,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -573,7 +657,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-user-projs.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/services/dp-user-projs.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -591,31 +675,110 @@ import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { IDpUserProj } from &#x27;../interface/IDpUserProj&#x27;;
 
+/**
+ * Сервис для работы с пользователями проектов (UserProjs).
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять и удалять пользователей проектов через API.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-
 export class DpUserProjsService {
   private baseUrl &#x3D; &#x60;${window.location.origin}/api/DpUserProjs&#x60;;
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех пользователей проектов.
+   *
+   * @returns {Observable&lt;IDpUserProj[]&gt;} Список пользователей проектов.
+   * @example
+   * // GET /api/DpUserProjs
+   * this.dpUserProjsService.getAllDpUserProjs().subscribe(users &#x3D;&gt; {
+   *   // users: [{ dpUserProjId, userName, ... }]
+   *   console.log(users);
+   * });
+   */
   getAllDpUserProjs(): Observable&lt;IDpUserProj[]&gt; {
     return this.http.get&lt;IDpUserProj[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает пользователя проекта по его идентификатору.
+   *
+   * @param {number} id Идентификатор пользователя проекта.
+   * @returns {Observable&lt;IDpUserProj&gt;} Пользователь проекта.
+   * @example
+   * // GET /api/DpUserProjs/1
+   * this.dpUserProjsService.getDpUserProjById(1).subscribe(user &#x3D;&gt; {
+   *   // user: { dpUserProjId, userName, ... }
+   * });
+   */
   getDpUserProjById(id: number): Observable&lt;IDpUserProj&gt; {
     return this.http.get&lt;IDpUserProj&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Создаёт нового пользователя проекта.
+   *
+   * @param {IDpUserProj} dpUserProj Объект пользователя проекта.
+   * @returns {Observable&lt;IDpUserProj&gt;} Созданный пользователь проекта.
+   * @example
+   * // POST /api/DpUserProjs
+   * // Body:
+   * // {
+   * //   &quot;dpUserProjId&quot;: 0,
+   * //   &quot;userName&quot;: &quot;Иван&quot;,
+   * //   ...другие поля...
+   * // }
+   * this.dpUserProjsService.createDpUserProj({
+   *   dpUserProjId: 0,
+   *   userName: &#x27;Иван&#x27;
+   * }).subscribe(newUser &#x3D;&gt; {
+   *   // newUser: { ... }
+   * });
+   */
   createDpUserProj(dpUserProj: IDpUserProj): Observable&lt;IDpUserProj&gt; {
     return this.http.post&lt;IDpUserProj&gt;(this.baseUrl, dpUserProj);
   }
 
+  /**
+   * Обновляет существующего пользователя проекта.
+   *
+   * @param {number} id Идентификатор пользователя проекта.
+   * @param {IDpUserProj} dpUserProj Обновлённый объект пользователя проекта.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/DpUserProjs/1
+   * // Body:
+   * // {
+   * //   &quot;dpUserProjId&quot;: 1,
+   * //   &quot;userName&quot;: &quot;Пётр&quot;,
+   * //   ...другие поля...
+   * // }
+   * this.dpUserProjsService.updateDpUserProj(1, {
+   *   dpUserProjId: 1,
+   *   userName: &#x27;Пётр&#x27;
+   * }).subscribe(() &#x3D;&gt; {
+   *   // Пользователь обновлён
+   * });
+   */
   updateDpUserProj(id: number, dpUserProj: IDpUserProj): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, dpUserProj);
   }
 
+  /**
+   * Удаляет пользователя проекта по идентификатору.
+   *
+   * @param {number} id Идентификатор пользователя проекта.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/DpUserProjs/1
+   * this.dpUserProjsService.deleteDpUserProj(1).subscribe(() &#x3D;&gt; {
+   *   // Пользователь удалён
+   * });
+   */
   deleteDpUserProj(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }

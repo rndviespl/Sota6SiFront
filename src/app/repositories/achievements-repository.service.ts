@@ -3,6 +3,10 @@ import { Observable } from 'rxjs';
 import { IAchievement } from '../interface/IAchievement';
 import { AchievementsService } from '../services/achievements.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

@@ -119,6 +119,48 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с категориями товаров.</p>
+<p>Позволяет получать, создавать, обновлять и удалять категории товаров через API.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Получить все категории (GET):
+// URL: /api/DpCategories
+this.dpCategoriesService.getAllDpCategories().subscribe(categories =&gt; console.log(categories));</code></pre></div><p>// Получить категорию по id (GET):
+// URL: /api/DpCategories/1
+this.dpCategoriesService.getDpCategoryById(1).subscribe(category =&gt; ...);</p>
+<p>// Создать категорию (POST):
+// URL: /api/DpCategories
+// Body:
+// {
+//   &quot;dpCategoryId&quot;: 0,
+//   &quot;dpCategoryTitle&quot;: &quot;Одежда&quot;,
+//   &quot;dpCategoryDescription&quot;: &quot;Вся одежда&quot;
+// }
+this.dpCategoriesService.createDpCategory({
+  dpCategoryId: 0,
+  dpCategoryTitle: &#39;Одежда&#39;,
+  dpCategoryDescription: &#39;Вся одежда&#39;
+}).subscribe(newCategory =&gt; ...);</p>
+<p>// Обновить категорию (PUT):
+// URL: /api/DpCategories/1
+// Body:
+// {
+//   &quot;dpCategoryId&quot;: 1,
+//   &quot;dpCategoryTitle&quot;: &quot;Обновлённая категория&quot;,
+//   &quot;dpCategoryDescription&quot;: &quot;Новое описание&quot;
+// }
+this.dpCategoriesService.updateDpCategory(1, {
+  dpCategoryId: 1,
+  dpCategoryTitle: &#39;Обновлённая категория&#39;,
+  dpCategoryDescription: &#39;Новое описание&#39;
+}).subscribe(() =&gt; ...);</p>
+<p>// Удалить категорию (DELETE):
+// URL: /api/DpCategories/1
+this.dpCategoriesService.deleteDpCategory(1).subscribe(() =&gt; ...);</p>
+
+            </p>
 
 
 
@@ -188,7 +230,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-categories.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/services/dp-categories.service.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -251,14 +293,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/services/dp-categories.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/services/dp-categories.service.ts:105</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт новую категорию.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/DpCategories
+// Body:
+// {
+//   &quot;dpCategoryId&quot;: 0,
+//   &quot;dpCategoryTitle&quot;: &quot;Одежда&quot;,
+//   &quot;dpCategoryDescription&quot;: &quot;Вся одежда&quot;
+// }
+this.dpCategoriesService.createDpCategory({
+  dpCategoryId: 0,
+  dpCategoryTitle: &#39;Одежда&#39;,
+  dpCategoryDescription: &#39;Вся одежда&#39;
+}).subscribe(newCategory =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -269,6 +324,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,6 +339,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект категории.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,7 +352,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданная категория.</p>
+
                             </div>
                 </td>
             </tr>
@@ -318,14 +379,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/services/dp-categories.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/services/dp-categories.service.ts:142</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет категорию по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/DpCategories/1
+this.dpCategoriesService.deleteDpCategory(1).subscribe(() =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -336,6 +400,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,6 +415,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор категории.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -359,7 +428,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -385,19 +455,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/services/dp-categories.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/services/dp-categories.service.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех категорий.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpCategories
+this.dpCategoriesService.getAllDpCategories().subscribe(categories =&gt; ...);</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/IDpCategory.html" target="_self" >Observable&lt;IDpCategory[]&gt;</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список категорий.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -422,14 +499,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/services/dp-categories.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/services/dp-categories.service.ts:82</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает категорию по её идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpCategories/1
+this.dpCategoriesService.getDpCategoryById(1).subscribe(category =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -440,6 +520,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -454,6 +535,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор категории.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -463,7 +548,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Категория.</p>
+
                             </div>
                 </td>
             </tr>
@@ -489,14 +575,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/services/dp-categories.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/services/dp-categories.service.ts:129</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующую категорию.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/DpCategories/1
+// Body:
+// {
+//   &quot;dpCategoryId&quot;: 1,
+//   &quot;dpCategoryTitle&quot;: &quot;Обновлённая категория&quot;,
+//   &quot;dpCategoryDescription&quot;: &quot;Новое описание&quot;
+// }
+this.dpCategoriesService.updateDpCategory(1, {
+  dpCategoryId: 1,
+  dpCategoryTitle: &#39;Обновлённая категория&#39;,
+  dpCategoryDescription: &#39;Новое описание&#39;
+}).subscribe(() =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -507,6 +606,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -521,6 +621,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор категории.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dpCategory</td>
@@ -533,6 +637,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённая категория.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -542,7 +650,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -573,7 +682,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/dp-categories.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/services/dp-categories.service.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -591,31 +700,142 @@ import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { IDpCategory } from &#x27;../interface/IDpCategory&#x27;;
 
+/**
+ * Сервис для работы с категориями товаров.
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять и удалять категории товаров через API.
+ *
+ * @example
+ * // Получить все категории (GET):
+ * // URL: /api/DpCategories
+ * this.dpCategoriesService.getAllDpCategories().subscribe(categories &#x3D;&gt; console.log(categories));
+ *
+ * // Получить категорию по id (GET):
+ * // URL: /api/DpCategories/1
+ * this.dpCategoriesService.getDpCategoryById(1).subscribe(category &#x3D;&gt; ...);
+ *
+ * // Создать категорию (POST):
+ * // URL: /api/DpCategories
+ * // Body:
+ * // {
+ * //   &quot;dpCategoryId&quot;: 0,
+ * //   &quot;dpCategoryTitle&quot;: &quot;Одежда&quot;,
+ * //   &quot;dpCategoryDescription&quot;: &quot;Вся одежда&quot;
+ * // }
+ * this.dpCategoriesService.createDpCategory({
+ *   dpCategoryId: 0,
+ *   dpCategoryTitle: &#x27;Одежда&#x27;,
+ *   dpCategoryDescription: &#x27;Вся одежда&#x27;
+ * }).subscribe(newCategory &#x3D;&gt; ...);
+ *
+ * // Обновить категорию (PUT):
+ * // URL: /api/DpCategories/1
+ * // Body:
+ * // {
+ * //   &quot;dpCategoryId&quot;: 1,
+ * //   &quot;dpCategoryTitle&quot;: &quot;Обновлённая категория&quot;,
+ * //   &quot;dpCategoryDescription&quot;: &quot;Новое описание&quot;
+ * // }
+ * this.dpCategoriesService.updateDpCategory(1, {
+ *   dpCategoryId: 1,
+ *   dpCategoryTitle: &#x27;Обновлённая категория&#x27;,
+ *   dpCategoryDescription: &#x27;Новое описание&#x27;
+ * }).subscribe(() &#x3D;&gt; ...);
+ *
+ * // Удалить категорию (DELETE):
+ * // URL: /api/DpCategories/1
+ * this.dpCategoriesService.deleteDpCategory(1).subscribe(() &#x3D;&gt; ...);
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
-
 export class DpCategoriesService {
   private baseUrl &#x3D; &#x60;${window.location.origin}/api/DpCategories&#x60;;
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех категорий.
+   *
+   * @returns {Observable&lt;IDpCategory[]&gt;} Список категорий.
+   * @example
+   * // GET /api/DpCategories
+   * this.dpCategoriesService.getAllDpCategories().subscribe(categories &#x3D;&gt; ...);
+   */
   getAllDpCategories(): Observable&lt;IDpCategory[]&gt; {
     return this.http.get&lt;IDpCategory[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает категорию по её идентификатору.
+   *
+   * @param {number} id Идентификатор категории.
+   * @returns {Observable&lt;IDpCategory&gt;} Категория.
+   * @example
+   * // GET /api/DpCategories/1
+   * this.dpCategoriesService.getDpCategoryById(1).subscribe(category &#x3D;&gt; ...);
+   */
   getDpCategoryById(id: number): Observable&lt;IDpCategory&gt; {
     return this.http.get&lt;IDpCategory&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Создаёт новую категорию.
+   *
+   * @param {IDpCategory} dpCategory Объект категории.
+   * @returns {Observable&lt;IDpCategory&gt;} Созданная категория.
+   * @example
+   * // POST /api/DpCategories
+   * // Body:
+   * // {
+   * //   &quot;dpCategoryId&quot;: 0,
+   * //   &quot;dpCategoryTitle&quot;: &quot;Одежда&quot;,
+   * //   &quot;dpCategoryDescription&quot;: &quot;Вся одежда&quot;
+   * // }
+   * this.dpCategoriesService.createDpCategory({
+   *   dpCategoryId: 0,
+   *   dpCategoryTitle: &#x27;Одежда&#x27;,
+   *   dpCategoryDescription: &#x27;Вся одежда&#x27;
+   * }).subscribe(newCategory &#x3D;&gt; ...);
+   */
   createDpCategory(dpCategory: IDpCategory): Observable&lt;IDpCategory&gt; {
     return this.http.post&lt;IDpCategory&gt;(this.baseUrl, dpCategory);
   }
 
+  /**
+   * Обновляет существующую категорию.
+   *
+   * @param {number} id Идентификатор категории.
+   * @param {IDpCategory} dpCategory Обновлённая категория.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/DpCategories/1
+   * // Body:
+   * // {
+   * //   &quot;dpCategoryId&quot;: 1,
+   * //   &quot;dpCategoryTitle&quot;: &quot;Обновлённая категория&quot;,
+   * //   &quot;dpCategoryDescription&quot;: &quot;Новое описание&quot;
+   * // }
+   * this.dpCategoriesService.updateDpCategory(1, {
+   *   dpCategoryId: 1,
+   *   dpCategoryTitle: &#x27;Обновлённая категория&#x27;,
+   *   dpCategoryDescription: &#x27;Новое описание&#x27;
+   * }).subscribe(() &#x3D;&gt; ...);
+   */
   updateDpCategory(id: number, dpCategory: IDpCategory): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, dpCategory);
   }
 
+  /**
+   * Удаляет категорию по идентификатору.
+   *
+   * @param {number} id Идентификатор категории.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/DpCategories/1
+   * this.dpCategoriesService.deleteDpCategory(1).subscribe(() &#x3D;&gt; ...);
+   */
   deleteDpCategory(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }

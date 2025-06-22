@@ -157,7 +157,7 @@
                             <code>ReactiveFormsModule</code>
                             <code>TuiAppearance</code>
                             <code>TuiButton</code>
-                                <code><a href="../miscellaneous/variables.html#Large" target="_self" >TuiCardLarge</a></code>
+                            <code>TuiCardLarge</code>
                             <code>TuiError</code>
                             <code>TuiFieldErrorPipe</code>
                             <code>TuiForm</code>
@@ -244,7 +244,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authProjRepository: <a href="../injectables/AuthProjRepositoryService.html" target="_self">AuthProjRepositoryService</a>, router: Router, alertService: TuiAlertService)</code>
+<code>constructor(authProjRepository: AuthProjRepositoryService, router: Router, alertService: TuiAlertService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -270,7 +270,7 @@
                                                         <td>authProjRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/AuthProjRepositoryService.html" target="_self" >AuthProjRepositoryService</a></code>
+                                                                    <code>AuthProjRepositoryService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -617,7 +617,7 @@ body.dark-theme form[tuiCardLarge] {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="form-container">    <form tuiAppearance="floating" tuiCardLarge tuiForm="m" [formGroup]="form" [style.max-width.rem]="32"        (ngSubmit)="onLogin()">        <header tuiHeader>            <h2 tuiTitle>Форма авторизации для пользователя с тестами</h2>        </header>        <tui-textfield>            <label tuiLabel>Логин</label>            <input formControlName="login" placeholder="Логин" tuiTextfield required />        </tui-textfield>        <tui-error formControlName="login" [error]="[] | tuiFieldError | async" />        <tui-textfield>            <label tuiLabel>Пароль</label>            <input formControlName="password" placeholder="Пароль" tuiTextfield type="password" required />        </tui-textfield>        <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />        <footer>            <button appearance="secondary" tuiButton type="button" (click)="navigateToRegister()">                Регистрация            </button>            <button tuiButton type="submit">Войти</button>        </footer>    </form></div></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'ButtonComponent', 'selector': 'storybook-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'storybook-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageComponent', 'selector': 'storybook-page'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginProjComponent'};
 </script>

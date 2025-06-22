@@ -5,6 +5,10 @@ import { IDpProduct } from '../interface/IDpProduct';
 import { ProductsService } from '../services/dp-products.service';
 import { ImagesRepositoryService } from './images-repository.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

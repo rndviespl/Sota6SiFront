@@ -8,6 +8,10 @@ import { IDpProduct } from '../interface/IDpProduct';
 import { ProductsRepositoryService } from './products-repository.service';
 import { ShopCartService } from '../services/dp-shop-cart.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

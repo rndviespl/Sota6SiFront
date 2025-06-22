@@ -5,6 +5,10 @@ import { IDpImage } from '../interface/IDpImage';
 import { IUpdateDpImageRequest } from '../interface/IUpdateDpImageRequest';
 import { DpImagesService } from '../services/dp-images.service';
 
+/**
+ * @ignore
+ */
+
 @Injectable({
   providedIn: 'root'
 })

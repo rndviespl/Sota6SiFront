@@ -119,6 +119,64 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для работы с составами заказов (Order Compositions).</p>
+<p>Позволяет получать, создавать, обновлять и удалять составы заказов через API.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Получить все составы заказов (GET):
+// URL: /api/DpOrderCompositions
+this.dpOrderCompositionsService.getAllDpOrderCompositions().subscribe(compositions =&gt; console.log(compositions));</code></pre></div><p>// Получить состав заказа по id (GET):
+// URL: /api/DpOrderCompositions/1
+this.dpOrderCompositionsService.getDpOrderCompositionById(1).subscribe(composition =&gt; {
+  // composition: { dpOrderId, dpProductId, quantity, dpAttributes, dpOrder }
+});</p>
+<p>// Создать состав заказа (POST):
+// URL: /api/DpOrderCompositions
+// Body:
+// {
+//   &quot;dpOrderId&quot;: 1,
+//   &quot;dpProductId&quot;: 2,
+//   &quot;quantity&quot;: 3,
+//   &quot;dpAttributes&quot;: [],
+//   &quot;dpOrder&quot;: null
+// }
+this.dpOrderCompositionsService.createDpOrderComposition({
+  dpOrderId: 1,
+  dpProductId: 2,
+  quantity: 3,
+  dpAttributes: [],
+  dpOrder: null
+}).subscribe(newComp =&gt; {
+  // newComp: { dpOrderId, dpProductId, quantity, ... }
+});</p>
+<p>// Обновить состав заказа (PUT):
+// URL: /api/DpOrderCompositions/1
+// Body:
+// {
+//   &quot;dpOrderId&quot;: 1,
+//   &quot;dpProductId&quot;: 2,
+//   &quot;quantity&quot;: 5,
+//   &quot;dpAttributes&quot;: [],
+//   &quot;dpOrder&quot;: null
+// }
+this.dpOrderCompositionsService.updateDpOrderComposition(1, {
+  dpOrderId: 1,
+  dpProductId: 2,
+  quantity: 5,
+  dpAttributes: [],
+  dpOrder: null
+}).subscribe(() =&gt; {
+  // Состав заказа обновлён
+});</p>
+<p>// Удалить состав заказа (DELETE):
+// URL: /api/DpOrderCompositions/1
+this.dpOrderCompositionsService.deleteDpOrderComposition(1).subscribe(() =&gt; {
+  // Состав заказа удалён
+});</p>
+
+            </p>
 
 
 
@@ -188,7 +246,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/dp-order-compositions.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/services/dp-order-compositions.service.ts:73</a></div>
                             </td>
                         </tr>
 
@@ -251,14 +309,33 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:131</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создаёт новый состав заказа.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/DpOrderCompositions
+// Body:
+// {
+//   &quot;dpOrderId&quot;: 1,
+//   &quot;dpProductId&quot;: 2,
+//   &quot;quantity&quot;: 3,
+//   &quot;dpAttributes&quot;: [],
+//   &quot;dpOrder&quot;: null
+// }
+this.dpOrderCompositionsService.createDpOrderComposition({
+  dpOrderId: 1,
+  dpProductId: 2,
+  quantity: 3,
+  dpAttributes: [],
+  dpOrder: null
+}).subscribe(newComp =&gt; {
+  // newComp: { ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -269,6 +346,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,6 +361,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Объект состава заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,7 +374,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Созданный состав заказа.</p>
+
                             </div>
                 </td>
             </tr>
@@ -318,14 +401,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:176</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет состав заказа по идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/DpOrderCompositions/1
+this.dpOrderCompositionsService.deleteDpOrderComposition(1).subscribe(() =&gt; {
+  // Состав заказа удалён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -336,6 +424,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,6 +439,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор состава заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -359,7 +452,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат удаления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -385,19 +479,28 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:87</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список всех составов заказов.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpOrderCompositions
+this.dpOrderCompositionsService.getAllDpOrderCompositions().subscribe(compositions =&gt; {
+  // compositions: [{ ... }]
+});</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Observable&lt;IDpOrderComposition[]&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Список составов заказов.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -422,14 +525,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает состав заказа по его идентификатору.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/DpOrderCompositions/1
+this.dpOrderCompositionsService.getDpOrderCompositionById(1).subscribe(composition =&gt; {
+  // composition: { ... }
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -440,6 +548,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -454,6 +563,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор состава заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -463,7 +576,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Состав заказа.</p>
+
                             </div>
                 </td>
             </tr>
@@ -489,14 +603,33 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="161"
+                                    class="link-to-prism">src/app/services/dp-order-compositions.service.ts:161</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующий состав заказа.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/DpOrderCompositions/1
+// Body:
+// {
+//   &quot;dpOrderId&quot;: 1,
+//   &quot;dpProductId&quot;: 2,
+//   &quot;quantity&quot;: 5,
+//   &quot;dpAttributes&quot;: [],
+//   &quot;dpOrder&quot;: null
+// }
+this.dpOrderCompositionsService.updateDpOrderComposition(1, {
+  dpOrderId: 1,
+  dpProductId: 2,
+  quantity: 5,
+  dpAttributes: [],
+  dpOrder: null
+}).subscribe(() =&gt; {
+  // Состав заказа обновлён
+});</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -507,6 +640,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -521,6 +655,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Идентификатор состава заказа.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>dpOrderComposition</td>
@@ -533,6 +671,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Обновлённый объект состава заказа.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -542,7 +684,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Результат обновления.</p>
+
                             </div>
                 </td>
             </tr>
@@ -573,7 +716,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/dp-order-compositions.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/services/dp-order-compositions.service.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -591,6 +734,69 @@ import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { IDpOrderComposition } from &#x27;../interface/IDpOrderComposition&#x27;;
 
+/**
+ * Сервис для работы с составами заказов (Order Compositions).
+ *
+ * @remarks
+ * Позволяет получать, создавать, обновлять и удалять составы заказов через API.
+ *
+ * @example
+ * // Получить все составы заказов (GET):
+ * // URL: /api/DpOrderCompositions
+ * this.dpOrderCompositionsService.getAllDpOrderCompositions().subscribe(compositions &#x3D;&gt; console.log(compositions));
+ *
+ * // Получить состав заказа по id (GET):
+ * // URL: /api/DpOrderCompositions/1
+ * this.dpOrderCompositionsService.getDpOrderCompositionById(1).subscribe(composition &#x3D;&gt; {
+ *   // composition: { dpOrderId, dpProductId, quantity, dpAttributes, dpOrder }
+ * });
+ *
+ * // Создать состав заказа (POST):
+ * // URL: /api/DpOrderCompositions
+ * // Body:
+ * // {
+ * //   &quot;dpOrderId&quot;: 1,
+ * //   &quot;dpProductId&quot;: 2,
+ * //   &quot;quantity&quot;: 3,
+ * //   &quot;dpAttributes&quot;: [],
+ * //   &quot;dpOrder&quot;: null
+ * // }
+ * this.dpOrderCompositionsService.createDpOrderComposition({
+ *   dpOrderId: 1,
+ *   dpProductId: 2,
+ *   quantity: 3,
+ *   dpAttributes: [],
+ *   dpOrder: null
+ * }).subscribe(newComp &#x3D;&gt; {
+ *   // newComp: { dpOrderId, dpProductId, quantity, ... }
+ * });
+ *
+ * // Обновить состав заказа (PUT):
+ * // URL: /api/DpOrderCompositions/1
+ * // Body:
+ * // {
+ * //   &quot;dpOrderId&quot;: 1,
+ * //   &quot;dpProductId&quot;: 2,
+ * //   &quot;quantity&quot;: 5,
+ * //   &quot;dpAttributes&quot;: [],
+ * //   &quot;dpOrder&quot;: null
+ * // }
+ * this.dpOrderCompositionsService.updateDpOrderComposition(1, {
+ *   dpOrderId: 1,
+ *   dpProductId: 2,
+ *   quantity: 5,
+ *   dpAttributes: [],
+ *   dpOrder: null
+ * }).subscribe(() &#x3D;&gt; {
+ *   // Состав заказа обновлён
+ * });
+ *
+ * // Удалить состав заказа (DELETE):
+ * // URL: /api/DpOrderCompositions/1
+ * this.dpOrderCompositionsService.deleteDpOrderComposition(1).subscribe(() &#x3D;&gt; {
+ *   // Состав заказа удалён
+ * });
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -599,22 +805,105 @@ export class DpOrderCompositionsService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Получает список всех составов заказов.
+   *
+   * @returns {Observable&lt;IDpOrderComposition[]&gt;} Список составов заказов.
+   * @example
+   * // GET /api/DpOrderCompositions
+   * this.dpOrderCompositionsService.getAllDpOrderCompositions().subscribe(compositions &#x3D;&gt; {
+   *   // compositions: [{ ... }]
+   * });
+   */
   getAllDpOrderCompositions(): Observable&lt;IDpOrderComposition[]&gt; {
     return this.http.get&lt;IDpOrderComposition[]&gt;(this.baseUrl);
   }
 
+  /**
+   * Получает состав заказа по его идентификатору.
+   *
+   * @param {number} id Идентификатор состава заказа.
+   * @returns {Observable&lt;IDpOrderComposition&gt;} Состав заказа.
+   * @example
+   * // GET /api/DpOrderCompositions/1
+   * this.dpOrderCompositionsService.getDpOrderCompositionById(1).subscribe(composition &#x3D;&gt; {
+   *   // composition: { ... }
+   * });
+   */
   getDpOrderCompositionById(id: number): Observable&lt;IDpOrderComposition&gt; {
     return this.http.get&lt;IDpOrderComposition&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
 
+  /**
+   * Создаёт новый состав заказа.
+   *
+   * @param {IDpOrderComposition} dpOrderComposition Объект состава заказа.
+   * @returns {Observable&lt;IDpOrderComposition&gt;} Созданный состав заказа.
+   * @example
+   * // POST /api/DpOrderCompositions
+   * // Body:
+   * // {
+   * //   &quot;dpOrderId&quot;: 1,
+   * //   &quot;dpProductId&quot;: 2,
+   * //   &quot;quantity&quot;: 3,
+   * //   &quot;dpAttributes&quot;: [],
+   * //   &quot;dpOrder&quot;: null
+   * // }
+   * this.dpOrderCompositionsService.createDpOrderComposition({
+   *   dpOrderId: 1,
+   *   dpProductId: 2,
+   *   quantity: 3,
+   *   dpAttributes: [],
+   *   dpOrder: null
+   * }).subscribe(newComp &#x3D;&gt; {
+   *   // newComp: { ... }
+   * });
+   */
   createDpOrderComposition(dpOrderComposition: IDpOrderComposition): Observable&lt;IDpOrderComposition&gt; {
     return this.http.post&lt;IDpOrderComposition&gt;(this.baseUrl, dpOrderComposition);
   }
 
+  /**
+   * Обновляет существующий состав заказа.
+   *
+   * @param {number} id Идентификатор состава заказа.
+   * @param {IDpOrderComposition} dpOrderComposition Обновлённый объект состава заказа.
+   * @returns {Observable&lt;void&gt;} Результат обновления.
+   * @example
+   * // PUT /api/DpOrderCompositions/1
+   * // Body:
+   * // {
+   * //   &quot;dpOrderId&quot;: 1,
+   * //   &quot;dpProductId&quot;: 2,
+   * //   &quot;quantity&quot;: 5,
+   * //   &quot;dpAttributes&quot;: [],
+   * //   &quot;dpOrder&quot;: null
+   * // }
+   * this.dpOrderCompositionsService.updateDpOrderComposition(1, {
+   *   dpOrderId: 1,
+   *   dpProductId: 2,
+   *   quantity: 5,
+   *   dpAttributes: [],
+   *   dpOrder: null
+   * }).subscribe(() &#x3D;&gt; {
+   *   // Состав заказа обновлён
+   * });
+   */
   updateDpOrderComposition(id: number, dpOrderComposition: IDpOrderComposition): Observable&lt;void&gt; {
     return this.http.put&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;, dpOrderComposition);
   }
 
+  /**
+   * Удаляет состав заказа по идентификатору.
+   *
+   * @param {number} id Идентификатор состава заказа.
+   * @returns {Observable&lt;void&gt;} Результат удаления.
+   * @example
+   * // DELETE /api/DpOrderCompositions/1
+   * this.dpOrderCompositionsService.deleteDpOrderComposition(1).subscribe(() &#x3D;&gt; {
+   *   // Состав заказа удалён
+   * });
+   */
   deleteDpOrderComposition(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
   }
