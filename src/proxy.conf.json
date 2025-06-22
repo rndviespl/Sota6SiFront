@@ -2,10 +2,5 @@
      "/api": {
         "target": "http://viespl.ru:8080",
         "secure": false
-    },
-      "/apiold": {
-        "target": "http://localhost:5243",
-        "secure": false
-    }
-    
+    }    
 }
