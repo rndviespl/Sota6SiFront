@@ -37,7 +37,7 @@ Sota6SiFront имитирует функциональность интерне�
 ### Установка
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/your-username/sota6si-front.git
+   git clone https://github.com/rndviespl/Sota6SiFront.git
    cd sota6si-front
    ```
 2. Установите зависимости:
