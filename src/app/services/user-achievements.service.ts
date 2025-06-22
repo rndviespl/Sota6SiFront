@@ -183,9 +183,9 @@ export class UserAchievementsService {
   ): Observable<void> {
     if (userProjId <= 0 || achievementId <= 0) {
       console.warn('Некорректный userProjId или achievementId:', { userProjId, achievementId });
-      this.alertService
-        .open('Некорректные данные для обработки тест-кейса!', { appearance: 'error' })
-        .subscribe();
+      // this.alertService
+      //   .open('Некорректные данные для обработки тест-кейса!', { appearance: 'error' })
+      //   .subscribe();
       return of(void 0);
     }
 

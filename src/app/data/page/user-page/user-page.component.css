@@ -2,19 +2,43 @@
 
 :host {
     display: block;
-    padding: 1.5rem 1rem; /* 24px 16px */
+    padding: 1.5rem 1rem;
+    /* 24px 16px */
     box-sizing: border-box;
     min-height: 100vh;
 }
 
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: var(--tui-base-02);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border: none;
+    background: var(--tui-background-neutral-1);
+    color: var(--tui-text-secondary);
+    padding: 0.25rem;
+}
+
 .user-page-content {
-    padding: 1.25rem; /* 20px */
+    padding: 1.25rem;
+    /* 20px */
     margin: 0 auto;
-    max-width: 800px; /* Компактная ширина */
-    border-radius: var(--button-border-radius); /* 6px */
+    max-width: 800px;
+    /* Компактная ширина */
+    border-radius: var(--button-border-radius);
+    /* 6px */
     display: flex;
     flex-direction: column;
-    gap: 1.25rem; /* Уменьшен с 1.5rem для компактности */
+    gap: 1.25rem;
+    /* Уменьшен с 1.5rem для компактности */
 }
 
 /* Стили для заголовка */
@@ -31,27 +55,32 @@ h1 {
 /* Стили для кнопок Taiga UI */
 button[tuiButton] {
     margin: 0;
-    padding: var(--button-padding); /* Из variables.css */
-    color: var(--tui-text-01); /* Текст кнопки */
+    padding: var(--button-padding);
+    /* Из variables.css */
+    color: var(--tui-text-01);
+    /* Текст кнопки */
 }
 
 /* Группа кнопок */
-.user-page-content > div.action-buttons {
+.user-page-content>div.action-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem; /* 12px между кнопками */
+    gap: 0.75rem;
+    /* 12px между кнопками */
 }
 
 /* Стили для форм */
 form {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem; /* 12px внутри формы */
+    gap: 0.75rem;
+    /* 12px внутри формы */
 }
 
 /* Стили для инпутов Taiga UI */
 tui-input {
-    max-width: 200px; /* Компактная ширина */
+    max-width: 200px;
+    /* Компактная ширина */
 }
 
 /* Стили для текстовых элементов */
@@ -65,14 +94,18 @@ p {
 /* Адаптивность */
 @media (max-width: 768px) {
     :host {
-        padding: 1rem 0.5rem; /* 16px 8px */
+        padding: 1rem 0.5rem;
+        /* 16px 8px */
     }
 
     .user-page-content {
-        padding: 0.75rem; /* 12px */
+        padding: 0.75rem;
+        /* 12px */
         max-width: 100%;
-        border-radius: 0.5rem; /* 8px */
-        gap: 1rem; /* 16px */
+        border-radius: 0.5rem;
+        /* 8px */
+        gap: 1rem;
+        /* 16px */
     }
 
     h1 {
@@ -81,41 +114,52 @@ p {
     }
 
     tui-input {
-        max-width: 100%; /* Полная ширина */
+        max-width: 100%;
+        /* Полная ширина */
     }
 
-    .user-page-content > div.action-buttons {
+    .user-page-content>div.action-buttons {
         flex-direction: column;
-        gap: 0.5rem; /* 8px */
+        gap: 0.5rem;
+        /* 8px */
     }
 
     form {
-        gap: 0.5rem; /* 8px */
+        gap: 0.5rem;
+        /* 8px */
     }
 }
 
 /* Темная тема */
 [data-theme="dark"] :host {
-    background: var(--background-color); /* Фон страницы */
-    color: var(--text-color-dark); /* Темный текст */
+    background: var(--background-color);
+    /* Фон страницы */
+    color: var(--text-color-dark);
+    /* Темный текст */
 }
 
 [data-theme="dark"] .user-page-content {
-    background: var(--card-background-color); /* Фон карточки */
-    box-shadow: var(--card-shadow); /* Тень */
+    background: var(--card-background-color);
+    /* Фон карточки */
+    box-shadow: var(--card-shadow);
+    /* Тень */
 }
 
 [data-theme="dark"] h1 {
-    color: var(--tui-primary); /* Акцентный цвет */
+    color: var(--tui-primary);
+    /* Акцентный цвет */
 }
 
 [data-theme="dark"] p {
-    color: var(--tui-text-01); /* Светлый текст */
+    color: var(--tui-text-01);
+    /* Светлый текст */
 }
 
 [data-theme="dark"] button[tuiButton] {
-    color: var(--tui-text-01); /* Светлый текст для кнопок */
-    background: var(--button-background-color); /* Фон из variables.css */
+    color: var(--tui-text-01);
+    /* Светлый текст для кнопок */
+    background: var(--button-background-color);
+    /* Фон из variables.css */
 }
 
 [data-theme="dark"] button[tuiButton]:hover {
@@ -123,7 +167,10 @@ p {
 }
 
 [data-theme="dark"] tui-input {
-    color: var(--tui-text-01); /* Светлый текст в инпутах */
-    background: var(--tui-base-01); /* Фон инпута */
-    border-color: var(--tui-base-03); /* Граница */
+    color: var(--tui-text-01);
+    /* Светлый текст в инпутах */
+    background: var(--tui-base-01);
+    /* Фон инпута */
+    border-color: var(--tui-base-03);
+    /* Граница */
 }

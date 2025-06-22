@@ -13,7 +13,7 @@ import { AboutComponent } from './data/page/about/about.component';
 export const routes: Routes = [
 
     {
-        path: '',
+        path: 'catalog',
         component: PageCatalogItemComponent,
         title: 'Каталог'
     },
@@ -59,7 +59,7 @@ export const routes: Routes = [
         title: "Регистрация для проекта"
     },
     { 
-        path: 'about', 
+        path: '', 
         component: AboutComponent, 
         title: "О приложении" 
     },
