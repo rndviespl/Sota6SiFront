@@ -3,31 +3,75 @@
     color: var(--avatar-color, #212529);
     fill: var(--avatar-color, #212529);
 }
+
 [data-theme="dark"] .user-avatar tui-svg,
 [data-theme="dark"] .user-avatar svg {
     color: #fff;
     fill: #fff;
 }
+
 label.always-fail-label {
+    color: #fff;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: var(--tui-base-02);
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border: none;
+    background: var(--tertiary-color);
+    color: var(--tui-text-secondary);
+    padding: 0.25rem;
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--tui-shadow, rgba(0, 0, 0, 0.08));
+    transition: box-shadow 0.2s, transform 0.2s;
+    /* Добавим светлую рамку для темной темы */
+    border: 2px solid transparent;
+}
+
+.user-avatar:hover {
+    box-shadow: 0 4px 16px var(--tui-shadow, rgba(0, 0, 0, 0.16));
+    transform: scale(1.05);
+}
+
+/* Для темной темы — светлая рамка и фон */
+[data-theme="dark"] .user-avatar {
+    background: #23272f;
+    border-color: #fff;
     color: #fff;
 }
 
 [data-theme="dark"] label.always-fail-label {
     color: #fff;
 }
+
 /* Можно добавить в ваш компонент или глобальные стили */
 .nav-row {
-  display: flex;
-  gap: 16px; /* расстояние между ссылками */
-  align-items: center;
+    display: flex;
+    gap: 16px;
+    /* расстояние между ссылками */
+    align-items: center;
 }
+
 .nav-link {
-  cursor: pointer;
-  padding: 4px 1px;
-  text-decoration: none;
+    cursor: pointer;
+    padding: 4px 1px;
+    text-decoration: none;
 }
+
 .nav-link:hover {
-  text-decoration: none;
-  background: #f0f0f0;
-  border-radius: 4px;
+    text-decoration: none;
+    background: #f0f0f0;
+    border-radius: 4px;
 }

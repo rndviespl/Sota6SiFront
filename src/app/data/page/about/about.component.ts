@@ -52,10 +52,5 @@ private readonly userAchievementsService = inject(UserAchievementsService);
  navigateTo(path: string): void {
     this.router.navigate([path]);
   }
-  /**
-   * Переходит на главную страницу
-   */
-  navigateToHome(): void {
-    this.navigateTo('/');
-  }
+ 
 }

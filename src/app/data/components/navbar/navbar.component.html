@@ -13,5 +13,6 @@
     <app-back-button></app-back-button>
     <button size="m" type="button" *ngIf="!isAuthenticated" (click)="navigateTo('/login')" tuiButton>Войти</button>
     <button size="m" type="button" *ngIf="isAuthenticated" (click)="logout()" tuiButton>Выйти</button>
+      <tui-avatar src="@tui.user" class="user-avatar" (click)="navigateTo('/user-page')"/>
   </div>
 </div>
