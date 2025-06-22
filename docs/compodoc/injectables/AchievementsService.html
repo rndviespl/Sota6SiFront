@@ -123,12 +123,12 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Сервис для работы с достижениями (Achievements).</p>
-<p>Позволяет получать, создавать, обновлять и удалять достижения через API.</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Получить все достижения (GET):
-GET /api/Achievements</code></pre></div><p>// Получить достижение по id (GET):
+                <p>Сервис для работы с тест-кейсами (Achievements).</p>
+<p>Позволяет получать, создавать, обновлять и удалять тест-кейсы через API.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Получить все тест-кейсы (GET):
+GET /api/Achievements</code></pre></div><p>// Получить тест-кейс по id (GET):
 GET /api/Achievements/1</p>
-<p>// Создать достижение (POST):
+<p>// Создать тест-кейс (POST):
 POST /api/Achievements
 Body:
 {
@@ -136,7 +136,7 @@ Body:
   &quot;title&quot;: &quot;Новое достижение&quot;,
   &quot;textAchievement&quot;: &quot;Описание достижения&quot;
 }</p>
-<p>// Обновить достижение (PUT):
+<p>// Обновить тест-кейс (PUT):
 PUT /api/Achievements/1
 Body:
 {
@@ -144,7 +144,7 @@ Body:
   &quot;title&quot;: &quot;Обновлённое достижение&quot;,
   &quot;textAchievement&quot;: &quot;Новое описание&quot;
 }</p>
-<p>// Удалить достижение (DELETE):
+<p>// Удалить тест-кейс (DELETE):
 DELETE /api/Achievements/1</p>
 
             </p>
@@ -291,18 +291,18 @@ DELETE /api/Achievements/1</p>
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Создаёт новое достижение.</p>
+                        <div class="io-description"><p>Создаёт новый тест-кейс.</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-html">// POST /api/Achievements
 // Body:
 // {
 //   &quot;achievementId&quot;: 0,
-//   &quot;title&quot;: &quot;Новое достижение&quot;,
-//   &quot;textAchievement&quot;: &quot;Описание достижения&quot;
+//   &quot;title&quot;: &quot;Новый тест-кейс&quot;,
+//   &quot;textAchievement&quot;: &quot;Описание тест-кейса&quot;
 // }
 this.achievementsService.createAchievement({
   achievementId: 0,
-  title: &#39;Новое достижение&#39;,
-  textAchievement: &#39;Описание достижения&#39;
+  title: &#39;Новый тест-кейс&#39;,
+  textAchievement: &#39;Описание тест-кейса&#39;
 }).subscribe(newAch =&gt; ...);</code></pre></div></div>
 
                             <div class="io-description">
@@ -330,7 +330,7 @@ this.achievementsService.createAchievement({
 
 
                                             <td>
-                                                    <p>Объект достижения.</p>
+                                                    <p>Объект тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -342,7 +342,7 @@ this.achievementsService.createAchievement({
 
                         </div>
                             <div class="io-description">
-                                <p>Созданное достижение.</p>
+                                <p>Созданный тест-кейс.</p>
 
                             </div>
                 </td>
@@ -377,7 +377,7 @@ this.achievementsService.createAchievement({
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Удаляет достижение по идентификатору.</p>
+                        <div class="io-description"><p>Удаляет тест-кейс по идентификатору.</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-html">// DELETE /api/Achievements/1
 this.achievementsService.deleteAchievement(1).subscribe(() =&gt; ...);</code></pre></div></div>
 
@@ -406,7 +406,7 @@ this.achievementsService.deleteAchievement(1).subscribe(() =&gt; ...);</code></p
 
 
                                             <td>
-                                                    <p>Идентификатор достижения.</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -453,7 +453,7 @@ this.achievementsService.deleteAchievement(1).subscribe(() =&gt; ...);</code></p
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Получает достижение по его идентификатору.</p>
+                        <div class="io-description"><p>Получает тест-кейс по его идентификатору.</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/Achievements/1
 this.achievementsService.getAchievementById(1).subscribe(ach =&gt; ...);</code></pre></div></div>
 
@@ -482,7 +482,7 @@ this.achievementsService.getAchievementById(1).subscribe(ach =&gt; ...);</code><
 
 
                                             <td>
-                                                    <p>Идентификатор достижения.</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -494,7 +494,7 @@ this.achievementsService.getAchievementById(1).subscribe(ach =&gt; ...);</code><
 
                         </div>
                             <div class="io-description">
-                                <p>Достижение.</p>
+                                <p>Тест-кейс.</p>
 
                             </div>
                 </td>
@@ -529,7 +529,7 @@ this.achievementsService.getAchievementById(1).subscribe(ach =&gt; ...);</code><
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Получает список всех достижений.</p>
+                        <div class="io-description"><p>Получает список всех тест-кейсов.</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-html">// GET /api/Achievements
 this.achievementsService.getAllAchievements().subscribe(list =&gt; console.log(list));</code></pre></div></div>
 
@@ -538,7 +538,7 @@ this.achievementsService.getAllAchievements().subscribe(list =&gt; console.log(l
 
                         </div>
                             <div class="io-description">
-                                <p>Список достижений.</p>
+                                <p>Список тест-кейсов.</p>
 
                             </div>
                 </td>
@@ -573,7 +573,7 @@ this.achievementsService.getAllAchievements().subscribe(list =&gt; console.log(l
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Разблокирует достижение по названию.</p>
+                        <div class="io-description"><p>Разблокирует тест-кейс по названию.</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.achievementsService.unlockAchievement(&#39;First Login&#39;);</code></pre></div></div>
 
                             <div class="io-description">
@@ -601,7 +601,7 @@ this.achievementsService.getAllAchievements().subscribe(list =&gt; console.log(l
 
 
                                             <td>
-                                                    <p>Название достижения.</p>
+                                                    <p>Название тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -647,17 +647,17 @@ this.achievementsService.getAllAchievements().subscribe(list =&gt; console.log(l
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Обновляет существующее достижение.</p>
+                        <div class="io-description"><p>Обновляет существующее тест-кейс.</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-html">// PUT /api/Achievements/1
 // Body:
 // {
 //   &quot;achievementId&quot;: 1,
-//   &quot;title&quot;: &quot;Обновлённое достижение&quot;,
+//   &quot;title&quot;: &quot;Обновлённый тест-кейс&quot;,
 //   &quot;textAchievement&quot;: &quot;Новое описание&quot;
 // }
 this.achievementsService.updateAchievement(1, {
   achievementId: 1,
-  title: &#39;Обновлённое достижение&#39;,
+  title: &#39;Обновлённый тест-кейс&#39;,
   textAchievement: &#39;Новое описание&#39;
 }).subscribe(() =&gt; ...);</code></pre></div></div>
 
@@ -686,7 +686,7 @@ this.achievementsService.updateAchievement(1, {
 
 
                                             <td>
-                                                    <p>Идентификатор достижения.</p>
+                                                    <p>Идентификатор тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -702,7 +702,7 @@ this.achievementsService.updateAchievement(1, {
 
 
                                             <td>
-                                                    <p>Обновлённый объект достижения.</p>
+                                                    <p>Обновлённый объект тест-кейса.</p>
 
                                             </td>
                                         </tr>
@@ -765,19 +765,19 @@ import { Observable } from &#x27;rxjs&#x27;;
 import { IAchievement } from &#x27;../interface/IAchievement&#x27;;
 
 /**
- * Сервис для работы с достижениями (Achievements).
+ * Сервис для работы с тест-кейсами (Achievements).
  *
  * @remarks
- * Позволяет получать, создавать, обновлять и удалять достижения через API.
+ * Позволяет получать, создавать, обновлять и удалять тест-кейсы через API.
  *
  * @example
- * // Получить все достижения (GET):
+ * // Получить все тест-кейсы (GET):
  * GET /api/Achievements
  *
- * // Получить достижение по id (GET):
+ * // Получить тест-кейс по id (GET):
  * GET /api/Achievements/1
  *
- * // Создать достижение (POST):
+ * // Создать тест-кейс (POST):
  * POST /api/Achievements
  * Body:
  * {
@@ -786,7 +786,7 @@ import { IAchievement } from &#x27;../interface/IAchievement&#x27;;
  *   &quot;textAchievement&quot;: &quot;Описание достижения&quot;
  * }
  *
- * // Обновить достижение (PUT):
+ * // Обновить тест-кейс (PUT):
  * PUT /api/Achievements/1
  * Body:
  * {
@@ -795,7 +795,7 @@ import { IAchievement } from &#x27;../interface/IAchievement&#x27;;
  *   &quot;textAchievement&quot;: &quot;Новое описание&quot;
  * }
  *
- * // Удалить достижение (DELETE):
+ * // Удалить тест-кейс (DELETE):
  * DELETE /api/Achievements/1
  */
 @Injectable({
@@ -807,9 +807,9 @@ export class AchievementsService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Получает список всех достижений.
+   * Получает список всех тест-кейсов.
    *
-   * @returns {Observable&lt;IAchievement[]&gt;} Список достижений.
+   * @returns {Observable&lt;IAchievement[]&gt;} Список тест-кейсов.
    * @example
    * // GET /api/Achievements
    * this.achievementsService.getAllAchievements().subscribe(list &#x3D;&gt; console.log(list));
@@ -819,10 +819,10 @@ export class AchievementsService {
   }
 
   /**
-   * Получает достижение по его идентификатору.
+   * Получает тест-кейс по его идентификатору.
    *
-   * @param {number} id Идентификатор достижения.
-   * @returns {Observable&lt;IAchievement&gt;} Достижение.
+   * @param {number} id Идентификатор тест-кейса.
+   * @returns {Observable&lt;IAchievement&gt;} Тест-кейс.
    * @example
    * // GET /api/Achievements/1
    * this.achievementsService.getAchievementById(1).subscribe(ach &#x3D;&gt; ...);
@@ -832,22 +832,22 @@ export class AchievementsService {
   }
 
   /**
-   * Создаёт новое достижение.
+   * Создаёт новый тест-кейс.
    *
-   * @param {IAchievement} achievement Объект достижения.
-   * @returns {Observable&lt;IAchievement&gt;} Созданное достижение.
+   * @param {IAchievement} achievement Объект тест-кейса.
+   * @returns {Observable&lt;IAchievement&gt;} Созданный тест-кейс.
    * @example
    * // POST /api/Achievements
    * // Body:
    * // {
    * //   &quot;achievementId&quot;: 0,
-   * //   &quot;title&quot;: &quot;Новое достижение&quot;,
-   * //   &quot;textAchievement&quot;: &quot;Описание достижения&quot;
+   * //   &quot;title&quot;: &quot;Новый тест-кейс&quot;,
+   * //   &quot;textAchievement&quot;: &quot;Описание тест-кейса&quot;
    * // }
    * this.achievementsService.createAchievement({
    *   achievementId: 0,
-   *   title: &#x27;Новое достижение&#x27;,
-   *   textAchievement: &#x27;Описание достижения&#x27;
+   *   title: &#x27;Новый тест-кейс&#x27;,
+   *   textAchievement: &#x27;Описание тест-кейса&#x27;
    * }).subscribe(newAch &#x3D;&gt; ...);
    */
   createAchievement(achievement: IAchievement): Observable&lt;IAchievement&gt; {
@@ -855,22 +855,22 @@ export class AchievementsService {
   }
 
   /**
-   * Обновляет существующее достижение.
+   * Обновляет существующее тест-кейс.
    *
-   * @param {number} id Идентификатор достижения.
-   * @param {IAchievement} achievement Обновлённый объект достижения.
+   * @param {number} id Идентификатор тест-кейса.
+   * @param {IAchievement} achievement Обновлённый объект тест-кейса.
    * @returns {Observable&lt;void&gt;} Результат обновления.
    * @example
    * // PUT /api/Achievements/1
    * // Body:
    * // {
    * //   &quot;achievementId&quot;: 1,
-   * //   &quot;title&quot;: &quot;Обновлённое достижение&quot;,
+   * //   &quot;title&quot;: &quot;Обновлённый тест-кейс&quot;,
    * //   &quot;textAchievement&quot;: &quot;Новое описание&quot;
    * // }
    * this.achievementsService.updateAchievement(1, {
    *   achievementId: 1,
-   *   title: &#x27;Обновлённое достижение&#x27;,
+   *   title: &#x27;Обновлённый тест-кейс&#x27;,
    *   textAchievement: &#x27;Новое описание&#x27;
    * }).subscribe(() &#x3D;&gt; ...);
    */
@@ -879,9 +879,9 @@ export class AchievementsService {
   }
 
   /**
-   * Удаляет достижение по идентификатору.
+   * Удаляет тест-кейс по идентификатору.
    *
-   * @param {number} id Идентификатор достижения.
+   * @param {number} id Идентификатор тест-кейса.
    * @returns {Observable&lt;void&gt;} Результат удаления.
    * @example
    * // DELETE /api/Achievements/1
@@ -892,15 +892,15 @@ export class AchievementsService {
   }
 
   /**
-   * Разблокирует достижение по названию.
+   * Разблокирует тест-кейс по названию.
    *
-   * @param {string} achievementTitle Название достижения.
+   * @param {string} achievementTitle Название тест-кейса.
    * @example
    * this.achievementsService.unlockAchievement(&#x27;First Login&#x27;);
    */
   unlockAchievement(achievementTitle: string): void {
-    console.log(&#x60;Achievement unlocked: ${achievementTitle}&#x60;);
-    // Здесь вы можете добавить логику для обновления состояния ачивки на сервере или локально
+    console.log(&#x60;test-case unlocked: ${achievementTitle}&#x60;);
+    // Здесь вы можете добавить логику для обновления состояния тест-кейса на сервере или локально
   }
 }
 </code></pre>

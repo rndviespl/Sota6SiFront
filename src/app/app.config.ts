@@ -6,6 +6,9 @@ import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { AchievementsService } from './services/achievements.service';
 
+/**
+ * @ignore
+ */
 
 export const appConfig: ApplicationConfig = {
   providers: [

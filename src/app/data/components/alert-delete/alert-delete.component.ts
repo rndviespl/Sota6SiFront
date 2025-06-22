@@ -6,6 +6,9 @@ import { TuiAlertService } from '@taiga-ui/core';
 import { injectContext, PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import { switchMap, takeUntil } from 'rxjs';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-alert-on-delete',
   imports: [CommonModule],

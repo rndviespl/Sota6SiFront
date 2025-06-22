@@ -10,6 +10,9 @@ import { TuiCardLarge, TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { TuiAlertService } from '@taiga-ui/core';
 import { AuthProjRepositoryService } from '../../../repositories/auth-proj-repository.service';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-login-proj',
   imports: [

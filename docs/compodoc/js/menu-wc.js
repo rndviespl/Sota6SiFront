@@ -56,75 +56,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <li class="link">
                                 <a href="components/AboutComponent.html" data-type="entity-link" >AboutComponent</a>
                             </li>
-                            <li class="link">
-                                <a href="components/AchievmentsPageForUserComponent.html" data-type="entity-link" >AchievmentsPageForUserComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/AlertDeleteComponent.html" data-type="entity-link" >AlertDeleteComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/AppComponent.html" data-type="entity-link" >AppComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/BackButtonComponent.html" data-type="entity-link" >BackButtonComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/CardItemComponent.html" data-type="entity-link" >CardItemComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/CarouselImgComponent.html" data-type="entity-link" >CarouselImgComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/DialogCategoryComponent.html" data-type="entity-link" >DialogCategoryComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/DialogImageComponent.html" data-type="entity-link" >DialogImageComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/DialogProductComponent.html" data-type="entity-link" >DialogProductComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/FilterByInputComponent.html" data-type="entity-link" >FilterByInputComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/IconTrashComponent.html" data-type="entity-link" >IconTrashComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/LoadingComponent.html" data-type="entity-link" >LoadingComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/LoginComponent.html" data-type="entity-link" >LoginComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/LoginProjComponent.html" data-type="entity-link" >LoginProjComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/NavbarComponent.html" data-type="entity-link" >NavbarComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/PageCartComponent.html" data-type="entity-link" >PageCartComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/PageCatalogItemComponent.html" data-type="entity-link" >PageCatalogItemComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/PageItemFromCatalogComponent.html" data-type="entity-link" >PageItemFromCatalogComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/RegisterComponent.html" data-type="entity-link" >RegisterComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/RegisterProjComponent.html" data-type="entity-link" >RegisterProjComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/ThemeToggleComponent.html" data-type="entity-link" >ThemeToggleComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/UserPageComponent.html" data-type="entity-link" >UserPageComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/UserPageProjComponent.html" data-type="entity-link" >UserPageProjComponent</a>
-                            </li>
                         </ul>
                     </li>
                         <li class="chapter">
@@ -249,19 +180,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/IUserHasAchievement.html" data-type="entity-link" >IUserHasAchievement</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#miscellaneous-links"'
-                            : 'data-bs-target="#xs-miscellaneous-links"' }>
-                            <span class="icon ion-ios-cube"></span>
-                            <span>Miscellaneous</span>
-                            <span class="icon ion-ios-arrow-down"></span>
-                        </div>
-                        <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
-                            <li class="link">
-                                <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
                             </li>
                         </ul>
                     </li>

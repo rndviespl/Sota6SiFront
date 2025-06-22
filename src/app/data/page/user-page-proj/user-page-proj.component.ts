@@ -11,6 +11,9 @@ import { UserAchievementsRepositoryService } from '../../../repositories/user-ac
 import { ConfigService } from '../../../services/config.service';
 import { UserAchievementsService } from '../../../services/user-achievements.service';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-user-page-proj',
   imports: [

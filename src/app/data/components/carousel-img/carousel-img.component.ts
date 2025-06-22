@@ -8,6 +8,9 @@ import { TuiAvatar, TuiCarousel, TuiPagination } from '@taiga-ui/kit';
 import { TuiAmountPipe } from '@taiga-ui/addon-commerce';
 import { Subscription, forkJoin, map } from 'rxjs';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-carousel-img',
   standalone: true,

@@ -9,6 +9,9 @@ import { TuiAvatar } from '@taiga-ui/kit';
 import { UserAchievementsService } from '../../../services/user-achievements.service';
 import { FormsModule } from '@angular/forms';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-navbar',
   imports: [

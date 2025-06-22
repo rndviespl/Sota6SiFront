@@ -18,6 +18,9 @@ interface CartItem extends ICartItem {
   readonly date: TuiDay;
 }
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-page-cart',
   standalone: true,

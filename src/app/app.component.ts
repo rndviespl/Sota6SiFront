@@ -2,6 +2,11 @@ import { TUI_DARK_MODE, TuiLink, TuiRoot } from "@taiga-ui/core";
 import { Component, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./data/components/navbar/navbar.component";
+
+/**
+ * @ignore
+ */
+
 @Component({
   selector: 'app-root',
   imports: [  

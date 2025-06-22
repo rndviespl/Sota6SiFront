@@ -126,6 +126,24 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс для товара (Product).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const product: IDpProduct = {
+  dpProductId: 1,
+  dpPrice: 1500,
+  dpTitle: &#39;Кроссовки&#39;,
+  dpPurchasePrice: 1000,
+  dpDiscountPercent: 10,
+  dpDescription: &#39;Удобные кроссовки для бега&#39;,
+  dpCategoryId: 2,
+  dpCategory: { dpCategoryId: 2, dpCategoryTitle: &#39;Обувь&#39;, ... },
+  dpImages: [{ dpImagesId: 1, dpProductId: 1, dpImageTitle: &#39;Фото&#39;, ... }],
+  dpProductAttributes: [{ dpAttributesId: 1, dpProductId: 1, dpCount: 5, ... }]
+};</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -586,8 +604,34 @@
 import { IDpCategory } from &quot;./IDpCategory&quot;;
 import { IDpImage } from &quot;./IDpImage&quot;;
 
-// DpProduct.ts
-
+/**
+ * Интерфейс для товара (Product).
+ *
+ * @property {number} dpProductId - Уникальный идентификатор товара.
+ * @property {number} dpPrice - Цена товара.
+ * @property {string} dpTitle - Название товара.
+ * @property {number} [dpDiscountPercent] - Процент скидки (опционально).
+ * @property {string} [dpDescription] - Описание товара (опционально).
+ * @property {number} [dpCategoryId] - Идентификатор категории (опционально).
+ * @property {number} dpPurchasePrice - Закупочная цена товара.
+ * @property {IDpCategory} [dpCategory] - Категория товара (опционально).
+ * @property {IDpImage[]} [dpImages] - Массив изображений товара (опционально).
+ * @property {IDpProductAttribute[]} [dpProductAttributes] - Массив атрибутов товара (опционально).
+ *
+ * @example
+ * const product: IDpProduct &#x3D; {
+ *   dpProductId: 1,
+ *   dpPrice: 1500,
+ *   dpTitle: &#x27;Кроссовки&#x27;,
+ *   dpPurchasePrice: 1000,
+ *   dpDiscountPercent: 10,
+ *   dpDescription: &#x27;Удобные кроссовки для бега&#x27;,
+ *   dpCategoryId: 2,
+ *   dpCategory: { dpCategoryId: 2, dpCategoryTitle: &#x27;Обувь&#x27;, ... },
+ *   dpImages: [{ dpImagesId: 1, dpProductId: 1, dpImageTitle: &#x27;Фото&#x27;, ... }],
+ *   dpProductAttributes: [{ dpAttributesId: 1, dpProductId: 1, dpCount: 5, ... }]
+ * };
+ */
 export interface IDpProduct {
     dpProductId: number;
     dpPrice: number;

@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { IAchievement } from '../interface/IAchievement';
 
 /**
- * Сервис для работы с достижениями (Achievements).
+ * Сервис для работы с тест-кейсами (Achievements).
  *
  * @remarks
- * Позволяет получать, создавать, обновлять и удалять достижения через API.
+ * Позволяет получать, создавать, обновлять и удалять тест-кейсы через API.
  *
  * @example
- * // Получить все достижения (GET):
+ * // Получить все тест-кейсы (GET):
  * GET /api/Achievements
  *
- * // Получить достижение по id (GET):
+ * // Получить тест-кейс по id (GET):
  * GET /api/Achievements/1
  *
- * // Создать достижение (POST):
+ * // Создать тест-кейс (POST):
  * POST /api/Achievements
  * Body:
  * {
@@ -25,7 +25,7 @@ import { IAchievement } from '../interface/IAchievement';
  *   "textAchievement": "Описание достижения"
  * }
  *
- * // Обновить достижение (PUT):
+ * // Обновить тест-кейс (PUT):
  * PUT /api/Achievements/1
  * Body:
  * {
@@ -34,7 +34,7 @@ import { IAchievement } from '../interface/IAchievement';
  *   "textAchievement": "Новое описание"
  * }
  *
- * // Удалить достижение (DELETE):
+ * // Удалить тест-кейс (DELETE):
  * DELETE /api/Achievements/1
  */
 @Injectable({
@@ -46,9 +46,9 @@ export class AchievementsService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Получает список всех достижений.
+   * Получает список всех тест-кейсов.
    *
-   * @returns {Observable<IAchievement[]>} Список достижений.
+   * @returns {Observable<IAchievement[]>} Список тест-кейсов.
    * @example
    * // GET /api/Achievements
    * this.achievementsService.getAllAchievements().subscribe(list => console.log(list));
@@ -58,10 +58,10 @@ export class AchievementsService {
   }
 
   /**
-   * Получает достижение по его идентификатору.
+   * Получает тест-кейс по его идентификатору.
    *
-   * @param {number} id Идентификатор достижения.
-   * @returns {Observable<IAchievement>} Достижение.
+   * @param {number} id Идентификатор тест-кейса.
+   * @returns {Observable<IAchievement>} Тест-кейс.
    * @example
    * // GET /api/Achievements/1
    * this.achievementsService.getAchievementById(1).subscribe(ach => ...);
@@ -71,22 +71,22 @@ export class AchievementsService {
   }
 
   /**
-   * Создаёт новое достижение.
+   * Создаёт новый тест-кейс.
    *
-   * @param {IAchievement} achievement Объект достижения.
-   * @returns {Observable<IAchievement>} Созданное достижение.
+   * @param {IAchievement} achievement Объект тест-кейса.
+   * @returns {Observable<IAchievement>} Созданный тест-кейс.
    * @example
    * // POST /api/Achievements
    * // Body:
    * // {
    * //   "achievementId": 0,
-   * //   "title": "Новое достижение",
-   * //   "textAchievement": "Описание достижения"
+   * //   "title": "Новый тест-кейс",
+   * //   "textAchievement": "Описание тест-кейса"
    * // }
    * this.achievementsService.createAchievement({
    *   achievementId: 0,
-   *   title: 'Новое достижение',
-   *   textAchievement: 'Описание достижения'
+   *   title: 'Новый тест-кейс',
+   *   textAchievement: 'Описание тест-кейса'
    * }).subscribe(newAch => ...);
    */
   createAchievement(achievement: IAchievement): Observable<IAchievement> {
@@ -94,22 +94,22 @@ export class AchievementsService {
   }
 
   /**
-   * Обновляет существующее достижение.
+   * Обновляет существующее тест-кейс.
    *
-   * @param {number} id Идентификатор достижения.
-   * @param {IAchievement} achievement Обновлённый объект достижения.
+   * @param {number} id Идентификатор тест-кейса.
+   * @param {IAchievement} achievement Обновлённый объект тест-кейса.
    * @returns {Observable<void>} Результат обновления.
    * @example
    * // PUT /api/Achievements/1
    * // Body:
    * // {
    * //   "achievementId": 1,
-   * //   "title": "Обновлённое достижение",
+   * //   "title": "Обновлённый тест-кейс",
    * //   "textAchievement": "Новое описание"
    * // }
    * this.achievementsService.updateAchievement(1, {
    *   achievementId: 1,
-   *   title: 'Обновлённое достижение',
+   *   title: 'Обновлённый тест-кейс',
    *   textAchievement: 'Новое описание'
    * }).subscribe(() => ...);
    */
@@ -118,9 +118,9 @@ export class AchievementsService {
   }
 
   /**
-   * Удаляет достижение по идентификатору.
+   * Удаляет тест-кейс по идентификатору.
    *
-   * @param {number} id Идентификатор достижения.
+   * @param {number} id Идентификатор тест-кейса.
    * @returns {Observable<void>} Результат удаления.
    * @example
    * // DELETE /api/Achievements/1
@@ -131,14 +131,14 @@ export class AchievementsService {
   }
 
   /**
-   * Разблокирует достижение по названию.
+   * Разблокирует тест-кейс по названию.
    *
-   * @param {string} achievementTitle Название достижения.
+   * @param {string} achievementTitle Название тест-кейса.
    * @example
    * this.achievementsService.unlockAchievement('First Login');
    */
   unlockAchievement(achievementTitle: string): void {
-    console.log(`Achievement unlocked: ${achievementTitle}`);
-    // Здесь вы можете добавить логику для обновления состояния ачивки на сервере или локально
+    console.log(`test-case unlocked: ${achievementTitle}`);
+    // Здесь вы можете добавить логику для обновления состояния тест-кейса на сервере или локально
   }
 }

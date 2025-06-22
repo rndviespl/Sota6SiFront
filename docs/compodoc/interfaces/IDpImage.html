@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Изображение товара.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const img: IDpImage = { dpImagesId: 1, dpProductId: 2, dpImageTitle: &#39;Фото&#39;, dpProduct: {...} };</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -359,8 +366,18 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IDpProduct } from &quot;./IDpProduct&quot;;
 
-// DpImage.ts
-
+/**
+ * Изображение товара.
+ *
+ * @property {number} dpImagesId - Идентификатор изображения.
+ * @property {number} dpProductId - Идентификатор товара.
+ * @property {string} dpImageTitle - Название изображения.
+ * @property {Uint8Array} [imagesData] - Данные изображения (опционально).
+ * @property {IDpProduct} dpProduct - Товар.
+ *
+ * @example
+ * const img: IDpImage &#x3D; { dpImagesId: 1, dpProductId: 2, dpImageTitle: &#x27;Фото&#x27;, dpProduct: {...} };
+ */
 export interface IDpImage {
     dpImagesId: number;
     dpProductId: number;

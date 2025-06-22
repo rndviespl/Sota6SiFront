@@ -20,6 +20,9 @@ import { ImagesRepositoryService } from '../../../repositories/images-repository
 import { ProductsRepositoryService } from '../../../repositories/products-repository.service';
 import { ThemeToggleComponent } from '../../components/theme-toggle/theme-toggle.component';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-user-page',
   imports: [

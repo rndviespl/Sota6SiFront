@@ -10,6 +10,9 @@ import { UserAchievementsRepositoryService } from '../../../repositories/user-ac
 import { UserAchievementsService } from '../../../services/user-achievements.service';
 import { Observable, of } from 'rxjs';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-page-catalog-item',
   standalone: true,

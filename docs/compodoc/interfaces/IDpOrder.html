@@ -126,6 +126,19 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс для заказа (Order).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const order: IDpOrder = {
+  dpOrderId: 1,
+  dpUserId: 2,
+  dpDateTimeOrder: new Date(),
+  dpTypeOrder: &#39;website&#39;,
+  dpUser: { dpUserId: 2, dpUsername: &#39;vasya&#39;, ... }
+};</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -359,8 +372,24 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IDpUser } from &quot;./IDpUser&quot;;
 
-// DpOrder.ts
-
+/**
+ * Интерфейс для заказа (Order).
+ *
+ * @property {number} dpOrderId - Уникальный идентификатор заказа.
+ * @property {number} dpUserId - Идентификатор пользователя, оформившего заказ.
+ * @property {Date} dpDateTimeOrder - Дата и время оформления заказа.
+ * @property {string} [dpTypeOrder] - Тип заказа (опционально).
+ * @property {IDpUser} dpUser - Объект пользователя, связанный с заказом.
+ *
+ * @example
+ * const order: IDpOrder &#x3D; {
+ *   dpOrderId: 1,
+ *   dpUserId: 2,
+ *   dpDateTimeOrder: new Date(),
+ *   dpTypeOrder: &#x27;website&#x27;,
+ *   dpUser: { dpUserId: 2, dpUsername: &#x27;vasya&#x27;, ... }
+ * };
+ */
 export interface IDpOrder {
     dpOrderId: number;
     dpUserId: number;

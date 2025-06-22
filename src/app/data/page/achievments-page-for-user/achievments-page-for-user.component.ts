@@ -14,7 +14,9 @@ import {
 import { Router } from '@angular/router';
 import { AuthProjService } from '../../../services/auth-proj.service';
 
-
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-achievments-page-for-user',
   imports: [CommonModule, CdkFixedSizeVirtualScroll,

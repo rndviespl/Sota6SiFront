@@ -126,6 +126,22 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс для пользователя (User).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const user: IDpUser = {
+  dpUserId: 1,
+  dpUsername: &#39;vasya&#39;,
+  dpPassword: &#39;123456&#39;,
+  dpRegistrationDate: new Date(),
+```html
+  dpFullName: &#39;Василий Иванов&#39;,
+  dpPhoneNumber: &#39;+79991234567&#39;,
+  dpOrders: [{ dpOrderId: 1, dpUserId: 1, ... }]
+};</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -494,8 +510,30 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IDpOrder } from &quot;./IDpOrder&quot;;
 
-// DpUser.ts
-
+/**
+ * Интерфейс для пользователя (User).
+ *
+ * @property {number} dpUserId - Уникальный идентификатор пользователя.
+ * @property {string} dpUsername - Имя пользователя (логин).
+ * @property {string} dpPassword - Пароль пользователя.
+ * @property {string} [dpEmail] - Email пользователя (опционально).
+ * @property {string} [dpFullName] - Полное имя пользователя (опционально).
+ * @property {Date} dpRegistrationDate - Дата регистрации пользователя.
+ * @property {string} [dpPhoneNumber] - Телефон пользователя (опционально).
+ * @property {IDpOrder[]} [dpOrders] - Список заказов пользователя (опционально).
+ *
+ * @example
+ * const user: IDpUser &#x3D; {
+ *   dpUserId: 1,
+ *   dpUsername: &#x27;vasya&#x27;,
+ *   dpPassword: &#x27;123456&#x27;,
+ *   dpRegistrationDate: new Date(),
+ *   dpEmail: &#x27;vasya@example.com&#x27;,
+ *   dpFullName: &#x27;Василий Иванов&#x27;,
+ *   dpPhoneNumber: &#x27;+79991234567&#x27;,
+ *   dpOrders: [{ dpOrderId: 1, dpUserId: 1, ... }]
+ * };
+ */
 export interface IDpUser {
     dpUserId: number;
     dpUsername: string;

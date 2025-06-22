@@ -126,6 +126,18 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс для размера товара (Size).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const size: IDpSize = {
+  sizeId: 1,
+  size: &#39;42&#39;,
+  dpProductAttributes: [{ dpAttributesId: 1, ... }],
+  dpCategories: [{ dpCategoryId: 2, dpCategoryTitle: &#39;Обувь&#39;, ... }]
+};</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -327,8 +339,22 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IDpCategory } from &quot;./IDpCategory&quot;;
 import { IDpProductAttribute } from &quot;./IDpProductAttribute&quot;;
 
-// DpSize.ts
-
+/**
+ * Интерфейс для размера товара (Size).
+ *
+ * @property {number} sizeId - Уникальный идентификатор размера.
+ * @property {string} size - Название или обозначение размера (например, &quot;42&quot;, &quot;M&quot;).
+ * @property {IDpProductAttribute[]} [dpProductAttributes] - Список атрибутов товаров с этим размером (опционально).
+ * @property {IDpCategory[]} [dpCategories] - Список категорий, связанных с этим размером (опционально).
+ *
+ * @example
+ * const size: IDpSize &#x3D; {
+ *   sizeId: 1,
+ *   size: &#x27;42&#x27;,
+ *   dpProductAttributes: [{ dpAttributesId: 1, ... }],
+ *   dpCategories: [{ dpCategoryId: 2, dpCategoryTitle: &#x27;Обувь&#x27;, ... }]
+ * };
+ */
 export interface IDpSize {
     sizeId: number;
     size: string;

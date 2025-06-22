@@ -7,6 +7,9 @@ import { AlertDeleteComponent } from '../alert-delete/alert-delete.component';
 import { CommonModule } from '@angular/common';
 import { ICartItem } from '../../../interface/ICartItem';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-icon-trash',
   imports: [ CommonModule,

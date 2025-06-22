@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Категория товара.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const cat: IDpCategory = { dpCategoryId: 1, dpCategoryTitle: &#39;Обувь&#39;, sizeId: 2, size: {...} };</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -360,8 +367,18 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IDpSize } from &quot;./IDpSize&quot;;
 import { IDpProduct } from &quot;./IDpProduct&quot;;
 
-// DpCategory.ts
-
+/**
+ * Категория товара.
+ *
+ * @property {number} dpCategoryId - Идентификатор категории.
+ * @property {string} dpCategoryTitle - Название категории.
+ * @property {number} sizeId - Идентификатор размера.
+ * @property {IDpSize} size - Размер.
+ * @property {IDpProduct[]} [dpProducts] - Товары в категории (опционально).
+ *
+ * @example
+ * const cat: IDpCategory &#x3D; { dpCategoryId: 1, dpCategoryTitle: &#x27;Обувь&#x27;, sizeId: 2, size: {...} };
+ */
 export interface IDpCategory {
     dpCategoryId: number;
     dpCategoryTitle: string;

@@ -13,6 +13,9 @@ import { ConfigService } from '../../../services/config.service';
 import { UserAchievementsRepositoryService } from '../../../repositories/user-achievements-repository.service';
 import { UserAchievementsService } from '../../../services/user-achievements.service';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-dialog-product',
   standalone: true,

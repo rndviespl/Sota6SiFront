@@ -10,6 +10,7 @@ import { BackButtonComponent } from '../../components/back-button/back-button.co
 import { ThemeToggleComponent } from '../../components/theme-toggle/theme-toggle.component';
 import { AuthService } from '../../../services/auth.service';
 
+
 @Component({
   selector: 'app-about',
  imports: [

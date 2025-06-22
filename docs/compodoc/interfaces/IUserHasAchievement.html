@@ -126,6 +126,19 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс связи пользователя проекта с достижением (UserHasAchievement).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const userAchievement: IUserHasAchievement = {
+  dpUserProjId: 1,
+  achievementId: 2,
+  isObtained: true,
+  dpUserProj: { dpUserProjId: 1, login: &#39;vasya&#39;, password: &#39;123&#39;, ... },
+  achievement: { achievementId: 2, title: &#39;Первый вход&#39;, ... }
+};</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -366,7 +379,24 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IAchievement } from &#x27;./IAchievement&#x27;;
 import { IDpUserProj } from &quot;./IDpUserProj&quot;;
 
-
+/**
+ * Интерфейс связи пользователя проекта с достижением (UserHasAchievement).
+ *
+ * @property {number} dpUserProjId - Внешний ключ на пользователя проекта (IDpUserProj).
+ * @property {number} achievementId - Внешний ключ на достижение (IAchievement).
+ * @property {boolean} isObtained - Флаг, указывающий, получено ли достижение.
+ * @property {IDpUserProj} [dpUserProj] - Навигационное свойство к пользователю проекта (опционально).
+ * @property {IAchievement} [achievement] - Навигационное свойство к достижению (опционально).
+ *
+ * @example
+ * const userAchievement: IUserHasAchievement &#x3D; {
+ *   dpUserProjId: 1,
+ *   achievementId: 2,
+ *   isObtained: true,
+ *   dpUserProj: { dpUserProjId: 1, login: &#x27;vasya&#x27;, password: &#x27;123&#x27;, ... },
+ *   achievement: { achievementId: 2, title: &#x27;Первый вход&#x27;, ... }
+ * };
+ */
 export interface IUserHasAchievement {
   dpUserProjId: number; // Внешний ключ на IDpUserProj
   achievementId: number; // Внешний ключ на IAchievement

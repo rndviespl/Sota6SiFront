@@ -126,6 +126,18 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс для объекта достижения (Achievement).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const achievement: IAchievement = {
+  achievementId: 1,
+  title: &#39;Первый вход&#39;,
+  textAchievement: &#39;Выполните первый вход в систему&#39;,
+  dpUserProjs: [{ dpUserProjId: 1, ... }]
+};</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -326,7 +338,22 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IDpUserProj } from &quot;./IDpUserProj&quot;;
 
-// Achievement.ts
+/**
+ * Интерфейс для объекта достижения (Achievement).
+ *
+ * @property {number} achievementId - Уникальный идентификатор достижения.
+ * @property {string} title - Название достижения.
+ * @property {string} [textAchievement] - Описание или дополнительный текст достижения (опционально).
+ * @property {IDpUserProj[]} [dpUserProjs] - Список пользователей, связанных с этим достижением (опционально).
+ *
+ * @example
+ * const achievement: IAchievement &#x3D; {
+ *   achievementId: 1,
+ *   title: &#x27;Первый вход&#x27;,
+ *   textAchievement: &#x27;Выполните первый вход в систему&#x27;,
+ *   dpUserProjs: [{ dpUserProjId: 1, ... }]
+ * };
+ */
 export interface IAchievement {
     achievementId: number;
     title: string;

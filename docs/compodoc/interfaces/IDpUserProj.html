@@ -126,6 +126,19 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс для пользователя проекта (User Project).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const userProj: IDpUserProj = {
+  dpUserProjId: 1,
+  login: &#39;vasya&#39;,
+  password: &#39;qwerty&#39;,
+```html
+  achievements: [{ achievementId: 1, title: &#39;Первый вход&#39; }]
+};</code></pre></div>
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -365,6 +378,24 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IAchievement } from &quot;./IAchievement&quot;;
 
+/**
+ * Интерфейс для пользователя проекта (User Project).
+ *
+ * @property {number} dpUserProjId - Уникальный идентификатор пользователя проекта.
+ * @property {string} [email] - Email пользователя (опционально).
+ * @property {string} password - Пароль пользователя.
+ * @property {string} login - Логин пользователя.
+ * @property {IAchievement[]} [achievements] - Список достижений пользователя (опционально).
+ *
+ * @example
+ * const userProj: IDpUserProj &#x3D; {
+ *   dpUserProjId: 1,
+ *   login: &#x27;vasya&#x27;,
+ *   password: &#x27;qwerty&#x27;,
+ *   email: &#x27;vasya@example.com&#x27;,
+ *   achievements: [{ achievementId: 1, title: &#x27;Первый вход&#x27; }]
+ * };
+ */
 export interface IDpUserProj {
     dpUserProjId: number;
     email?: string;

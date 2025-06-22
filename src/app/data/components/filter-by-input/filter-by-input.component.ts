@@ -3,6 +3,9 @@ import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Reacti
 import { TuiDataListWrapper } from '@taiga-ui/kit';
 import {TuiInputModule} from '@taiga-ui/legacy';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-filter-by-input',
   standalone: true,
