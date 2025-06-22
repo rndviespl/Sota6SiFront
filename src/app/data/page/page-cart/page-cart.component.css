@@ -17,7 +17,7 @@
   box-shadow: var(--tui-shadow);
 }
 
-.empty-cart h3 {
+.empty-cart h3,p {
   color: var(--tui-text-01);
   margin-bottom: 1rem;
 }

@@ -1,0 +1,1913 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>sota6-si-front documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">sota6-si-front documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DialogImageComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/data/components/dialog-image/dialog-image.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-dialog-image</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>AsyncPipe</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>TuiAutoFocus</code>
+                            <code>TuiButton</code>
+                            <code>TuiDataListWrapper</code>
+                            <code>TuiFiles</code>
+                            <code>TuiInputModule</code>
+                            <code>TuiSelectModule</code>
+                            <code>TuiSlider</code>
+                            <code>TuiTextfield</code>
+                            <code>TuiTextfieldControllerModule</code>
+                            <code>NgIf</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./dialog-image.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./dialog-image.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#alerts" >alerts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#allowedTypes" >allowedTypes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#configService" >configService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#context" >context</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogs" >dialogs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#failedImage$" >failedImage$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#imageControl" >imageControl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#imageForm" >imageForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#imagesRepositoryService" >imagesRepositoryService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loadedImage$" >loadedImage$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loadingImage$" >loadingImage$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#maxFileSize" >maxFileSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#productNameInputRef" >productNameInputRef</a>
+                            </li>
+                            <li>
+                                <a href="#selectedFile" >selectedFile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userAchievementsRepository" >userAchievementsRepository</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userAchievementsService" >userAchievementsService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#createImage" >createImage</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#onFileChange" >onFileChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#removeImage" >removeImage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showError" >showError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showSuccess" >showSuccess</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#submit" >submit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateImage" >updateImage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#validateFile" >validateFile</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#hasValue" >hasValue</a>
+                                </li>
+                                <li>
+                                    <a href="#data" >data</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createImage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>createImage</b></span>
+                        <a href="#createImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createImage(imageData: <a href="../interfaces/ICreateDpImageRequest.html" target="_self">ICreateDpImageRequest</a>, userProjId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>imageData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ICreateDpImageRequest.html" target="_self" >ICreateDpImageRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>userProjId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileChange"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>onFileChange</b></span>
+                        <a href="#onFileChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onFileChange(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeImage"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>removeImage</b></span>
+                        <a href="#removeImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showError</b></span>
+                        <a href="#showError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showError(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:233</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showSuccess"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showSuccess</b></span>
+                        <a href="#showSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showSuccess(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="243"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:243</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submit"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>submit</b></span>
+                        <a href="#submit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>submit(event?: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateImage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateImage</b></span>
+                        <a href="#updateImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateImage(imageData: <a href="../interfaces/IUpdateDpImageRequest.html" target="_self">IUpdateDpImageRequest</a>, userProjId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:197</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>imageData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/IUpdateDpImageRequest.html" target="_self" >IUpdateDpImageRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>userProjId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateFile"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>validateFile</b></span>
+                        <a href="#validateFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateFile(file: File)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>file</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alerts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>alerts</b></span>
+                        <a href="#alerts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TuiAlertService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allowedTypes"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>allowedTypes</b></span>
+                        <a href="#allowedTypes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;image/jpeg&#x27;, &#x27;image/png&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>configService</b></span>
+                        <a href="#configService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ConfigService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="context"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>context</b></span>
+                        <a href="#context"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>injectContext&lt;TuiDialogContext&lt;IDpImage, IDpImage&gt;&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogs"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogs</b></span>
+                        <a href="#dialogs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TuiDialogService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="failedImage$"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>failedImage$</b></span>
+                        <a href="#failedImage$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;TuiFileLike | null&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageControl"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>imageControl</b></span>
+                        <a href="#imageControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormControl&lt;TuiFileLike | null&gt;(null, Validators.required)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageForm"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>imageForm</b></span>
+                        <a href="#imageForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    dpProductId: new FormControl&lt;number | null&gt;(null, Validators.required),
+    dpImageTitle: new FormControl(&#x27;&#x27;, [Validators.required, Validators.maxLength(200)])
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imagesRepositoryService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>imagesRepositoryService</b></span>
+                        <a href="#imagesRepositoryService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ImagesRepositoryService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadedImage$"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loadedImage$</b></span>
+                        <a href="#loadedImage$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;TuiFileLike | null&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingImage$"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loadingImage$</b></span>
+                        <a href="#loadingImage$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;TuiFileLike | null&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="maxFileSize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>maxFileSize</b></span>
+                        <a href="#maxFileSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>5 * 1024 * 1024</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productNameInputRef"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>productNameInputRef</b></span>
+                        <a href="#productNameInputRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;productNameInput&#x27;, {read: ElementRef})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFile"></a>
+                    <span class="name">
+                        <span ><b>selectedFile</b></span>
+                        <a href="#selectedFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userAchievementsRepository"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userAchievementsRepository</b></span>
+                        <a href="#userAchievementsRepository"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserAchievementsRepositoryService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userAchievementsService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userAchievementsService</b></span>
+                        <a href="#userAchievementsService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserAchievementsService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hasValue"></a>
+                        <span class="name"><b>hasValue</b><a href="#hasValue"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>hasValue()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:65</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <span class="name"><b>data</b><a href="#data"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>data()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/data/components/dialog-image/dialog-image.component.ts:69</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, ViewChild, ElementRef, OnInit } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { AsyncPipe, NgIf } from &#x27;@angular/common&#x27;;
+import { TuiAutoFocus } from &#x27;@taiga-ui/cdk&#x27;;
+import { TuiAlertService, TuiButton, TuiDialogContext, TuiDialogService, TuiTextfield } from &#x27;@taiga-ui/core&#x27;;
+import { TuiDataListWrapper, TuiFileLike, TuiFiles, TuiSlider } from &#x27;@taiga-ui/kit&#x27;;
+import { TuiInputModule, TuiSelectModule, TuiTextfieldControllerModule } from &#x27;@taiga-ui/legacy&#x27;;
+import { injectContext } from &#x27;@taiga-ui/polymorpheus&#x27;;
+import { Subject, Observable, of } from &#x27;rxjs&#x27;;
+import { ICreateDpImageRequest } from &#x27;../../../interface/ICreateDpImageRequest&#x27;;
+import { ImagesRepositoryService } from &#x27;../../../repositories/images-repository.service&#x27;;
+import { IDpImage } from &#x27;../../../interface/IDpImage&#x27;;
+import { IUpdateDpImageRequest } from &#x27;../../../interface/IUpdateDpImageRequest&#x27;;
+import { UserAchievementsRepositoryService } from &#x27;../../../repositories/user-achievements-repository.service&#x27;;
+import { ConfigService } from &#x27;../../../services/config.service&#x27;;
+import { UserAchievementsService } from &#x27;../../../services/user-achievements.service&#x27;;
+
+@Component({
+  selector: &#x27;app-dialog-image&#x27;,
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    ReactiveFormsModule,
+    TuiAutoFocus,
+    TuiButton,
+    TuiDataListWrapper,
+    TuiFiles,
+    TuiInputModule,
+    TuiSelectModule,
+    TuiSlider,
+    TuiTextfield,
+    TuiTextfieldControllerModule,
+    NgIf
+  ],
+  templateUrl: &#x27;./dialog-image.component.html&#x27;,
+  styleUrls: [&#x27;./dialog-image.component.css&#x27;]
+})
+export class DialogImageComponent implements OnInit {
+  @ViewChild(&#x27;productNameInput&#x27;, { read: ElementRef }) productNameInputRef!: ElementRef;
+
+  private readonly alerts &#x3D; inject(TuiAlertService);
+  private readonly dialogs &#x3D; inject(TuiDialogService);
+  private readonly imagesRepositoryService &#x3D; inject(ImagesRepositoryService);
+  private readonly userAchievementsRepository &#x3D; inject(UserAchievementsRepositoryService);
+  private readonly configService &#x3D; inject(ConfigService);
+  private readonly userAchievementsService &#x3D; inject(UserAchievementsService);
+
+  public readonly context &#x3D; injectContext&lt;TuiDialogContext&lt;IDpImage, IDpImage&gt;&gt;();
+
+  protected readonly imageControl &#x3D; new FormControl&lt;TuiFileLike | null&gt;(null, Validators.required);
+  protected readonly failedImage$ &#x3D; new Subject&lt;TuiFileLike | null&gt;();
+  protected readonly loadingImage$ &#x3D; new Subject&lt;TuiFileLike | null&gt;();
+  protected readonly loadedImage$ &#x3D; new Subject&lt;TuiFileLike | null&gt;();
+
+  protected readonly imageForm &#x3D; new FormGroup({
+    dpProductId: new FormControl&lt;number | null&gt;(null, Validators.required),
+    dpImageTitle: new FormControl(&#x27;&#x27;, [Validators.required, Validators.maxLength(200)])
+  });
+
+  selectedFile: File | null &#x3D; null;
+  private readonly maxFileSize &#x3D; 5 * 1024 * 1024; // 5MB
+  private readonly allowedTypes &#x3D; [&#x27;image/jpeg&#x27;, &#x27;image/png&#x27;];
+
+  protected get hasValue(): boolean {
+    return this.imageForm.valid &amp;&amp; !!this.selectedFile;
+  }
+
+  protected get data(): IDpImage {
+    return this.context.data;
+  }
+
+  ngOnInit(): void {
+    const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+    this.userAchievementsRepository
+      .handleAchievement(userProjId, this.configService.achievementIds.openImageDialogSuccess, &#x27;тест-кейс: диалог изображения открыт!&#x27;)
+      .subscribe();
+    if (this.data) {
+      this.imageForm.patchValue({
+        dpProductId: this.data.dpProductId,
+        dpImageTitle: this.data.dpImageTitle
+      });
+    }
+  }
+
+  protected removeImage(): void {
+    this.imageControl.setValue(null);
+    this.selectedFile &#x3D; null;
+    this.loadedImage$.next(null);
+    this.failedImage$.next(null);
+    this.loadingImage$.next(null);
+  }
+
+  protected onFileChange(event: Event): void {
+    const input &#x3D; event.target as HTMLInputElement;
+    if (input.files &amp;&amp; input.files.length &gt; 0) {
+      const file &#x3D; input.files[0];
+      const validationError &#x3D; this.validateFile(file);
+      if (validationError) {
+        this.showError(validationError);
+        this.failedImage$.next(file);
+        this.imageControl.setValue(null);
+        this.selectedFile &#x3D; null;
+        return;
+      }
+      this.selectedFile &#x3D; file;
+      this.imageControl.setValue(file);
+      this.loadedImage$.next(file);
+    }
+  }
+
+  private validateFile(file: File): string | null {
+    if (file.size &gt; this.maxFileSize) {
+      return &#x60;Файл слишком большой (максимум ${this.maxFileSize / 1024 / 1024}MB).&#x60;;
+    }
+    if (!this.allowedTypes.includes(file.type)) {
+      return &#x27;Поддерживаются только JPEG и PNG.&#x27;;
+    }
+    return null;
+  }
+
+  protected submit(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    if (this.hasValue) {
+      const imageData &#x3D; this.imageForm.value;
+      const userProjId &#x3D; parseInt(localStorage.getItem(&#x27;userProjId&#x27;) || &#x27;0&#x27;, 10);
+      this.loadingImage$.next(this.selectedFile);
+
+      if (this.data.dpImagesId) {
+        const updateRequest: IUpdateDpImageRequest &#x3D; {
+          dpProductId: imageData.dpProductId!,
+          dpImageTitle: imageData.dpImageTitle!,
+          file: this.selectedFile!
+        };
+        this.updateImage(updateRequest, userProjId);
+      } else {
+        const createRequest: ICreateDpImageRequest &#x3D; {
+          dpProductId: imageData.dpProductId!,
+          dpImageTitle: imageData.dpImageTitle!,
+          file: this.selectedFile!
+        };
+        this.createImage(createRequest, userProjId);
+      }
+    } else {
+      this.showError(&#x27;Форма заполнена некорректно.&#x27;);
+    }
+  }
+
+  private createImage(imageData: ICreateDpImageRequest, userProjId: number): void {
+    // Проверка: если включён режим &quot;всегда ошибка&quot; — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.addImageFailed,
+          &#x27;тест-кейс: ошибка добавления изображения!&#x27;
+        )
+        .subscribe();
+      this.showError(&#x27;Тест-кейс: ошибка добавления изображения!&#x27;);
+      this.failedImage$.next(this.selectedFile);
+      this.loadingImage$.next(null);
+      return;
+    }
+
+    // Обычная логика
+    this.imagesRepositoryService.createDpImage(imageData).subscribe({
+      next: (createdImage) &#x3D;&gt; {
+        this.context.completeWith(createdImage);
+        this.showSuccess(&#x27;Изображение успешно загружено.&#x27;);
+        this.userAchievementsRepository
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.addImageSuccess,
+            &#x27;тест-кейс: изображение успешно добавлено!&#x27;
+          )
+          .subscribe();
+        this.loadingImage$.next(null);
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Ошибка при загрузке изображения:&#x27;, error);
+        this.showError(&#x60;Ошибка при загрузке изображения: ${error.message || &#x27;неизвестная ошибка&#x27;}&#x60;);
+        this.userAchievementsRepository
+          .handleAchievement(
+            userProjId,
+            this.configService.achievementIds.addImageFailed,
+            &#x27;тест-кейс: ошибка добавления изображения!&#x27;
+          )
+          .subscribe();
+        this.failedImage$.next(this.selectedFile);
+        this.loadingImage$.next(null);
+      }
+    });
+  }
+
+  private updateImage(imageData: IUpdateDpImageRequest, userProjId: number): void {
+    // Проверка: если включён режим &quot;всегда ошибка&quot; — только негативный тест-кейс
+    if (this.userAchievementsService.getAlwaysFailMode()) {
+      this.userAchievementsRepository
+        .handleAchievement(
+          userProjId,
+          this.configService.achievementIds.updateImageFailed,
+          &#x27;тест-кейс: ошибка обновления изображения!&#x27;
+        )
+        .subscribe();
+      this.showError(&#x27;Тест-кейс: ошибка обновления изображения!&#x27;);
+      return;
+    }
+
+    // Обычная логика обновления изображения
+    this.imagesRepositoryService.updateDpImage(this.data.dpImagesId, imageData).subscribe({
+      next: () &#x3D;&gt; {
+        this.context.completeWith(this.data);
+        this.showSuccess(&#x27;Изображение успешно обновлено.&#x27;);
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.updateImageSuccess, &#x27;тест-кейс: изображение успешно обновлено!&#x27;)
+          .subscribe();
+        this.loadingImage$.next(null);
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Ошибка при обновлении изображения:&#x27;, error);
+        this.showError(&#x60;Ошибка при обновлении изображения: ${error.message || &#x27;неизвестная ошибка&#x27;}&#x60;);
+        this.userAchievementsRepository
+          .handleAchievement(userProjId, this.configService.achievementIds.updateImageFailed, &#x27;тест-кейс: ошибка обновления изображения!&#x27;)
+          .subscribe();
+        this.failedImage$.next(this.selectedFile);
+        this.loadingImage$.next(null);
+      }
+    });
+  }
+
+  private showError(message: string): void {
+    this.alerts
+      .open(message, {
+        label: &#x27;Ошибка&#x27;,
+        appearance: &#x27;negative&#x27;,
+        autoClose: 5000
+      })
+      .subscribe();
+  }
+
+  private showSuccess(message: string): void {
+    this.alerts
+      .open(message, {
+        label: &#x27;Успех&#x27;,
+        appearance: &#x27;success&#x27;,
+        autoClose: 5000
+      })
+      .subscribe();
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;dialog-container&quot;&gt;
+  &lt;form [formGroup]&#x3D;&quot;imageForm&quot; (submit)&#x3D;&quot;submit($event)&quot;&gt;
+    &lt;tui-input
+      tuiTextfieldSize&#x3D;&quot;m&quot;
+      maxlength&#x3D;&quot;200&quot;
+      formControlName&#x3D;&quot;dpProductId&quot;
+    &gt;
+      ID продукта
+    &lt;/tui-input&gt;
+    &lt;br /&gt;
+    &lt;tui-input
+      tuiTextfieldSize&#x3D;&quot;m&quot;
+      maxlength&#x3D;&quot;200&quot;
+      formControlName&#x3D;&quot;dpImageTitle&quot;
+    &gt;
+      Название изображения
+    &lt;/tui-input&gt;
+    &lt;br /&gt;
+    &lt;label *ngIf&#x3D;&quot;!imageControl.value&quot; tuiInputFiles&gt;
+      &lt;input accept&#x3D;&quot;image/*&quot; tuiInputFiles [formControl]&#x3D;&quot;imageControl&quot; (change)&#x3D;&quot;onFileChange($event)&quot; /&gt;
+    &lt;/label&gt;
+    &lt;br /&gt;
+    &lt;button tuiButton type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!hasValue&quot;&gt;Загрузить изображение&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;tui-files class&#x3D;&quot;tui-space_top-1&quot;&gt;
+    &lt;tui-file
+      *ngIf&#x3D;&quot;imageControl.value | tuiFileRejected: {accept: &#x27;image/*&#x27;} | async as file&quot;
+      state&#x3D;&quot;error&quot;
+      [file]&#x3D;&quot;file&quot;
+      (remove)&#x3D;&quot;removeImage()&quot;
+    /&gt;
+
+    &lt;tui-file
+      *ngIf&#x3D;&quot;loadedImage$ | async as file&quot;
+      [file]&#x3D;&quot;file&quot;
+      (remove)&#x3D;&quot;removeImage()&quot;
+    /&gt;
+
+    &lt;tui-file
+      *ngIf&#x3D;&quot;failedImage$ | async as file&quot;
+      state&#x3D;&quot;error&quot;
+      [file]&#x3D;&quot;file&quot;
+      (remove)&#x3D;&quot;removeImage()&quot;
+    /&gt;
+
+    &lt;tui-file
+      *ngIf&#x3D;&quot;loadingImage$ | async as file&quot;
+      state&#x3D;&quot;loading&quot;
+      [file]&#x3D;&quot;file&quot;
+      (remove)&#x3D;&quot;removeImage()&quot;
+    /&gt;
+  &lt;/tui-files&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./dialog-image.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="dialog-container">  <form [formGroup]="imageForm" (submit)="submit($event)">    <tui-input      tuiTextfieldSize="m"      maxlength="200"      formControlName="dpProductId"    >      ID продукта    </tui-input>    <br />    <tui-input      tuiTextfieldSize="m"      maxlength="200"      formControlName="dpImageTitle"    >      Название изображения    </tui-input>    <br />    <label *ngIf="!imageControl.value" tuiInputFiles>      <input accept="image/*" tuiInputFiles [formControl]="imageControl" (change)="onFileChange($event)" />    </label>    <br />    <button tuiButton type="submit" [disabled]="!hasValue">Загрузить изображение</button>  </form>  <tui-files class="tui-space_top-1">    <tui-file      *ngIf="imageControl.value | tuiFileRejected: {accept: \'image/*\'} | async as file"      state="error"      [file]="file"      (remove)="removeImage()"    />    <tui-file      *ngIf="loadedImage$ | async as file"      [file]="file"      (remove)="removeImage()"    />    <tui-file      *ngIf="failedImage$ | async as file"      state="error"      [file]="file"      (remove)="removeImage()"    />    <tui-file      *ngIf="loadingImage$ | async as file"      state="loading"      [file]="file"      (remove)="removeImage()"    />  </tui-files></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AchievmentsPageForUserComponent', 'selector': 'app-achievments-page-for-user'},{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardItemComponent', 'selector': 'app-card-item'},{'name': 'CarouselImgComponent', 'selector': 'app-carousel-img'},{'name': 'DialogCategoryComponent', 'selector': 'app-dialog-category'},{'name': 'DialogImageComponent', 'selector': 'app-dialog-image'},{'name': 'DialogProductComponent', 'selector': 'app-dialog-product'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginProjComponent', 'selector': 'app-login-proj'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PageCartComponent', 'selector': 'app-page-cart'},{'name': 'PageCatalogItemComponent', 'selector': 'app-page-catalog-item'},{'name': 'PageItemFromCatalogComponent', 'selector': 'app-page-item-from-catalog'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterProjComponent', 'selector': 'app-register-proj'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserPageProjComponent', 'selector': 'app-user-page-proj'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DialogImageComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DialogImageComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

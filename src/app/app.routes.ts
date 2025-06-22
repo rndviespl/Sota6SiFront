@@ -9,6 +9,7 @@ import { UserPageProjComponent } from './data/page/user-page-proj/user-page-proj
 import { LoginProjComponent } from './data/components/login-proj/login-proj.component';
 import { RegisterProjComponent } from './data/components/register-proj/register-proj.component';
 import { AboutComponent } from './data/page/about/about.component';
+import { DocsComponent } from './docs/docs.component';
 
 export const routes: Routes = [
 
@@ -63,4 +64,9 @@ export const routes: Routes = [
         component: AboutComponent, 
         title: "О приложении" 
     },
+    {
+    path: 'docs',
+    component: DocsComponent,
+    title: 'Документация',
+  },
 ];

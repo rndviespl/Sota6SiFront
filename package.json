@@ -4,14 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run compodoc:build-and-copy",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "storybook": "ng run Sota6SiFront:storybook",
     "build-storybook": "ng run Sota6SiFront:build-storybook",
-    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build": "compodoc -p tsconfig.doc.json --output docs/compodoc",
     "compodoc": "npx compodoc -p tsconfig.doc.json -s --output docs/compodoc",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:build-and-copy": "npm run compodoc:build && cp -r docs/compodoc/* src/assets/docs",
     "compodoc:serve": "compodoc -s"
   },
   "private": true,
