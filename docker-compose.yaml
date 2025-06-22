@@ -3,4 +3,4 @@ services:
   sota-front:
     build: .
     ports:
-      - "80:80"
+      - "8081:80"
